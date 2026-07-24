@@ -16,7 +16,17 @@
 - Visual QA: compare against the prototype screen where one exists; where it
   doesn't (Models, Settings, Podcasts), apply tokens + laws, not invention.
 
-## PR sequence
+## Delivery structure (decided 2026-07-24): 3 takes
+
+The 8 sections below regroup into **3 PRs**:
+- **Take 1 — Foundation** = PR 1 + PR 2 (tokens + fonts + primitives +
+  `/dev/design`). Merging these together removes the "half-themed app"
+  window. This is the PR that gets real review.
+- **Take 2 — Screens** = PRs 3–7 in one branch, one screenshot per screen in
+  the PR body; review is visual, `/dev/design` must be untouched.
+- **Take 3 — Polish** = PR 8, cut only after days of real use.
+
+## PR sequence (reference detail for the takes)
 
 ### PR 1 — Design tokens land in `globals.css`
 Port `foundation/tokens.css` into `frontend/src/app/globals.css`:
