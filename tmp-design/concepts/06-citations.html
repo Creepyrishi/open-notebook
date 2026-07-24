@@ -1,0 +1,1514 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UX Concept — Citations & Evidence · Direction D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..800;1,400&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DIRECTION D FOUNDATION — CALM CLEAN / SOFT NEUTRAL
+   Shared across all five UX concept screens.
+   ============================================================ */
+:root {
+  --canvas:        #F1EEE8;
+  --canvas-tint:   #EAE6DE;
+  --surface:       #FBFAF7;
+  --surface-2:     #F5F3EE;
+  --surface-3:     #EDEAE3;
+  --hairline:      rgba(62, 56, 45, 0.08);
+  --hairline-soft: rgba(62, 56, 45, 0.05);
+
+  --ink:        #292522;
+  --ink-2:      #5C564D;
+  --ink-3:      #8B847A;
+  --ink-faint:  #ADA69B;
+
+  --primary:        #3E6B58;
+  --primary-hover:  #34594A;
+  --primary-ink:    #F4F7F3;
+  --primary-soft:   #DEE8E0;
+  --primary-soft-2: #ECF1EB;
+
+  --c-video:      #C2705F;  --c-video-soft:   #F3E1DB;
+  --c-note:       #A8823C;  --c-note-soft:    #F1E7D2;
+  --c-insight:    #6E6FA8;  --c-insight-soft: #E5E4F1;
+  --c-ai:         #4E7D6C;  --c-ai-soft:      #DFEAE2;
+  --c-audio:      #9A6B8F;  --c-audio-soft:   #EFE2EC;
+  --c-paper:      #5F7E9E;  --c-paper-soft:   #E0E8EE;
+
+  --warn:      #A2763B;  --warn-soft: #F0E4CD;
+
+  --shadow-panel:
+    0 1px 2px rgba(48, 42, 32, 0.04),
+    0 4px 14px rgba(48, 42, 32, 0.05),
+    0 14px 38px rgba(48, 42, 32, 0.06);
+  --shadow-card:
+    0 1px 2px rgba(48, 42, 32, 0.05),
+    0 3px 9px rgba(48, 42, 32, 0.05);
+  --shadow-pill:
+    0 1px 2px rgba(38, 66, 54, 0.25),
+    0 5px 14px rgba(38, 66, 54, 0.22);
+  --shadow-overlay:
+    0 2px 6px rgba(38, 33, 24, 0.10),
+    0 12px 34px rgba(38, 33, 24, 0.16),
+    0 40px 90px rgba(38, 33, 24, 0.22);
+
+  --r-panel: 22px;
+  --r-card:  14px;
+  --r-ctl:   10px;
+  --r-pill:  999px;
+
+  --font-sans: "Hanken Grotesk", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Spline Sans Mono", "SF Mono", "Cascadia Mono", monospace;
+  --fs-micro: 0.6875rem;
+  --fs-meta:  0.75rem;
+  --fs-body:  0.875rem;
+  --fs-md:    0.9375rem;
+  --fs-title: 1.375rem;
+
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-7: 32px;
+
+  --focus-ring: 0 0 0 3px rgba(62, 107, 88, 0.28);
+}
+
+.dark {
+  --canvas:        #1D1B18;
+  --canvas-tint:   #191714;
+  --surface:       #26231F;
+  --surface-2:     #2D2A25;
+  --surface-3:     #34302A;
+  --hairline:      rgba(235, 226, 210, 0.07);
+  --hairline-soft: rgba(235, 226, 210, 0.045);
+
+  --ink:        #EDE8DF;
+  --ink-2:      #B3ACA0;
+  --ink-3:      #837C71;
+  --ink-faint:  #5F594F;
+
+  --primary:        #6FA98F;
+  --primary-hover:  #83B9A0;
+  --primary-ink:    #14211B;
+  --primary-soft:   #2C3B33;
+  --primary-soft-2: #26312B;
+
+  --c-video:      #D89484;  --c-video-soft:   #3A2C27;
+  --c-note:       #CBA45E;  --c-note-soft:    #383023;
+  --c-insight:    #9C9DCF;  --c-insight-soft: #2E2E3D;
+  --c-ai:         #86B4A0;  --c-ai-soft:      #263630;
+  --c-audio:      #C595B8;  --c-audio-soft:   #362B33;
+  --c-paper:      #8FB0C9;  --c-paper-soft:   #26313A;
+
+  --warn:      #C7A05F;  --warn-soft: #362F1F;
+
+  --shadow-panel:
+    0 1px 2px rgba(0, 0, 0, 0.28),
+    0 6px 18px rgba(0, 0, 0, 0.30),
+    0 18px 48px rgba(0, 0, 0, 0.32);
+  --shadow-card:
+    0 1px 2px rgba(0, 0, 0, 0.30),
+    0 3px 10px rgba(0, 0, 0, 0.26);
+  --shadow-pill:
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 5px 16px rgba(111, 169, 143, 0.18);
+  --shadow-overlay:
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    0 16px 44px rgba(0, 0, 0, 0.45),
+    0 48px 110px rgba(0, 0, 0, 0.5);
+
+  --focus-ring: 0 0 0 3px rgba(111, 169, 143, 0.32);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 420px at 62% -140px, var(--canvas-tint), transparent 70%),
+    var(--canvas);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-width: 1000px;
+  transition: background-color .35s ease, color .35s ease;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+input, textarea { font: inherit; color: inherit; }
+::placeholder { color: var(--ink-faint); }
+
+.pebble { display: inline-block; width: 8px; height: 8px; border-radius: 42%; flex: none; }
+
+/* ---- tile banner ---- */
+.tile-banner {
+  display: flex; align-items: baseline; gap: var(--sp-3);
+  padding: 7px var(--sp-6);
+  font-size: var(--fs-meta);
+  color: var(--ink-2);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--hairline);
+  flex: none;
+}
+.tile-banner strong { color: var(--ink); font-weight: 700; letter-spacing: .01em; }
+.tile-banner span { color: var(--ink-3); }
+.banner-nav { margin-left: auto; display: flex; gap: 5px; }
+.banner-nav a {
+  width: 22px; height: 22px; border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-3);
+  transition: background .15s ease, color .15s ease;
+}
+.banner-nav a:hover { background: var(--surface-3); color: var(--ink); }
+.banner-nav a.here { background: var(--primary); color: var(--primary-ink); }
+
+/* ---- shell / sidebar ---- */
+.shell { flex: 1; display: flex; min-height: 0; }
+.sidebar {
+  width: 232px; flex: none;
+  display: flex; flex-direction: column;
+  padding: var(--sp-6) var(--sp-4) var(--sp-4);
+  gap: var(--sp-2);
+  overflow-y: auto;
+}
+.wordmark {
+  display: flex; align-items: center; gap: 10px;
+  padding: 2px var(--sp-2) var(--sp-5);
+  font-weight: 700; font-size: var(--fs-md); letter-spacing: -0.01em;
+}
+.logo-pebbles { display: flex; gap: 3px; align-items: center; }
+.logo-pebbles .pebble { width: 11px; height: 11px; }
+.logo-pebbles .pebble:first-child { background: var(--primary); }
+.logo-pebbles .pebble:last-child  { background: var(--c-video); width: 8px; height: 8px; }
+
+.btn-new {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  height: 40px; margin: 0 var(--sp-2) var(--sp-4);
+  border-radius: var(--r-pill);
+  background: var(--primary); color: var(--primary-ink);
+  font-weight: 650; font-size: var(--fs-body); letter-spacing: .01em;
+  box-shadow: var(--shadow-pill);
+  transition: background .18s ease, transform .18s ease;
+}
+.btn-new:hover { background: var(--primary-hover); transform: translateY(-1px); }
+.btn-new svg { width: 15px; height: 15px; }
+.btn-new .kbd { background: rgba(255,255,255,.16); box-shadow: none; color: inherit; margin-left: 2px; }
+.dark .btn-new .kbd { background: rgba(0,0,0,.18); }
+
+.nav-group { display: flex; flex-direction: column; gap: 1px; margin-bottom: var(--sp-3); }
+.nav-label {
+  padding: var(--sp-2) var(--sp-3) 5px;
+  font-size: var(--fs-micro); font-weight: 650;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 8px var(--sp-3);
+  border-radius: var(--r-ctl);
+  color: var(--ink-2); font-weight: 500; font-size: var(--fs-body);
+  transition: background .15s ease, color .15s ease;
+  text-align: left;
+}
+.nav-item svg { width: 16px; height: 16px; flex: none; opacity: .72; }
+.nav-item:hover { background: var(--surface-3); color: var(--ink); }
+.nav-item.active {
+  background: var(--surface);
+  color: var(--ink); font-weight: 650;
+  box-shadow: var(--shadow-card);
+}
+.nav-item.active::before {
+  content: ""; width: 7px; height: 7px; border-radius: 42%;
+  background: var(--primary); margin-left: -2px; margin-right: -1px;
+}
+.nav-item .nav-hint {
+  margin-left: auto; font-size: var(--fs-micro); color: var(--ink-faint); font-weight: 500;
+}
+.nav-divider { height: 1px; background: var(--hairline-soft); margin: var(--sp-2) var(--sp-3); }
+.nav-item.chat-entry { color: var(--ink-3); }
+.nav-item.chat-entry:hover { color: var(--ink); }
+.nav-item.chat-entry .pebble { width: 6px; height: 6px; background: var(--c-ai); margin-left: auto; }
+
+.nav-manage { margin-top: var(--sp-1); }
+.nav-manage summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  padding: var(--sp-2) var(--sp-3) 5px;
+  font-size: var(--fs-micro); font-weight: 650;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-faint);
+  transition: color .15s ease;
+}
+.nav-manage summary:hover { color: var(--ink-3); }
+.nav-manage summary::-webkit-details-marker { display: none; }
+.nav-manage summary svg { width: 9px; height: 9px; transition: transform .2s ease; }
+.nav-manage[open] summary svg { transform: rotate(90deg); }
+.nav-manage .nav-item { padding: 6px var(--sp-3); font-size: var(--fs-meta); color: var(--ink-3); }
+.nav-manage .nav-item svg { width: 14px; height: 14px; }
+
+.sidebar-foot {
+  margin-top: auto; padding-top: var(--sp-4);
+  border-top: 1px solid var(--hairline);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.foot-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px var(--sp-3); border-radius: var(--r-ctl);
+  color: var(--ink-3); font-size: var(--fs-meta); font-weight: 500;
+  transition: background .15s ease, color .15s ease;
+  width: 100%; text-align: left;
+}
+.foot-item:hover { background: var(--surface-3); color: var(--ink); }
+.foot-item svg { width: 15px; height: 15px; opacity: .75; }
+.kbd {
+  margin-left: auto;
+  font-family: var(--font-mono); font-size: 10px;
+  padding: 2px 6px; border-radius: 6px;
+  background: var(--surface); box-shadow: inset 0 0 0 1px var(--hairline);
+  color: var(--ink-3);
+}
+
+/* ---- main / header ---- */
+.main {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column;
+  padding: var(--sp-6) var(--sp-6) var(--sp-5) var(--sp-2);
+  gap: var(--sp-5);
+}
+.nb-header { display: flex; align-items: flex-start; gap: var(--sp-5); padding: 0 var(--sp-2); }
+.nb-id { flex: 1; min-width: 0; }
+.crumbs {
+  font-size: var(--fs-meta); color: var(--ink-3); font-weight: 500;
+  display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap;
+}
+.crumbs a:hover { color: var(--ink); }
+.crumbs .sep { color: var(--ink-faint); }
+.crumbs .pebble { background: var(--primary); width: 6px; height: 6px; }
+.nb-title { font-size: var(--fs-title); font-weight: 750; letter-spacing: -0.022em; line-height: 1.15; }
+.nb-desc {
+  margin-top: 5px; font-size: var(--fs-body); color: var(--ink-2);
+  display: inline-flex; align-items: center; gap: 8px;
+  border-radius: 8px; padding: 3px 8px; margin-left: -8px;
+  cursor: text; transition: background .15s ease;
+}
+.nb-desc:hover { background: var(--surface-3); }
+.nb-desc svg { width: 12px; height: 12px; opacity: 0; transition: opacity .15s ease; }
+.nb-desc:hover svg { opacity: .55; }
+.nb-meta { margin-top: 7px; font-size: var(--fs-meta); color: var(--ink-3); display: flex; gap: 8px; align-items: center; }
+.nb-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+.nb-actions { display: flex; gap: var(--sp-2); padding-top: 6px; }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 14px; border-radius: var(--r-pill);
+  font-size: var(--fs-meta); font-weight: 600; color: var(--ink-2);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  transition: background .15s ease, color .15s ease;
+}
+.btn-ghost:hover { background: var(--surface); color: var(--ink); }
+.btn-ghost.danger:hover { color: var(--c-video); }
+.btn-ghost svg { width: 13px; height: 13px; }
+
+/* ---- panels ---- */
+.workspace { flex: 1; min-height: 0; display: grid; gap: var(--sp-4); }
+.panel {
+  background: var(--surface);
+  border-radius: var(--r-panel);
+  box-shadow: var(--shadow-panel);
+  display: flex; flex-direction: column;
+  min-height: 0; overflow: hidden;
+  transition: background-color .35s ease;
+}
+.panel-head { display: flex; align-items: center; gap: 9px; padding: var(--sp-4) var(--sp-5) var(--sp-3); flex: none; }
+.panel-title {
+  font-size: var(--fs-micro); font-weight: 700;
+  letter-spacing: .13em; text-transform: uppercase;
+  color: var(--ink-2);
+}
+.panel-count {
+  font-family: var(--font-mono); font-size: 10.5px;
+  color: var(--ink-3);
+  background: var(--surface-2); border-radius: 7px; padding: 2px 7px;
+}
+.panel-head .spacer { flex: 1; }
+.icon-btn {
+  width: 28px; height: 28px; border-radius: 9px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink-3);
+  transition: background .15s ease, color .15s ease;
+}
+.icon-btn:hover { background: var(--surface-3); color: var(--ink); }
+.icon-btn svg { width: 14px; height: 14px; }
+.panel-body { flex: 1; overflow-y: auto; padding: 0 var(--sp-3) var(--sp-3); min-height: 0; }
+.panel-body::-webkit-scrollbar { width: 8px; }
+.panel-body::-webkit-scrollbar-thumb { background: var(--hairline); border-radius: 4px; }
+.panel-action {
+  margin: 0 var(--sp-3) var(--sp-4);
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  height: 36px; border-radius: var(--r-pill); flex: none;
+  font-size: var(--fs-meta); font-weight: 650; color: var(--primary);
+  background: var(--primary-soft-2);
+  transition: background .15s ease;
+}
+.panel-action:hover { background: var(--primary-soft); }
+.panel-action svg { width: 14px; height: 14px; }
+
+/* ---- source rows + selection ---- */
+.src-row {
+  display: flex; align-items: flex-start; gap: 11px;
+  width: 100%; text-align: left;
+  padding: 11px 12px; border-radius: var(--r-card);
+  transition: background .15s ease;
+}
+.src-row:hover { background: var(--surface-2); }
+.src-row.selected { background: var(--primary-soft-2); }
+.src-row.selected:hover { background: var(--primary-soft); }
+.check {
+  width: 16px; height: 16px; border-radius: 5px; flex: none; margin-top: 5px;
+  box-shadow: inset 0 0 0 1.5px var(--ink-faint);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: transparent;
+  transition: background .15s ease, box-shadow .15s ease, color .15s ease;
+}
+.src-row:hover .check { box-shadow: inset 0 0 0 1.5px var(--ink-3); }
+.src-row.selected .check { background: var(--primary); box-shadow: none; color: var(--primary-ink); }
+.check svg { width: 10px; height: 10px; }
+.src-type {
+  width: 26px; height: 26px; border-radius: 9px; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--c-video-soft); color: var(--c-video);
+  margin-top: 1px;
+}
+.src-type svg { width: 12px; height: 12px; }
+.src-type.t-pdf   { background: var(--c-note-soft);  color: var(--c-note); }
+.src-type.t-web   { background: var(--c-ai-soft);    color: var(--c-ai); }
+.src-type.t-audio { background: var(--c-audio-soft); color: var(--c-audio); }
+.src-type.t-paper { background: var(--c-paper-soft); color: var(--c-paper); }
+.src-none { color: var(--ink-faint); font-weight: 500; }
+.src-main { min-width: 0; flex: 1; }
+.src-title {
+  font-size: var(--fs-body); font-weight: 550; line-height: 1.35;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.src-meta { margin-top: 4px; display: flex; align-items: center; gap: 7px; font-size: var(--fs-micro); color: var(--ink-3); flex-wrap: wrap; }
+.insight-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 1.5px 8px; border-radius: var(--r-pill);
+  background: var(--c-insight-soft); color: var(--c-insight);
+  font-weight: 650; font-size: var(--fs-micro);
+}
+.insight-chip .pebble { width: 5px; height: 5px; background: var(--c-insight); }
+
+/* ---- notes ---- */
+.note-card {
+  display: block; width: 100%; text-align: left;
+  padding: 13px 15px; border-radius: var(--r-card);
+  background: var(--surface-2);
+  transition: background .15s ease;
+}
+.note-card:hover { background: var(--surface-3); }
+.note-kind {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: var(--fs-micro); font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--c-ai);
+  margin-bottom: 7px;
+}
+.note-kind .pebble { background: var(--c-ai); width: 6px; height: 6px; }
+.note-title { display: block; font-size: var(--fs-body); font-weight: 650; line-height: 1.35; }
+.note-excerpt {
+  display: block;
+  margin-top: 5px; font-size: var(--fs-meta); color: var(--ink-2); line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.note-time { margin-top: 8px; font-size: var(--fs-micro); color: var(--ink-3); display: flex; align-items: center; gap: 6px; }
+.note-time svg { width: 11px; height: 11px; opacity: .7; }
+
+.quick-capture {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: var(--sp-3);
+  padding: 4px 5px 4px 14px;
+  border-radius: var(--r-pill);
+  background: var(--canvas);
+  box-shadow: inset 0 1px 3px rgba(48, 42, 32, 0.06), inset 0 0 0 1px var(--hairline-soft);
+  transition: box-shadow .18s ease;
+}
+.quick-capture:focus-within { box-shadow: inset 0 0 0 1.5px var(--primary); }
+.dark .quick-capture { box-shadow: inset 0 1px 3px rgba(0,0,0,0.35), inset 0 0 0 1px var(--hairline); }
+.dark .quick-capture:focus-within { box-shadow: inset 0 0 0 1.5px var(--primary); }
+.quick-capture input { flex: 1; min-width: 0; background: none; border: none; font-size: var(--fs-meta); padding: 6px 0; }
+.quick-capture input:focus-visible { box-shadow: none; }
+.quick-capture .mini-send {
+  width: 28px; height: 28px; border-radius: 50%; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface-3); color: var(--ink-3);
+  transition: background .15s ease, color .15s ease;
+}
+.quick-capture:focus-within .mini-send { background: var(--primary); color: var(--primary-ink); }
+.quick-capture .mini-send svg { width: 12px; height: 12px; }
+
+/* ---- artifacts ---- */
+.art-row {
+  display: flex; align-items: flex-start; gap: 11px;
+  width: 100%; text-align: left;
+  padding: 11px 12px; border-radius: var(--r-card);
+  transition: background .15s ease;
+}
+.art-row:hover { background: var(--surface-2); }
+.art-type {
+  width: 26px; height: 26px; border-radius: 9px; flex: none;
+  display: flex; align-items: center; justify-content: center; margin-top: 1px;
+}
+.art-type svg { width: 13px; height: 13px; }
+.t-podcast  { background: var(--c-audio-soft);   color: var(--c-audio); }
+.t-mindmap  { background: var(--c-paper-soft);   color: var(--c-paper); }
+.t-guide    { background: var(--c-note-soft);    color: var(--c-note); }
+.t-cards    { background: var(--c-insight-soft); color: var(--c-insight); }
+.t-videoart { background: var(--c-video-soft);   color: var(--c-video); }
+.t-insight  { background: var(--c-insight-soft); color: var(--c-insight); }
+.t-noteart  { background: var(--c-note-soft);    color: var(--c-note); }
+.art-main { min-width: 0; flex: 1; }
+.art-title { font-size: var(--fs-body); font-weight: 600; line-height: 1.35; }
+.art-meta { margin-top: 4px; font-size: var(--fs-micro); color: var(--ink-3); display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.art-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+.proj-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 1.5px 8px; border-radius: var(--r-pill);
+  background: var(--c-paper-soft); color: var(--c-paper);
+  font-weight: 650; font-size: var(--fs-micro);
+}
+.proj-badge .pebble { width: 5px; height: 5px; background: var(--c-paper); }
+
+/* ---- creation chips ---- */
+.chip-row { display: flex; flex-wrap: wrap; gap: 7px; padding: 2px var(--sp-3) var(--sp-3); }
+.create-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 12px; border-radius: var(--r-pill);
+  font-size: var(--fs-meta); font-weight: 600; color: var(--ink-2);
+  background: var(--surface-2);
+  transition: background .15s ease, color .15s ease;
+}
+.create-chip:hover { background: var(--surface-3); color: var(--ink); }
+.create-chip .pebble { width: 7px; height: 7px; }
+
+/* ---- chat ---- */
+.chat { display: flex; flex-direction: column; }
+.scope-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 4px 12px; border-radius: var(--r-pill);
+  background: var(--primary-soft-2); color: var(--primary);
+  font-size: var(--fs-micro); font-weight: 650;
+  transition: background .15s ease;
+  white-space: nowrap;
+}
+.scope-pill:hover { background: var(--primary-soft); }
+.scope-pill .pebble { background: var(--primary); width: 6px; height: 6px; }
+.scope-pill .chev { opacity: .6; font-size: 9px; }
+.chat-body { display: flex; flex-direction: column; gap: var(--sp-4); padding: var(--sp-2) var(--sp-5) var(--sp-4); }
+.msg { max-width: 88%; }
+.msg.user { align-self: flex-end; }
+.msg.user .bubble {
+  background: var(--primary-soft); color: var(--ink);
+  border-radius: 16px 16px 5px 16px;
+  padding: 10px 15px; font-size: var(--fs-body); line-height: 1.5;
+}
+.msg.ai { align-self: flex-start; }
+.msg-agent {
+  display: flex; align-items: center; gap: 7px;
+  font-size: var(--fs-micro); font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--c-ai); margin-bottom: 7px;
+}
+.msg-agent .pebble { background: var(--c-ai); width: 6px; height: 6px; }
+.msg.ai .bubble {
+  background: var(--surface-2);
+  border-radius: 5px 16px 16px 16px;
+  padding: 13px 16px;
+  font-size: var(--fs-body); line-height: 1.58; color: var(--ink);
+}
+.msg.ai .bubble p + p { margin-top: 10px; }
+.msg.ai .bubble em { font-style: normal; font-weight: 650; color: var(--primary); }
+.cite {
+  display: inline-flex; align-items: center; gap: 4px;
+  vertical-align: 1px; margin: 0 1px;
+  padding: 0.5px 7px; border-radius: var(--r-pill);
+  background: var(--c-insight-soft); color: var(--c-insight);
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  white-space: nowrap; cursor: pointer;
+  transition: filter .15s ease;
+}
+.cite:hover { filter: brightness(0.95); }
+.cite .pebble { width: 4px; height: 4px; background: var(--c-insight); }
+.cite.note-cite { background: var(--c-note-soft); color: var(--c-note); }
+.cite.note-cite .pebble { background: var(--c-note); }
+.msg-tools { display: flex; gap: 8px; margin-top: 9px; }
+.tool-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: var(--r-pill);
+  font-size: var(--fs-micro); font-weight: 650; color: var(--ink-3);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  transition: background .15s ease, color .15s ease;
+}
+.tool-pill:hover { background: var(--surface-2); color: var(--primary); }
+.tool-pill svg { width: 12px; height: 12px; }
+
+.context-bar {
+  flex: none;
+  margin: 0 var(--sp-4) var(--sp-3);
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 14px;
+  border-radius: var(--r-pill);
+  background: var(--surface-2);
+  font-family: var(--font-mono); font-size: 11px; color: var(--ink-3);
+}
+.context-bar .sep { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+.context-bar b { color: var(--ink-2); font-weight: 500; }
+.model-chip {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px; border-radius: var(--r-pill);
+  background: var(--c-ai-soft); color: var(--c-ai);
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 500;
+  white-space: nowrap;
+}
+.model-chip .pebble { width: 6px; height: 6px; background: var(--c-ai); }
+.composer {
+  flex: none;
+  margin: 0 var(--sp-4) var(--sp-4);
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 6px 6px 18px;
+  border-radius: var(--r-pill);
+  background: var(--canvas);
+  box-shadow: inset 0 1px 3px rgba(48, 42, 32, 0.06), inset 0 0 0 1px var(--hairline-soft);
+  transition: box-shadow .18s ease;
+}
+.composer:focus-within { box-shadow: inset 0 0 0 1.5px var(--primary), inset 0 1px 3px rgba(48,42,32,0.04); }
+.dark .composer { box-shadow: inset 0 1px 3px rgba(0,0,0,0.35), inset 0 0 0 1px var(--hairline); }
+.dark .composer:focus-within { box-shadow: inset 0 0 0 1.5px var(--primary); }
+.composer input { flex: 1; min-width: 0; background: none; border: none; font-size: var(--fs-body); padding: 8px 0; }
+.composer input:focus-visible { box-shadow: none; }
+.btn-send {
+  width: 36px; height: 36px; border-radius: 50%; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--primary); color: var(--primary-ink);
+  box-shadow: var(--shadow-pill);
+  transition: background .18s ease, transform .18s ease;
+}
+.btn-send:hover { background: var(--primary-hover); transform: translateY(-1px); }
+.btn-send svg { width: 15px; height: 15px; }
+
+/* ---- empty hint ---- */
+.notes-empty {
+  margin-top: var(--sp-3);
+  padding: var(--sp-4);
+  border-radius: var(--r-card);
+  border: 1.5px dashed var(--hairline);
+  text-align: center;
+}
+.notes-empty .pebble-trio { display: flex; justify-content: center; gap: 5px; margin-bottom: 8px; }
+.notes-empty .pebble-trio .pebble { width: 9px; height: 9px; }
+.notes-empty .pebble-trio .pebble:nth-child(1) { background: var(--c-note); opacity: .8; }
+.notes-empty .pebble-trio .pebble:nth-child(2) { background: var(--c-ai); opacity: .8; }
+.notes-empty .pebble-trio .pebble:nth-child(3) { background: var(--c-insight); opacity: .8; }
+.notes-empty p { font-size: var(--fs-meta); color: var(--ink-3); line-height: 1.55; }
+.notes-empty p strong { color: var(--ink-2); font-weight: 650; display: block; margin-bottom: 3px; }
+
+/* ---- progress (quiet) ---- */
+.progress { height: 4px; border-radius: 2px; background: var(--surface-3); overflow: hidden; margin-top: 8px; }
+.progress i { display: block; height: 100%; width: 38%; border-radius: 2px; background: var(--c-ai); animation: slide 1.7s ease-in-out infinite; }
+@keyframes slide { 0% { transform: translateX(-110%); } 100% { transform: translateX(320%); } }
+
+.panel, .sidebar, .nav-item, .note-card, .composer, .context-bar,
+.src-row, .art-row, .btn-ghost, .tile-banner { transition-property: background-color, color, box-shadow; transition-duration: .35s; }
+
+/* ============ SCREEN 06 layout (citations anatomy) ============ */
+.workspace.cite-page {
+  grid-template-columns: minmax(250px, 19rem) minmax(430px, 1fr) minmax(196px, 14rem);
+}
+.main { overflow-y: auto; }
+.workspace.cite-page .panel.chat,
+.workspace.cite-page .panel.chat .panel-body { overflow: visible; }
+.workspace.cite-page .panel.chat { max-width: 58rem; }
+.workspace.cite-page .chat-body { padding-top: 8px; }
+.msg.ai .bubble p + p { margin-top: 12px; }
+
+/* numbered citation chips — evolution of the cite idiom */
+.cite.n { padding: 0.5px 8px; }
+.cite .no { font-weight: 500; }
+.cite.note-cite { background: var(--c-note-soft); color: var(--c-note); }
+.cite.note-cite .pebble { background: var(--c-note); }
+.cite.ins { background: var(--c-insight-soft); color: var(--c-insight); }
+.cite.ext {
+  background: none; border: 1px dashed var(--c-paper); color: var(--c-paper);
+  padding: 0 7px;
+}
+.cite.ext .pebble { background: none; box-shadow: inset 0 0 0 1.5px currentColor; }
+.cite.open-chip { box-shadow: 0 0 0 2px var(--c-insight); }
+.inferred { border-bottom: 1.5px dotted var(--ink-faint); }
+.cite.inf {
+  background: none; box-shadow: inset 0 0 0 1px var(--hairline);
+  color: var(--ink-3); padding: 0 7px;
+}
+
+/* popovers */
+.cite-anchor { position: relative; display: inline-block; }
+.popover {
+  position: absolute; top: calc(100% + 9px); left: -14px; z-index: 30;
+  width: 304px;
+  background: var(--surface);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-overlay);
+  padding: 12px 14px 13px;
+  font-family: var(--font-sans); font-size: var(--fs-meta); font-weight: 400;
+  line-height: 1.5; color: var(--ink-2);
+  white-space: normal; text-align: left; cursor: default;
+}
+.popover.up { top: auto; bottom: calc(100% + 9px); }
+.popover.up::before { top: auto; bottom: -5px; left: 26px; border-radius: 0 0 3px 0; }
+.popover.flip { left: calc(100% + 12px); top: -128px; }
+.popover::before {
+  content: ""; position: absolute; top: -5px; left: 26px;
+  width: 10px; height: 10px; border-radius: 3px 0 0 0;
+  background: var(--surface); transform: rotate(45deg);
+}
+.popover.flip::before { top: 136px; left: -5px; border-radius: 0 0 0 3px; }
+.pop-quote {
+  display: block;
+  background: var(--c-insight-soft);
+  border-radius: 8px; padding: 8px 10px;
+  color: var(--ink); font-size: var(--fs-meta); line-height: 1.55;
+}
+.pop-src { display: flex; align-items: center; gap: 7px; margin-top: 9px; font-weight: 650; color: var(--ink); font-size: var(--fs-meta); }
+.pop-src .pebble { width: 6px; height: 6px; }
+.pop-loc { display: block; margin-top: 2px; font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); }
+.pop-crumb {
+  display: flex;
+  margin-top: 7px; padding-top: 7px; border-top: 1px solid var(--hairline-soft);
+  font-family: var(--font-mono); font-size: 10px; color: var(--ink-3);
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+.pop-crumb .pebble { width: 4px; height: 4px; background: var(--c-video); }
+.pop-action {
+  margin-top: 9px; display: inline-flex; align-items: center; gap: 5px;
+  color: var(--primary); font-weight: 650; font-size: var(--fs-meta);
+}
+.pop-action:hover { text-decoration: underline; }
+.pop-receipt { display: block; margin-top: 7px; font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); overflow-wrap: anywhere; }
+.pop-adopt {
+  margin-top: 9px; display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: var(--r-pill);
+  background: var(--primary-soft-2); color: var(--primary);
+  font-weight: 650; font-size: var(--fs-micro);
+  transition: background .15s ease;
+}
+.pop-adopt:hover { background: var(--primary-soft); }
+
+.popover.chunky { width: 320px; padding: 0; overflow: hidden; }
+.pop-pin-head {
+  display: block; padding: 11px 14px 8px;
+  border-bottom: 1px solid var(--hairline-soft);
+  background: var(--surface);
+}
+.pop-pin-foot {
+  display: block; padding: 8px 14px 10px;
+  border-top: 1px solid var(--hairline-soft);
+  background: var(--surface);
+}
+.pop-pin-foot .pop-action { margin-top: 0; }
+.pop-chunk {
+  display: block; position: relative;
+  max-height: 174px; overflow-y: auto;
+  margin: 8px 10px; padding: 8px 10px;
+  background: var(--c-insight-soft); border-radius: 8px;
+  color: var(--ink); font-size: var(--fs-meta); line-height: 1.6;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+}
+.pop-chunk::-webkit-scrollbar { width: 6px; }
+.pop-chunk::-webkit-scrollbar-thumb { background: var(--hairline); border-radius: 3px; }
+.best-match {
+  background: rgba(110, 111, 168, .20);
+  box-shadow: 0 0 0 2px rgba(110, 111, 168, .20);
+  border-radius: 3px;
+}
+.dark .best-match {
+  background: rgba(156, 157, 207, .24);
+  box-shadow: 0 0 0 2px rgba(156, 157, 207, .24);
+}
+
+/* Sources panel — reader state: a citation click landed here */
+.reader .panel-body { padding: 0 var(--sp-4) var(--sp-4); }
+.src-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin: 2px 0 var(--sp-2) -10px; padding: 4px 10px;
+  border-radius: var(--r-pill);
+  font-size: var(--fs-meta); font-weight: 600; color: var(--ink-3);
+  transition: background .15s ease, color .15s ease;
+}
+.src-back:hover { background: var(--surface-3); color: var(--ink); }
+.reader-id {
+  display: flex; align-items: flex-start; gap: 11px;
+  padding-bottom: var(--sp-3); margin-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.reader-id .src-title:hover { color: var(--primary); }
+.reader-body { font-size: var(--fs-meta); line-height: 1.7; color: var(--ink-2); }
+.reader-body h3 { font-size: var(--fs-meta); font-weight: 700; color: var(--ink); margin-bottom: var(--sp-2); letter-spacing: -0.01em; }
+.reader-body p + p { margin-top: 9px; }
+.page-tag { font-family: var(--font-mono); font-size: 10px; color: var(--ink-faint); margin-left: 6px; }
+.chunk-marker {
+  display: inline-flex; align-items: center; gap: 5px;
+  margin: var(--sp-3) 0 7px; padding: 1px 8px;
+  border-radius: var(--r-pill);
+  background: var(--c-insight-soft); color: var(--c-insight);
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+}
+.chunk-marker .pebble { width: 4px; height: 4px; background: var(--c-insight); }
+.cited-chunk {
+  display: block; margin: 0 -8px; padding: 9px 10px;
+  background: var(--c-insight-soft); border-radius: 10px;
+  color: var(--ink); line-height: 1.65;
+}
+.cited-chunk + p { margin-top: 10px; }
+
+/* evidence bundle — receipt strip + inline accordion */
+.evidence-strip {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-top: 11px; padding: 8px 14px;
+  border-radius: var(--r-pill);
+  background: var(--surface-2);
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-3);
+}
+.evidence-strip b { color: var(--ink-2); font-weight: 500; }
+.evidence-strip .sep { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+.evidence-strip a { color: var(--primary); font-weight: 500; margin-left: 4px; }
+.evidence-strip a:hover { text-decoration: underline; }
+.evidence-fold {
+  margin-top: 8px; padding: var(--sp-2);
+  border-radius: var(--r-card);
+  background: var(--surface-2);
+  display: flex; flex-direction: column; gap: 3px;
+}
+.evd-entry {
+  display: flex; align-items: flex-start; gap: 9px;
+  width: 100%; text-align: left;
+  padding: 9px 10px; border-radius: 10px;
+  transition: background .15s ease;
+}
+.evd-entry:hover { background: var(--surface-3); }
+.evd-entry > .pebble { width: 6px; height: 6px; margin-top: 5px; }
+.evd-entry.note, .evd-entry.note:hover { background: var(--c-note-soft); }
+.evd-entry.ext { border: 1px dashed var(--c-paper); padding: 8px 9px; }
+.evd-main { min-width: 0; flex: 1; }
+.evd-src { display: flex; align-items: center; gap: 7px; font-weight: 650; color: var(--ink); font-size: var(--fs-meta); flex-wrap: wrap; }
+.evd-loc { display: block; margin-top: 2px; font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); overflow-wrap: anywhere; }
+.evd-snip {
+  margin-top: 5px; font-size: var(--fs-meta); color: var(--ink-2); line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.evd-more {
+  display: block; width: 100%; margin-top: 2px; padding: 7px;
+  border-radius: 10px; text-align: center;
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-3);
+  transition: background .15s ease, color .15s ease;
+}
+.evd-more:hover { background: var(--surface-3); color: var(--primary); }
+
+/* annotation rail — meta, outside the app */
+.anno-rail { display: flex; flex-direction: column; gap: var(--sp-4); padding: 6px 0 0 6px; align-self: start; }
+.anno-head {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--ink-faint);
+  padding-bottom: 2px; border-bottom: 1px dashed var(--hairline);
+}
+.anno { position: relative; padding-left: 16px; font-size: var(--fs-micro); color: var(--ink-3); line-height: 1.55; }
+.anno::before { content: ""; position: absolute; left: 0; top: 7px; width: 9px; height: 1px; background: var(--ink-faint); }
+.anno .num {
+  display: block; font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2);
+  margin-bottom: 2px;
+}
+.anno .popover.inline-demo {
+  display: block;
+  position: static; width: auto; margin-top: 8px;
+  box-shadow: var(--shadow-card);
+  overflow-wrap: break-word;
+}
+.anno .popover.inline-demo::before { display: none; }
+@media (max-width: 1180px) {
+  .sidebar { width: 200px; }
+  .workspace.cite-page { grid-template-columns: minmax(400px, 1fr) minmax(230px, 17rem); }
+  .workspace.cite-page .panel.reader { grid-column: 2; grid-row: 1; min-height: 480px; }
+  .workspace.cite-page .anno-rail { grid-column: 2; grid-row: 2; }
+  .workspace.cite-page .panel.chat { grid-column: 1; grid-row: 1 / 3; }
+  .msg { max-width: 96%; }
+  .popover { width: 264px; }
+  .context-bar { flex-wrap: wrap; row-gap: 4px; }
+}
+
+/* ============ SCREEN 06b — degraded states & mobile ============ */
+/* the page now has a second plate below — the first sizes to its content
+   instead of flexing, so the long chat column no longer bleeds over it */
+.workspace.cite-page { flex: none; }
+.workspace.cite-page .panel.reader { align-self: start; max-height: min(82vh, 780px); }
+
+.sec-head { margin-top: var(--sp-5); padding-top: var(--sp-6); border-top: 1px dashed var(--hairline); }
+.sec-head .nb-title { font-size: 1.125rem; }
+
+.workspace.state-page {
+  flex: none;
+  grid-template-columns: minmax(250px, 19rem) minmax(430px, 1fr) minmax(196px, 14rem);
+  align-items: start;
+  padding-bottom: var(--sp-4);
+}
+.state-col { display: flex; flex-direction: column; gap: var(--sp-6); min-width: 0; }
+
+/* exhibit plates — canvas clusters, same meta-language as the annotation rail */
+.state-plate { display: flex; flex-direction: column; gap: 9px; }
+.state-label {
+  display: flex; align-items: center; gap: 7px;
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint);
+}
+.state-label .pebble { width: 6px; height: 6px; background: var(--warn); }
+.demo-bubble {
+  background: var(--surface);
+  border-radius: 5px 16px 16px 16px;
+  padding: 11px 14px;
+  font-size: var(--fs-body); line-height: 1.58; color: var(--ink);
+  box-shadow: var(--shadow-card);
+}
+.demo-bubble em { font-style: normal; font-weight: 650; color: var(--primary); }
+.state-plate .popover {
+  position: static; width: auto; margin: 0;
+  box-shadow: var(--shadow-card);
+}
+.state-plate .popover::before { display: none; }
+
+/* 09 — stale evidence */
+.cite.stale { background: var(--warn-soft); color: var(--warn); }
+.cite.stale .pebble { background: var(--warn); }
+.pop-quote.stale { background: var(--surface-2); color: var(--ink-3); }
+.pop-notice {
+  display: flex; align-items: flex-start; gap: 7px;
+  margin-top: 9px;
+  font-size: var(--fs-meta); font-weight: 550; color: var(--warn); line-height: 1.45;
+}
+.pop-notice .pebble { width: 6px; height: 6px; background: var(--warn); margin-top: 5px; }
+.pop-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.pop-actions .pop-action { margin-top: 9px; }
+.pop-action.quiet { color: var(--ink-3); }
+
+/* 10 — invalid / unavailable reference */
+.cite.broken {
+  background: none; box-shadow: inset 0 0 0 1px var(--hairline);
+  color: var(--ink-faint);
+}
+.cite.broken .no { text-decoration: line-through; text-decoration-thickness: 1px; }
+.cite.broken .pebble { background: none; box-shadow: inset 0 0 0 1.2px var(--ink-faint); }
+.pop-src.gone { color: var(--ink-3); }
+.pop-note { display: block; margin-top: 8px; font-size: var(--fs-meta); color: var(--ink-3); line-height: 1.5; }
+
+/* 11 — partially-supported receipt strip */
+.evidence-strip.partial { background: var(--warn-soft); color: var(--warn); box-shadow: var(--shadow-card); margin-top: 0; }
+.evidence-strip.partial b { color: var(--warn); font-weight: 500; }
+.evidence-strip.partial .sep { background: var(--warn); opacity: .45; }
+.evidence-strip.partial a { color: var(--warn); font-weight: 600; }
+.evidence-strip.partial .pebble { width: 6px; height: 6px; background: var(--warn); }
+
+/* 12 — unsupported answer banner */
+.syn-banner {
+  display: flex; align-items: flex-start; gap: 9px;
+  padding: 10px 14px;
+  border-radius: var(--r-card);
+  border: 1.5px dashed var(--hairline);
+  font-size: var(--fs-meta); color: var(--ink-2); line-height: 1.55;
+}
+.syn-banner .pebble { width: 7px; height: 7px; margin-top: 4px; background: none; box-shadow: inset 0 0 0 1.5px var(--ink-faint); }
+
+/* 13 — stacked evidence chip */
+.cite.stack { box-shadow: 2px 2.5px 0 -0.5px var(--surface), 2px 2.5px 0 0 var(--c-insight); }
+.cite .mult { font-size: 9px; font-weight: 500; opacity: .72; margin-left: 1px; }
+.pop-head {
+  display: block; margin-bottom: 4px;
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3);
+}
+.pop-row { display: block; padding: 7px 0; border-top: 1px solid var(--hairline-soft); }
+.pop-row:first-of-type { border-top: 0; padding-top: 3px; }
+.pop-row .pop-src { margin-top: 0; }
+
+/* 14 — mobile plate: phone frame + bottom sheet */
+.phone {
+  width: 380px; max-width: 100%;
+  margin: 2px auto 0;
+  padding: 9px;
+  border-radius: 46px;
+  background: #33302B;
+  box-shadow: var(--shadow-overlay);
+  align-self: center;
+}
+.dark .phone { background: #0F0E0C; box-shadow: var(--shadow-overlay), inset 0 0 0 1px rgba(235,226,210,.06); }
+.phone-screen {
+  position: relative; overflow: hidden;
+  height: 600px;
+  border-radius: 37px;
+  background:
+    radial-gradient(500px 220px at 60% -60px, var(--canvas-tint), transparent 70%),
+    var(--canvas);
+  display: flex; flex-direction: column;
+}
+.phone-status {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 24px 4px;
+  font-family: var(--font-mono); font-size: 10px; color: var(--ink-3);
+  flex: none;
+}
+.phone-status .sig { display: flex; gap: 3px; }
+.phone-status .sig .pebble { width: 5px; height: 5px; background: var(--ink-faint); }
+.phone-head {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 18px 10px;
+  font-size: var(--fs-meta); font-weight: 650;
+  border-bottom: 1px solid var(--hairline-soft);
+  flex: none;
+}
+.phone-head .pebble { width: 7px; height: 7px; background: var(--primary); }
+.phone-head .chev { margin-left: auto; color: var(--ink-faint); font-size: 10px; }
+.phone-body { flex: 1; min-height: 0; padding: 12px 14px; display: flex; flex-direction: column; gap: 12px; overflow: hidden; }
+.phone-body .msg { max-width: 92%; }
+.phone-body .bubble { font-size: var(--fs-meta); }
+.phone-scrim { position: absolute; inset: 0; background: rgba(38, 33, 24, .30); }
+.dark .phone-scrim { background: rgba(0, 0, 0, .46); }
+.sheet {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  background: var(--surface);
+  border-radius: 18px 18px 0 0;
+  box-shadow: var(--shadow-overlay);
+  display: flex; flex-direction: column;
+}
+.sheet-handle { width: 36px; height: 4px; border-radius: 2px; background: var(--ink-faint); opacity: .55; margin: 8px auto 2px; flex: none; }
+.sheet .pop-chunk { max-height: 150px; margin: 8px 12px; }
+.sheet .pop-pin-head { border-bottom: 0; padding-bottom: 4px; }
+.sheet .pop-pin-foot { padding: 9px 14px 16px; }
+
+@media (max-width: 1180px) {
+  .workspace.state-page { grid-template-columns: minmax(400px, 1fr) minmax(230px, 17rem); }
+  .workspace.state-page .state-col { grid-column: 1; }
+  .workspace.state-page .anno-rail { grid-column: 2; grid-row: 1 / 3; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="tile-banner">
+  <strong>UX Concept — Citations & Evidence · Direction D</strong>
+  <span>The core promise made visible: every claim wears its evidence — sources, notes, derivations, external finds, and honest synthesis, each with its own dress.</span>
+  <nav class="banner-nav">
+    <a href="00-home.html">0</a><a href="01-notebook.html">1</a><a href="02-source.html">2</a><a href="03-creations.html">3</a><a href="04-global-chat.html">4</a><a href="05-create-overlay.html">5</a><a class="here" href="06-citations.html">6</a><a href="07-deep-research.html">7</a><a href="08-search.html">8</a>
+  </nav>
+</div>
+
+<div class="shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a class="wordmark" href="01-notebook.html">
+      <span class="logo-pebbles"><span class="pebble"></span><span class="pebble"></span></span>
+      Open Notebook
+    </a>
+
+    <a class="btn-new" href="05-create-overlay.html">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+      Create
+      <span class="kbd">⌘J</span>
+    </a>
+
+    <nav class="nav-group">
+      <a class="nav-item" href="00-home.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7 8 2.5 13.5 7v5.5a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1z"/><path d="M6.5 13.5v-4h3v4"/></svg>
+        Home
+      </a>
+      <a class="nav-item active" href="01-notebook.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>
+        Notebooks
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path d="M5.5 6h5M5.5 8.5h5M5.5 11h3"/></svg>
+        Sources
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg>
+        Notes
+      </a>
+      <a class="nav-item" href="03-creations.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/><path d="m12.5 10.5.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></svg>
+        Creations
+      </a>
+      <a class="nav-item" href="08-search.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>
+        Search
+      </a>
+      <div class="nav-divider"></div>
+      <a class="nav-item chat-entry" href="04-global-chat.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13.5 8a5.5 5.5 0 1 0-2.2 4.4L13.5 13l-.5-2.2A5.47 5.47 0 0 0 13.5 8z"/></svg>
+        Chat
+        <span class="pebble"></span>
+      </a>
+    </nav>
+
+    <details class="nav-manage">
+      <summary>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 4 4 4-4 4"/></svg>
+        Manage
+      </summary>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 5.5 8 2.5l5.5 3L8 8.5zM2.5 8.2 8 11.2l5.5-3M2.5 10.9 8 13.9l5.5-3"/></svg>
+        Models
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 5h7M12.5 5h.5M3 11h.5M6 11h7"/><circle cx="11" cy="5" r="1.6"/><circle cx="4.7" cy="11" r="1.6"/></svg>
+        Transformations
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="2.2"/><path d="M8 2v1.6M8 12.4V14M2 8h1.6M12.4 8H14M3.8 3.8l1.1 1.1M11.1 11.1l1.1 1.1M12.2 3.8l-1.1 1.1M4.9 11.1l-1.1 1.1"/></svg>
+        Settings
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m6 4-3 4 3 4M10 4l3 4-3 4"/></svg>
+        Advanced
+      </a>
+    </details>
+
+    <div class="sidebar-foot">
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/></svg>
+        Quick actions
+        <span class="kbd">⌘K</span>
+      </button>
+      <button class="foot-item" id="theme-toggle" aria-pressed="false">
+        <svg id="icon-moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3 5.5 5.5 0 1 0 13 9.5z"/></svg>
+        <svg id="icon-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="display:none"><circle cx="8" cy="8" r="3"/><path d="M8 1.5V3M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M12.6 3.4l-1 1M4.4 11.6l-1 1"/></svg>
+        <span id="theme-label">Dark theme</span>
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c1.8 1.7 2.6 3.8 2.6 6S9.8 12.3 8 14C6.2 12.3 5.4 10.2 5.4 8S6.2 3.7 8 2z"/></svg>
+        English
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 2h-3A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14h3M10.5 11 14 8l-3.5-3M14 8H6"/></svg>
+        Sign out
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <header class="nb-header">
+      <div class="nb-id">
+        <div class="crumbs">
+          <span class="pebble"></span>
+          <a href="01-notebook.html">Notebooks</a><span class="sep">/</span>
+          <a href="01-notebook.html">The Attention Economy</a><span class="sep">/</span>
+          <span>Conversation</span>
+        </div>
+        <h1 class="nb-title">Citations &amp; Evidence</h1>
+        <div class="nb-meta">Every claim verifiable in the evidence that supports it <span class="dot"></span> anatomy of one answer, all states shown</div>
+      </div>
+    </header>
+
+    <div class="workspace cite-page">
+
+      <!-- SOURCES — reader state: chip 2 was clicked, the panel opened the source at the cited chunk -->
+      <section class="panel reader">
+        <div class="panel-head">
+          <span class="panel-title">Sources</span>
+          <span class="panel-count">3 / 5</span>
+          <span class="spacer"></span>
+          <button class="icon-btn" title="Collapse panel">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m10 4-4 4 4 4"/></svg>
+          </button>
+        </div>
+        <div class="panel-body">
+          <a class="src-back" href="01-notebook.html">← All sources</a>
+          <div class="reader-id">
+            <span class="src-type t-pdf"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5L12.5 6v7A1.5 1.5 0 0 1 11 14.5H4A1.5 1.5 0 0 1 2.5 13V4A1.5 1.5 0 0 1 4 2.5z"/><path d="M9 2.5V6h3.5"/></svg></span>
+            <span class="src-main">
+              <a class="src-title" href="02-source.html">Stolen Focus — Johann Hari (chapter notes)</a>
+              <span class="src-meta">PDF <span class="insight-chip"><span class="pebble"></span>2 insights</span></span>
+            </span>
+          </div>
+          <div class="reader-body">
+            <h3>Environment beats willpower<span class="page-tag">ch. 4</span></h3>
+            <p>…the chapter turns from diagnosis to design: if attention is farmed at industrial scale, the counter-move has to be structural, not heroic.</p>
+            <span class="chunk-marker"><span class="pebble"></span>chunk 7/12 · cited in 2 answers</span>
+            <p class="cited-chunk">Hari opens the chapter with the Provincetown experiment — three months with no smartphone, and his attention returned in weeks, not years. The lesson he draws is not that abstinence works; it is that the baseline was never broken. <span class="best-match">Willpower is the wrong unit of analysis. Individuals blaming themselves for distraction are playing a rigged game — thousands of engineers optimize daily against their self-control.</span> He walks through the internal metrics of engagement teams: session length, resurrection rate, time-to-first-notification. None of these measure value to the user; all of them measure capture. The public-health parallel is developed at length: nineteenth-century cities did not cure cholera by teaching citizens to sip carefully — they rebuilt the water supply. Attention, Hari argues, needs the same shift from individual blame to systemic design. The chapter closes with the practical corollary: change the defaults before you test the will. Remove the frictionless paths — the autoplaying feed, the badge, the phone on the desk — and ordinary discipline becomes sufficient again. Willpower still matters, but only downstream of the environment that either spends it or spares it.</p>
+            <p>From there the argument widens to policy: defaults are set by whoever profits from them, and the chapter ends by asking who should hold that pen.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- THE ANSWER -->
+      <section class="panel chat">
+        <div class="panel-head">
+          <span class="panel-title">Conversation</span>
+          <span class="spacer"></span>
+          <button class="scope-pill" title="Change scope">
+            <span class="pebble"></span>
+            Scope: this notebook
+            <span class="chev">▾</span>
+          </button>
+        </div>
+
+        <div class="panel-body chat-body">
+          <div class="msg user">
+            <div class="bubble">Give me the full picture: how do I actually rebuild my focus?</div>
+          </div>
+          <div class="msg ai" style="max-width: 94%">
+            <div class="msg-agent"><span class="pebble"></span>Notebook</div>
+            <div class="bubble">
+              <p>Start from a blunt admission: the distraction is not an accident. Platforms monetize interruption, so attention has to be defended as deliberately as it is attacked <span class="cite n"><span class="pebble"></span><span class="no">1</span></span>. Hari's conclusion is the correct starting point — <em>environment beats willpower</em>, because you cannot out-discipline a system engineered against you <span class="cite-anchor"><span class="cite n open-chip"><span class="pebble"></span><span class="no">2</span></span>
+                <span class="popover up chunky">
+                  <span class="pop-pin-head">
+                    <span class="pop-src"><span class="pebble" style="background:var(--c-note)"></span>Stolen Focus — Johann Hari</span>
+                    <span class="pop-loc">Chapter 4 · Section: Environment beats willpower · chunk 7/12</span>
+                  </span>
+                  <span class="pop-chunk">Hari opens the chapter with the Provincetown experiment — three months with no smartphone, and his attention returned in weeks, not years. The lesson he draws is not that abstinence works; it is that the baseline was never broken. <span class="best-match">Willpower is the wrong unit of analysis. Individuals blaming themselves for distraction are playing a rigged game — thousands of engineers optimize daily against their self-control.</span> He walks through the internal metrics of engagement teams: session length, resurrection rate, time-to-first-notification. None of these measure value to the user; all of them measure capture. The public-health parallel is developed at length: nineteenth-century cities did not cure cholera by teaching citizens to sip carefully — they rebuilt the water supply. Attention, Hari argues, needs the same shift from individual blame to systemic design. The chapter closes with the practical corollary: change the defaults before you test the will. Remove the frictionless paths — the autoplaying feed, the badge, the phone on the desk — and ordinary discipline becomes sufficient again. Willpower still matters, but only downstream of the environment that either spends it or spares it.</span>
+                  <span class="pop-pin-foot"><a class="pop-action" href="02-source.html">Open source →</a></span>
+                </span>
+              </span>.</p>
+
+              <p>That matches what you already distilled for yourself: environment design first, single-task blocks second, attention treated as a budget <span class="cite note-cite"><span class="pebble"></span>your note · Key levers for reclaiming focus</span>. Newport supplies the mechanism behind the rule: every context switch leaves an “attention residue” that taxes the next task, so fragmented hours are never merely fragmented — each piece is degraded <span class="cite n"><span class="pebble"></span><span class="no">3</span></span>.</p>
+
+              <p>The supply side completes the picture. The dense summary of the video makes the business model explicit: engagement is revenue and your focus is the inventory being sold <span class="cite-anchor"><span class="cite ins open-chip"><span class="pebble"></span><span class="no">4</span></span>
+                <span class="popover flip">
+                  <span class="pop-quote">“Attention is bought and sold in millisecond auctions; the feed is optimized for retention, not comprehension.”</span>
+                  <span class="pop-src"><span class="pebble" style="background:var(--c-insight)"></span>Dense Summary of How Your Attention Is Sold</span>
+                  <span class="pop-loc">Insight · recipe: Dense Summary</span>
+                  <span class="pop-crumb">derived from <span class="pebble"></span> How Your Attention Is Sold (video) · 04:12</span>
+                  <a class="pop-action" href="01-notebook.html">Open original →</a>
+                </span>
+              </span>. Once you see the auction, “just try harder” stops sounding like a plan.</p>
+
+              <p>Independent reporting points the same way — workplace studies keep measuring shrinking spans of sustained attention <span class="cite ext"><span class="pebble"></span>attentionlab.org</span>. <span class="inferred">Taken together, the realistic program is environmental redesign first, then scheduled depth, then deliberate training — willpower last</span> <span class="cite inf">~ synthesis</span>.</p>
+            </div>
+
+            <div class="evidence-strip">
+              This answer drew on <b>3 sources</b><span class="sep"></span><b>1 note</b><span class="sep"></span><b>8 passages</b>
+              <a href="#">Hide evidence ↑</a>
+            </div>
+
+            <div class="evidence-fold">
+              <button class="evd-entry">
+                <span class="pebble" style="background:var(--c-note)"></span>
+                <span class="evd-main">
+                  <span class="evd-src">Stolen Focus — Johann Hari <span class="cite n"><span class="pebble"></span><span class="no">2</span></span></span>
+                  <span class="evd-loc">Chapter 4 · Section: Environment beats willpower · chunk 7/12</span>
+                  <span class="evd-snip">Willpower is the wrong unit of analysis. Individuals blaming themselves for distraction are playing a rigged game — thousands of engineers optimize daily against their self-control.</span>
+                </span>
+              </button>
+              <button class="evd-entry note">
+                <span class="pebble" style="background:var(--c-note)"></span>
+                <span class="evd-main">
+                  <span class="evd-src">Your note · Key levers for reclaiming focus</span>
+                  <span class="evd-loc">note · edited 2 days ago</span>
+                  <span class="evd-snip">Environment design first, single-task blocks second, attention treated as a budget — willpower is what you protect, not what you spend.</span>
+                </span>
+              </button>
+              <button class="evd-entry ext">
+                <span class="pebble" style="background:none;box-shadow:inset 0 0 0 1.5px var(--c-paper)"></span>
+                <span class="evd-main">
+                  <span class="evd-src">attentionlab.org — Workplace Attention Report</span>
+                  <span class="evd-loc">attentionlab.org/reports/2026 · retrieved Jul 21, 2026</span>
+                  <span class="evd-snip">Median uninterrupted screen focus among knowledge workers fell to 47 seconds in 2025 studies.</span>
+                </span>
+              </button>
+              <button class="evd-more">show all 8 passages ↓</button>
+            </div>
+
+            <div class="msg-tools">
+              <button class="tool-pill" title="Saving preserves the evidence bundle">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h8A1.5 1.5 0 0 1 13.5 4v9.5L8 10.8l-5.5 2.7V4A1.5 1.5 0 0 1 4 2.5z"/></svg>
+                Save answer
+              </button>
+              <button class="tool-pill">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 3v7M8 3 5.5 5.5M8 3l2.5 2.5M3 11v1.5A1.5 1.5 0 0 0 4.5 14h7a1.5 1.5 0 0 0 1.5-1.5V11"/></svg>
+                Copy
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="context-bar">
+          <b>5 sources</b><span class="sep"></span><b>1 note</b><span class="sep"></span>4.9K tokens
+          <span class="model-chip"><span class="pebble"></span>gpt-5.6-terra</span>
+        </div>
+
+        <div class="composer">
+          <input type="text" placeholder="Ask anything about your sources…" aria-label="Message">
+          <button class="btn-send" title="Send">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5v-9M4 7.5l4-4 4 4"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- ANNOTATION RAIL (meta — not part of the app UI) -->
+      <aside class="anno-rail" aria-label="Design annotations">
+        <div class="anno-head">Spec · citation states</div>
+
+        <div class="anno">
+          <span class="num">01 · Source citation</span>
+          Numbered mono pill after the claim. The popover (open on chip 2) shows the retrieval chunk verbatim — header and “Open source →” pinned, chunk scrolling behind fade masks. Best-match sentences highlighted via term overlap (no LLM).
+        </div>
+
+        <div class="anno">
+          <span class="num">02 · Note citation</span>
+          Honey-tinted, labelled “your note”. Your own words are evidence too — visually distinct from sources so provenance never blurs.
+        </div>
+
+        <div class="anno">
+          <span class="num">03 · Derived + breadcrumb</span>
+          Chip 4 cites an insight; its popover (shown open) carries the derivation trail — “derived from · video · 04:12” — with a jump to the original. Provenance is a chain, not a link. Derived artifacts run shorter than raw chunks — the contrast is itself informative.
+        </div>
+
+        <div class="anno">
+          <span class="num">04 · External evidence</span>
+          Dashed pill, hollow pebble: found on the web, not in the library yet. Its popover carries a retrieval receipt and the adopt action:
+          <span class="popover inline-demo">
+            <span class="pop-quote">“Median uninterrupted screen focus among knowledge workers fell to 47 seconds in 2025 studies.”</span>
+            <span class="pop-src"><span class="pebble" style="background:none;box-shadow:inset 0 0 0 1.5px var(--c-paper)"></span>attentionlab.org — Workplace Attention Report</span>
+            <span class="pop-receipt">attentionlab.org/reports/2026 · retrieved Jul 21, 2026</span>
+            <a class="pop-adopt" href="01-notebook.html">+ Add as source</a>
+          </span>
+        </div>
+
+        <div class="anno">
+          <span class="num">05 · Direct vs inferred</span>
+          The dotted-underlined sentence has no direct span behind it — it is the model's synthesis, marked with a hollow “~ synthesis” chip. Claims and conclusions are never dressed alike.
+        </div>
+
+        <div class="anno">
+          <span class="num">06 · Evidence bundle</span>
+          Every answer ends with its receipt — sources, notes, passage count — and the bundle expands in the conversation flow, directly under it: compare by scrolling, no side rail. Preserved when the answer is saved as an artifact.
+        </div>
+
+        <div class="anno">
+          <span class="num">07 · Hover peeks, click goes to the source</span>
+          Clicking a chip opens that source in the Sources panel, scrolled to the cited chunk — click lands in the Contents surface, so there is no new panel to learn; the deep-dive is one more click, to the source page.
+        </div>
+
+        <div class="anno">
+          <span class="num">08 · Retrieval unit</span>
+          Phase 1: citation span = the chunk (150–300 words). Finer spans — page and sentence offsets — come later.
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- ============ SECTION 2 — DEGRADED STATES & MOBILE ============ -->
+    <header class="nb-header sec-head">
+      <div class="nb-id">
+        <div class="crumbs">
+          <span class="pebble" style="background:var(--warn)"></span>
+          <span>Anatomy · continued</span>
+        </div>
+        <h1 class="nb-title">Degraded states &amp; mobile</h1>
+        <div class="nb-meta">The non-happy paths <span class="dot"></span> evidence that aged, broke, ran thin — or met a small screen</div>
+      </div>
+    </header>
+
+    <div class="workspace state-page">
+
+      <!-- COLUMN A — chip-level states -->
+      <div class="state-col">
+
+        <!-- 09 stale evidence -->
+        <div class="state-plate">
+          <div class="state-label"><span class="pebble"></span>09 · stale evidence</div>
+          <div class="demo-bubble">Hari's numbers on notification load make the same point <span class="cite n stale"><span class="pebble"></span><span class="no">2</span></span>.</div>
+          <div class="popover">
+            <span class="pop-quote stale">Willpower is the wrong unit of analysis. Individuals blaming themselves for distraction are playing a rigged game — thousands of engineers optimize daily against their self-control.</span>
+            <span class="pop-src"><span class="pebble" style="background:var(--c-note)"></span>Stolen Focus — Johann Hari</span>
+            <span class="pop-loc">Chapter 4 · saved from version 2 — library now holds version 3</span>
+            <span class="pop-notice"><span class="pebble"></span>source updated since this answer — the passage may have moved.</span>
+            <span class="pop-actions">
+              <a class="pop-action" href="02-source.html">Open current version →</a>
+              <a class="pop-action quiet" href="#">View saved excerpt</a>
+            </span>
+          </div>
+        </div>
+
+        <!-- 10 invalid / unavailable reference -->
+        <div class="state-plate">
+          <div class="state-label"><span class="pebble" style="background:none;box-shadow:inset 0 0 0 1.2px var(--ink-faint)"></span>10 · invalid reference</div>
+          <div class="demo-bubble">One study he cites puts the recovery time at 23 minutes <span class="cite n broken"><span class="pebble"></span><span class="no">5</span></span>.</div>
+          <div class="popover">
+            <span class="pop-src gone"><span class="pebble" style="background:none;box-shadow:inset 0 0 0 1.2px var(--ink-faint)"></span>Stolen Focus — Johann Hari</span>
+            <span class="pop-loc">chunk 9/12 · not found in current index</span>
+            <span class="pop-note">This passage could not be found — the answer may not be fully supported here.</span>
+          </div>
+        </div>
+
+        <!-- 11 stacked evidence -->
+        <div class="state-plate">
+          <div class="state-label"><span class="pebble" style="background:var(--c-insight)"></span>11 · stacked evidence</div>
+          <div class="demo-bubble">Every source in this notebook converges on defaults over discipline <span class="cite n stack"><span class="pebble"></span><span class="no">2</span><span class="mult">×3</span></span>.</div>
+          <div class="popover">
+            <span class="pop-head">3 passages support this claim</span>
+            <span class="pop-row">
+              <span class="pop-src"><span class="pebble" style="background:var(--c-note)"></span>Stolen Focus — Johann Hari</span>
+              <span class="pop-loc">Chapter 4 · chunk 7/12 · best match</span>
+            </span>
+            <span class="pop-row">
+              <span class="pop-src"><span class="pebble" style="background:var(--c-note)"></span>Deep Work — Cal Newport</span>
+              <span class="pop-loc">Chapter 1 · chunk 3/9</span>
+            </span>
+            <span class="pop-row">
+              <span class="pop-src"><span class="pebble" style="background:var(--c-insight)"></span>Dense Summary of How Your Attention Is Sold</span>
+              <span class="pop-loc">insight · derived</span>
+            </span>
+            <a class="pop-action" href="#">View all three in evidence ↓</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- COLUMN B — answer-level states + mobile -->
+      <div class="state-col">
+
+        <!-- 12 partially-supported answer -->
+        <div class="state-plate">
+          <div class="state-label"><span class="pebble"></span>12 · partially-supported answer</div>
+          <div class="evidence-strip partial">
+            <span class="pebble"></span>
+            <b>2 of 6 claims</b> could not be verified against your library
+            <a href="#">View unsupported claims</a>
+          </div>
+        </div>
+
+        <!-- 13 unsupported answer -->
+        <div class="state-plate">
+          <div class="state-label"><span class="pebble" style="background:none;box-shadow:inset 0 0 0 1.2px var(--ink-faint)"></span>13 · unsupported answer</div>
+          <div class="syn-banner">
+            <span class="pebble"></span>
+            This answer is mostly synthesis — your library had little direct evidence for this question.
+          </div>
+          <div class="demo-bubble"><span class="inferred">A reasonable starting routine is a phone-free morning block, then two scheduled depth sessions — but that is a construction, not a citation</span> <span class="cite inf">~ synthesis</span>.</div>
+        </div>
+
+        <!-- 14 mobile — bottom sheet -->
+        <div class="state-plate">
+          <div class="state-label"><span class="pebble" style="background:var(--primary)"></span>14 · mobile — bottom sheet</div>
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-status">9:41<span class="sig"><span class="pebble"></span><span class="pebble"></span><span class="pebble"></span></span></div>
+              <div class="phone-head"><span class="pebble"></span>The Attention Economy<span class="chev">▾</span></div>
+              <div class="phone-body">
+                <div class="msg user">
+                  <div class="bubble">How do I actually rebuild my focus?</div>
+                </div>
+                <div class="msg ai">
+                  <div class="msg-agent"><span class="pebble"></span>Notebook</div>
+                  <div class="bubble">
+                    <p>The distraction is not an accident — attention has to be defended as deliberately as it is attacked <span class="cite n"><span class="pebble"></span><span class="no">1</span></span>.</p>
+                    <p>Hari's conclusion is the starting point: <em>environment beats willpower</em>, because you cannot out-discipline a system engineered against you <span class="cite n open-chip"><span class="pebble"></span><span class="no">2</span></span>.</p>
+                    <p>Newport supplies the mechanism — every context switch leaves an attention residue that taxes the next task <span class="cite n"><span class="pebble"></span><span class="no">3</span></span>.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="phone-scrim"></div>
+              <div class="sheet">
+                <span class="sheet-handle"></span>
+                <span class="pop-pin-head">
+                  <span class="pop-src"><span class="pebble" style="background:var(--c-note)"></span>Stolen Focus — Johann Hari</span>
+                  <span class="pop-loc">Chapter 4 · Environment beats willpower · chunk 7/12</span>
+                </span>
+                <span class="pop-chunk">The lesson Hari draws from Provincetown is not that abstinence works; it is that the baseline was never broken. <span class="best-match">Willpower is the wrong unit of analysis. Individuals blaming themselves for distraction are playing a rigged game — thousands of engineers optimize daily against their self-control.</span> Nineteenth-century cities did not cure cholera by teaching citizens to sip carefully — they rebuilt the water supply. Change the defaults before you test the will: remove the autoplaying feed, the badge, the phone on the desk, and ordinary discipline becomes sufficient again.</span>
+                <span class="pop-pin-foot"><a class="pop-action" href="02-source.html">Open source →</a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ANNOTATION RAIL (continued) -->
+      <aside class="anno-rail" aria-label="Design annotations — degraded states">
+        <div class="anno-head">Spec · degraded &amp; mobile</div>
+
+        <div class="anno">
+          <span class="num">09 · Stale evidence</span>
+          The source was re-versioned after the answer. The chip warms to amber, the saved excerpt stays but grays — evidence is never silently swapped. Both paths offered: the current version, or the excerpt as it was cited.
+        </div>
+
+        <div class="anno">
+          <span class="num">10 · Invalid reference</span>
+          The passage no longer resolves. The chip keeps its shape but drops its fill — hollow, number struck through. The popover says plainly what it means: this part of the answer may no longer be supported.
+        </div>
+
+        <div class="anno">
+          <span class="num">11 · Stacked evidence</span>
+          One claim, several passages: the chip carries a count and a second pill peeks behind it. The popover leads with the best match; corroboration is shown, not summed into false confidence.
+        </div>
+
+        <div class="anno">
+          <span class="num">12 · Partially supported</span>
+          The receipt strip turns a calm amber when verification comes up short. Honesty is a feature: never hide, never alarm — the count is stated and the unsupported claims are one tap away.
+        </div>
+
+        <div class="anno">
+          <span class="num">13 · Unsupported answer</span>
+          When the library ran thin, a quiet dashed banner says so before the answer does its best. Same hollow idiom as the “~ synthesis” chip — construction, clearly dressed as construction.
+        </div>
+
+        <div class="anno">
+          <span class="num">14 · Mobile — bottom sheet</span>
+          Popovers have a sheet/dialog alternative — tapping a chip raises a bottom sheet with the same anatomy: pinned header, scrollable chunk, pinned “Open source →”. Evidence reachable on any viewport; side panels are never the only path to evidence.
+        </div>
+      </aside>
+
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  if (localStorage.getItem('dirD-theme') === 'dark') root.classList.add('dark');
+  var btn = document.getElementById('theme-toggle');
+  var moon = document.getElementById('icon-moon');
+  var sun = document.getElementById('icon-sun');
+  var label = document.getElementById('theme-label');
+  function sync() {
+    var dark = root.classList.contains('dark');
+    btn.setAttribute('aria-pressed', String(dark));
+    moon.style.display = dark ? 'none' : '';
+    sun.style.display = dark ? '' : 'none';
+    label.textContent = dark ? 'Light theme' : 'Dark theme';
+  }
+  btn.addEventListener('click', function () {
+    root.classList.toggle('dark');
+    localStorage.setItem('dirD-theme', root.classList.contains('dark') ? 'dark' : 'light');
+    sync();
+  });
+  sync();
+
+  var input = document.querySelector('.composer input');
+  var send = document.querySelector('.btn-send');
+  if (send) {
+    send.addEventListener('click', function () {
+      if (!input.value.trim()) return;
+      input.value = '';
+      send.animate([{ transform: 'scale(1)' }, { transform: 'scale(0.86)' }, { transform: 'scale(1)' }], { duration: 220, easing: 'ease-out' });
+      input.focus();
+    });
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') send.click(); });
+  }
+})();
+</script>
+</body>
+</html>

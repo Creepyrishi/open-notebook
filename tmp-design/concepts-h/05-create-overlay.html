@@ -1,0 +1,1311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UX Concept — Universal Create · Direction I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   HYBRID H FOUNDATION — QUIET COLOR (C tamed)
+   Neutral near-fresh canvas, honest 1px borders, near-zero
+   shadows. Each panel speaks ONLY its own hue: a header tick,
+   an icon chip, a tinted action. Cross-hue chips are neutral
+   shells with colored dots. Light default.
+   ============================================================ */
+:root {
+  --bg: #F5F5F2;
+  --bg-deep: #EEEEE9;
+  --surface: #FEFEFC;
+  --surface-raised: #FFFFFF;
+  --ink: #23252A;
+  --ink-soft: #565A61;
+  --ink-faint: #878B92;
+  --line: #E0E0DA;
+  --line-strong: #23252A;
+
+  /* owned hues — red retired to destructive-only; fern = action */
+  --fern:  #2E6B4F; --fern-deep:  #245740; --fern-tint:  #DFEAE2;
+  --gold:  #A97B12; --gold-deep:  #7C5A05; --gold-tint:  #F3EAD3;
+  --teal:  #0E7268; --teal-deep:  #095A51; --teal-tint:  #DDECE8;
+  --sage:  #5E7A54; --sage-deep:  #47603F; --sage-tint:  #E5EBDC;
+  --mauve: #8D5B80; --mauve-deep: #714566; --mauve-tint: #F1E5EE;
+  --slate: #4E6B84; --slate-deep: #3A5468; --slate-tint: #E1E8EE;
+  --plum:  #5D4991; --plum-tint:  #EAE6F3;
+  --danger: #B0432D; --danger-deep: #93341F; --danger-tint: #F5E4DF;
+  --clay:  #B0451F;
+
+  /* aliases so per-type dots resolve (video plum · pdf honey ·
+     web sage · audio mauve · paper slate · notes gold · AI teal) */
+  --c-video: var(--plum); --c-note: var(--gold); --c-insight: var(--teal);
+  --c-ai: var(--teal); --c-audio: var(--mauve); --c-paper: var(--slate);
+
+  --primary: #2E6B4F; --primary-hover: #245740; --on-primary: #F1F8F3;
+
+  --shadow-soft: 0 1px 2px rgba(35,37,42,.06);
+  --shadow-lift: 0 1px 3px rgba(35,37,42,.10);
+  --shadow-overlay: 0 2px 6px rgba(35,37,42,.10), 0 16px 44px rgba(35,37,42,.18);
+
+  /* squared: instrument, not toy; floor is 4px */
+  --r-xl: 6px; --r-lg: 5px; --r-md: 5px; --r-sm: 4px; --r-pill: 4px;
+
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Trebuchet MS", sans-serif;
+  --font-body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, monospace;
+  --fs-hero: 24px; --fs-title: 15.5px; --fs-body: 13.5px;
+  --fs-small: 12px; --fs-micro: 10.5px;
+
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 10px; --sp-4: 14px;
+  --sp-5: 18px; --sp-6: 22px; --sp-7: 28px;
+
+  --focus-ring: 0 0 0 3px var(--teal-tint);
+}
+
+.dark {
+  --bg: #17181B;
+  --bg-deep: #121316;
+  --surface: #1E2024;
+  --surface-raised: #24262B;
+  --ink: #ECEDEA;
+  --ink-soft: #A9ACB1;
+  --ink-faint: #74777D;
+  --line: #2E3036;
+  --line-strong: #ECEDEA;
+
+  --fern:  #55B285; --fern-deep:  #6CC298; --fern-tint:  #1B2F25;
+  --gold:  #CFA13E; --gold-deep:  #DDB55F; --gold-tint:  #322B1B;
+  --teal:  #3FB3A5; --teal-deep:  #64C5B9; --teal-tint:  #16302C;
+  --sage:  #93B084; --sage-deep:  #A8C299; --sage-tint:  #232B1D;
+  --mauve: #C892BA; --mauve-deep: #D6A8CB; --mauve-tint: #322230;
+  --slate: #8FAFC8; --slate-deep: #A5C1D6; --slate-tint: #212B34;
+  --plum:  #A290D3; --plum-tint:  #29253A;
+  --danger: #DF7C63; --danger-deep: #E9937D; --danger-tint: #37231D;
+  --clay:  #F08A5C;
+
+  --primary: #3D8E67; --primary-hover: #479E74; --on-primary: #ECF7F0;
+
+  --shadow-soft: 0 1px 2px rgba(0,0,0,.35);
+  --shadow-lift: 0 1px 3px rgba(0,0,0,.45);
+  --shadow-overlay: 0 2px 6px rgba(0,0,0,.4), 0 20px 52px rgba(0,0,0,.55);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-width: 1000px;
+  transition: background-color .25s ease, color .25s ease;
+}
+::selection { background: var(--teal-tint); color: var(--ink); }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+input, textarea { font: inherit; color: inherit; }
+::placeholder { color: var(--ink-faint); }
+
+.pebble { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex: none; }
+
+/* ---- concept banner (dark ink bar, H signature) ---- */
+.tile-banner {
+  display: flex; align-items: center; gap: var(--sp-3);
+  padding: 6px var(--sp-6);
+  font-size: var(--fs-micro);
+  letter-spacing: .04em;
+  color: var(--bg);
+  background: var(--ink);
+  flex: none;
+}
+.dark .tile-banner { background: #0E0F11; color: var(--ink-soft); }
+.tile-banner strong { font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.tile-banner span { opacity: .7; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tile-banner .dirlink {
+  margin-left: auto; flex: none;
+  opacity: .55; font-weight: 600; white-space: nowrap;
+}
+.tile-banner .dirlink:hover { opacity: 1; text-decoration: underline; }
+.banner-nav { display: flex; gap: 4px; flex: none; }
+.banner-nav a {
+  width: 21px; height: 21px; border-radius: 6px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 10px;
+  color: inherit; opacity: .6;
+  transition: background .15s ease, opacity .15s ease;
+}
+.banner-nav a:hover { background: rgba(255,255,255,.14); opacity: 1; }
+.banner-nav a.here { background: var(--primary); color: var(--on-primary); opacity: 1; }
+
+/* ---- shell / sidebar ---- */
+.shell { flex: 1; display: flex; min-height: 0; }
+.sidebar {
+  width: 232px; flex: none;
+  display: flex; flex-direction: column;
+  background: var(--bg-deep);
+  border-right: 1px solid var(--line);
+  padding: var(--sp-5) var(--sp-4) var(--sp-4);
+  gap: var(--sp-2);
+  overflow-y: auto;
+}
+.wordmark {
+  display: flex; align-items: center; gap: 9px;
+  padding: 2px var(--sp-2) var(--sp-4);
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 15px; letter-spacing: -.01em;
+}
+.logo-pebbles { display: flex; gap: 3px; align-items: center; }
+.logo-pebbles .pebble { width: 10px; height: 10px; border-radius: 3px; }
+.logo-pebbles .pebble:nth-child(1) { background: var(--fern); }
+.logo-pebbles .pebble:nth-child(2) { background: var(--gold); }
+.logo-pebbles .pebble:nth-child(3) { background: var(--teal); }
+
+.btn-new {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  height: 38px; margin: 0 var(--sp-2) var(--sp-4);
+  border-radius: var(--r-md);
+  background: var(--primary); color: var(--on-primary);
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 13.5px; letter-spacing: .01em;
+  box-shadow: none;
+  transition: background .15s ease;
+}
+.btn-new:hover { background: var(--primary-hover); }
+.btn-new:active { filter: brightness(.94); }
+.btn-new svg { width: 14px; height: 14px; }
+.btn-new .kbd { background: rgba(255,255,255,.18); box-shadow: none; color: inherit; margin-left: 2px; }
+.dark .btn-new .kbd { background: rgba(0,0,0,.22); }
+
+.nav-group { display: flex; flex-direction: column; gap: 2px; margin-bottom: var(--sp-3); }
+.nav-label {
+  padding: var(--sp-2) var(--sp-3) 5px;
+  font-size: var(--fs-micro); font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 7px var(--sp-3);
+  border-radius: var(--r-sm);
+  color: var(--ink-soft); font-weight: 500; font-size: 13px;
+  position: relative;
+  transition: background .12s ease, color .12s ease;
+  text-align: left;
+}
+.nav-item svg { width: 15px; height: 15px; flex: none; opacity: .85; }
+.nav-item:hover { background: var(--surface); color: var(--ink); }
+.nav-item.active {
+  background: var(--surface-raised);
+  color: var(--ink); font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.nav-item.active::before {
+  content: ""; position: absolute;
+  left: -4px; top: 7px; bottom: 7px; width: 3px;
+  border-radius: 3px; background: var(--fern);
+}
+.nav-item .nav-hint { margin-left: auto; font-size: var(--fs-micro); color: var(--ink-faint); font-weight: 500; }
+.nav-divider { height: 1px; background: var(--line); margin: var(--sp-2) var(--sp-3); }
+.nav-item.chat-entry { color: var(--ink-soft); }
+.nav-item.chat-entry:hover { color: var(--ink); }
+.nav-item.chat-entry .pebble { width: 6px; height: 6px; background: var(--teal); margin-left: auto; }
+
+.nav-manage { margin-top: var(--sp-1); }
+.nav-manage summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  padding: var(--sp-2) var(--sp-3) 5px;
+  font-size: var(--fs-micro); font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-faint);
+  transition: color .15s ease;
+}
+.nav-manage summary:hover { color: var(--ink-soft); }
+.nav-manage summary::-webkit-details-marker { display: none; }
+.nav-manage summary svg { width: 9px; height: 9px; transition: transform .2s ease; }
+.nav-manage[open] summary svg { transform: rotate(90deg); }
+.nav-manage .nav-item { padding: 6px var(--sp-3); font-size: var(--fs-small); color: var(--ink-soft); }
+.nav-manage .nav-item svg { width: 14px; height: 14px; color: var(--ink-faint); }
+
+.sidebar-foot {
+  margin-top: auto; padding-top: var(--sp-4);
+  border-top: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.foot-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px var(--sp-3); border-radius: var(--r-sm);
+  color: var(--ink-soft); font-size: 12.5px; font-weight: 500;
+  transition: background .12s ease, color .12s ease;
+  width: 100%; text-align: left;
+}
+.foot-item:hover { background: var(--surface); color: var(--ink); }
+.foot-item svg { width: 14px; height: 14px; opacity: .8; }
+.kbd {
+  margin-left: auto;
+  font-family: var(--font-body); font-size: 10px; font-weight: 600;
+  padding: 2px 6px; border-radius: 4px;
+  background: var(--plum-tint); color: var(--plum);
+  letter-spacing: .03em;
+}
+
+/* ---- main / header ---- */
+.main {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column;
+  padding: var(--sp-5) var(--sp-6) var(--sp-5) var(--sp-5);
+  gap: var(--sp-4);
+}
+.nb-header { display: flex; align-items: flex-start; gap: var(--sp-5); padding: 0 var(--sp-2); }
+.nb-id { flex: 1; min-width: 0; }
+.crumbs {
+  font-size: var(--fs-small); color: var(--ink-faint); font-weight: 500;
+  display: flex; align-items: center; gap: 7px; margin-bottom: 6px; flex-wrap: wrap;
+}
+.crumbs a { color: var(--teal); font-weight: 600; }
+.crumbs a:hover { text-decoration: underline; }
+.crumbs .sep { color: var(--ink-faint); }
+.crumbs .pebble { background: var(--fern); width: 6px; height: 6px; }
+.nb-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero); font-weight: 700;
+  letter-spacing: -.02em; line-height: 1.12;
+  position: relative; display: inline-block;
+  padding-bottom: 8px;
+}
+.nb-title::after {
+  content: ""; position: absolute;
+  left: 1px; bottom: 0; width: 56px; height: 3px;
+  border-radius: 2px; background: var(--fern);
+}
+.nb-desc {
+  margin-top: 6px; font-size: 13px; color: var(--ink-soft);
+  display: inline-flex; align-items: center; gap: 8px;
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 3px;
+  cursor: text;
+}
+.nb-desc:hover { border-bottom-color: var(--gold); }
+.nb-desc svg { width: 12px; height: 12px; color: var(--ink-faint); opacity: 0; transition: opacity .15s ease; }
+.nb-desc:hover svg { opacity: 1; }
+.nb-meta { margin-top: 8px; font-size: var(--fs-small); color: var(--ink-faint); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.nb-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+.nb-actions { display: flex; gap: var(--sp-2); padding-top: 6px; }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 6px 13px; border-radius: var(--r-md);
+  font-size: 12.5px; font-weight: 600; color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  transition: border-color .12s ease, color .12s ease, background .12s ease;
+}
+.btn-ghost:hover { border-color: var(--ink-soft); color: var(--ink); }
+/* red means delete — and only delete */
+.btn-ghost.danger:hover { border-color: var(--danger); color: var(--danger-deep); background: var(--danger-tint); }
+.dark .btn-ghost.danger:hover { color: var(--danger); }
+.btn-ghost svg { width: 13px; height: 13px; }
+
+/* ---- panels ---- */
+.workspace { flex: 1; min-height: 0; display: grid; gap: var(--sp-4); }
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-soft);
+  display: flex; flex-direction: column;
+  min-height: 0; overflow: hidden;
+  transition: background-color .25s ease;
+}
+.panel-head {
+  display: flex; align-items: center; gap: 9px;
+  padding: var(--sp-4) var(--sp-4) var(--sp-3);
+  border-bottom: 1px solid var(--line);
+  position: relative; flex: none;
+  flex-wrap: wrap; row-gap: 6px;
+}
+.panel-head::after {
+  content: ""; position: absolute;
+  left: var(--sp-4); bottom: -1px;
+  width: 30px; height: 2px; border-radius: 2px;
+  background: var(--ink-faint);
+}
+/* per-panel hue: sources sage · conversation teal · notes gold · creations gold */
+.workspace.nb > .panel:nth-child(1) .panel-head::after { background: var(--sage); }
+.panel.chat .panel-head::after { background: var(--teal); }
+.panel.notes-p .panel-head::after { background: var(--gold); }
+.panel.creations-p .panel-head::after { background: var(--gold); }
+.panel-title {
+  font-size: var(--fs-micro); font-weight: 700;
+  letter-spacing: .13em; text-transform: uppercase;
+  color: var(--ink-soft);
+}
+/* no count badges in panel headers */
+.panel-head .spacer { flex: 1; }
+.icon-btn {
+  width: 26px; height: 26px; border-radius: 4px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink-faint);
+  transition: background .12s ease, color .12s ease;
+}
+.icon-btn:hover { background: var(--bg-deep); color: var(--ink); }
+.icon-btn svg { width: 14px; height: 14px; }
+.panel-body { flex: 1; overflow-y: auto; padding: var(--sp-3) var(--sp-3) var(--sp-3); min-height: 0; }
+.panel-body::-webkit-scrollbar { width: 8px; }
+.panel-body::-webkit-scrollbar-thumb { background: var(--line); border-radius: 8px; }
+.panel-action {
+  margin: 0 var(--sp-3) var(--sp-4);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  height: 34px; border-radius: var(--r-md); flex: none;
+  font-size: 12px; font-weight: 700;
+  color: var(--fern-deep); background: var(--fern-tint);
+  transition: filter .12s ease;
+}
+.dark .panel-action { color: var(--fern); }
+.panel-action:hover { filter: brightness(.95); }
+.dark .panel-action:hover { filter: brightness(1.15); }
+.panel-action svg { width: 13px; height: 13px; }
+
+/* ---- source cards: the left spine carries CONTEXT STATE —
+   fern = full content, gold = insights only, hairline = excluded.
+   The clickable truth is a single current-state chip, right-aligned
+   on the metadata row — click cycles full → insights → off. ---- */
+.src-card {
+  display: block; width: 100%; text-align: left;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 9px 11px 9px;
+  cursor: pointer; position: relative;
+  transition: border-color .15s ease, background .15s ease;
+}
+.src-card + .src-card { margin-top: 7px; }
+.src-card.ctx-full     { border-left-color: var(--fern); }
+.src-card.ctx-insights { border-left-color: var(--gold); }
+.src-card.ctx-excluded { border-left-color: var(--line); }
+.src-card:hover {
+  border-color: color-mix(in srgb, var(--sage) 45%, var(--line));
+  background: color-mix(in srgb, var(--sage-tint) 18%, var(--surface-raised));
+}
+.src-card.ctx-full:hover     { border-left-color: var(--fern); }
+.src-card.ctx-insights:hover { border-left-color: var(--gold); }
+.src-card.ctx-excluded:hover { border-left-color: var(--line); }
+/* excluded: dim the text, keep it legible — the context chip
+   stays at full opacity: it is the way back in */
+.src-card.ctx-excluded .src-title,
+.src-card.ctx-excluded .src-type,
+.src-card.ctx-excluded .meta-dot,
+.src-card.ctx-excluded .insight-chip { opacity: .55; }
+.src-title {
+  display: block;
+  font-size: 12.8px; font-weight: 600; line-height: 1.35; color: var(--ink);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  /* keep the title clear of the top-right ⋮ button */
+  max-width: calc(100% - 24px);
+}
+/* ONE metadata line: type chip · insight count · context chip */
+.src-meta {
+  margin-top: 6px;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap; min-width: 0;
+}
+.src-meta .meta-dot { color: var(--ink-faint); font-size: 10px; line-height: 1; }
+/* type hues, red-free: video plum · pdf honey · web sage · audio mauve · paper slate */
+.src-type {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 9px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+  color: var(--plum); background: var(--plum-tint);
+  border-radius: 4px; padding: 1px 5px;
+}
+.src-type svg { width: 9px; height: 9px; }
+.src-type.t-pdf   { color: var(--gold-deep);  background: var(--gold-tint); }
+.src-type.t-web   { color: var(--sage-deep);  background: var(--sage-tint); }
+.src-type.t-audio { color: var(--mauve-deep); background: var(--mauve-tint); }
+.src-type.t-paper { color: var(--ink-soft);   background: var(--bg-deep); }
+.dark .src-type.t-pdf { color: var(--gold); }
+.dark .src-type.t-web { color: var(--sage); }
+.dark .src-type.t-audio { color: var(--mauve); }
+/* insight chip goes neutral; only the star glyph keeps gold */
+.insight-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 600;
+  color: var(--ink-soft); background: var(--bg-deep);
+  border-radius: var(--r-pill); padding: 2px 8px;
+}
+.insight-chip svg { width: 11px; height: 11px; color: var(--gold); }
+.insight-chip.empty {
+  background: transparent;
+  border: 1px dashed var(--line);
+  color: var(--ink-faint); font-weight: 500;
+}
+/* context chip: shows ONLY the current state — click cycles.
+   Full opacity even on excluded cards: the chip is the way back in. */
+.ctx-state {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 9.5px; font-weight: 700;
+  letter-spacing: .05em; text-transform: uppercase; line-height: 1.3;
+  white-space: nowrap;
+  border-radius: var(--r-sm); padding: 3px 7px;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: filter .12s ease, box-shadow .12s ease;
+}
+.ctx-state svg { width: 9px; height: 9px; opacity: .75; flex: none; }
+.ctx-state:hover { filter: brightness(.96); box-shadow: var(--shadow-lift); }
+.dark .ctx-state:hover { filter: brightness(1.12); }
+.ctx-state.on-full {
+  background: var(--fern-tint); color: var(--fern-deep);
+  border: 1px solid color-mix(in srgb, var(--fern) 45%, transparent);
+}
+.dark .ctx-state.on-full { color: var(--fern); }
+.ctx-state.on-ins {
+  background: var(--gold-tint); color: var(--gold-deep);
+  border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
+}
+.dark .ctx-state.on-ins { color: var(--gold); }
+.ctx-state.on-off {
+  background: var(--surface-raised); color: var(--ink-soft);
+  border: 1px solid color-mix(in srgb, var(--ink-faint) 40%, transparent);
+}
+/* ⋮ overflow: pinned to the card's TOP-RIGHT, aligned with the title */
+.src-more {
+  position: absolute; top: 6px; right: 6px;
+  color: var(--ink-faint);
+  border-radius: 4px; padding: 3px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.src-more:hover { background: var(--sage-tint); color: var(--sage-deep); }
+.dark .src-more:hover { color: var(--sage); }
+.src-more svg { width: 14px; height: 14px; }
+
+/* ---- notes: same context spine + chip as sources, but BINARY —
+   in context (fern spine, FULL chip) or out (hairline, OFF) ---- */
+.note-card {
+  display: block; width: 100%; text-align: left;
+  padding: 11px 13px; border-radius: var(--r-md);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line);
+  transition: border-color .15s ease, background .15s ease;
+}
+.note-card.ctx-full { border-left-color: var(--fern); }
+.note-card.ctx-off  { border-left-color: var(--line); }
+.note-card:hover {
+  border-color: color-mix(in srgb, var(--gold) 50%, var(--line));
+  background: color-mix(in srgb, var(--gold-tint) 18%, var(--surface-raised));
+}
+.note-card.ctx-full:hover { border-left-color: var(--fern); }
+.note-card.ctx-off:hover  { border-left-color: var(--line); }
+/* off: dim the content, never the chip — it is the way back in */
+.note-card.ctx-off .note-kind,
+.note-card.ctx-off .note-title,
+.note-card.ctx-off .note-excerpt { opacity: .55; }
+.note-time .ctx-state { margin-left: auto; }
+.note-kind {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10px; font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--gold-deep);
+  margin-bottom: 7px;
+}
+.note-kind .pebble { background: var(--gold); width: 6px; height: 6px; }
+.note-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 13.5px; font-weight: 700; line-height: 1.3; letter-spacing: -.005em;
+}
+.note-excerpt {
+  display: block;
+  margin-top: 5px; font-size: var(--fs-small); color: var(--ink-soft); line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.note-time { margin-top: 8px; font-size: 11px; color: var(--ink-faint); display: flex; align-items: center; gap: 6px; }
+.note-time svg { width: 11px; height: 11px; opacity: .7; }
+
+.quick-capture {
+  display: flex; align-items: center; gap: 8px;
+  margin: 2px 0 var(--sp-3);
+  padding: 6px 6px 6px 12px;
+  border-radius: var(--r-lg);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.quick-capture:focus-within { border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-tint); }
+.quick-capture input { flex: 1; min-width: 0; background: none; border: none; font-size: 13px; padding: 8px 0; }
+.quick-capture input:focus-visible { box-shadow: none; }
+.quick-capture .mini-send {
+  width: 28px; height: 28px; border-radius: var(--r-sm); flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-deep); color: var(--ink-faint);
+  transition: background .12s ease, color .12s ease;
+}
+.quick-capture:focus-within .mini-send { background: var(--teal); color: #EFFAF7; }
+.dark .quick-capture:focus-within .mini-send { color: #0B211E; }
+.quick-capture .mini-send svg { width: 12px; height: 12px; }
+
+/* ---- artifacts ---- */
+.art-row {
+  display: flex; align-items: flex-start; gap: 11px;
+  width: 100%; text-align: left;
+  padding: 10px 11px; border-radius: var(--r-md);
+  transition: background .12s ease;
+}
+.art-row:hover { background: var(--bg-deep); }
+.art-type {
+  width: 26px; height: 26px; border-radius: 4px; flex: none;
+  display: flex; align-items: center; justify-content: center; margin-top: 1px;
+}
+.art-type svg { width: 13px; height: 13px; }
+.t-podcast  { background: var(--mauve-tint); color: var(--mauve-deep); }
+.t-mindmap  { background: var(--slate-tint); color: var(--slate-deep); }
+.t-guide    { background: var(--gold-tint);  color: var(--gold-deep); }
+.t-cards    { background: var(--teal-tint);  color: var(--teal-deep); }
+.t-videoart { background: var(--plum-tint); color: var(--plum); }
+.t-insight  { background: var(--teal-tint);  color: var(--teal-deep); }
+.t-noteart  { background: var(--gold-tint);  color: var(--gold-deep); }
+.art-main { min-width: 0; flex: 1; }
+.art-title { font-size: 12.8px; font-weight: 600; line-height: 1.35; }
+.art-meta { margin-top: 4px; font-size: 11px; color: var(--ink-faint); display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.art-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+.proj-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 1.5px 8px; border-radius: var(--r-pill);
+  background: var(--bg-deep); border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-weight: 600; font-size: 11px;
+}
+.proj-badge .pebble { width: 5px; height: 5px; background: var(--slate); }
+
+/* ---- creation chips (neutral shells, hue dots) ---- */
+.chip-row { display: flex; flex-wrap: wrap; gap: 7px; padding: var(--sp-3) var(--sp-3) 2px; }
+.create-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 4.5px 11px; border-radius: var(--r-pill);
+  font-size: 11.5px; font-weight: 600; color: var(--ink-soft);
+  background: transparent;
+  border: 1px solid var(--line);
+  transition: border-color .12s ease, background .12s ease, color .12s ease;
+}
+.create-chip:hover { border-color: var(--ink-faint); background: var(--surface-raised); color: var(--ink); }
+.create-chip .pebble { width: 7px; height: 7px; }
+
+/* ---- chat ---- */
+.chat { display: flex; flex-direction: column; }
+.scope-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 4px 11px; border-radius: var(--r-pill);
+  background: var(--bg-deep); border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 11px; font-weight: 600;
+  transition: border-color .12s ease, color .12s ease;
+  white-space: nowrap;
+}
+.scope-pill:hover { border-color: var(--ink-faint); color: var(--ink); }
+.scope-pill .pebble { background: var(--teal); width: 6px; height: 6px; }
+.scope-pill .chev { opacity: .6; font-size: 9px; }
+.chat-body { display: flex; flex-direction: column; gap: var(--sp-4); padding: var(--sp-3) var(--sp-4) var(--sp-4); }
+.msg { max-width: 88%; }
+.msg.user { align-self: flex-end; }
+.msg.user .bubble {
+  background: var(--bg-deep); color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  border-bottom-right-radius: 4px;
+  padding: 10px 13px; font-size: 13px; line-height: 1.55;
+}
+.dark .msg.user .bubble { background: var(--surface-raised); }
+.msg.ai { align-self: flex-start; }
+.msg-agent {
+  display: flex; align-items: center; gap: 7px;
+  font-size: var(--fs-micro); font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--teal-deep); margin-bottom: 7px;
+}
+.dark .msg-agent { color: var(--teal); }
+.msg-agent .pebble { background: var(--teal); width: 6px; height: 6px; }
+.msg.ai .bubble {
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  border-bottom-left-radius: 4px;
+  padding: 12px 14px;
+  font-size: 13px; line-height: 1.6; color: var(--ink);
+}
+.msg.ai .bubble p + p { margin-top: 9px; }
+.msg.ai .bubble em {
+  font-style: normal; font-weight: 600; color: var(--teal-deep);
+  box-shadow: inset 0 -5px 0 var(--teal-tint);
+}
+.dark .msg.ai .bubble em { color: var(--teal); }
+.cite {
+  display: inline-flex; align-items: center; gap: 4px;
+  vertical-align: 1px; margin: 0 1px;
+  padding: .5px 7px; border-radius: var(--r-pill);
+  background: var(--surface-raised); border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  white-space: nowrap; cursor: pointer;
+  transition: border-color .15s ease;
+}
+.cite:hover { border-color: var(--teal); }
+.cite .pebble { width: 4px; height: 4px; background: var(--teal); }
+.cite .no { font-weight: 700; color: var(--teal-deep); }
+.dark .cite .no { color: var(--teal); }
+.cite.note-cite .pebble { background: var(--gold); }
+.cite.note-cite:hover { border-color: var(--gold); }
+.cite.note-cite .no { color: var(--gold-deep); }
+.dark .cite.note-cite .no { color: var(--gold); }
+.msg-tools { display: flex; gap: 6px; margin-top: 8px; }
+.tool-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: var(--r-sm);
+  font-size: var(--fs-micro); font-weight: 600;
+  color: var(--teal-deep); background: var(--teal-tint);
+  transition: filter .12s ease;
+}
+.dark .tool-pill { color: var(--teal); }
+.tool-pill:hover { filter: brightness(.95); }
+.dark .tool-pill:hover { filter: brightness(1.15); }
+.tool-pill svg { width: 11px; height: 11px; }
+/* Save as Note: the one promoted answer action — soft teal fill, firm label */
+.tool-pill.save-note {
+  font-weight: 700;
+  color: var(--teal-deep); background: var(--teal-tint);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--teal) 35%, transparent);
+}
+.dark .tool-pill.save-note { color: var(--teal); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--teal) 45%, transparent); }
+
+.context-bar {
+  flex: none;
+  margin: 0 var(--sp-4) var(--sp-3);
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 12px;
+  border-radius: var(--r-md);
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint);
+}
+.context-bar .sep { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+.context-bar b { color: var(--ink-soft); font-weight: 500; }
+.model-chip {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 2.5px 10px; border-radius: var(--r-pill);
+  background: var(--plum-tint); color: var(--plum);
+  font-family: var(--font-body); font-size: 11px; font-weight: 700;
+  white-space: nowrap;
+}
+.model-chip .pebble { width: 6px; height: 6px; background: var(--plum); }
+.composer {
+  flex: none;
+  margin: 0 var(--sp-4) var(--sp-4);
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 8px 8px 12px;
+  border-radius: var(--r-lg);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.composer:focus-within { border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-tint); }
+/* comfortable bar: ~52px input, controls vertically centered */
+.composer input { flex: 1; min-width: 0; background: none; border: none; font-size: 13px; padding: 7px 0; min-height: 52px; }
+.composer input:focus-visible { box-shadow: none; }
+.btn-send {
+  width: 34px; height: 34px; border-radius: var(--r-md); flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--primary); color: var(--on-primary);
+  transition: background .12s ease;
+}
+.btn-send:hover { background: var(--primary-hover); }
+.btn-send svg { width: 15px; height: 15px; }
+
+/* ---- empty hint ---- */
+.notes-empty {
+  margin-top: var(--sp-3);
+  padding: var(--sp-4);
+  border-radius: var(--r-lg);
+  border: 1.5px dashed color-mix(in srgb, var(--gold) 40%, var(--line));
+  text-align: center;
+}
+.notes-empty .pebble-trio { display: flex; justify-content: center; gap: 5px; margin-bottom: 8px; }
+.notes-empty .pebble-trio .pebble { width: 8px; height: 8px; }
+.notes-empty .pebble-trio .pebble:nth-child(1) { background: var(--gold); }
+.notes-empty .pebble-trio .pebble:nth-child(2) { background: var(--teal); }
+.notes-empty .pebble-trio .pebble:nth-child(3) { background: var(--fern); }
+.notes-empty p { font-size: var(--fs-small); color: var(--ink-soft); line-height: 1.55; }
+.notes-empty p strong {
+  color: var(--ink); font-weight: 700; display: block; margin-bottom: 3px;
+  font-family: var(--font-display); letter-spacing: -.005em;
+}
+
+/* ---- progress (quiet) ---- */
+.progress { height: 3px; border-radius: 2px; background: var(--bg-deep); overflow: hidden; margin-top: 8px; }
+.progress i { display: block; height: 100%; width: 38%; border-radius: 2px; background: var(--teal); animation: slide 1.7s ease-in-out infinite; }
+@keyframes slide { 0% { transform: translateX(-110%); } 100% { transform: translateX(320%); } }
+
+.panel, .sidebar, .nav-item, .note-card, .composer, .context-bar,
+.src-card, .art-row, .btn-ghost, .tile-banner { transition-property: background-color, color, border-color, box-shadow; transition-duration: .25s; }
+
+/* ============ SCREEN 01 layout ============ */
+.workspace.nb {
+  grid-template-columns: minmax(270px, 20rem) minmax(340px, 1fr) minmax(280px, 21.5rem);
+}
+.stack { display: flex; flex-direction: column; gap: var(--sp-4); min-height: 0; }
+.stack .panel.notes-p { flex: 1.15; }
+.stack .panel.creations-p { flex: 1; }
+
+@media (max-width: 1180px) {
+  .sidebar { width: 200px; }
+  .workspace.nb { grid-template-columns: minmax(216px, 17rem) minmax(280px, 1fr) minmax(226px, 18rem); }
+  .msg { max-width: 96%; }
+  .context-bar { flex-wrap: wrap; row-gap: 4px; }
+}
+/* ============ SCREEN 05 additions (create overlay) ============ */
+.shell.dimmed, .tile-banner.dimmed-x { pointer-events: none; user-select: none; }
+.overlay {
+  position: fixed; inset: 0; z-index: 60;
+  background: rgba(23, 24, 27, .45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex; align-items: flex-start; justify-content: center;
+  padding-top: 9vh;
+}
+.dark .overlay { background: rgba(0, 0, 0, .6); }
+.overlay-hit { position: absolute; inset: 0; }
+.palette { position: relative; z-index: 1; }
+.palette {
+  width: 640px; max-width: 92vw;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-overlay);
+  overflow: hidden;
+  animation: pop .26s cubic-bezier(.2, .9, .3, 1.15);
+}
+@keyframes pop { from { opacity: 0; transform: translateY(12px) scale(.98); } }
+.palette-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+/* the create palette's own hue tick — fern, the maker acts */
+.palette-head::after {
+  content: ""; position: absolute;
+  left: var(--sp-5); bottom: -1px;
+  width: 30px; height: 2px; border-radius: 2px;
+  background: var(--fern);
+}
+.palette-head .logo-pebbles .pebble:first-child { background: var(--fern); }
+.palette-title {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: var(--fs-title); letter-spacing: -.01em;
+}
+.palette-sub { font-size: var(--fs-small); color: var(--ink-faint); }
+.palette-head .kbd { margin-left: auto; }
+/* palette kbd hints: neutral */
+.palette .kbd {
+  background: var(--bg-deep); color: var(--ink-soft);
+  border: 1px solid var(--line);
+}
+.type-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 10px; padding: var(--sp-4) var(--sp-5) var(--sp-3);
+}
+/* neutral raised tiles, 1px borders; each type's hue lives in the
+   icon chip only. Focus = fern ring — the action green. */
+.type-tile {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; gap: 9px;
+  padding: 16px 8px 14px;
+  border-radius: var(--r-lg);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.type-tile:hover { border-color: var(--ink-faint); box-shadow: var(--shadow-lift); }
+.type-tile.focused {
+  border-color: var(--fern);
+  box-shadow: 0 0 0 3px var(--fern-tint);
+}
+.type-tile .art-type { margin: 0; width: 32px; height: 32px; border-radius: 5px; }
+.type-tile .art-type svg { width: 15px; height: 15px; }
+.type-tile b { font-size: var(--fs-small); font-weight: 700; color: var(--ink); text-align: center; line-height: 1.2; }
+.scope-composer {
+  margin: 0 var(--sp-5) var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--r-lg);
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.scope-composer .label {
+  font-size: var(--fs-micro); font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint);
+}
+/* scope token: neutral shell, teal dot marks the live scope */
+.scope-token {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 4px 11px; border-radius: var(--r-pill);
+  background: var(--surface-raised); border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: var(--fs-small); font-weight: 600;
+}
+.scope-token .pebble { background: var(--teal); width: 6px; height: 6px; }
+.scope-token .x { color: var(--ink-faint); font-size: 10px; margin-left: 2px; cursor: pointer; }
+.scope-token .x:hover { color: var(--danger-deep); }
+.dark .scope-token .x:hover { color: var(--danger); }
+.scope-add {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 11px; border-radius: var(--r-pill);
+  border: 1.5px dashed var(--line);
+  color: var(--ink-faint); font-size: var(--fs-small); font-weight: 500;
+  transition: color .15s ease, border-color .15s ease;
+}
+.scope-add:hover { color: var(--ink); border-color: var(--ink-faint); }
+.palette-foot {
+  display: flex; align-items: center; gap: 14px;
+  padding: var(--sp-3) var(--sp-5);
+  border-top: 1px solid var(--line);
+  background: var(--bg-deep);
+  font-size: var(--fs-micro); color: var(--ink-faint);
+}
+.palette-foot .kbd { margin-left: 0; }
+.palette-foot .right { margin-left: auto; font-style: normal; }
+</style>
+</head>
+<body>
+
+<div class="tile-banner">
+  <strong>UX Concept — Universal Create · Direction I</strong>
+  <span>One Create, invoked anywhere: the same artifact-type picker, pre-filled with the scope you came from — and the scope stays editable.</span>
+  <a class="dirlink" href="../concepts/05-create-overlay.html">view in Direction D →</a>
+  <nav class="banner-nav">
+    <a href="00-home.html">0</a><a href="01-notebook.html">1</a><a href="02-source.html">2</a><a href="03-creations.html">3</a><a href="04-global-chat.html">4</a><a class="here" href="05-create-overlay.html">5</a><a href="06-citations.html">6</a><a href="07-deep-research.html">7</a><a href="08-search.html">8</a>
+  </nav>
+</div>
+
+<div class="shell dimmed" aria-hidden="true">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a class="wordmark" href="01-notebook.html">
+      <span class="logo-pebbles"><span class="pebble"></span><span class="pebble"></span><span class="pebble"></span></span>
+      Open Notebook
+    </a>
+
+    <a class="btn-new" href="05-create-overlay.html">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+      Create
+      <span class="kbd">⌘J</span>
+    </a>
+
+    <nav class="nav-group">
+      <a class="nav-item" href="00-home.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7 8 2.5 13.5 7v5.5a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1z"/><path d="M6.5 13.5v-4h3v4"/></svg>
+        Home
+      </a>
+      <a class="nav-item active" href="01-notebook.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>
+        Notebooks
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path d="M5.5 6h5M5.5 8.5h5M5.5 11h3"/></svg>
+        Sources
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg>
+        Notes
+      </a>
+      <a class="nav-item" href="03-creations.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/><path d="m12.5 10.5.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></svg>
+        Creations
+      </a>
+      <a class="nav-item" href="08-search.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>
+        Search
+      </a>
+      <div class="nav-divider"></div>
+      <a class="nav-item chat-entry" href="04-global-chat.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13.5 8a5.5 5.5 0 1 0-2.2 4.4L13.5 13l-.5-2.2A5.47 5.47 0 0 0 13.5 8z"/></svg>
+        Chat
+        <span class="pebble"></span>
+      </a>
+    </nav>
+
+    <details class="nav-manage">
+      <summary>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 4 4 4-4 4"/></svg>
+        Manage
+      </summary>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 5.5 8 2.5l5.5 3L8 8.5zM2.5 8.2 8 11.2l5.5-3M2.5 10.9 8 13.9l5.5-3"/></svg>
+        Models
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 5h7M12.5 5h.5M3 11h.5M6 11h7"/><circle cx="11" cy="5" r="1.6"/><circle cx="4.7" cy="11" r="1.6"/></svg>
+        Transformations
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="2.2"/><path d="M8 2v1.6M8 12.4V14M2 8h1.6M12.4 8H14M3.8 3.8l1.1 1.1M11.1 11.1l1.1 1.1M12.2 3.8l-1.1 1.1M4.9 11.1l-1.1 1.1"/></svg>
+        Settings
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m6 4-3 4 3 4M10 4l3 4-3 4"/></svg>
+        Advanced
+      </a>
+    </details>
+
+    <div class="sidebar-foot">
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/></svg>
+        Quick actions
+        <span class="kbd">⌘K</span>
+      </button>
+      <button class="foot-item" id="theme-toggle" aria-pressed="false">
+        <svg id="icon-moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3 5.5 5.5 0 1 0 13 9.5z"/></svg>
+        <svg id="icon-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="display:none"><circle cx="8" cy="8" r="3"/><path d="M8 1.5V3M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M12.6 3.4l-1 1M4.4 11.6l-1 1"/></svg>
+        <span id="theme-label">Dark theme</span>
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c1.8 1.7 2.6 3.8 2.6 6S9.8 12.3 8 14C6.2 12.3 5.4 10.2 5.4 8S6.2 3.7 8 2z"/></svg>
+        English
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 2h-3A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14h3M10.5 11 14 8l-3.5-3M14 8H6"/></svg>
+        Sign out
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <header class="nb-header">
+      <div class="nb-id">
+        <div class="crumbs"><span class="pebble"></span><a href="01-notebook.html">Notebooks</a></div>
+        <h1 class="nb-title">The Attention Economy</h1>
+        <div class="nb-desc" role="button" tabindex="0">
+          Research for an essay on focus, distraction and what technology does to both.
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg>
+        </div>
+        <div class="nb-meta">Created 3 days ago <span class="dot"></span> Updated 2 days ago</div>
+      </div>
+      <div class="nb-actions">
+        <button class="btn-ghost">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 5h11M3.5 5v7A1.5 1.5 0 0 0 5 13.5h6A1.5 1.5 0 0 0 12.5 12V5M6 5V3.5A1 1 0 0 1 7 2.5h2a1 1 0 0 1 1 1V5"/></svg>
+          Archive
+        </button>
+        <button class="btn-ghost danger">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+          Delete
+        </button>
+      </div>
+    </header>
+
+    <div class="workspace nb">
+
+      <!-- SOURCES -->
+      <section class="panel">
+        <div class="panel-head">
+          <span class="panel-title">Sources</span>
+          <span class="spacer"></span>
+          <button class="icon-btn" title="Collapse panel">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m10 4-4 4 4 4"/></svg>
+          </button>
+        </div>
+        <div class="panel-body">
+          <article class="src-card ctx-full">
+            <span class="src-title">How Your Attention Is Sold</span>
+            <button class="src-more" aria-label="Source options"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="3.5" cy="8" r="1.3"/><circle cx="8" cy="8" r="1.3"/><circle cx="12.5" cy="8" r="1.3"/></svg></button>
+            <span class="src-meta">
+              <span class="src-type"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M6 4.5v7l6-3.5z"/></svg>Video</span>
+              <span class="meta-dot" aria-hidden="true">·</span>
+              <span class="insight-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/></svg>1 insight</span>
+              <button class="ctx-state on-full" title="Context: full — click to cycle (full → insights → off)">Full<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
+            </span>
+          </article>
+          <article class="src-card ctx-full">
+            <span class="src-title">Stolen Focus — Johann Hari (chapter notes)</span>
+            <button class="src-more" aria-label="Source options"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="3.5" cy="8" r="1.3"/><circle cx="8" cy="8" r="1.3"/><circle cx="12.5" cy="8" r="1.3"/></svg></button>
+            <span class="src-meta">
+              <span class="src-type t-pdf"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5L12.5 6v7A1.5 1.5 0 0 1 11 14.5H4A1.5 1.5 0 0 1 2.5 13V4A1.5 1.5 0 0 1 4 2.5z"/><path d="M9 2.5V6h3.5"/></svg>PDF</span>
+              <span class="meta-dot" aria-hidden="true">·</span>
+              <span class="insight-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/></svg>2 insights</span>
+              <button class="ctx-state on-full" title="Context: full — click to cycle (full → insights → off)">Full<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
+            </span>
+          </article>
+          <article class="src-card ctx-full">
+            <span class="src-title">The Cost of Context Switching — Cal Newport</span>
+            <button class="src-more" aria-label="Source options"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="3.5" cy="8" r="1.3"/><circle cx="8" cy="8" r="1.3"/><circle cx="12.5" cy="8" r="1.3"/></svg></button>
+            <span class="src-meta">
+              <span class="src-type t-web"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="8" r="5.5"/><path d="M2.5 8h11M8 2.5c1.7 1.6 2.5 3.5 2.5 5.5S9.7 11.9 8 13.5C6.3 11.9 5.5 10 5.5 8S6.3 4.1 8 2.5z"/></svg>Web</span>
+              <span class="meta-dot" aria-hidden="true">·</span>
+              <span class="insight-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/></svg>1 insight</span>
+              <button class="ctx-state on-full" title="Context: full — click to cycle (full → insights → off)">Full<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
+            </span>
+          </article>
+          <article class="src-card ctx-insights">
+            <span class="src-title">Deep Questions #312: Rebuilding Concentration</span>
+            <button class="src-more" aria-label="Source options"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="3.5" cy="8" r="1.3"/><circle cx="8" cy="8" r="1.3"/><circle cx="12.5" cy="8" r="1.3"/></svg></button>
+            <span class="src-meta">
+              <span class="src-type t-audio"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6.5v3M5.5 4.5v7M8 3v10M10.5 5.5v5M13 7v2"/></svg>Audio</span>
+              <span class="meta-dot" aria-hidden="true">·</span>
+              <span class="insight-chip empty">No insights yet</span>
+              <button class="ctx-state on-ins" title="Context: insights — click to cycle (full → insights → off)">Insights<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
+            </span>
+          </article>
+          <article class="src-card ctx-excluded">
+            <span class="src-title">Attention Is All You Need</span>
+            <button class="src-more" aria-label="Source options"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="3.5" cy="8" r="1.3"/><circle cx="8" cy="8" r="1.3"/><circle cx="12.5" cy="8" r="1.3"/></svg></button>
+            <span class="src-meta">
+              <span class="src-type t-paper"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3.5 2.5h9v11h-9z"/><path d="M5.5 5h5M5.5 7.3h5M5.5 9.6h3"/></svg>Paper</span>
+              <span class="meta-dot" aria-hidden="true">·</span>
+              <span class="insight-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/></svg>1 insight</span>
+              <button class="ctx-state on-off" title="Context: off — click to cycle (full → insights → off)">Off<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
+            </span>
+          </article>
+        </div>
+        <button class="panel-action">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3.5v9M3.5 8h9"/></svg>
+          Add Source
+        </button>
+      </section>
+
+      <!-- CHAT -->
+      <section class="panel chat">
+        <div class="panel-head">
+          <span class="panel-title">Conversation</span>
+          <span class="spacer"></span>
+          <button class="scope-pill" title="Change scope">
+            <span class="pebble"></span>
+            Scope: this notebook · 3 sources in context
+            <span class="chev">▾</span>
+          </button>
+          <button class="icon-btn" title="Collapse panel">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m6 4 4 4-4 4"/></svg>
+          </button>
+        </div>
+
+        <div class="panel-body chat-body">
+          <div class="msg user">
+            <div class="bubble">What do my sources agree on about rebuilding focus?</div>
+          </div>
+          <div class="msg ai">
+            <div class="msg-agent"><span class="pebble"></span>Notebook</div>
+            <div class="bubble">
+              <p>All selected sources converge on one premise: attention is a <em>trainable, finite resource</em> — not a fixed trait. Hari argues that environment beats willpower, so the first lever is removing frictionless distraction rather than resisting it <span class="cite"><span class="pebble"></span><span class="no">1</span></span>. Newport quantifies why: every context switch leaves an "attention residue" that taxes the next task, which is what makes fragmented work so expensive <span class="cite"><span class="pebble"></span><span class="no">2</span></span>.</p>
+              <p>The video completes the picture from the supply side — the distraction isn't accidental, it's a business model optimized against your focus <span class="cite"><span class="pebble"></span><span class="no">3</span></span>. The practical agreement: design your environment, protect long single-task blocks, and treat concentration as a capacity you rebuild through deliberate practice.</p>
+            </div>
+            <div class="msg-tools">
+              <button class="tool-pill save-note" title="Save this answer, with its evidence, as a note">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg>
+                Save as Note
+              </button>
+              <button class="tool-pill">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 3v7M8 3 5.5 5.5M8 3l2.5 2.5M3 11v1.5A1.5 1.5 0 0 0 4.5 14h7a1.5 1.5 0 0 0 1.5-1.5V11"/></svg>
+                Copy
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="context-bar">
+          <b>3 sources</b><span class="sep"></span><b>1 note</b><span class="sep"></span>4.9K tokens
+          <span class="model-chip"><span class="pebble"></span>gpt-5.6-terra</span>
+        </div>
+
+        <div class="composer">
+          <input type="text" placeholder="Ask anything about your sources…" aria-label="Message">
+          <button class="btn-send" title="Send">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5v-9M4 7.5l4-4 4 4"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- NOTES + CREATIONS -->
+      <div class="stack">
+
+        <section class="panel notes-p">
+          <div class="panel-head">
+            <span class="panel-title">Notes</span>
+            <span class="spacer"></span>
+            <a class="icon-btn" href="#" title="Open notes">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M9.5 2.5h4v4M13.5 2.5 8.5 7.5"/><path d="M13.5 9.5v3a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h3"/></svg>
+            </a>
+            <button class="icon-btn" title="Collapse panel">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m6 4 4 4-4 4"/></svg>
+            </button>
+          </div>
+          <div class="panel-body">
+            <div class="quick-capture">
+              <input type="text" placeholder="Capture a thought…" aria-label="Quick note">
+              <button class="mini-send" title="Save note">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 12.5v-9M4 7.5l4-4 4 4"/></svg>
+              </button>
+            </div>
+            <a class="note-card ctx-full" href="#">
+              <span class="note-kind"><span class="pebble"></span>AI Generated</span>
+              <span class="note-title">Key levers for reclaiming focus</span>
+              <span class="note-excerpt">Environment design over willpower, single-tasking blocks, and treating attention as a finite budget you spend deliberately.</span>
+              <span class="note-time">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg>
+                Edited 2 days ago
+                <button class="ctx-state on-full" title="Context: full — click to toggle (full → off)">Full<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
+              </span>
+            </a>
+            <div class="notes-empty">
+              <div class="pebble-trio"><span class="pebble"></span><span class="pebble"></span><span class="pebble"></span></div>
+              <p><strong>Notes are living documents.</strong> Draft, revise, and grow them over time — saved answers and insights can seed one.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel creations-p">
+          <div class="panel-head">
+            <span class="panel-title">Creations</span>
+            <span class="spacer"></span>
+            <a class="icon-btn" href="03-creations.html" title="See all creations">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M9.5 2.5h4v4M13.5 2.5 8.5 7.5"/><path d="M13.5 9.5v3a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h3"/></svg>
+            </a>
+            <button class="icon-btn" title="Collapse panel">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m6 4 4 4-4 4"/></svg>
+            </button>
+          </div>
+          <div class="chip-row">
+            <a class="create-chip" href="05-create-overlay.html"><span class="pebble" style="background:var(--c-audio)"></span>Podcast</a>
+            <a class="create-chip" href="05-create-overlay.html"><span class="pebble" style="background:var(--c-paper)"></span>Mind map</a>
+            <a class="create-chip" href="05-create-overlay.html"><span class="pebble" style="background:var(--c-note)"></span>Study guide</a>
+            <a class="create-chip" href="05-create-overlay.html"><span class="pebble" style="background:var(--c-insight)"></span>Flashcards</a>
+            <a class="create-chip" href="05-create-overlay.html"><span class="pebble" style="background:var(--c-video)"></span>Video</a>
+          </div>
+          <div class="panel-body">
+            <a class="art-row" href="03-creations.html">
+              <span class="art-type t-podcast"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="6" y="2" width="4" height="8" rx="2"/><path d="M3.5 8a4.5 4.5 0 0 0 9 0M8 12.5V14"/></svg></span>
+              <span class="art-main">
+                <span class="art-title">Attention, Explained</span>
+                <span class="art-meta">Podcast episode <span class="dot"></span> 12:40 <span class="proj-badge"><span class="pebble"></span>also cites 2 other notebooks</span></span>
+              </span>
+            </a>
+            <a class="art-row" href="03-creations.html">
+              <span class="art-type t-mindmap"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="1.8"/><circle cx="3" cy="3.5" r="1.4"/><circle cx="13" cy="3.5" r="1.4"/><circle cx="8" cy="13.5" r="1.4"/><path d="M4.1 4.5 6.8 6.9M11.9 4.5 9.2 6.9M8 9.8v2.3"/></svg></span>
+              <span class="art-main">
+                <span class="art-title">Attention Economy Map</span>
+                <span class="art-meta">Mind map <span class="dot"></span> from this notebook <span class="dot"></span> yesterday</span>
+              </span>
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+
+<!-- UNIVERSAL CREATE OVERLAY -->
+<div class="overlay">
+  <a class="overlay-hit" href="01-notebook.html" aria-label="Close"></a>
+  <div class="palette" role="dialog" aria-modal="true" aria-label="Create">
+    <div class="palette-head">
+      <span class="logo-pebbles"><span class="pebble"></span></span>
+      <div>
+        <div class="palette-title">Create</div>
+        <div class="palette-sub">Same picker everywhere — scope comes from where you invoked it.</div>
+      </div>
+      <span class="kbd">⌘J</span>
+    </div>
+
+    <div class="type-grid">
+      <a class="type-tile focused" href="#">
+        <span class="art-type t-noteart"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg></span>
+        <b>Note</b>
+      </a>
+      <a class="type-tile" href="#">
+        <span class="art-type t-podcast"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="6" y="2" width="4" height="8" rx="2"/><path d="M3.5 8a4.5 4.5 0 0 0 9 0M8 12.5V14"/></svg></span>
+        <b>Podcast</b>
+      </a>
+      <a class="type-tile" href="#">
+        <span class="art-type t-mindmap"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="1.8"/><circle cx="3" cy="3.5" r="1.4"/><circle cx="13" cy="3.5" r="1.4"/><circle cx="8" cy="13.5" r="1.4"/><path d="M4.1 4.5 6.8 6.9M11.9 4.5 9.2 6.9M8 9.8v2.3"/></svg></span>
+        <b>Mind map</b>
+      </a>
+      <a class="type-tile" href="#">
+        <span class="art-type t-guide"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H13v11H4.5A1.5 1.5 0 0 0 3 14.5v-11z"/><path d="M3 12.5A1.5 1.5 0 0 1 4.5 11H13M6 5.5h4"/></svg></span>
+        <b>Study guide</b>
+      </a>
+      <a class="type-tile" href="#">
+        <span class="art-type t-cards"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.5" y="4.5" width="9" height="9" rx="1.5"/><path d="M5.5 2.5h8v8"/></svg></span>
+        <b>Flashcards</b>
+      </a>
+      <a class="type-tile" href="#">
+        <span class="art-type t-videoart"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M6 4.5v7l6-3.5z"/></svg></span>
+        <b>Video explainer</b>
+      </a>
+      <a class="type-tile" href="#">
+        <span class="art-type t-insight"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/><path d="m12.5 10.5.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></svg></span>
+        <b>Insight / Transform</b>
+      </a>
+    </div>
+
+    <div class="scope-composer">
+      <span class="label">From</span>
+      <span class="scope-token"><span class="pebble"></span>The Attention Economy · 5 sources <span class="x">✕</span></span>
+      <a class="scope-add" href="#">+ add notebooks or sources</a>
+    </div>
+
+    <div class="palette-foot">
+      <span><span class="kbd">↑↓←→</span> navigate</span>
+      <span><span class="kbd">⏎</span> create</span>
+      <span><span class="kbd">esc</span> close</span>
+      <span class="right">scope is editable — widen or compose across notebooks</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  if (localStorage.getItem('on-theme-i') === 'dark') root.classList.add('dark');
+  var btn = document.getElementById('theme-toggle');
+  var moon = document.getElementById('icon-moon');
+  var sun = document.getElementById('icon-sun');
+  var label = document.getElementById('theme-label');
+  function sync() {
+    var dark = root.classList.contains('dark');
+    btn.setAttribute('aria-pressed', String(dark));
+    moon.style.display = dark ? 'none' : '';
+    sun.style.display = dark ? '' : 'none';
+    label.textContent = dark ? 'Light theme' : 'Dark theme';
+  }
+  btn.addEventListener('click', function () {
+    root.classList.toggle('dark');
+    localStorage.setItem('on-theme-i', root.classList.contains('dark') ? 'dark' : 'light');
+    sync();
+  });
+  sync();
+
+  var input = document.querySelector('.composer input');
+  var send = document.querySelector('.btn-send');
+  if (send) {
+    send.addEventListener('click', function () {
+      if (!input.value.trim()) return;
+      input.value = '';
+      send.animate([{ transform: 'scale(1)' }, { transform: 'scale(0.86)' }, { transform: 'scale(1)' }], { duration: 220, easing: 'ease-out' });
+      input.focus();
+    });
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') send.click(); });
+  }
+})();
+</script>
+<script>
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') window.location.href = '01-notebook.html';
+});
+</script>
+</body>
+</html>

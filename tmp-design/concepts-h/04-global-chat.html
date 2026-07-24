@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UX Concept — App-Scope Chat · Direction I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DIRECTION I — QUIET GREEN (H, de-alarmed & squared) · concepts
+   Red retired to destructive-only; fern green is the one action
+   hue. Geometry tightened to 4–6px. Neutral surfaces, honest 1px
+   borders, near-zero shadows; cross-hue chips stay neutral shells
+   with colored dots.
+   ============================================================ */
+:root {
+  /* — neutrals — */
+  --bg: #F5F5F2;
+  --bg-deep: #EEEEE9;
+  --surface: #FEFEFC;
+  --surface-raised: #FFFFFF;
+  --ink: #23252A;
+  --ink-soft: #565A61;
+  --ink-faint: #878B92;
+  --line: #E0E0DA;
+  --line-strong: #23252A;
+
+  /* — owned hues, red-free — */
+  --fern: #2E6B4F;           /* action — the one green you act with */
+  --fern-deep: #245740;
+  --fern-tint: #DFEAE2;
+  --gold: #A97B12;           /* notes */
+  --gold-deep: #7C5A05;
+  --gold-tint: #F3EAD3;
+  --teal: #0E7268;           /* chat / AI / insight */
+  --teal-deep: #095A51;
+  --teal-tint: #DDECE8;
+  --plum: #5D4991;           /* video · seasoning: model chip, kbd */
+  --plum-tint: #EAE6F3;
+
+  /* — per-type set — */
+  --honey: #A97B12;  --honey-tint: #F3EAD3;   /* pdf */
+  --sage: #5E7A54;   --sage-tint: #E5EBDC;    /* sources / web */
+  --mauve: #8D5B80;  --mauve-tint: #F1E5EE;   /* audio · derived breadcrumb */
+  --slate: #4E6B84;  --slate-tint: #E1E8EE;   /* paper · external */
+  --clay: #B0451F;   --clay-tint: #F5E4DB;    /* degraded / warn — the only red left */
+
+  /* — action — */
+  --primary: #2E6B4F;
+  --primary-hover: #245740;
+  --on-primary: #F1F8F3;
+
+  /* — depth: flat clarity — */
+  --shadow-soft: 0 1px 2px rgba(35,37,42,.06);
+  --shadow-lift: 0 1px 3px rgba(35,37,42,.10);
+
+  /* — shape — */
+  --r-xl: 6px;
+  --r-lg: 5px;
+  --r-md: 5px;
+  --r-sm: 4px;
+  --r-pill: 4px;
+
+  /* — type — */
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Trebuchet MS", sans-serif;
+  --font-body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, monospace;
+  --fs-hero: 24px;
+  --fs-title: 15.5px;
+  --fs-body: 13.5px;
+  --fs-small: 12px;
+  --fs-micro: 10.5px;
+
+  /* — space — */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 10px; --sp-4: 14px;
+  --sp-5: 18px; --sp-6: 22px; --sp-7: 28px;
+
+  --focus-ring: 0 0 0 3px var(--teal-tint);
+}
+
+.dark {
+  --bg: #17181B;
+  --bg-deep: #121316;
+  --surface: #1E2024;
+  --surface-raised: #24262B;
+  --ink: #ECEDEA;
+  --ink-soft: #A9ACB1;
+  --ink-faint: #74777D;
+  --line: #2E3036;
+  --line-strong: #ECEDEA;
+
+  --fern: #55B285;
+  --fern-deep: #6CC298;
+  --fern-tint: #1B2F25;
+  --gold: #CFA13E;
+  --gold-deep: #DDB55F;
+  --gold-tint: #322B1B;
+  --teal: #3FB3A5;
+  --teal-deep: #64C5B9;
+  --teal-tint: #16302C;
+  --plum: #A290D3;
+  --plum-tint: #29253A;
+
+  --honey: #CFA13E;  --honey-tint: #322B1B;
+  --sage: #93B084;   --sage-tint: #232B1D;
+  --mauve: #C892BA;  --mauve-tint: #322230;
+  --slate: #8FAFC8;  --slate-tint: #212B34;
+  --clay: #F08A5C;   --clay-tint: #35211A;
+
+  --primary: #3D8E67;
+  --primary-hover: #479E74;
+  --on-primary: #ECF7F0;
+
+  --shadow-soft: 0 1px 2px rgba(0,0,0,.35);
+  --shadow-lift: 0 1px 3px rgba(0,0,0,.45);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-width: 1000px;
+  transition: background-color .25s ease, color .25s ease;
+}
+::selection { background: var(--teal-tint); color: var(--ink); }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+input, textarea { font: inherit; color: inherit; }
+::placeholder { color: var(--ink-faint); }
+
+.dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; flex: none; }
+
+/* ---- direction banner ---- */
+.tile-banner {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 16px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: var(--fs-micro);
+  letter-spacing: .04em;
+  flex: none;
+}
+.dark .tile-banner { background: #0E0F11; color: var(--ink-soft); }
+.tile-banner .dots { display: flex; gap: 4px; }
+.tile-banner .dots i { width: 8px; height: 8px; border-radius: 2px; display: block; }
+.tile-banner .dots i:nth-child(1) { background: var(--fern); }
+.tile-banner .dots i:nth-child(2) { background: var(--gold); }
+.tile-banner .dots i:nth-child(3) { background: var(--teal); }
+.tile-banner strong { font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.tile-banner span { opacity: .7; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tile-banner .alt-link {
+  color: inherit; opacity: .55; font-weight: 600; white-space: nowrap;
+}
+.tile-banner .alt-link:hover { opacity: 1; text-decoration: underline; }
+.banner-nav { margin-left: auto; display: flex; gap: 4px; flex: none; }
+.banner-nav a {
+  width: 20px; height: 20px; border-radius: 4px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 10px;
+  color: inherit; opacity: .55;
+  transition: background .15s ease, opacity .15s ease;
+}
+.banner-nav a:hover { opacity: 1; background: rgba(255,255,255,.12); }
+.banner-nav a.here { opacity: 1; background: var(--teal); color: #EFFAF7; }
+
+/* ---- shell / sidebar ---- */
+.shell { flex: 1; display: flex; min-height: 0; }
+.sidebar {
+  width: 226px; flex: none;
+  background: var(--bg-deep);
+  border-right: 1px solid var(--line);
+  display: flex; flex-direction: column;
+  padding: var(--sp-5) var(--sp-4) var(--sp-4);
+  gap: var(--sp-4);
+  overflow-y: auto;
+}
+.wordmark { display: flex; align-items: center; gap: 10px; padding: 2px 4px; }
+.wordmark .mark {
+  width: 30px; height: 30px; border-radius: 5px;
+  background: var(--ink);
+  position: relative; overflow: hidden; flex-shrink: 0;
+}
+.dark .wordmark .mark { background: var(--surface-raised); }
+.wordmark .mark::before {
+  content: "";
+  position: absolute; inset: 7px;
+  border-radius: 2px 2px 1px 1px;
+  background: linear-gradient(to bottom,
+    var(--fern) 0 33%, var(--gold) 33% 66%, var(--teal) 66% 100%);
+}
+.wordmark h1 {
+  font-family: var(--font-display);
+  font-size: 14px; font-weight: 700; letter-spacing: -.01em; line-height: 1.05;
+}
+.wordmark h1 b { color: var(--fern); }
+
+.btn-new {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 13.5px; letter-spacing: .01em;
+  background: var(--primary); color: var(--on-primary);
+  border-radius: var(--r-md);
+  padding: 9px 14px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: background .15s ease;
+}
+.btn-new:hover { background: var(--primary-hover); }
+.btn-new svg { width: 14px; height: 14px; }
+.btn-new .kbd { background: rgba(255,255,255,.18); color: inherit; }
+.dark .btn-new .kbd { background: rgba(0,0,0,.22); }
+
+.nav-group { display: flex; flex-direction: column; gap: 2px; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 7px 10px;
+  border-radius: var(--r-sm);
+  color: var(--ink-soft); font-weight: 500; font-size: 13px;
+  position: relative; text-align: left;
+  transition: background .12s ease, color .12s ease;
+}
+.nav-item svg { width: 15px; height: 15px; flex: none; opacity: .85; }
+.nav-item:hover { background: var(--surface); color: var(--ink); }
+.nav-item.active {
+  background: var(--surface-raised);
+  color: var(--ink); font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.nav-item.active::before {
+  content: "";
+  position: absolute; left: -3px; top: 7px; bottom: 7px; width: 3px;
+  border-radius: 2px; background: var(--fern);
+}
+.nav-divider { height: 1px; background: var(--line); margin: var(--sp-2) 10px; }
+.nav-item.chat-entry .dot { width: 6px; height: 6px; background: var(--teal); margin-left: auto; }
+
+.nav-manage { margin-top: var(--sp-1); }
+.nav-manage summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  padding: var(--sp-2) 10px 5px;
+  font-size: var(--fs-micro); font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-faint);
+  transition: color .15s ease;
+}
+.nav-manage summary:hover { color: var(--ink-soft); }
+.nav-manage summary::-webkit-details-marker { display: none; }
+.nav-manage summary svg { width: 9px; height: 9px; transition: transform .2s ease; }
+.nav-manage[open] summary svg { transform: rotate(90deg); }
+.nav-manage .nav-item { padding: 6px 10px; font-size: 12.5px; color: var(--ink-faint); }
+.nav-manage .nav-item:hover { color: var(--ink); }
+.nav-manage .nav-item svg { width: 14px; height: 14px; }
+
+.sidebar-foot {
+  margin-top: auto; padding-top: var(--sp-4);
+  border-top: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.foot-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 10px; border-radius: var(--r-sm);
+  color: var(--ink-soft); font-size: 12.5px; font-weight: 500;
+  width: 100%; text-align: left;
+  transition: background .12s ease, color .12s ease;
+}
+.foot-item:hover { background: var(--surface); color: var(--ink); }
+.foot-item svg { width: 14px; height: 14px; opacity: .8; }
+.kbd {
+  margin-left: auto;
+  font-family: var(--font-body); font-size: 10px; font-weight: 600;
+  background: var(--plum-tint); color: var(--plum);
+  border-radius: 4px; padding: 2px 6px; letter-spacing: .03em;
+}
+
+/* ---- main ---- */
+.main {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column;
+  padding: var(--sp-5) var(--sp-6) var(--sp-5);
+  gap: var(--sp-4);
+}
+
+/* ---- panels: neutral surface, honest border, hue tick in header ---- */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  display: flex; flex-direction: column;
+  min-height: 0; overflow: hidden;
+}
+.panel-head {
+  display: flex; align-items: center; gap: 9px;
+  padding: var(--sp-4) var(--sp-4) var(--sp-3);
+  flex: none; position: relative;
+  border-bottom: 1px solid var(--line);
+}
+/* the hue tick: 30px stroke breaking the header hairline */
+.panel-head::after {
+  content: "";
+  position: absolute; left: var(--sp-4); bottom: -1px;
+  width: 30px; height: 2px; border-radius: 2px;
+  background: var(--tick, var(--ink-faint));
+}
+.panel-title {
+  font-size: var(--fs-micro); font-weight: 700;
+  letter-spacing: .13em; text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.panel-collapse {
+  width: 20px; height: 20px; flex: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid transparent; border-radius: 4px;
+  color: var(--ink-faint);
+  transition: background .12s ease, border-color .12s ease, color .12s ease;
+}
+.panel-collapse:hover { background: var(--bg-deep); border-color: var(--line); color: var(--ink); }
+.panel-collapse svg { width: 12px; height: 12px; }
+.panel-head .spacer { flex: 1; }
+.panel-body { flex: 1; overflow-y: auto; padding: var(--sp-3) var(--sp-3) var(--sp-3); min-height: 0; }
+.panel-body::-webkit-scrollbar { width: 8px; }
+.panel-body::-webkit-scrollbar-thumb { background: var(--line); border-radius: 8px; }
+
+/* ============ SCREEN 04 layout (app-scope chat) ============ */
+.chat-layout {
+  flex: 1; min-height: 0;
+  display: grid; grid-template-columns: minmax(480px, 1fr) minmax(240px, 17rem);
+  gap: var(--sp-4);
+}
+.chat-hero { max-width: 62rem; width: 100%; justify-self: center; --tick: var(--teal); }
+.sessions-rail { --tick: var(--teal); }
+
+/* ---- scope pill: neutral shell, teal dot carries the active value ---- */
+.scope-ctl { position: relative; }
+.scope-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 3.5px 11px; border-radius: var(--r-pill);
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 11px; font-weight: 600;
+  white-space: nowrap;
+  transition: border-color .15s ease, color .15s ease;
+}
+.scope-pill:hover { border-color: var(--ink-soft); color: var(--ink); }
+.scope-pill .dot { width: 6px; height: 6px; background: var(--teal); }
+.scope-pill .chev { opacity: .6; font-size: 9px; }
+.scope-menu {
+  display: none;
+  position: absolute; top: calc(100% + 6px); right: 0; z-index: 10;
+  min-width: 240px;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lift);
+  padding: 6px; font-size: var(--fs-body);
+}
+.scope-ctl:hover .scope-menu, .scope-ctl:focus-within .scope-menu { display: block; }
+.scope-menu .menu-label {
+  padding: 7px 12px 4px;
+  font-size: var(--fs-micro); font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-faint);
+}
+.scope-menu a {
+  display: flex; align-items: center; gap: 9px;
+  padding: 7px 12px; border-radius: var(--r-sm);
+  color: var(--ink-soft); font-weight: 500; font-size: 12.5px;
+  transition: background .15s ease, color .15s ease;
+}
+.scope-menu a:hover { background: var(--bg-deep); color: var(--ink); }
+.scope-menu a.on { color: var(--ink); font-weight: 600; }
+.scope-menu a .tick { margin-left: auto; color: var(--teal); font-weight: 700; }
+.scope-menu a .dot { width: 6px; height: 6px; }
+
+/* ---- context depth: neutral options, active = teal dot + underline ---- */
+.ctx-mode {
+  display: inline-flex; align-items: center; gap: 2px; row-gap: 4px;
+  flex: none; flex-wrap: wrap; min-width: 0; max-width: 100%;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.ctx-mode .ctx-label { margin-right: 5px; color: var(--ink-faint); }
+.ctx-opt {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 2.5px 8px 4px; border-radius: 4px 4px 0 0;
+  font-family: inherit; font-size: inherit; letter-spacing: inherit;
+  color: var(--ink-faint);
+  border-bottom: 2px solid transparent;
+  transition: color .15s ease, border-color .15s ease;
+}
+.ctx-opt:hover { color: var(--ink-soft); }
+.ctx-opt.on { color: var(--teal-deep); border-bottom-color: var(--teal); font-weight: 700; }
+.dark .ctx-opt.on { color: var(--teal); }
+.ctx-opt.on::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--teal); }
+
+/* ---- chat body ---- */
+.chat-body { display: flex; flex-direction: column; gap: var(--sp-4); padding: var(--sp-4); }
+.msg { max-width: 88%; }
+.msg.user { align-self: flex-end; }
+.msg.user .bubble {
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  border-radius: var(--r-lg);
+  border-bottom-right-radius: 4px;
+  padding: 10px 14px; font-size: 13px; line-height: 1.55;
+}
+.dark .msg.user .bubble { background: var(--surface-raised); }
+.msg.ai { align-self: flex-start; }
+.msg-agent {
+  display: flex; align-items: center; gap: 7px;
+  font-size: var(--fs-micro); font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--teal-deep); margin-bottom: 7px;
+}
+.dark .msg-agent { color: var(--teal); }
+.msg-agent .dot { background: var(--teal); width: 6px; height: 6px; }
+.msg.ai .bubble {
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  border-top-left-radius: 4px;
+  padding: 12px 15px;
+  font-size: 13px; line-height: 1.62; color: var(--ink);
+}
+.msg.ai .bubble p + p { margin-top: 10px; }
+/* in-answer emphasis: one family only — teal marker underline, not paint */
+.msg.ai .bubble em {
+  font-style: normal; font-weight: 600; color: var(--teal-deep);
+  box-shadow: inset 0 -5px 0 var(--teal-tint);
+}
+.dark .msg.ai .bubble em { color: var(--teal); }
+
+/* ---- citation chips: minimal — class dot + sequential number colored by
+       evidence class (teal = source · gold = note). Details in the popover. ---- */
+.cite {
+  display: inline-flex; align-items: center; gap: 5px;
+  vertical-align: 1px; margin: 0 1px;
+  padding: .5px 8px .5px 6px; border-radius: var(--r-pill);
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  white-space: nowrap; cursor: pointer;
+  transition: border-color .15s ease, color .15s ease;
+}
+.cite:hover { border-color: var(--ink-soft); color: var(--ink); }
+.cite .dot { width: 5px; height: 5px; background: var(--teal); }       /* source evidence */
+.cite .cnum { font-weight: 700; color: var(--teal-deep); }
+.dark .cite .cnum { color: var(--teal); }
+.cite.note-cite .dot { background: var(--gold); }                      /* authoral note */
+.cite.note-cite .cnum { color: var(--gold-deep); }
+.dark .cite.note-cite .cnum { color: var(--gold); }
+/* in-text notebook references: quiet emphasis, not a link */
+.msg.ai .bubble .nb-ref { font-weight: 500; color: inherit; font-style: normal; }
+
+.msg-tools { display: flex; gap: 6px; margin-top: 9px; }
+.tool-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 10.5px; font-weight: 600;
+  color: var(--teal-deep);
+  background: var(--teal-tint);
+  border-radius: 5px; padding: 3px 9px;
+  transition: filter .12s ease;
+}
+.dark .tool-pill { color: var(--teal); }
+.tool-pill:hover { filter: brightness(.95); }
+.dark .tool-pill:hover { filter: brightness(1.15); }
+.tool-pill svg { width: 11px; height: 11px; }
+/* Save as Note: the one promoted answer action — adoption speaks fern */
+.tool-pill.save-note {
+  font-weight: 700;
+  color: var(--fern-deep); background: var(--fern-tint);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--fern) 35%, transparent);
+}
+.dark .tool-pill.save-note { color: var(--fern); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--fern) 45%, transparent); }
+
+/* ---- context bar: neutral shells, colored dots ---- */
+.context-bar {
+  flex: none;
+  margin: 0 var(--sp-4) var(--sp-3);
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  font-size: 11px; font-weight: 600; color: var(--ink-soft);
+}
+.context-bar .ctx-label { margin-right: 2px; color: var(--ink-faint); font-weight: 500; }
+.ctx-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  border-radius: var(--r-pill); padding: 2.5px 9px;
+  background: var(--bg-deep); border: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+.ctx-chip .dot { width: 7px; height: 7px; }
+.ctx-chip.c-nb .dot { background: var(--teal); }
+.ctx-chip.c-src .dot { background: var(--sage); }
+.ctx-chip.c-note .dot { background: var(--gold); }
+.ctx-chip.c-tok { color: var(--ink-faint); }
+.model-chip {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700;
+  color: var(--plum); background: var(--plum-tint);
+  border-radius: var(--r-pill); padding: 3px 10px;
+  white-space: nowrap; cursor: pointer;
+  transition: filter .12s ease;
+}
+.model-chip:hover { filter: brightness(.97); }
+.model-chip .dot { width: 6px; height: 6px; background: var(--plum); }
+
+/* ---- composer ---- */
+.composer {
+  flex: none;
+  margin: 0 var(--sp-4) var(--sp-4);
+  display: flex; align-items: center; gap: 8px;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 8px 8px 8px 12px;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.composer:focus-within { border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-tint); }
+/* comfortable bar: ~52px input, controls vertically centered */
+.composer input { flex: 1; min-width: 0; background: none; border: none; font-size: 13px; padding: 7px 0; min-height: 52px; outline: none; text-overflow: ellipsis; }
+.composer input:focus-visible { box-shadow: none; }
+.btn-send {
+  width: 34px; height: 34px; border-radius: var(--r-md); flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--primary); color: var(--on-primary);
+  transition: background .12s ease;
+}
+.btn-send:hover { background: var(--primary-hover); }
+.btn-send svg { width: 15px; height: 15px; }
+
+/* ---- effort toggle: neutral shell, active = teal dot + underline ---- */
+.mode-switch {
+  display: inline-flex; align-items: center; gap: 2px; flex: none;
+  padding: 3px; border-radius: var(--r-md);
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+}
+.mode-opt {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px 4px; border-radius: var(--r-sm);
+  font-size: var(--fs-micro); font-weight: 600; color: var(--ink-faint);
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color .18s ease, border-color .18s ease;
+}
+.mode-opt:hover { color: var(--ink); }
+.mode-opt.on { color: var(--teal-deep); border-bottom-color: var(--teal); font-weight: 700; }
+.dark .mode-opt.on { color: var(--teal); }
+.mode-opt.on::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--teal); }
+.chat .panel-head { flex-wrap: wrap; row-gap: 6px; }
+
+/* ---- sessions rail ---- */
+.session-row {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 10px 12px; border-radius: var(--r-md);
+  border: 1px solid transparent;
+  transition: background .15s ease, border-color .15s ease;
+}
+.session-row:hover { background: var(--bg-deep); }
+.session-row.current {
+  background: var(--surface-raised);
+  border-color: var(--line);
+  box-shadow: inset 3px 0 0 var(--teal);
+}
+.session-scope {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: var(--fs-micro); font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink-faint);
+}
+.session-scope .dot { width: 5px; height: 5px; }
+.session-q { font-size: var(--fs-small); color: var(--ink); font-weight: 600; line-height: 1.4; }
+.session-time { font-size: var(--fs-micro); color: var(--ink-faint); }
+
+@media (max-width: 1180px) {
+  .sidebar { width: 200px; }
+  .chat-layout { grid-template-columns: minmax(400px, 1fr) minmax(210px, 15rem); }
+  .msg { max-width: 96%; }
+  .context-bar { row-gap: 4px; }
+  .tile-banner span { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="tile-banner">
+  <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+  <strong>UX Concept — App-Scope Chat · Direction I</strong>
+  <span>Ask, evolved: the same conversation surface at app scope. Sessions are objects, scope can narrow, and any answer can become an artifact.</span>
+  <a class="alt-link" href="../concepts/04-global-chat.html">view in Direction D →</a>
+  <nav class="banner-nav">
+    <a href="00-home.html">0</a><a href="01-notebook.html">1</a><a href="02-source.html">2</a><a href="03-creations.html">3</a><a class="here" href="04-global-chat.html">4</a><a href="05-create-overlay.html">5</a><a href="06-citations.html">6</a><a href="07-deep-research.html">7</a><a href="08-search.html">8</a>
+  </nav>
+</div>
+
+<div class="shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a class="wordmark" href="01-notebook.html">
+      <span class="mark" aria-hidden="true"></span>
+      <h1>Open Notebook<b>.</b></h1>
+    </a>
+
+    <a class="btn-new" href="05-create-overlay.html">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+      Create
+      <span class="kbd">⌘J</span>
+    </a>
+
+    <nav class="nav-group">
+      <a class="nav-item" href="00-home.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7 8 2.5 13.5 7v5.5a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1z"/><path d="M6.5 13.5v-4h3v4"/></svg>
+        Home
+      </a>
+      <a class="nav-item" href="01-notebook.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>
+        Notebooks
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path d="M5.5 6h5M5.5 8.5h5M5.5 11h3"/></svg>
+        Sources
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg>
+        Notes
+      </a>
+      <a class="nav-item" href="03-creations.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/><path d="m12.5 10.5.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></svg>
+        Creations
+      </a>
+      <a class="nav-item" href="08-search.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>
+        Search
+      </a>
+      <div class="nav-divider"></div>
+      <a class="nav-item chat-entry active" href="04-global-chat.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13.5 8a5.5 5.5 0 1 0-2.2 4.4L13.5 13l-.5-2.2A5.47 5.47 0 0 0 13.5 8z"/></svg>
+        Chat
+        <span class="dot"></span>
+      </a>
+    </nav>
+
+    <details class="nav-manage">
+      <summary>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 4 4 4-4 4"/></svg>
+        Manage
+      </summary>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 5.5 8 2.5l5.5 3L8 8.5zM2.5 8.2 8 11.2l5.5-3M2.5 10.9 8 13.9l5.5-3"/></svg>
+        Models
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 5h7M12.5 5h.5M3 11h.5M6 11h7"/><circle cx="11" cy="5" r="1.6"/><circle cx="4.7" cy="11" r="1.6"/></svg>
+        Transformations
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="2.2"/><path d="M8 2v1.6M8 12.4V14M2 8h1.6M12.4 8H14M3.8 3.8l1.1 1.1M11.1 11.1l1.1 1.1M12.2 3.8l-1.1 1.1M4.9 11.1l-1.1 1.1"/></svg>
+        Settings
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m6 4-3 4 3 4M10 4l3 4-3 4"/></svg>
+        Advanced
+      </a>
+    </details>
+
+    <div class="sidebar-foot">
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/></svg>
+        Quick actions
+        <span class="kbd">⌘K</span>
+      </button>
+      <button class="foot-item" id="theme-toggle" aria-pressed="false">
+        <svg id="icon-moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3 5.5 5.5 0 1 0 13 9.5z"/></svg>
+        <svg id="icon-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="display:none"><circle cx="8" cy="8" r="3"/><path d="M8 1.5V3M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M12.6 3.4l-1 1M4.4 11.6l-1 1"/></svg>
+        <span id="theme-label">Dark theme</span>
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c1.8 1.7 2.6 3.8 2.6 6S9.8 12.3 8 14C6.2 12.3 5.4 10.2 5.4 8S6.2 3.7 8 2z"/></svg>
+        English
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 2h-3A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14h3M10.5 11 14 8l-3.5-3M14 8H6"/></svg>
+        Sign out
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <div class="chat-layout">
+
+      <!-- APP-SCOPE CHAT -->
+      <section class="panel chat chat-hero">
+        <div class="panel-head">
+          <span class="panel-title">Chat</span>
+          <span class="spacer"></span>
+          <span class="scope-ctl">
+            <button class="scope-pill" title="Change scope">
+              <span class="dot"></span>
+              Scope: All notebooks
+              <span class="chev">▾</span>
+            </button>
+            <div class="scope-menu">
+              <div class="menu-label">Answer from</div>
+              <a class="on" href="04-global-chat.html"><span class="dot" style="background:var(--teal)"></span>All notebooks <span class="tick">✓</span></a>
+              <a href="01-notebook.html"><span class="dot" style="background:var(--teal)"></span>The Attention Economy</a>
+              <a href="#"><span class="dot" style="background:var(--teal)"></span>Deep Work Essays</a>
+              <a href="02-source.html"><span class="dot" style="background:var(--sage)"></span>Pick a source…</a>
+            </div>
+          </span>
+          <span class="ctx-mode" role="radiogroup" aria-label="How much of the scoped content goes into context">
+            <button class="ctx-opt on" role="radio" aria-checked="true" title="Open Notebook decides how much of each notebook to load">Auto</button>
+            <button class="ctx-opt" role="radio" aria-checked="false" title="Full text — heavier, most faithful">Full</button>
+            <button class="ctx-opt" role="radio" aria-checked="false" title="Insights only — cheaper, coarser">Insights</button>
+            <button class="ctx-opt" role="radio" aria-checked="false" title="In scope but kept out of context">Excluded</button>
+          </span>
+        </div>
+
+        <div class="panel-body chat-body">
+          <div class="msg user">
+            <div class="bubble">Across all my research, what did I conclude about attention and focus?</div>
+          </div>
+          <div class="msg ai">
+            <div class="msg-agent"><span class="dot"></span>Open Notebook</div>
+            <div class="bubble">
+              <p>Two notebooks carry this thread, and they agree on the foundation: attention is a <em>finite, trainable resource</em>, and the environment — not willpower — is the primary lever. In <span class="nb-ref">The Attention Economy</span>, Hari's argument anchors it: redesign the supply of distraction instead of resisting it <span class="cite"><span class="dot"></span><span class="cnum">1</span></span>, while Newport prices the damage of every context switch <span class="cite"><span class="dot"></span><span class="cnum">2</span></span>.</p>
+              <p>Your own synthesis already names the practical levers — environment design, single-task blocks, attention as a budget <span class="cite note-cite"><span class="dot"></span><span class="cnum">3</span></span>. <span class="nb-ref">Deep Work Essays</span> extends this from defense to offense: focus is not just protected but scheduled, with depth treated as the scarce professional skill. Your conclusion, compressed: guard the inputs, structure the hours, train the capacity.</p>
+            </div>
+            <div class="msg-tools">
+              <button class="tool-pill save-note" title="Save this answer, with its evidence, as a note">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg>
+                Save as Note
+              </button>
+              <button class="tool-pill">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 3v7M8 3 5.5 5.5M8 3l2.5 2.5M3 11v1.5A1.5 1.5 0 0 0 4.5 14h7a1.5 1.5 0 0 0 1.5-1.5V11"/></svg>
+                Copy
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="context-bar">
+          <span class="ctx-label">Context</span>
+          <span class="ctx-chip c-nb"><span class="dot"></span>2 notebooks</span>
+          <span class="ctx-chip c-src"><span class="dot"></span>9 sources</span>
+          <span class="ctx-chip c-note"><span class="dot"></span>3 notes</span>
+          <span class="ctx-chip c-tok">6.2K tokens</span>
+          <span class="model-chip"><span class="dot"></span>gpt-5.6-terra</span>
+        </div>
+
+        <div class="composer">
+          <div class="mode-switch" role="radiogroup" aria-label="Conversation effort">
+            <button class="mode-opt on" role="radio" aria-checked="true" title="Fast, predictable — answers from the scoped context">Focused</button>
+            <a class="mode-opt" href="07-deep-research.html" role="radio" aria-checked="false" title="Investigates — searches farther, thinks longer. See the Deep Research screen">Deep</a>
+          </div>
+          <input type="text" placeholder="Ask anything — @ to bring in a notebook or source…" aria-label="Message">
+          <button class="btn-send" title="Send">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5v-9M4 7.5l4-4 4 4"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- SESSIONS RAIL -->
+      <section class="panel sessions-rail">
+        <div class="panel-head">
+          <span class="panel-title">Recent sessions</span>
+          <span class="spacer"></span>
+          <button class="panel-collapse" title="Collapse panel" aria-expanded="true">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 6 4 4 4-4"/></svg>
+          </button>
+        </div>
+        <div class="panel-body">
+          <a class="session-row current" href="04-global-chat.html">
+            <span class="session-scope"><span class="dot" style="background:var(--teal)"></span>All notebooks</span>
+            <span class="session-q">Across all my research, what did I conclude…</span>
+            <span class="session-time">now</span>
+          </a>
+          <a class="session-row" href="01-notebook.html">
+            <span class="session-scope"><span class="dot" style="background:var(--teal)"></span>Notebook · The Attention Economy</span>
+            <span class="session-q">What do my sources agree on about rebuilding focus?</span>
+            <span class="session-time">2 days ago · 1 answer saved</span>
+          </a>
+          <a class="session-row" href="02-source.html">
+            <span class="session-scope"><span class="dot" style="background:var(--teal)"></span>Source · Stolen Focus</span>
+            <span class="session-q">Is Hari saying willpower is useless?</span>
+            <span class="session-time">3 days ago</span>
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var KEY = 'on-theme-i';
+  try { if (localStorage.getItem(KEY) === 'dark') root.classList.add('dark'); } catch (e) {}
+  var btn = document.getElementById('theme-toggle');
+  var moon = document.getElementById('icon-moon');
+  var sun = document.getElementById('icon-sun');
+  var label = document.getElementById('theme-label');
+  function sync() {
+    var dark = root.classList.contains('dark');
+    btn.setAttribute('aria-pressed', String(dark));
+    moon.style.display = dark ? 'none' : '';
+    sun.style.display = dark ? '' : 'none';
+    label.textContent = dark ? 'Light theme' : 'Dark theme';
+  }
+  btn.addEventListener('click', function () {
+    root.classList.toggle('dark');
+    try { localStorage.setItem(KEY, root.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+    sync();
+  });
+  sync();
+
+  var input = document.querySelector('.composer input');
+  var send = document.querySelector('.btn-send');
+  if (send) {
+    send.addEventListener('click', function () {
+      if (!input.value.trim()) return;
+      input.value = '';
+      send.animate([{ transform: 'scale(1)' }, { transform: 'scale(0.86)' }, { transform: 'scale(1)' }], { duration: 220, easing: 'ease-out' });
+      input.focus();
+    });
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') send.click(); });
+  }
+})();
+</script>
+</body>
+</html>

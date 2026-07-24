@@ -1,0 +1,948 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UX Concept — Search &amp; Discovery · Direction I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DIRECTION I — QUIET GREEN (H, de-alarmed & squared) · concepts
+   Red retired to destructive-only; fern green is the one action
+   hue. Geometry tightened to 4–6px. Neutral surfaces, honest 1px
+   borders, near-zero shadows; cross-hue chips stay neutral shells
+   with colored dots.
+   ============================================================ */
+:root {
+  /* — neutrals — */
+  --bg: #F5F5F2;
+  --bg-deep: #EEEEE9;
+  --surface: #FEFEFC;
+  --surface-raised: #FFFFFF;
+  --ink: #23252A;
+  --ink-soft: #565A61;
+  --ink-faint: #878B92;
+  --line: #E0E0DA;
+  --line-strong: #23252A;
+
+  /* — owned hues, red-free — */
+  --fern: #2E6B4F;           /* action — the one green you act with */
+  --fern-deep: #245740;
+  --fern-tint: #DFEAE2;
+  --gold: #A97B12;           /* notes */
+  --gold-deep: #7C5A05;
+  --gold-tint: #F3EAD3;
+  --teal: #0E7268;           /* chat / AI / insight */
+  --teal-deep: #095A51;
+  --teal-tint: #DDECE8;
+  --plum: #5D4991;           /* video · seasoning: model chip, kbd */
+  --plum-tint: #EAE6F3;
+
+  /* — per-type set — */
+  --honey: #A97B12;  --honey-tint: #F3EAD3;   /* pdf */
+  --sage: #5E7A54;   --sage-tint: #E5EBDC;    /* sources / web */
+  --mauve: #8D5B80;  --mauve-tint: #F1E5EE;   /* audio · derived breadcrumb */
+  --slate: #4E6B84;  --slate-tint: #E1E8EE;   /* paper · external */
+  --clay: #B0451F;   --clay-tint: #F5E4DB;    /* degraded / warn — the only red left */
+
+  /* — action — */
+  --primary: #2E6B4F;
+  --primary-hover: #245740;
+  --on-primary: #F1F8F3;
+
+  /* — depth: flat clarity — */
+  --shadow-soft: 0 1px 2px rgba(35,37,42,.06);
+  --shadow-lift: 0 1px 3px rgba(35,37,42,.10);
+
+  /* — shape — */
+  --r-xl: 6px;
+  --r-lg: 5px;
+  --r-md: 5px;
+  --r-sm: 4px;
+  --r-pill: 4px;
+
+  /* — type — */
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Trebuchet MS", sans-serif;
+  --font-body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, monospace;
+  --fs-hero: 24px;
+  --fs-title: 15.5px;
+  --fs-body: 13.5px;
+  --fs-small: 12px;
+  --fs-micro: 10.5px;
+
+  /* — space — */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 10px; --sp-4: 14px;
+  --sp-5: 18px; --sp-6: 22px; --sp-7: 28px;
+
+  --focus-ring: 0 0 0 3px var(--teal-tint);
+}
+
+.dark {
+  --bg: #17181B;
+  --bg-deep: #121316;
+  --surface: #1E2024;
+  --surface-raised: #24262B;
+  --ink: #ECEDEA;
+  --ink-soft: #A9ACB1;
+  --ink-faint: #74777D;
+  --line: #2E3036;
+  --line-strong: #ECEDEA;
+
+  --fern: #55B285;
+  --fern-deep: #6CC298;
+  --fern-tint: #1B2F25;
+  --gold: #CFA13E;
+  --gold-deep: #DDB55F;
+  --gold-tint: #322B1B;
+  --teal: #3FB3A5;
+  --teal-deep: #64C5B9;
+  --teal-tint: #16302C;
+  --plum: #A290D3;
+  --plum-tint: #29253A;
+
+  --honey: #CFA13E;  --honey-tint: #322B1B;
+  --sage: #93B084;   --sage-tint: #232B1D;
+  --mauve: #C892BA;  --mauve-tint: #322230;
+  --slate: #8FAFC8;  --slate-tint: #212B34;
+  --clay: #F08A5C;   --clay-tint: #35211A;
+
+  --primary: #3D8E67;
+  --primary-hover: #479E74;
+  --on-primary: #ECF7F0;
+
+  --shadow-soft: 0 1px 2px rgba(0,0,0,.35);
+  --shadow-lift: 0 1px 3px rgba(0,0,0,.45);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-width: 1000px;
+  transition: background-color .25s ease, color .25s ease;
+}
+::selection { background: var(--teal-tint); color: var(--ink); }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+input, textarea { font: inherit; color: inherit; }
+::placeholder { color: var(--ink-faint); }
+
+.dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; flex: none; }
+
+/* ---- direction banner ---- */
+.tile-banner {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 16px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: var(--fs-micro);
+  letter-spacing: .04em;
+  flex: none;
+}
+.dark .tile-banner { background: #0E0F11; color: var(--ink-soft); }
+.tile-banner .dots { display: flex; gap: 4px; }
+.tile-banner .dots i { width: 8px; height: 8px; border-radius: 2px; display: block; }
+.tile-banner .dots i:nth-child(1) { background: var(--fern); }
+.tile-banner .dots i:nth-child(2) { background: var(--gold); }
+.tile-banner .dots i:nth-child(3) { background: var(--teal); }
+.tile-banner strong { font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.tile-banner span { opacity: .7; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tile-banner .alt-link { color: inherit; opacity: .55; font-weight: 600; white-space: nowrap; }
+.tile-banner .alt-link:hover { opacity: 1; text-decoration: underline; }
+.banner-nav { margin-left: auto; display: flex; gap: 4px; flex: none; }
+.banner-nav a {
+  width: 20px; height: 20px; border-radius: 4px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 10px;
+  color: inherit; opacity: .55;
+  transition: background .15s ease, opacity .15s ease;
+}
+.banner-nav a:hover { opacity: 1; background: rgba(255,255,255,.12); }
+.banner-nav a.here { opacity: 1; background: var(--teal); color: #EFFAF7; }
+
+/* ---- shell / sidebar ---- */
+.shell { flex: 1; display: flex; min-height: 0; }
+.sidebar {
+  width: 226px; flex: none;
+  background: var(--bg-deep);
+  border-right: 1px solid var(--line);
+  display: flex; flex-direction: column;
+  padding: var(--sp-5) var(--sp-4) var(--sp-4);
+  gap: var(--sp-4);
+  overflow-y: auto;
+}
+.wordmark { display: flex; align-items: center; gap: 10px; padding: 2px 4px; }
+.wordmark .mark {
+  width: 30px; height: 30px; border-radius: 5px;
+  background: var(--ink);
+  position: relative; overflow: hidden; flex-shrink: 0;
+}
+.dark .wordmark .mark { background: var(--surface-raised); }
+.wordmark .mark::before {
+  content: "";
+  position: absolute; inset: 7px;
+  border-radius: 2px 2px 1px 1px;
+  background: linear-gradient(to bottom,
+    var(--fern) 0 33%, var(--gold) 33% 66%, var(--teal) 66% 100%);
+}
+.wordmark h1 {
+  font-family: var(--font-display);
+  font-size: 14px; font-weight: 700; letter-spacing: -.01em; line-height: 1.05;
+}
+.wordmark h1 b { color: var(--fern); }
+
+.btn-new {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 13.5px; letter-spacing: .01em;
+  background: var(--primary); color: var(--on-primary);
+  border-radius: var(--r-md);
+  padding: 9px 14px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: background .15s ease;
+}
+.btn-new:hover { background: var(--primary-hover); }
+.btn-new svg { width: 14px; height: 14px; }
+.btn-new .kbd { background: rgba(255,255,255,.18); color: inherit; }
+.dark .btn-new .kbd { background: rgba(0,0,0,.22); }
+
+.nav-group { display: flex; flex-direction: column; gap: 2px; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 7px 10px;
+  border-radius: var(--r-sm);
+  color: var(--ink-soft); font-weight: 500; font-size: 13px;
+  position: relative; text-align: left;
+  transition: background .12s ease, color .12s ease;
+}
+.nav-item svg { width: 15px; height: 15px; flex: none; opacity: .85; }
+.nav-item:hover { background: var(--surface); color: var(--ink); }
+.nav-item.active {
+  background: var(--surface-raised);
+  color: var(--ink); font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.nav-item.active::before {
+  content: "";
+  position: absolute; left: -3px; top: 7px; bottom: 7px; width: 3px;
+  border-radius: 2px; background: var(--fern);
+}
+.nav-divider { height: 1px; background: var(--line); margin: var(--sp-2) 10px; }
+.nav-item.chat-entry .dot { width: 6px; height: 6px; background: var(--teal); margin-left: auto; }
+
+.nav-manage { margin-top: var(--sp-1); }
+.nav-manage summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  padding: var(--sp-2) 10px 5px;
+  font-size: var(--fs-micro); font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-faint);
+  transition: color .15s ease;
+}
+.nav-manage summary:hover { color: var(--ink-soft); }
+.nav-manage summary::-webkit-details-marker { display: none; }
+.nav-manage summary svg { width: 9px; height: 9px; transition: transform .2s ease; }
+.nav-manage[open] summary svg { transform: rotate(90deg); }
+.nav-manage .nav-item { padding: 6px 10px; font-size: 12.5px; color: var(--ink-faint); }
+.nav-manage .nav-item:hover { color: var(--ink); }
+.nav-manage .nav-item svg { width: 14px; height: 14px; }
+
+.sidebar-foot {
+  margin-top: auto; padding-top: var(--sp-4);
+  border-top: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.foot-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 10px; border-radius: var(--r-sm);
+  color: var(--ink-soft); font-size: 12.5px; font-weight: 500;
+  width: 100%; text-align: left;
+  transition: background .12s ease, color .12s ease;
+}
+.foot-item:hover { background: var(--surface); color: var(--ink); }
+.foot-item svg { width: 14px; height: 14px; opacity: .8; }
+.kbd {
+  margin-left: auto;
+  font-family: var(--font-body); font-size: 10px; font-weight: 600;
+  background: var(--plum-tint); color: var(--plum);
+  border-radius: 4px; padding: 2px 6px; letter-spacing: .03em;
+}
+
+/* ---- main / page header ---- */
+.main {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column;
+  padding: var(--sp-5) var(--sp-6) var(--sp-5);
+  gap: var(--sp-4);
+  overflow-y: auto;
+}
+.nb-header { display: flex; align-items: flex-start; gap: var(--sp-5); padding: 0 2px; flex: none; }
+.nb-id { flex: 1; min-width: 0; }
+.crumbs {
+  font-size: var(--fs-small); color: var(--ink-faint); font-weight: 500;
+  display: flex; align-items: center; gap: 8px; margin-bottom: 5px; flex-wrap: wrap;
+}
+.crumbs .dot { background: var(--teal); width: 6px; height: 6px; }
+.nb-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero); font-weight: 700;
+  letter-spacing: -.02em; line-height: 1.1;
+  display: block; width: fit-content; position: relative;
+}
+/* signature underline: one hue, no show — search speaks teal */
+.nb-title::after {
+  content: "";
+  position: absolute; left: 2px; bottom: -6px;
+  width: 56px; height: 3px; border-radius: 2px;
+  background: var(--teal);
+}
+.nb-desc {
+  margin-top: 12px; color: var(--ink-soft); font-size: 13px;
+  display: inline-flex; align-items: center; gap: 8px;
+  border-bottom: 1px dashed var(--line); padding-bottom: 3px;
+  cursor: text;
+}
+.nb-desc:hover { border-bottom-color: var(--teal); }
+
+/* ============ SCREEN 08 layout (search & discovery) ============ */
+.workspace.search-page {
+  flex: 1;
+  display: grid; gap: var(--sp-4);
+  grid-template-columns: minmax(480px, 1fr) minmax(180px, 13.5rem);
+  align-items: start;
+}
+.search-col { display: flex; flex-direction: column; gap: var(--sp-4); min-width: 0; padding: 0 2px; }
+
+/* search header — the prominent query field */
+.search-field {
+  display: flex; align-items: center; gap: 10px;
+  padding: 5px 5px 5px 14px;
+  border-radius: var(--r-lg);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.search-field:focus-within { border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-tint); }
+.search-field > svg { width: 16px; height: 16px; color: var(--ink-faint); flex: none; }
+.search-field input {
+  flex: 1; min-width: 0; background: none; border: none;
+  font-size: 14px; font-weight: 600; padding: 8px 0; outline: none;
+}
+.search-field input:focus-visible { box-shadow: none; }
+.scope-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 3.5px 11px; border-radius: var(--r-pill);
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 11px; font-weight: 600;
+  white-space: nowrap;
+  transition: border-color .15s ease, color .15s ease;
+}
+.scope-pill:hover { border-color: var(--ink-soft); color: var(--ink); }
+.scope-pill .dot { width: 6px; height: 6px; background: var(--teal); }
+.scope-pill .chev { opacity: .6; font-size: 9px; }
+.btn-go {
+  width: 34px; height: 34px; border-radius: var(--r-md); flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--primary); color: var(--on-primary);
+  transition: background .12s ease;
+}
+.btn-go:hover { background: var(--primary-hover); }
+.btn-go svg { width: 15px; height: 15px; }
+
+.search-modes {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 0 var(--sp-3);
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-faint);
+}
+.mode-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 2.5px 10px; border-radius: var(--r-pill);
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase;
+}
+.mode-chip .dot { width: 5px; height: 5px; background: var(--teal); }
+.mode-note { color: var(--ink-faint); }
+.result-count { margin-left: auto; }
+.result-count b { color: var(--ink-soft); font-weight: 600; }
+
+/* ---- filters: neutral shells + colored dots; active = teal dot + underline ---- */
+.filters { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; padding: 0 2px; }
+.filter-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 13px; border-radius: var(--r-pill);
+  font-size: var(--fs-small); font-weight: 600; color: var(--ink-soft);
+  background: transparent;
+  border: 1px solid var(--line);
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.filter-chip:hover { background: var(--surface); color: var(--ink); border-color: var(--ink-soft); }
+.filter-chip.active {
+  background: var(--surface-raised);
+  color: var(--ink);
+  border-color: var(--ink-soft);
+  box-shadow: inset 0 -2px 0 var(--teal);
+  font-weight: 700;
+}
+.filter-chip.active::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+.filter-chip .dot { width: 6px; height: 6px; }
+.filter-chip.ext-chip { border-style: dashed; border-color: var(--slate); color: var(--slate); }
+.filter-chip.ext-chip:hover { background: var(--slate-tint); }
+.filter-chip.ext-chip .dot { background: none; box-shadow: inset 0 0 0 1.5px currentColor; }
+.filters .spacer { flex: 1; }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 5px 12px;
+  transition: border-color .12s ease, color .12s ease;
+}
+.btn-ghost svg { width: 13px; height: 13px; }
+.btn-ghost:hover { border-color: var(--ink-soft); color: var(--ink); }
+
+/* ---- results: neutral rows; nature = icon chip + colored dot ---- */
+.results { display: flex; flex-direction: column; gap: var(--sp-3); }
+.result {
+  display: flex; align-items: flex-start; gap: 12px;
+  width: 100%; text-align: left;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 12px 15px 13px;
+  transition: border-color .15s ease, background .15s ease;
+}
+.result:hover { border-color: var(--ink-faint); }
+.res-main { min-width: 0; flex: 1; }
+.res-nature {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 10px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-faint);
+  margin-bottom: 4px; flex-wrap: wrap;
+}
+.res-nature .dot { width: 6px; height: 6px; }
+.res-nature .ts {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 0; text-transform: none;
+  margin-left: auto; color: var(--ink-faint);
+}
+.res-title {
+  font-family: var(--font-display);
+  font-size: 14px; font-weight: 700; letter-spacing: -.005em; line-height: 1.3;
+  display: block;
+}
+.res-snip {
+  display: -webkit-box;
+  margin-top: 6px; font-size: var(--fs-small); color: var(--ink-soft); line-height: 1.6;
+  -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+/* term highlight: soft gold wash */
+.hl {
+  background: var(--gold-tint);
+  border-radius: 3px; padding: 0 2px;
+  font-weight: 600; color: var(--ink);
+}
+.res-meta {
+  margin-top: 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  font-size: var(--fs-micro); color: var(--ink-faint);
+}
+.res-meta .sep { width: 3px; height: 3px; border-radius: 50%; background: var(--line); flex: none; }
+.dark .res-meta .sep { background: var(--ink-faint); }
+.res-meta .loc { font-family: var(--font-mono); font-size: 10px; }
+
+/* type icon chips: tinted chip, colored glyph — flat, not candy */
+.src-type {
+  width: 26px; height: 26px; border-radius: 4px; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--plum-tint); color: var(--plum);
+  margin-top: 1px;
+}
+.dark .src-type { color: var(--plum); }
+.src-type svg { width: 12px; height: 12px; }
+.src-type.t-pdf   { background: var(--honey-tint); color: var(--honey); }
+.src-type.t-web   { background: var(--sage-tint);  color: var(--sage); }
+.src-type.t-audio { background: var(--mauve-tint); color: var(--mauve); }
+.src-type.t-paper { background: var(--slate-tint); color: var(--slate); }
+.src-type.t-note  { background: var(--gold-tint);  color: var(--gold-deep); }
+.dark .src-type.t-note { color: var(--gold); }
+.src-type.t-ins   { background: var(--teal-tint);  color: var(--teal-deep); }
+.dark .src-type.t-ins { color: var(--teal); }
+.src-type.t-ext   { background: transparent; color: var(--slate); border: 1px dashed var(--slate); }
+
+/* semantic match: neutral shell + teal dot */
+.sem-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 1px 8px; border-radius: var(--r-pill);
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 0; text-transform: none;
+}
+.sem-tag .dot { width: 5px; height: 5px; background: var(--teal); }
+/* derived breadcrumb: mauve dot */
+.derived-line { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 10px; color: var(--ink-faint); }
+.derived-line .dot { width: 5px; height: 5px; background: var(--mauve); }
+
+/* note result: neutral row, gold carried by chip + dot only */
+.result.note-res .res-nature { color: var(--gold-deep); }
+.dark .result.note-res .res-nature { color: var(--gold); }
+.note-dot { width: 6px; height: 6px; background: var(--gold); }
+
+/* external result — dashed left edge, slate, hollow dot */
+.result.ext-res {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px dashed var(--slate);
+}
+.result.ext-res:hover { border-color: var(--slate); border-left-style: dashed; }
+.result.ext-res.selected { background: var(--surface-raised); box-shadow: var(--shadow-lift); }
+.result.ext-res .res-nature { color: var(--slate); }
+.hollow-dot { width: 7px; height: 7px; background: none; box-shadow: inset 0 0 0 1.5px var(--slate); }
+.ext-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 1px 8px; border-radius: var(--r-pill);
+  border: 1px dashed var(--slate); color: var(--slate);
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 0; text-transform: none;
+}
+.ext-receipt {
+  display: block;
+  margin-top: 5px; font-family: var(--font-mono); font-size: 10px;
+  color: var(--ink-faint); overflow-wrap: anywhere;
+}
+.ext-excerpt {
+  display: block; margin-top: 9px; padding: 9px 11px;
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  color: var(--ink); font-size: var(--fs-small); line-height: 1.6;
+}
+.ext-actions { margin-top: 11px; display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+.btn-adopt {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 14px; border-radius: var(--r-md);
+  background: var(--primary); color: var(--on-primary);
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 12.5px; letter-spacing: .01em;
+  transition: background .15s ease;
+}
+.btn-adopt:hover { background: var(--primary-hover); }
+.btn-adopt svg { width: 13px; height: 13px; flex: none; }
+.btn-adopt .target { font-family: var(--font-body); font-weight: 500; opacity: .85; }
+.btn-adopt .chev { opacity: .6; font-size: 9px; }
+.btn-once {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 13px; border-radius: var(--r-md);
+  font-size: 12px; font-weight: 600; color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  transition: border-color .15s ease, color .15s ease;
+}
+.btn-once:hover { border-color: var(--ink-soft); color: var(--ink); }
+.ext-hint { font-size: var(--fs-micro); color: var(--ink-faint); }
+
+/* ---- adoption state chips: neutral shells, dot hardens ---- */
+.state-flow { display: flex; flex-direction: column; gap: 5px; margin-top: 8px; align-items: flex-start; }
+.state-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 11px; border-radius: var(--r-pill);
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: var(--fs-micro); font-weight: 600;
+  position: relative; overflow: hidden;
+}
+.state-chip .dot { width: 6px; height: 6px; }
+.state-chip.candidate { border-style: dashed; }
+.state-chip.candidate .dot { background: none; box-shadow: inset 0 0 0 1.5px var(--slate); }
+.state-chip.citable .dot { background: var(--slate); }
+.state-chip.adopting .dot { background: var(--teal); animation: breathe 1.4s ease-in-out infinite; }
+.state-chip.adopting::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: var(--teal); opacity: .7;
+  animation: sweep 1.7s ease-in-out infinite;
+}
+.state-chip.adopted { color: var(--fern-deep); font-weight: 700; }
+.dark .state-chip.adopted { color: var(--fern); }
+.state-chip.adopted .dot { background: var(--fern); }
+@keyframes breathe { 50% { opacity: .35; } }
+@keyframes sweep { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.state-arrow { font-family: var(--font-mono); font-size: 10px; color: var(--ink-faint); padding-left: 12px; }
+
+/* ---- annotation rail — meta, outside the app ---- */
+.anno-rail { display: flex; flex-direction: column; gap: var(--sp-4); padding: 6px 0 0 6px; align-self: start; }
+.anno-head {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--ink-faint);
+  padding-bottom: 2px; border-bottom: 1px dashed var(--line);
+  position: relative;
+}
+.anno-head::after {
+  content: ""; position: absolute; left: 0; bottom: -1px;
+  width: 30px; height: 2px; border-radius: 2px; background: var(--teal);
+}
+.anno { position: relative; padding-left: 16px; font-size: var(--fs-micro); color: var(--ink-faint); line-height: 1.55; }
+.anno::before { content: ""; position: absolute; left: 0; top: 7px; width: 9px; height: 1px; background: var(--ink-faint); }
+.anno .num {
+  display: block; font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft);
+  margin-bottom: 2px;
+}
+.anno a { color: var(--teal-deep); font-weight: 600; }
+.dark .anno a { color: var(--teal); }
+.anno a:hover { text-decoration: underline; }
+
+@media (max-width: 1180px) {
+  .sidebar { width: 200px; }
+  .workspace.search-page { grid-template-columns: minmax(440px, 1fr) minmax(172px, 12.5rem); }
+  .search-modes { row-gap: 4px; }
+  .result-count { margin-left: 0; }
+  .tile-banner span { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="tile-banner">
+  <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+  <strong>UX Concept — Search &amp; Discovery · Direction I</strong>
+  <span>Manual discovery, the human-driven twin of conversation: same results, same evidence dress, same adoption flow — and a universe bigger than your sources.</span>
+  <a class="alt-link" href="../concepts/08-search.html">view in Direction D →</a>
+  <nav class="banner-nav">
+    <a href="00-home.html">0</a><a href="01-notebook.html">1</a><a href="02-source.html">2</a><a href="03-creations.html">3</a><a href="04-global-chat.html">4</a><a href="05-create-overlay.html">5</a><a href="06-citations.html">6</a><a href="07-deep-research.html">7</a><a class="here" href="08-search.html">8</a>
+  </nav>
+</div>
+
+<div class="shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a class="wordmark" href="01-notebook.html">
+      <span class="mark" aria-hidden="true"></span>
+      <h1>Open Notebook<b>.</b></h1>
+    </a>
+
+    <a class="btn-new" href="05-create-overlay.html">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+      Create
+      <span class="kbd">⌘J</span>
+    </a>
+
+    <nav class="nav-group">
+      <a class="nav-item" href="00-home.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7 8 2.5 13.5 7v5.5a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1z"/><path d="M6.5 13.5v-4h3v4"/></svg>
+        Home
+      </a>
+      <a class="nav-item" href="01-notebook.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>
+        Notebooks
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path d="M5.5 6h5M5.5 8.5h5M5.5 11h3"/></svg>
+        Sources
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg>
+        Notes
+      </a>
+      <a class="nav-item" href="03-creations.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/><path d="m12.5 10.5.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></svg>
+        Creations
+      </a>
+      <a class="nav-item active" href="08-search.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>
+        Search
+      </a>
+      <div class="nav-divider"></div>
+      <a class="nav-item chat-entry" href="04-global-chat.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13.5 8a5.5 5.5 0 1 0-2.2 4.4L13.5 13l-.5-2.2A5.47 5.47 0 0 0 13.5 8z"/></svg>
+        Chat
+        <span class="dot"></span>
+      </a>
+    </nav>
+
+    <details class="nav-manage">
+      <summary>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 4 4 4-4 4"/></svg>
+        Manage
+      </summary>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 5.5 8 2.5l5.5 3L8 8.5zM2.5 8.2 8 11.2l5.5-3M2.5 10.9 8 13.9l5.5-3"/></svg>
+        Models
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 5h7M12.5 5h.5M3 11h.5M6 11h7"/><circle cx="11" cy="5" r="1.6"/><circle cx="4.7" cy="11" r="1.6"/></svg>
+        Transformations
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="2.2"/><path d="M8 2v1.6M8 12.4V14M2 8h1.6M12.4 8H14M3.8 3.8l1.1 1.1M11.1 11.1l1.1 1.1M12.2 3.8l-1.1 1.1M4.9 11.1l-1.1 1.1"/></svg>
+        Settings
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m6 4-3 4 3 4M10 4l3 4-3 4"/></svg>
+        Advanced
+      </a>
+    </details>
+
+    <div class="sidebar-foot">
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/></svg>
+        Quick actions
+        <span class="kbd">⌘K</span>
+      </button>
+      <button class="foot-item" id="theme-toggle" aria-pressed="false">
+        <svg id="icon-moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3 5.5 5.5 0 1 0 13 9.5z"/></svg>
+        <svg id="icon-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="display:none"><circle cx="8" cy="8" r="3"/><path d="M8 1.5V3M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M12.6 3.4l-1 1M4.4 11.6l-1 1"/></svg>
+        <span id="theme-label">Dark theme</span>
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c1.8 1.7 2.6 3.8 2.6 6S9.8 12.3 8 14C6.2 12.3 5.4 10.2 5.4 8S6.2 3.7 8 2z"/></svg>
+        English
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 2h-3A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14h3M10.5 11 14 8l-3.5-3M14 8H6"/></svg>
+        Sign out
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <header class="nb-header">
+      <div class="nb-id">
+        <div class="crumbs"><span class="dot"></span><span>Search</span></div>
+        <h1 class="nb-title">Search</h1>
+        <div class="nb-desc" role="button" tabindex="0">
+          Find anything across your library — and beyond it. Every result keeps its nature visible.
+        </div>
+      </div>
+    </header>
+
+    <div class="workspace search-page">
+
+      <div class="search-col">
+
+        <!-- SEARCH HEADER -->
+        <div class="search-field">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>
+          <input type="text" value="attention residue" aria-label="Search query">
+          <button class="scope-pill" title="Change search scope">
+            <span class="dot"></span>
+            Scope: All notebooks
+            <span class="chev">▾</span>
+          </button>
+          <button class="btn-go" title="Search">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8h11M9.5 4l4 4-4 4"/></svg>
+          </button>
+        </div>
+        <div class="search-modes">
+          <span class="mode-chip"><span class="dot"></span>hybrid · text + semantic</span>
+          <span class="mode-note">no embedding model? falls back to text-only — quietly, never an error</span>
+          <span class="result-count"><b>7 results</b> · 0.4s</span>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="filters">
+          <button class="filter-chip active">All</button>
+          <button class="filter-chip"><span class="dot" style="background:var(--sage)"></span>Sources</button>
+          <button class="filter-chip"><span class="dot" style="background:var(--gold)"></span>Notes</button>
+          <button class="filter-chip"><span class="dot" style="background:var(--mauve)"></span>Creations</button>
+          <button class="filter-chip ext-chip"><span class="dot"></span>External</button>
+          <span class="spacer"></span>
+          <button class="btn-ghost">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>
+            All notebooks ▾
+          </button>
+          <button class="btn-ghost">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.5" y="3.5" width="11" height="10" rx="2"/><path d="M5.5 2v3M10.5 2v3M2.5 7h11"/></svg>
+            Any time ▾
+          </button>
+        </div>
+
+        <!-- UNIFIED RESULTS -->
+        <div class="results">
+
+          <!-- source · pdf -->
+          <a class="result" href="02-source.html" title="Opens the source at the matched chunk — same reader as citations">
+            <span class="src-type t-pdf"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5L12.5 6v7A1.5 1.5 0 0 1 11 14.5H4A1.5 1.5 0 0 1 2.5 13V4A1.5 1.5 0 0 1 4 2.5z"/><path d="M9 2.5V6h3.5"/></svg></span>
+            <span class="res-main">
+              <span class="res-nature"><span class="dot" style="background:var(--honey)"></span>Source · PDF</span>
+              <span class="res-title">Stolen Focus — Johann Hari (chapter notes)</span>
+              <span class="res-snip">…Hari borrows Newport's term for the tax: every glance at the feed deposits <span class="hl">attention residue</span> that outlives the glance itself. The next block of work starts already contaminated — the chapter's argument is that the residue, not the interruption, is the real cost.</span>
+              <span class="res-meta"><span class="loc">ch. 5 · chunk 3/12</span> <span class="sep"></span> The Attention Economy <span class="sep"></span> added Jun 30</span>
+            </span>
+          </a>
+
+          <!-- source · web -->
+          <a class="result" href="#">
+            <span class="src-type t-web"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c1.8 1.7 2.6 3.8 2.6 6S9.8 12.3 8 14C6.2 12.3 5.4 10.2 5.4 8S6.2 3.7 8 2z"/></svg></span>
+            <span class="res-main">
+              <span class="res-nature"><span class="dot" style="background:var(--sage)"></span>Source · Web</span>
+              <span class="res-title">The Cost of Context Switching</span>
+              <span class="res-snip">…subjects who switched tasks carried a measurable <span class="hl">attention residue</span> for up to 23 minutes: performance on the second task suffered even when the first was “finished.” The residue scaled with how unresolved the abandoned task felt.</span>
+              <span class="res-meta"><span class="loc">chunk 2/6</span> <span class="sep"></span> Deep Work Essays <span class="sep"></span> added Jul 3</span>
+            </span>
+          </a>
+
+          <!-- source · video, semantic match -->
+          <a class="result" href="#">
+            <span class="src-type"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M6 4.5v7l6-3.5z"/></svg></span>
+            <span class="res-main">
+              <span class="res-nature"><span class="dot" style="background:var(--plum)"></span>Source · Video <span class="ts">matched at 07:26</span></span>
+              <span class="res-title">How Your Attention Is Sold</span>
+              <span class="res-snip">…“the feed never lets a switch complete — you close the app, but part of your mind stays inside it, refreshing on your behalf. That lingering fraction is the product working exactly as designed.”</span>
+              <span class="res-meta"><span class="sem-tag"><span class="dot"></span>semantic match — the passage never says the term</span> <span class="sep"></span> The Attention Economy</span>
+            </span>
+          </a>
+
+          <!-- note · authoral -->
+          <a class="result note-res" href="#">
+            <span class="src-type t-note"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg></span>
+            <span class="res-main">
+              <span class="res-nature"><span class="dot note-dot"></span>Your note</span>
+              <span class="res-title">Key levers for reclaiming focus</span>
+              <span class="res-snip">…single-task blocks exist to stop <span class="hl">attention residue</span> from bleeding across the day. Treat the switch itself as a cost — budget it like money, and most “quick checks” stop being worth the price.</span>
+              <span class="res-meta">note · edited 2 days ago <span class="sep"></span> The Attention Economy</span>
+            </span>
+          </a>
+
+          <!-- insight · derived -->
+          <a class="result" href="#">
+            <span class="src-type t-ins"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/><path d="m12.5 10.5.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></svg></span>
+            <span class="res-main">
+              <span class="res-nature"><span class="dot" style="background:var(--teal)"></span>Insight · derived</span>
+              <span class="res-title">Key Claims — Deep Work</span>
+              <span class="res-snip">…claim 3: <span class="hl">attention residue</span> makes fragmented hours worth less than their sum — each fragment inherits the unfinished business of the last. Scheduling depth is therefore a compounding investment, not a preference.</span>
+              <span class="res-meta"><span class="derived-line">derived from <span class="dot"></span> source: Deep Work — Cal Newport · recipe: Key Claims</span></span>
+            </span>
+          </a>
+
+          <!-- creation · podcast, transcript match -->
+          <a class="result" href="03-creations.html">
+            <span class="src-type t-audio"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="6" y="2" width="4" height="8" rx="2"/><path d="M3.5 8a4.5 4.5 0 0 0 9 0M8 12.5V14"/></svg></span>
+            <span class="res-main">
+              <span class="res-nature"><span class="dot" style="background:var(--mauve)"></span>Creation · Podcast <span class="ts">12:40 · matched at 04:12</span></span>
+              <span class="res-title">Attention, Explained</span>
+              <span class="res-snip">…“and that's the <span class="hl">residue</span> problem in one sentence: you sat down to write, but half of you is still answering that message. The interruption ended minutes ago — the cost didn't.”</span>
+              <span class="res-meta">matched in transcript <span class="sep"></span> from The Attention Economy <span class="sep"></span> created Jul 12</span>
+            </span>
+          </a>
+
+          <!-- EXTERNAL — dashed edge, selected + expanded -->
+          <div class="result ext-res selected">
+            <span class="src-type t-ext"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c1.8 1.7 2.6 3.8 2.6 6S9.8 12.3 8 14C6.2 12.3 5.4 10.2 5.4 8S6.2 3.7 8 2z"/></svg></span>
+            <span class="res-main">
+              <span class="res-nature"><span class="dot hollow-dot"></span>External · Web <span class="ext-badge">not in your library</span></span>
+              <span class="res-title">Attention Residue and Task Performance — Leroy (2009), summary</span>
+              <span class="ext-receipt">gloria-leroy-lab.org/papers/residue-2009 · retrieved Jul 21, 2026</span>
+              <span class="ext-excerpt">“People need to stop thinking about one task in order to fully transition their attention and perform well on another. Yet results indicate it is difficult for people to transition their attention away from an unfinished task — and their subsequent task performance suffers. This carry-over is what the paper names <span class="hl">attention residue</span>.”</span>
+              <span class="ext-actions">
+                <button class="btn-adopt">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+                  Add as source <span class="target">→ The Attention Economy</span> <span class="chev">▾</span>
+                </button>
+                <button class="btn-once" title="Cite this result without adding it to the library">Use once — cite without adopting</button>
+                <span class="ext-hint">adoption is always your call — search never files anything on its own</span>
+              </span>
+            </span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ANNOTATION RAIL (meta — not part of the app UI) -->
+      <aside class="anno-rail" aria-label="Design annotations">
+        <div class="anno-head">Spec · search &amp; discovery</div>
+
+        <div class="anno">
+          <span class="num">01 · One anatomy, every nature</span>
+          Type chip, title, matched passage, provenance line — identical bones for source, note, insight, creation and external. Natures never blur: gold dot = yours, dashed edge = not in the library, derived carries its trail.
+        </div>
+
+        <div class="anno">
+          <span class="num">02 · Hybrid by default</span>
+          Text + semantic, fused. Without an embedding model the mode chip quietly reads “text only” — a label, never an error. The video result shows why semantic earns its keep: it matches the idea, not the words.
+        </div>
+
+        <div class="anno">
+          <span class="num">03 · Same components as conversation</span>
+          These result cards, the evidence dress and the adopt flow are the very components the chat agent uses when it cites (see <a href="06-citations.html">06 — Citations</a>). Manual search and the agent differ only in who is driving.
+        </div>
+
+        <div class="anno">
+          <span class="num">04 · Discover → reference → adopt</span>
+          The external card carries its receipt (URL + retrieved date). “Use once” cites without filing; “Add as source” adopts into a notebook you pick. Adoption is always an explicit user decision.
+        </div>
+
+        <div class="anno">
+          <span class="num">05 · Adoption states</span>
+          The external dot hardens as it crosses the boundary:
+          <span class="state-flow">
+            <span class="state-chip candidate"><span class="dot"></span>candidate</span>
+            <span class="state-arrow">↓ opened</span>
+            <span class="state-chip citable"><span class="dot"></span>citable</span>
+            <span class="state-arrow">↓ add as source</span>
+            <span class="state-chip adopting"><span class="dot"></span>adopting…</span>
+            <span class="state-arrow">↓ processed</span>
+            <span class="state-chip adopted"><span class="dot"></span>adopted ✓ source</span>
+          </span>
+        </div>
+
+        <div class="anno">
+          <span class="num">06 · Result → evidence continuity</span>
+          Clicking a result opens the same reader anatomy a citation click opens — the first result lands in <a href="02-source.html">02 — Source</a> scrolled to the matched chunk. One preview surface to learn, everywhere evidence appears.
+        </div>
+
+        <div class="anno">
+          <span class="num">07 · Bigger than Sources</span>
+          The searchable universe includes notes, insights, creation transcripts and the open web — the library is the center of gravity, not the boundary.
+        </div>
+      </aside>
+
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var KEY = 'on-theme-i';
+  try { if (localStorage.getItem(KEY) === 'dark') root.classList.add('dark'); } catch (e) {}
+  var btn = document.getElementById('theme-toggle');
+  var moon = document.getElementById('icon-moon');
+  var sun = document.getElementById('icon-sun');
+  var label = document.getElementById('theme-label');
+  function sync() {
+    var dark = root.classList.contains('dark');
+    btn.setAttribute('aria-pressed', String(dark));
+    moon.style.display = dark ? 'none' : '';
+    sun.style.display = dark ? '' : 'none';
+    label.textContent = dark ? 'Light theme' : 'Dark theme';
+  }
+  btn.addEventListener('click', function () {
+    root.classList.toggle('dark');
+    try { localStorage.setItem(KEY, root.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+    sync();
+  });
+  sync();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1250 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UX Concept — Universal Create · Direction B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DIRECTION B FOUNDATION — REFINED TECHNICAL TOOL
+   Warm graphite · electric amber · Schibsted Grotesk + JetBrains Mono
+   Dark-first. Hairline borders on background steps, no floating shadows.
+   Shared across all UX concept screens (Direction B).
+   ============================================================ */
+:root {
+  --font-sans: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+  --fs-2xs: 10px; --fs-xs: 11px; --fs-sm: 12px; --fs-md: 13px; --fs-lg: 15px; --fs-xl: 19px;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 24px;
+  --r-xs: 3px; --r-sm: 5px; --r-md: 7px;
+
+  /* ---- LIGHT theme (hand-tuned warm paper-graphite) ---- */
+  --bg-app:    #edebe7;
+  --bg-shell:  #e6e4df;
+  --bg-panel:  #f7f6f3;
+  --bg-raised: #fdfdfb;
+  --bg-inset:  #e9e7e2;
+  --bg-hover:  rgba(30, 27, 22, 0.05);
+  --bg-active: rgba(30, 27, 22, 0.08);
+
+  --fg:       #201d18;
+  --fg-mid:   #57534a;
+  --fg-dim:   #8a857a;
+  --fg-faint: #b3ada0;
+
+  --line:        rgba(32, 29, 24, 0.13);
+  --line-strong: rgba(32, 29, 24, 0.22);
+
+  --accent:          #b45f06;   /* burnt amber on light */
+  --accent-fg:       #9a5205;
+  --accent-contrast: #fff;
+  --accent-soft:     rgba(180, 95, 6, 0.09);
+  --accent-line:     rgba(180, 95, 6, 0.35);
+  --accent-glow:     0 0 0 3px rgba(180, 95, 6, 0.14);
+
+  --ok: #2f7d4f;
+  /* semantic content palette (desaturated-deep on light) */
+  --c-video:   #a3372e;   /* video content / destructive hover */
+  --c-note:    #a53252;   /* pdf · notes · authoral */
+  --c-insight: #6d4fc2;   /* derived / insight / citations */
+  --c-ai:      #21697d;   /* ai-generated · web */
+  --c-audio:   #2f7d4f;   /* audio · podcast */
+  --c-paper:   #6d7a2a;   /* papers · mind maps · notebooks badge */
+
+  --overlay-dim: rgba(32, 29, 24, 0.42);
+  --overlay-shadow: 0 18px 60px rgba(32, 29, 24, 0.28);
+  --focus-ring: 0 0 0 1px var(--bg-panel), 0 0 0 3px var(--accent-line);
+  --scroll-thumb: rgba(32, 29, 24, 0.18);
+}
+
+.dark {
+  /* ---- DARK theme (hero) — warm graphite steps ---- */
+  --bg-app:    #131110;
+  --bg-shell:  #161413;
+  --bg-panel:  #1a1816;
+  --bg-raised: #201d1b;
+  --bg-inset:  #0f0e0d;
+  --bg-hover:  rgba(237, 227, 213, 0.045);
+  --bg-active: rgba(237, 227, 213, 0.08);
+
+  --fg:       #ece7df;
+  --fg-mid:   #a9a299;
+  --fg-dim:   #746e66;
+  --fg-faint: #514c46;
+
+  --line:        rgba(236, 231, 223, 0.08);
+  --line-strong: rgba(236, 231, 223, 0.16);
+
+  --accent:          #ffb224;   /* electric amber */
+  --accent-fg:       #ffb224;
+  --accent-contrast: #1a1000;
+  --accent-soft:     rgba(255, 178, 36, 0.08);
+  --accent-line:     rgba(255, 178, 36, 0.35);
+  --accent-glow:     0 0 0 3px rgba(255, 178, 36, 0.13), 0 0 18px rgba(255, 178, 36, 0.10);
+
+  --ok: #4ade80;
+  /* semantic content palette (desaturated-bright on dark) */
+  --c-video:   #f0705a;
+  --c-note:    #e8618c;
+  --c-insight: #b19bf5;
+  --c-ai:      #56c2e0;
+  --c-audio:   #5ad4a6;
+  --c-paper:   #c3d160;
+
+  --overlay-dim: rgba(4, 3, 2, 0.62);
+  --overlay-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+  --focus-ring: 0 0 0 1px var(--bg-panel), 0 0 0 3px var(--accent-line);
+  --scroll-thumb: rgba(236, 231, 223, 0.14);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-md);
+  line-height: 1.45;
+  color: var(--fg);
+  background: var(--bg-app);
+  -webkit-font-smoothing: antialiased;
+  display: flex; flex-direction: column;
+  min-width: 1000px;
+  transition: background-color .25s ease, color .25s ease;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+input, textarea { font: inherit; color: inherit; }
+::placeholder { color: var(--fg-dim); }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 4px; border: 2px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* B's tick: a tiny square, machine-cut — not a pebble */
+.pebble { display: inline-block; width: 6px; height: 6px; border-radius: 1px; flex: none; }
+
+.kbd {
+  margin-left: auto;
+  font-family: var(--font-mono); font-size: var(--fs-2xs);
+  padding: 1px 5px 2px; border-radius: var(--r-xs); line-height: 1.5;
+  background: var(--bg-inset);
+  border: 1px solid var(--line-strong);
+  box-shadow: inset 0 -1px 0 var(--line);
+  color: var(--fg-dim);
+}
+
+/* ---- tile banner ---- */
+.tile-banner {
+  flex: none;
+  display: flex; align-items: center; gap: var(--sp-3);
+  padding: 5px var(--sp-4);
+  background: var(--bg-inset);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono); font-size: var(--fs-2xs);
+  letter-spacing: .05em;
+  color: var(--fg-dim);
+  white-space: nowrap; overflow: hidden;
+}
+.tile-banner strong { color: var(--accent-fg); font-weight: 600; text-transform: uppercase; letter-spacing: .09em; flex: none; }
+.tile-banner span { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.dir-link { flex: none; margin-left: auto; color: var(--fg-dim); border-bottom: 1px dotted var(--line-strong); padding-bottom: 1px; transition: color 120ms ease; }
+.dir-link:hover { color: var(--fg); border-color: var(--fg-dim); }
+.banner-nav { flex: none; display: flex; gap: 3px; }
+.banner-nav a {
+  width: 20px; height: 20px; border-radius: var(--r-xs);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 10px; color: var(--fg-dim);
+  border: 1px solid transparent;
+  transition: background 100ms ease, color 100ms ease, border-color 100ms ease;
+}
+.banner-nav a:hover { background: var(--bg-hover); color: var(--fg); border-color: var(--line); }
+.banner-nav a.here { background: var(--accent); color: var(--accent-contrast); font-weight: 600; }
+
+/* ---- shell / sidebar ---- */
+.shell { flex: 1; display: flex; min-height: 0; }
+.sidebar {
+  width: 224px; flex: none;
+  display: flex; flex-direction: column;
+  background: var(--bg-shell);
+  border-right: 1px solid var(--line);
+  padding: var(--sp-3) var(--sp-2) var(--sp-2);
+  overflow-y: auto;
+}
+.wordmark {
+  display: flex; align-items: center; gap: var(--sp-2);
+  padding: var(--sp-1) var(--sp-2) var(--sp-3);
+  font-weight: 600; font-size: var(--fs-md); letter-spacing: -0.01em;
+}
+.logo-pebbles { display: flex; gap: 3px; align-items: center; }
+.logo-pebbles .pebble { width: 9px; height: 9px; border-radius: 2px; }
+.logo-pebbles .pebble:first-child { background: var(--accent); box-shadow: 0 0 10px var(--accent-line); }
+html:not(.dark) .logo-pebbles .pebble:first-child { box-shadow: none; }
+.logo-pebbles .pebble:last-child { background: var(--c-video); width: 6px; height: 6px; }
+
+.btn-new {
+  display: flex; align-items: center; justify-content: center; gap: var(--sp-2);
+  height: 30px; margin: 0 var(--sp-1) var(--sp-3);
+  border-radius: var(--r-sm);
+  background: var(--accent); color: var(--accent-contrast);
+  font-weight: 600; font-size: var(--fs-sm);
+  border: 1px solid color-mix(in srgb, var(--accent) 70%, #000);
+  transition: box-shadow 120ms ease, filter 120ms ease;
+}
+.btn-new:hover { filter: brightness(1.06); box-shadow: var(--accent-glow); }
+.btn-new svg { width: 13px; height: 13px; }
+.btn-new .kbd { margin-left: 2px; background: rgba(0,0,0,0.18); border-color: rgba(0,0,0,0.25); box-shadow: none; color: inherit; }
+
+.nav-group { display: flex; flex-direction: column; gap: 1px; margin-bottom: var(--sp-3); }
+.nav-label {
+  padding: var(--sp-2) var(--sp-2) var(--sp-1);
+  font-family: var(--font-mono); font-size: var(--fs-2xs); font-weight: 500;
+  letter-spacing: .09em; text-transform: uppercase;
+  color: var(--fg-faint);
+}
+.nav-item {
+  position: relative;
+  display: flex; align-items: center; gap: var(--sp-2);
+  width: 100%; padding: 5px var(--sp-2) 5px 10px;
+  border-radius: var(--r-sm);
+  border: 1px solid transparent;
+  color: var(--fg-mid); font-weight: 500; font-size: var(--fs-sm);
+  transition: background 100ms ease, color 100ms ease;
+  text-align: left;
+}
+.nav-item svg { width: 14px; height: 14px; flex: none; opacity: .75; }
+.nav-item:hover { background: var(--bg-hover); color: var(--fg); }
+.nav-item.active { background: var(--bg-active); color: var(--fg); font-weight: 600; border-color: var(--line); }
+.nav-item.active::before {
+  content: ""; position: absolute; left: 0; top: 5px; bottom: 5px; width: 2px;
+  background: var(--accent); border-radius: 1px;
+  box-shadow: 0 0 8px var(--accent-line);
+}
+html:not(.dark) .nav-item.active::before { box-shadow: none; }
+.nav-item .nav-hint { margin-left: auto; font-family: var(--font-mono); font-size: var(--fs-2xs); color: var(--fg-faint); }
+.nav-divider { height: 1px; background: var(--line); margin: var(--sp-2) var(--sp-2); }
+.nav-item.chat-entry { color: var(--fg-dim); }
+.nav-item.chat-entry:hover { color: var(--fg); }
+.nav-item.chat-entry .pebble { width: 5px; height: 5px; background: var(--c-ai); margin-left: auto; border-radius: 50%; }
+
+.nav-manage { margin-top: var(--sp-1); }
+.nav-manage summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  padding: var(--sp-2) var(--sp-2) var(--sp-1);
+  font-family: var(--font-mono); font-size: var(--fs-2xs); font-weight: 500;
+  letter-spacing: .09em; text-transform: uppercase;
+  color: var(--fg-faint);
+  transition: color 100ms ease;
+}
+.nav-manage summary:hover { color: var(--fg-dim); }
+.nav-manage summary::-webkit-details-marker { display: none; }
+.nav-manage summary svg { width: 8px; height: 8px; transition: transform 140ms ease; }
+.nav-manage[open] summary svg { transform: rotate(90deg); }
+.nav-manage .nav-item { padding: 4px var(--sp-2) 4px 10px; font-size: var(--fs-sm); color: var(--fg-dim); }
+.nav-manage .nav-item svg { width: 13px; height: 13px; }
+
+.sidebar-foot {
+  margin-top: auto; padding-top: var(--sp-2);
+  border-top: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 1px;
+}
+.foot-item {
+  display: flex; align-items: center; gap: var(--sp-2);
+  padding: 5px var(--sp-2); border-radius: var(--r-sm);
+  color: var(--fg-mid); font-size: var(--fs-sm); font-weight: 500;
+  transition: background 100ms ease, color 100ms ease;
+  width: 100%; text-align: left;
+}
+.foot-item:hover { background: var(--bg-hover); color: var(--fg); }
+.foot-item svg { width: 14px; height: 14px; opacity: .75; }
+
+/* ---- main / header ---- */
+.main { flex: 1; min-width: 0; display: flex; flex-direction: column; min-height: 0; }
+.nb-header {
+  flex: none;
+  display: flex; align-items: flex-start; gap: var(--sp-4);
+  padding: var(--sp-3) var(--sp-5);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-app);
+}
+.nb-id { flex: 1; min-width: 0; }
+.crumbs {
+  font-family: var(--font-mono); font-size: var(--fs-2xs); color: var(--fg-dim);
+  letter-spacing: .05em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 6px; margin-bottom: 4px; flex-wrap: wrap;
+}
+.crumbs a:hover { color: var(--fg); }
+.crumbs .sep { color: var(--fg-faint); }
+.crumbs .pebble { background: var(--accent); width: 5px; height: 5px; }
+.nb-title { font-size: var(--fs-xl); font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+.nb-desc {
+  margin-top: 3px; font-size: var(--fs-sm); color: var(--fg-dim);
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px dashed transparent; border-radius: var(--r-xs);
+  padding: 1px 4px; margin-left: -4px;
+  cursor: text; transition: border-color 100ms ease, color 100ms ease;
+}
+.nb-desc:hover { border-color: var(--line-strong); color: var(--fg-mid); }
+.nb-desc svg { width: 11px; height: 11px; opacity: 0; transition: opacity 100ms ease; }
+.nb-desc:hover svg { opacity: .55; }
+.nb-meta {
+  margin-top: 5px;
+  font-family: var(--font-mono); font-size: var(--fs-2xs); color: var(--fg-dim);
+  letter-spacing: .03em;
+  display: flex; gap: var(--sp-2); align-items: center; flex-wrap: wrap;
+}
+.nb-meta .dot { width: 2px; height: 2px; border-radius: 50%; background: var(--fg-faint); }
+.nb-actions { display: flex; gap: var(--sp-2); padding-top: 4px; }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: var(--r-sm);
+  font-size: var(--fs-sm); font-weight: 500; color: var(--fg-mid);
+  border: 1px solid var(--line-strong);
+  background: var(--bg-panel);
+  transition: background 100ms ease, color 100ms ease, border-color 100ms ease;
+}
+.btn-ghost:hover { background: var(--bg-hover); color: var(--fg); }
+.btn-ghost.danger:hover { color: var(--c-video); border-color: color-mix(in srgb, var(--c-video) 45%, transparent); }
+.btn-ghost svg { width: 13px; height: 13px; }
+
+/* ---- panels: full-bleed grid, hairline gutters, no shadows ---- */
+.workspace {
+  flex: 1; min-height: 0;
+  display: grid; gap: 1px;
+  background: var(--line);
+}
+.panel {
+  background: var(--bg-panel);
+  display: flex; flex-direction: column;
+  min-height: 0; min-width: 0; overflow: hidden;
+}
+.panel-head {
+  flex: none;
+  display: flex; align-items: center; gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  border-bottom: 1px solid var(--line);
+  min-height: 36px;
+}
+.panel-title {
+  font-family: var(--font-mono); font-size: var(--fs-2xs); font-weight: 500;
+  letter-spacing: .09em; text-transform: uppercase;
+  color: var(--fg-mid);
+}
+.panel-count { font-family: var(--font-mono); font-size: var(--fs-2xs); color: var(--fg-faint); }
+.panel-head .spacer { flex: 1; }
+.icon-btn {
+  width: 24px; height: 24px; border-radius: var(--r-sm);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--fg-dim); border: 1px solid transparent;
+  transition: background 100ms ease, color 100ms ease, border-color 100ms ease;
+}
+.icon-btn:hover { background: var(--bg-hover); color: var(--fg); border-color: var(--line); }
+.icon-btn svg { width: 13px; height: 13px; }
+.panel-body { flex: 1; overflow-y: auto; padding: var(--sp-2); min-height: 0; }
+.panel-action {
+  margin: 0 var(--sp-2) var(--sp-2);
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  height: 28px; border-radius: var(--r-sm); flex: none;
+  font-size: var(--fs-xs); font-weight: 600; color: var(--accent-fg);
+  border: 1px solid var(--accent-line);
+  background: var(--accent-soft);
+  transition: box-shadow 120ms ease;
+}
+.panel-action:hover { box-shadow: var(--accent-glow); }
+.panel-action svg { width: 12px; height: 12px; }
+
+/* ---- source rows + selection ---- */
+.src-row {
+  display: flex; align-items: flex-start; gap: var(--sp-2);
+  width: 100%; text-align: left;
+  padding: 6px var(--sp-2); border-radius: var(--r-sm);
+  border: 1px solid transparent;
+  transition: background 100ms ease, border-color 100ms ease;
+}
+.src-row:hover { background: var(--bg-raised); border-color: var(--line); }
+.src-row.selected { background: var(--accent-soft); border-color: var(--accent-line); }
+.src-row.selected:hover { background: var(--accent-soft); }
+.check {
+  width: 14px; height: 14px; border-radius: var(--r-xs); flex: none; margin-top: 4px;
+  border: 1px solid var(--line-strong);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: transparent; background: var(--bg-inset);
+  transition: background 100ms ease, border-color 100ms ease, color 100ms ease;
+}
+.src-row:hover .check { border-color: var(--fg-dim); }
+.src-row.selected .check { background: var(--accent); border-color: var(--accent); color: var(--accent-contrast); }
+.check svg { width: 9px; height: 9px; }
+.src-type, .art-type {
+  width: 24px; height: 24px; border-radius: var(--r-sm); flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  margin-top: 1px;
+  color: var(--c-video);
+}
+.src-type svg { width: 11px; height: 11px; }
+.src-type.t-pdf   { color: var(--c-note); }
+.src-type.t-web   { color: var(--c-ai); }
+.src-type.t-audio { color: var(--c-audio); }
+.src-type.t-paper { color: var(--c-paper); }
+.src-none { color: var(--fg-faint); font-family: var(--font-mono); font-size: var(--fs-2xs); }
+.src-main { min-width: 0; flex: 1; }
+.src-title {
+  font-size: var(--fs-sm); font-weight: 500; line-height: 1.35;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.src-meta {
+  margin-top: 3px; display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: var(--fs-2xs); color: var(--fg-dim);
+  letter-spacing: .03em; flex-wrap: wrap;
+}
+.insight-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 0 6px 1px; border-radius: 999px;
+  background: color-mix(in srgb, var(--c-insight) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c-insight) 30%, transparent);
+  color: var(--c-insight);
+  font-family: var(--font-mono); font-size: var(--fs-2xs); font-weight: 500;
+}
+.insight-chip .pebble { width: 4px; height: 4px; background: var(--c-insight); }
+
+/* ---- notes (authoral tint) ---- */
+.note-card {
+  display: block; width: 100%; text-align: left;
+  padding: var(--sp-2) var(--sp-3) var(--sp-3);
+  border-radius: var(--r-md);
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  transition: border-color 100ms ease;
+}
+.note-card:hover { border-color: var(--line-strong); }
+.note-kind {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--font-mono); font-size: var(--fs-2xs); font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--c-ai);
+  margin-bottom: 5px;
+}
+.note-kind .pebble { background: var(--c-ai); width: 5px; height: 5px; }
+.note-title { display: block; font-size: var(--fs-sm); font-weight: 600; line-height: 1.35; }
+.note-excerpt {
+  display: block;
+  margin-top: 4px; font-size: var(--fs-sm); color: var(--fg-mid); line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.note-time {
+  margin-top: 6px; font-family: var(--font-mono); font-size: var(--fs-2xs);
+  color: var(--fg-dim); letter-spacing: .03em;
+  display: flex; align-items: center; gap: 5px;
+}
+.note-time svg { width: 10px; height: 10px; opacity: .7; }
+
+.quick-capture {
+  display: flex; align-items: center; gap: var(--sp-2);
+  margin-top: var(--sp-2);
+  padding: 3px 3px 3px var(--sp-2);
+  border-radius: var(--r-sm);
+  background: var(--bg-inset);
+  border: 1px solid var(--line-strong);
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+.quick-capture:focus-within { border-color: var(--accent-line); box-shadow: var(--accent-glow); }
+.quick-capture input { flex: 1; min-width: 0; background: none; border: none; font-size: var(--fs-sm); padding: 4px 0; }
+.quick-capture input:focus-visible { box-shadow: none; }
+.quick-capture .mini-send {
+  width: 22px; height: 22px; border-radius: var(--r-xs); flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-active); color: var(--fg-dim);
+  transition: background 100ms ease, color 100ms ease;
+}
+.quick-capture:focus-within .mini-send { background: var(--accent); color: var(--accent-contrast); }
+.quick-capture .mini-send svg { width: 11px; height: 11px; }
+
+/* ---- artifacts ---- */
+.art-row {
+  display: flex; align-items: flex-start; gap: var(--sp-2);
+  width: 100%; text-align: left;
+  padding: 6px var(--sp-2); border-radius: var(--r-sm);
+  border: 1px solid transparent;
+  transition: background 100ms ease, border-color 100ms ease;
+}
+.art-row:hover { background: var(--bg-raised); border-color: var(--line); }
+.art-type svg { width: 12px; height: 12px; }
+.t-podcast  { color: var(--c-audio); }
+.t-mindmap  { color: var(--c-paper); }
+.t-guide    { color: var(--c-note); }
+.t-cards    { color: var(--c-insight); }
+.t-videoart { color: var(--c-video); }
+.t-insight  { color: var(--c-insight); }
+.t-noteart  { color: var(--c-note); }
+.art-main { min-width: 0; flex: 1; }
+.art-title { font-size: var(--fs-sm); font-weight: 600; line-height: 1.35; }
+.art-meta {
+  margin-top: 3px; font-family: var(--font-mono); font-size: var(--fs-2xs);
+  color: var(--fg-dim); letter-spacing: .03em;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+.art-meta .dot { width: 2px; height: 2px; border-radius: 50%; background: var(--fg-faint); }
+.proj-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 0 6px 1px; border-radius: 999px;
+  background: color-mix(in srgb, var(--c-paper) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c-paper) 30%, transparent);
+  color: var(--c-paper);
+  font-family: var(--font-mono); font-size: var(--fs-2xs); font-weight: 500;
+}
+.proj-badge .pebble { width: 4px; height: 4px; background: var(--c-paper); }
+
+/* ---- creation chips ---- */
+.chip-row { display: flex; flex-wrap: wrap; gap: 5px; padding: var(--sp-2) var(--sp-2) var(--sp-2); border-bottom: 1px solid var(--line); }
+.create-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 9px; border-radius: var(--r-sm);
+  font-size: var(--fs-xs); font-weight: 500; color: var(--fg-mid);
+  border: 1px solid var(--line-strong);
+  background: var(--bg-panel);
+  transition: background 100ms ease, color 100ms ease, border-color 100ms ease;
+}
+.create-chip:hover { background: var(--bg-hover); color: var(--fg); border-color: var(--fg-dim); }
+.create-chip .pebble { width: 6px; height: 6px; }
+
+/* ---- chat ---- */
+.chat { background: var(--bg-app); }
+.chat .panel-head { background: var(--bg-panel); flex-wrap: wrap; row-gap: 4px; }
+.scope-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 8px; border-radius: var(--r-sm);
+  background: var(--accent-soft); color: var(--accent-fg);
+  border: 1px solid var(--accent-line);
+  font-family: var(--font-mono); font-size: var(--fs-2xs); font-weight: 500;
+  letter-spacing: .04em;
+  transition: box-shadow 120ms ease;
+  white-space: nowrap;
+}
+.scope-pill:hover { box-shadow: var(--accent-glow); }
+.scope-pill .pebble { background: var(--accent); width: 5px; height: 5px; }
+.scope-pill .chev { opacity: .6; font-size: 8px; }
+.chat-body { display: flex; flex-direction: column; gap: var(--sp-4); padding: var(--sp-3) var(--sp-4) var(--sp-4); }
+.msg { max-width: 90%; }
+.msg.user { align-self: flex-end; }
+.msg.user .bubble {
+  background: var(--bg-active); color: var(--fg);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: var(--sp-2) var(--sp-3); font-size: var(--fs-md); line-height: 1.5;
+}
+.msg.ai { align-self: flex-start; }
+.msg-agent {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: var(--fs-2xs); font-weight: 600;
+  letter-spacing: .09em; text-transform: uppercase;
+  color: var(--accent-fg); margin-bottom: 5px;
+}
+.msg-agent .pebble { background: var(--accent); width: 5px; height: 5px; }
+.msg.ai .bubble {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--accent-line);
+  border-radius: var(--r-md);
+  padding: var(--sp-3) var(--sp-4);
+  font-size: var(--fs-md); line-height: 1.55; color: var(--fg);
+}
+.msg.ai .bubble p + p { margin-top: var(--sp-3); }
+.msg.ai .bubble em { font-style: normal; font-weight: 600; color: var(--accent-fg); }
+.cite {
+  display: inline-flex; align-items: center; gap: 4px;
+  vertical-align: 1px; margin: 0 1px;
+  padding: 0 4px 1px; border-radius: var(--r-xs);
+  background: color-mix(in srgb, var(--c-insight) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c-insight) 30%, transparent);
+  color: var(--c-insight);
+  font-family: var(--font-mono); font-size: var(--fs-2xs); font-weight: 500;
+  white-space: nowrap; cursor: pointer;
+  transition: border-color 100ms ease;
+}
+.cite:hover { border-color: var(--c-insight); }
+.cite .pebble { width: 3px; height: 3px; background: var(--c-insight); }
+.cite.note-cite { background: color-mix(in srgb, var(--c-note) 10%, transparent); border-color: color-mix(in srgb, var(--c-note) 30%, transparent); color: var(--c-note); }
+.cite.note-cite .pebble { background: var(--c-note); }
+.msg-tools { display: flex; gap: 6px; margin-top: 7px; }
+.tool-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 9px; border-radius: var(--r-sm);
+  font-size: var(--fs-xs); font-weight: 500; color: var(--fg-dim);
+  border: 1px solid var(--line-strong);
+  transition: color 100ms ease, border-color 100ms ease;
+}
+.tool-pill:hover { color: var(--accent-fg); border-color: var(--accent-line); }
+.tool-pill svg { width: 11px; height: 11px; }
+
+.context-bar {
+  flex: none;
+  display: flex; align-items: center; gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  border-top: 1px solid var(--line);
+  background: var(--bg-panel);
+  font-family: var(--font-mono); font-size: var(--fs-2xs); color: var(--fg-dim);
+  letter-spacing: .04em; flex-wrap: wrap;
+}
+.context-bar .sep { width: 2px; height: 2px; border-radius: 50%; background: var(--fg-faint); }
+.context-bar b { color: var(--fg-mid); font-weight: 500; }
+.model-chip {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 2px 7px; border-radius: var(--r-sm);
+  border: 1px solid var(--line-strong);
+  background: var(--bg-inset);
+  color: var(--fg-mid);
+  font-family: var(--font-mono); font-size: var(--fs-2xs);
+  white-space: nowrap; cursor: pointer;
+  transition: border-color 100ms ease;
+}
+.model-chip:hover { border-color: var(--accent-line); }
+.model-chip .pebble { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 5px var(--accent-line); }
+.composer {
+  flex: none;
+  margin: 0; padding: var(--sp-2) var(--sp-3) var(--sp-3);
+  background: var(--bg-panel);
+  border-top: 1px solid var(--line);
+  display: flex; align-items: center; gap: var(--sp-2);
+}
+.composer input {
+  flex: 1; min-width: 0;
+  background: var(--bg-inset); border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  font-size: var(--fs-md); padding: 6px var(--sp-3);
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+.composer input:focus-visible { box-shadow: none; }
+.composer input:focus { outline: none; border-color: var(--accent-line); box-shadow: var(--accent-glow); }
+.btn-send {
+  width: 28px; height: 28px; border-radius: var(--r-sm); flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--accent); color: var(--accent-contrast);
+  border: 1px solid color-mix(in srgb, var(--accent) 70%, #000);
+  transition: box-shadow 120ms ease, filter 120ms ease;
+}
+.btn-send:hover { filter: brightness(1.07); box-shadow: var(--accent-glow); }
+.btn-send svg { width: 13px; height: 13px; }
+
+/* ---- composer extras: mention token · context selection · effort toggle ---- */
+.mention-token {
+  display: inline-flex; align-items: center; gap: 5px; flex: none;
+  padding: 2px 8px; border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--c-ai) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c-ai) 30%, transparent);
+  color: var(--c-ai);
+  font-family: var(--font-mono); font-size: var(--fs-2xs); font-weight: 500;
+  white-space: nowrap; cursor: default;
+}
+.mention-token .pebble { width: 5px; height: 5px; background: var(--c-ai); }
+.ctx-mode {
+  display: inline-flex; align-items: center; gap: 1px; row-gap: 4px;
+  flex: none; flex-wrap: wrap; min-width: 0; max-width: 100%;
+  font-family: var(--font-mono); font-size: var(--fs-2xs); letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.ctx-mode .ctx-label { margin-right: 5px; color: var(--fg-dim); }
+.ctx-opt {
+  padding: 2px 7px; border-radius: var(--r-xs);
+  font-family: inherit; font-size: inherit; letter-spacing: inherit;
+  color: var(--fg-faint); border: 1px solid transparent;
+  transition: color 100ms ease, background 100ms ease;
+}
+.ctx-opt:hover { color: var(--fg-mid); }
+.ctx-opt.on { background: var(--accent-soft); color: var(--accent-fg); border-color: var(--accent-line); }
+.ctx-tag {
+  flex: none;
+  font-family: var(--font-mono); font-size: var(--fs-2xs); letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--accent-fg); background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  padding: 2px 7px; border-radius: var(--r-xs);
+}
+.mode-switch {
+  display: inline-flex; align-items: center; gap: 2px; flex: none;
+  padding: 2px; border-radius: var(--r-sm);
+  background: var(--bg-inset);
+  border: 1px solid var(--line);
+}
+.mode-opt {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 9px; border-radius: var(--r-xs);
+  font-family: var(--font-mono); font-size: var(--fs-2xs); font-weight: 500;
+  letter-spacing: .05em; text-transform: uppercase;
+  color: var(--fg-dim); white-space: nowrap;
+  transition: background 120ms ease, color 120ms ease;
+}
+.mode-opt:hover { color: var(--fg); }
+.mode-opt.on { background: var(--accent); color: var(--accent-contrast); }
+
+/* ---- empty hint ---- */
+.notes-empty {
+  margin-top: var(--sp-2);
+  padding: var(--sp-3);
+  border-radius: var(--r-md);
+  border: 1px dashed var(--line-strong);
+  text-align: center;
+}
+.notes-empty .pebble-trio { display: flex; justify-content: center; gap: 4px; margin-bottom: 7px; }
+.notes-empty .pebble-trio .pebble { width: 7px; height: 7px; border-radius: 1px; }
+.notes-empty .pebble-trio .pebble:nth-child(1) { background: var(--c-note); opacity: .8; }
+.notes-empty .pebble-trio .pebble:nth-child(2) { background: var(--c-ai); opacity: .8; }
+.notes-empty .pebble-trio .pebble:nth-child(3) { background: var(--c-insight); opacity: .8; }
+.notes-empty p { font-size: var(--fs-xs); color: var(--fg-dim); line-height: 1.55; }
+.notes-empty p strong { color: var(--fg-mid); font-weight: 600; display: block; margin-bottom: 3px; }
+
+/* ---- progress: amber pulse idiom ---- */
+.progress { height: 3px; border-radius: 2px; background: var(--bg-inset); border: 1px solid var(--line); overflow: hidden; margin-top: 7px; }
+.progress i {
+  display: block; height: 100%; width: 38%; border-radius: 2px;
+  background: var(--accent); box-shadow: 0 0 8px var(--accent-line);
+  animation: slide 1.7s ease-in-out infinite;
+}
+@keyframes slide { 0% { transform: translateX(-110%); } 100% { transform: translateX(320%); } }
+
+@media (max-width: 1180px) {
+  .sidebar { width: 196px; }
+}
+
+
+/* ============ SCREEN 01 layout (dimmed backdrop) — Direction B ============ */
+.workspace.nb {
+  grid-template-columns: minmax(270px, 20rem) minmax(340px, 1fr) minmax(280px, 21.5rem);
+}
+.stack { display: flex; flex-direction: column; gap: 1px; background: var(--line); min-height: 0; min-width: 0; }
+.stack .panel.notes-p { flex: 1.15; }
+.stack .panel.creations-p { flex: 1; }
+
+@media (max-width: 1180px) {
+  .workspace.nb { grid-template-columns: minmax(216px, 17rem) minmax(280px, 1fr) minmax(226px, 18rem); }
+  .msg { max-width: 96%; }
+}
+
+/* ============ SCREEN 05 (universal create) — a real command palette ============ */
+.shell.dimmed, .tile-banner.dimmed-x { pointer-events: none; user-select: none; }
+.overlay {
+  position: fixed; inset: 0; z-index: 60;
+  background: var(--overlay-dim);
+  backdrop-filter: blur(3px) saturate(.9);
+  -webkit-backdrop-filter: blur(3px) saturate(.9);
+  display: flex; align-items: flex-start; justify-content: center;
+  padding-top: 11vh;
+}
+.overlay-hit { position: absolute; inset: 0; }
+.palette {
+  position: relative; z-index: 1;
+  width: 620px; max-width: 92vw;
+  background: var(--bg-panel);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  box-shadow: var(--overlay-shadow), 0 0 0 4px rgba(0,0,0,0.04);
+  overflow: hidden;
+  animation: pop 160ms ease-out;
+}
+.dark .palette { box-shadow: var(--overlay-shadow), 0 0 40px rgba(255, 178, 36, 0.04); }
+@keyframes pop { from { opacity: 0; transform: translateY(6px) scale(.995); } }
+.palette-head {
+  display: flex; align-items: center; gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-raised);
+}
+.palette-head .logo-pebbles .pebble:first-child { background: var(--accent); }
+.palette-title {
+  font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--fg);
+}
+.palette-sub { font-size: var(--fs-xs); color: var(--fg-dim); margin-top: 1px; }
+.palette-head .kbd { margin-left: auto; }
+.type-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-2); padding: var(--sp-3) var(--sp-4) var(--sp-2);
+}
+.type-tile {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  padding: 13px 6px 11px;
+  border-radius: var(--r-sm);
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  transition: background 100ms ease, border-color 100ms ease, box-shadow 120ms ease;
+}
+.type-tile:hover { background: var(--bg-hover); border-color: var(--line-strong); }
+.type-tile.focused {
+  background: var(--accent-soft);
+  border-color: var(--accent-line);
+  box-shadow: var(--accent-glow);
+}
+.type-tile .art-type { margin: 0; width: 28px; height: 28px; border-radius: var(--r-sm); }
+.type-tile .art-type svg { width: 14px; height: 14px; }
+.type-tile b { font-size: var(--fs-xs); font-weight: 600; color: var(--fg); text-align: center; line-height: 1.2; }
+.type-tile .kbd { position: absolute; top: 5px; right: 5px; margin: 0; background: var(--bg-panel); }
+.type-tile.focused .kbd { border-color: var(--accent-line); color: var(--accent-fg); }
+.scope-composer {
+  margin: var(--sp-2) var(--sp-4) var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--r-sm);
+  background: var(--bg-inset);
+  border: 1px solid var(--line);
+  display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap;
+}
+.scope-composer .label {
+  font-family: var(--font-mono); font-size: var(--fs-2xs); font-weight: 500;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--fg-faint);
+}
+.scope-token {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 2px 9px 3px; border-radius: var(--r-sm);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  color: var(--fg);
+  font-size: var(--fs-sm); font-weight: 500;
+}
+.scope-token .pebble { background: var(--accent); width: 5px; height: 5px; }
+.scope-token .x { color: var(--fg-dim); font-size: 9px; margin-left: 2px; cursor: pointer; }
+.scope-token .x:hover { color: var(--fg); }
+.scope-add {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 2px 9px 3px; border-radius: var(--r-sm);
+  border: 1px dashed var(--line-strong);
+  color: var(--fg-dim); font-size: var(--fs-sm); font-weight: 500;
+  transition: color 100ms ease, border-color 100ms ease;
+}
+.scope-add:hover { color: var(--fg); border-color: var(--fg-dim); }
+.palette-foot {
+  display: flex; align-items: center; gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-4);
+  border-top: 1px solid var(--line);
+  background: var(--bg-raised);
+  font-family: var(--font-mono); font-size: var(--fs-2xs); color: var(--fg-dim);
+  letter-spacing: .03em;
+}
+.palette-foot > span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.palette-foot .kbd { margin-left: 0; }
+.palette-foot .right { margin-left: auto; font-style: normal; color: var(--fg-faint); }
+</style>
+</head>
+<body>
+
+<div class="tile-banner">
+  <strong>UX Concept — Universal Create · Direction B</strong>
+  <span>One Create, invoked anywhere: the same artifact-type picker, pre-filled with the scope you came from — and the scope stays editable.</span>
+  <a class="dir-link" href="../concepts/05-create-overlay.html">view in Direction D →</a>
+  <nav class="banner-nav">
+    <a href="00-home.html">0</a><a href="01-notebook.html">1</a><a href="02-source.html">2</a><a href="03-creations.html">3</a><a href="04-global-chat.html">4</a><a class="here" href="05-create-overlay.html">5</a><a href="06-citations.html">6</a><a href="07-deep-research.html">7</a><a href="08-search.html">8</a>
+  </nav>
+</div>
+
+<div class="shell dimmed" aria-hidden="true">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a class="wordmark" href="01-notebook.html">
+      <span class="logo-pebbles"><span class="pebble"></span><span class="pebble"></span></span>
+      Open Notebook
+    </a>
+
+    <a class="btn-new" href="05-create-overlay.html">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+      Create
+      <span class="kbd">⌘J</span>
+    </a>
+
+    <nav class="nav-group">
+      <a class="nav-item" href="00-home.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7 8 2.5 13.5 7v5.5a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1z"/><path d="M6.5 13.5v-4h3v4"/></svg>
+        Home
+      </a>
+      <a class="nav-item active" href="01-notebook.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>
+        Notebooks
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path d="M5.5 6h5M5.5 8.5h5M5.5 11h3"/></svg>
+        Sources
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg>
+        Notes
+      </a>
+      <a class="nav-item" href="03-creations.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/><path d="m12.5 10.5.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></svg>
+        Creations
+      </a>
+      <a class="nav-item" href="08-search.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>
+        Search
+      </a>
+      <div class="nav-divider"></div>
+      <a class="nav-item chat-entry" href="04-global-chat.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13.5 8a5.5 5.5 0 1 0-2.2 4.4L13.5 13l-.5-2.2A5.47 5.47 0 0 0 13.5 8z"/></svg>
+        Chat
+        <span class="pebble"></span>
+      </a>
+    </nav>
+
+    <details class="nav-manage">
+      <summary>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 4 4 4-4 4"/></svg>
+        Manage
+      </summary>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 5.5 8 2.5l5.5 3L8 8.5zM2.5 8.2 8 11.2l5.5-3M2.5 10.9 8 13.9l5.5-3"/></svg>
+        Models
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 5h7M12.5 5h.5M3 11h.5M6 11h7"/><circle cx="11" cy="5" r="1.6"/><circle cx="4.7" cy="11" r="1.6"/></svg>
+        Transformations
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="2.2"/><path d="M8 2v1.6M8 12.4V14M2 8h1.6M12.4 8H14M3.8 3.8l1.1 1.1M11.1 11.1l1.1 1.1M12.2 3.8l-1.1 1.1M4.9 11.1l-1.1 1.1"/></svg>
+        Settings
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m6 4-3 4 3 4M10 4l3 4-3 4"/></svg>
+        Advanced
+      </a>
+    </details>
+
+    <div class="sidebar-foot">
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/></svg>
+        Quick actions
+        <span class="kbd">⌘K</span>
+      </button>
+      <button class="foot-item" id="theme-toggle" aria-pressed="false">
+        <svg id="icon-moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3 5.5 5.5 0 1 0 13 9.5z"/></svg>
+        <svg id="icon-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="display:none"><circle cx="8" cy="8" r="3"/><path d="M8 1.5V3M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M12.6 3.4l-1 1M4.4 11.6l-1 1"/></svg>
+        <span id="theme-label">Dark theme</span>
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c1.8 1.7 2.6 3.8 2.6 6S9.8 12.3 8 14C6.2 12.3 5.4 10.2 5.4 8S6.2 3.7 8 2z"/></svg>
+        English
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 2h-3A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14h3M10.5 11 14 8l-3.5-3M14 8H6"/></svg>
+        Sign out
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <header class="nb-header">
+      <div class="nb-id">
+        <div class="crumbs"><span class="pebble"></span><a href="01-notebook.html">Notebooks</a></div>
+        <h1 class="nb-title">The Attention Economy</h1>
+        <div class="nb-desc" role="button" tabindex="0">
+          Research for an essay on focus, distraction and what technology does to both.
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg>
+        </div>
+        <div class="nb-meta">Created 3 days ago <span class="dot"></span> Updated 2 days ago</div>
+      </div>
+      <div class="nb-actions">
+        <button class="btn-ghost">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 5h11M3.5 5v7A1.5 1.5 0 0 0 5 13.5h6A1.5 1.5 0 0 0 12.5 12V5M6 5V3.5A1 1 0 0 1 7 2.5h2a1 1 0 0 1 1 1V5"/></svg>
+          Archive
+        </button>
+        <button class="btn-ghost danger">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+          Delete
+        </button>
+      </div>
+    </header>
+
+    <div class="workspace nb">
+
+      <!-- SOURCES -->
+      <section class="panel">
+        <div class="panel-head">
+          <span class="panel-title">Sources</span>
+          <span class="panel-count">3 / 5</span>
+          <span class="spacer"></span>
+          <button class="icon-btn" title="Collapse panel">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m10 4-4 4 4 4"/></svg>
+          </button>
+        </div>
+        <div class="panel-body">
+          <a class="src-row selected" href="#">
+            <span class="check"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8.5 3.2 3L13 4.5"/></svg></span>
+            <span class="src-type"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M6 4.5v7l6-3.5z"/></svg></span>
+            <span class="src-main">
+              <span class="src-title">How Your Attention Is Sold</span>
+              <span class="src-meta">Video <span class="insight-chip"><span class="pebble"></span>1 insight</span></span>
+            </span>
+          </a>
+          <a class="src-row selected" href="02-source.html">
+            <span class="check"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8.5 3.2 3L13 4.5"/></svg></span>
+            <span class="src-type t-pdf"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5L12.5 6v7A1.5 1.5 0 0 1 11 14.5H4A1.5 1.5 0 0 1 2.5 13V4A1.5 1.5 0 0 1 4 2.5z"/><path d="M9 2.5V6h3.5"/></svg></span>
+            <span class="src-main">
+              <span class="src-title">Stolen Focus — Johann Hari (chapter notes)</span>
+              <span class="src-meta">PDF <span class="insight-chip"><span class="pebble"></span>2 insights</span></span>
+            </span>
+          </a>
+          <a class="src-row selected" href="#">
+            <span class="check"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8.5 3.2 3L13 4.5"/></svg></span>
+            <span class="src-type t-web"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="8" r="5.5"/><path d="M2.5 8h11M8 2.5c1.7 1.6 2.5 3.5 2.5 5.5S9.7 11.9 8 13.5C6.3 11.9 5.5 10 5.5 8S6.3 4.1 8 2.5z"/></svg></span>
+            <span class="src-main">
+              <span class="src-title">The Cost of Context Switching — Cal Newport</span>
+              <span class="src-meta">Web <span class="insight-chip"><span class="pebble"></span>1 insight</span></span>
+            </span>
+          </a>
+          <a class="src-row" href="#">
+            <span class="check"></span>
+            <span class="src-type t-audio"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 6.5v3M5.5 4.5v7M8 3v10M10.5 5.5v5M13 7v2"/></svg></span>
+            <span class="src-main">
+              <span class="src-title">Deep Questions #312: Rebuilding Concentration</span>
+              <span class="src-meta">Audio <span class="src-none">No insights yet</span></span>
+            </span>
+          </a>
+          <a class="src-row" href="#">
+            <span class="check"></span>
+            <span class="src-type t-paper"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3.5 2.5h9v11h-9z"/><path d="M5.5 5h5M5.5 7.3h5M5.5 9.6h3"/></svg></span>
+            <span class="src-main">
+              <span class="src-title">Attention Is All You Need</span>
+              <span class="src-meta">Paper · arXiv <span class="insight-chip"><span class="pebble"></span>1 insight</span></span>
+            </span>
+          </a>
+        </div>
+        <button class="panel-action">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3.5v9M3.5 8h9"/></svg>
+          Add Source
+        </button>
+      </section>
+
+      <!-- CHAT -->
+      <section class="panel chat">
+        <div class="panel-head">
+          <span class="panel-title">Conversation</span>
+          <span class="spacer"></span>
+          <button class="scope-pill" title="Change scope">
+            <span class="pebble"></span>
+            Scope: this notebook · 3 selected sources
+            <span class="chev">▾</span>
+          </button>
+        </div>
+
+        <div class="panel-body chat-body">
+          <div class="msg user">
+            <div class="bubble">What do my sources agree on about rebuilding focus?</div>
+          </div>
+          <div class="msg ai">
+            <div class="msg-agent"><span class="pebble"></span>Notebook</div>
+            <div class="bubble">
+              <p>All selected sources converge on one premise: attention is a <em>trainable, finite resource</em> — not a fixed trait. Hari argues that environment beats willpower, so the first lever is removing frictionless distraction rather than resisting it <span class="cite"><span class="pebble"></span>Stolen Focus</span>. Newport quantifies why: every context switch leaves an "attention residue" that taxes the next task, which is what makes fragmented work so expensive <span class="cite"><span class="pebble"></span>Newport</span>.</p>
+              <p>The video completes the picture from the supply side — the distraction isn't accidental, it's a business model optimized against your focus <span class="cite"><span class="pebble"></span>How Your Attention Is Sold</span>. The practical agreement: design your environment, protect long single-task blocks, and treat concentration as a capacity you rebuild through deliberate practice.</p>
+            </div>
+            <div class="msg-tools">
+              <button class="tool-pill" title="Save this answer with its evidence as an artifact">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h8A1.5 1.5 0 0 1 13.5 4v9.5L8 10.8l-5.5 2.7V4A1.5 1.5 0 0 1 4 2.5z"/></svg>
+                Save answer
+              </button>
+              <button class="tool-pill">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 3v7M8 3 5.5 5.5M8 3l2.5 2.5M3 11v1.5A1.5 1.5 0 0 0 4.5 14h7a1.5 1.5 0 0 0 1.5-1.5V11"/></svg>
+                Copy
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="context-bar">
+          <b>3 sources</b><span class="sep"></span><b>1 note</b><span class="sep"></span>4.9K tokens
+          <span class="model-chip"><span class="pebble"></span>gpt-5.6-terra</span>
+        </div>
+
+        <div class="composer">
+          <input type="text" placeholder="Ask anything about your sources…" aria-label="Message">
+          <button class="btn-send" title="Send">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5v-9M4 7.5l4-4 4 4"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- NOTES + CREATIONS -->
+      <div class="stack">
+
+        <section class="panel notes-p">
+          <div class="panel-head">
+            <span class="panel-title">Notes</span>
+            <span class="panel-count">1</span>
+            <span class="spacer"></span>
+            <a class="icon-btn" href="#" title="Open notes">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M9.5 2.5h4v4M13.5 2.5 8.5 7.5"/><path d="M13.5 9.5v3a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h3"/></svg>
+            </a>
+          </div>
+          <div class="panel-body">
+            <a class="note-card" href="#">
+              <span class="note-kind"><span class="pebble"></span>AI Generated</span>
+              <span class="note-title">Key levers for reclaiming focus</span>
+              <span class="note-excerpt">Environment design over willpower, single-tasking blocks, and treating attention as a finite budget you spend deliberately.</span>
+              <span class="note-time">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg>
+                Edited 2 days ago · always editable
+              </span>
+            </a>
+            <div class="quick-capture">
+              <input type="text" placeholder="Capture a thought…" aria-label="Quick note">
+              <button class="mini-send" title="Save note">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 12.5v-9M4 7.5l4-4 4 4"/></svg>
+              </button>
+            </div>
+            <div class="notes-empty">
+              <div class="pebble-trio"><span class="pebble"></span><span class="pebble"></span><span class="pebble"></span></div>
+              <p><strong>Notes are living documents.</strong> Draft, revise, and grow them over time — saved answers and insights can seed one.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel creations-p">
+          <div class="panel-head">
+            <span class="panel-title">Creations</span>
+            <span class="panel-count">2</span>
+            <span class="spacer"></span>
+            <a class="icon-btn" href="03-creations.html" title="See all creations">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M9.5 2.5h4v4M13.5 2.5 8.5 7.5"/><path d="M13.5 9.5v3a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h3"/></svg>
+            </a>
+          </div>
+          <div class="chip-row">
+            <a class="create-chip" href="05-create-overlay.html"><span class="pebble" style="background:var(--c-audio)"></span>Podcast</a>
+            <a class="create-chip" href="05-create-overlay.html"><span class="pebble" style="background:var(--c-paper)"></span>Mind map</a>
+            <a class="create-chip" href="05-create-overlay.html"><span class="pebble" style="background:var(--c-note)"></span>Study guide</a>
+            <a class="create-chip" href="05-create-overlay.html"><span class="pebble" style="background:var(--c-insight)"></span>Flashcards</a>
+            <a class="create-chip" href="05-create-overlay.html"><span class="pebble" style="background:var(--c-video)"></span>Video</a>
+          </div>
+          <div class="panel-body">
+            <a class="art-row" href="03-creations.html">
+              <span class="art-type t-podcast"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="6" y="2" width="4" height="8" rx="2"/><path d="M3.5 8a4.5 4.5 0 0 0 9 0M8 12.5V14"/></svg></span>
+              <span class="art-main">
+                <span class="art-title">Attention, Explained</span>
+                <span class="art-meta">Podcast episode <span class="dot"></span> 12:40 <span class="proj-badge"><span class="pebble"></span>also cites 2 other notebooks</span></span>
+              </span>
+            </a>
+            <a class="art-row" href="03-creations.html">
+              <span class="art-type t-mindmap"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="1.8"/><circle cx="3" cy="3.5" r="1.4"/><circle cx="13" cy="3.5" r="1.4"/><circle cx="8" cy="13.5" r="1.4"/><path d="M4.1 4.5 6.8 6.9M11.9 4.5 9.2 6.9M8 9.8v2.3"/></svg></span>
+              <span class="art-main">
+                <span class="art-title">Attention Economy Map</span>
+                <span class="art-meta">Mind map <span class="dot"></span> from this notebook <span class="dot"></span> yesterday</span>
+              </span>
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+
+<!-- UNIVERSAL CREATE OVERLAY -->
+<div class="overlay">
+  <a class="overlay-hit" href="01-notebook.html" aria-label="Close"></a>
+  <div class="palette" role="dialog" aria-modal="true" aria-label="Create">
+    <div class="palette-head">
+      <span class="logo-pebbles"><span class="pebble"></span></span>
+      <div>
+        <div class="palette-title">Create</div>
+        <div class="palette-sub">Same picker everywhere — scope comes from where you invoked it.</div>
+      </div>
+      <span class="kbd">⌘J</span>
+    </div>
+
+    <div class="type-grid">
+      <a class="type-tile focused" href="#">
+        <span class="art-type t-noteart"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg></span>
+        <b>Note</b>
+        <span class="kbd">N</span>
+      </a>
+      <a class="type-tile" href="#">
+        <span class="art-type t-podcast"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="6" y="2" width="4" height="8" rx="2"/><path d="M3.5 8a4.5 4.5 0 0 0 9 0M8 12.5V14"/></svg></span>
+        <b>Podcast</b>
+        <span class="kbd">P</span>
+      </a>
+      <a class="type-tile" href="#">
+        <span class="art-type t-mindmap"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="1.8"/><circle cx="3" cy="3.5" r="1.4"/><circle cx="13" cy="3.5" r="1.4"/><circle cx="8" cy="13.5" r="1.4"/><path d="M4.1 4.5 6.8 6.9M11.9 4.5 9.2 6.9M8 9.8v2.3"/></svg></span>
+        <b>Mind map</b>
+        <span class="kbd">M</span>
+      </a>
+      <a class="type-tile" href="#">
+        <span class="art-type t-guide"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H13v11H4.5A1.5 1.5 0 0 0 3 14.5v-11z"/><path d="M3 12.5A1.5 1.5 0 0 1 4.5 11H13M6 5.5h4"/></svg></span>
+        <b>Study guide</b>
+        <span class="kbd">G</span>
+      </a>
+      <a class="type-tile" href="#">
+        <span class="art-type t-cards"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.5" y="4.5" width="9" height="9" rx="1.5"/><path d="M5.5 2.5h8v8"/></svg></span>
+        <b>Flashcards</b>
+        <span class="kbd">F</span>
+      </a>
+      <a class="type-tile" href="#">
+        <span class="art-type t-videoart"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M6 4.5v7l6-3.5z"/></svg></span>
+        <b>Video explainer</b>
+        <span class="kbd">V</span>
+      </a>
+      <a class="type-tile" href="#">
+        <span class="art-type t-insight"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/><path d="m12.5 10.5.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></svg></span>
+        <b>Insight / Transform</b>
+        <span class="kbd">I</span>
+      </a>
+    </div>
+
+    <div class="scope-composer">
+      <span class="label">From</span>
+      <span class="scope-token"><span class="pebble"></span>The Attention Economy · 5 sources <span class="x">✕</span></span>
+      <a class="scope-add" href="#">+ add notebooks or sources</a>
+    </div>
+
+    <div class="palette-foot">
+      <span><span class="kbd">↑↓←→</span> navigate</span>
+      <span><span class="kbd">⏎</span> create</span>
+      <span><span class="kbd">esc</span> close</span>
+      <span class="right">scope is editable — widen or compose across notebooks</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  // Direction B is dark-first: dark unless the user chose light.
+  if (localStorage.getItem('on-theme-b') === 'light') root.classList.remove('dark');
+  else root.classList.add('dark');
+  var btn = document.getElementById('theme-toggle');
+  var moon = document.getElementById('icon-moon');
+  var sun = document.getElementById('icon-sun');
+  var label = document.getElementById('theme-label');
+  function sync() {
+    var dark = root.classList.contains('dark');
+    btn.setAttribute('aria-pressed', String(dark));
+    moon.style.display = dark ? 'none' : '';
+    sun.style.display = dark ? '' : 'none';
+    label.textContent = dark ? 'Light theme' : 'Dark theme';
+  }
+  btn.addEventListener('click', function () {
+    root.classList.toggle('dark');
+    localStorage.setItem('on-theme-b', root.classList.contains('dark') ? 'dark' : 'light');
+    sync();
+  });
+  sync();
+
+  var input = document.querySelector('.composer input');
+  var send = document.querySelector('.btn-send');
+  if (send && input) {
+    send.addEventListener('click', function () {
+      if (!input.value.trim()) return;
+      input.value = '';
+      send.animate([{ transform: 'scale(1)' }, { transform: 'scale(0.9)' }, { transform: 'scale(1)' }], { duration: 160, easing: 'ease-out' });
+      input.focus();
+    });
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') send.click(); });
+  }
+})();
+</script>
+<script>
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') window.location.href = '01-notebook.html';
+});
+</script>
+</body>
+</html>

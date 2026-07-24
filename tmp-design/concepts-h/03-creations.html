@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UX Concept — Creations Library · Direction I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   HYBRID H FOUNDATION — QUIET COLOR (C tamed)
+   Neutral near-fresh canvas, honest 1px borders, near-zero
+   shadows. Each panel speaks ONLY its own hue: a header tick,
+   an icon chip, a tinted action. Cross-hue chips are neutral
+   shells with colored dots. Light default.
+   ============================================================ */
+:root {
+  --bg: #F5F5F2;
+  --bg-deep: #EEEEE9;
+  --surface: #FEFEFC;
+  --surface-raised: #FFFFFF;
+  --ink: #23252A;
+  --ink-soft: #565A61;
+  --ink-faint: #878B92;
+  --line: #E0E0DA;
+  --line-strong: #23252A;
+
+  /* owned hues — red retired to destructive-only; fern = action */
+  --fern:  #2E6B4F; --fern-deep:  #245740; --fern-tint:  #DFEAE2;
+  --gold:  #A97B12; --gold-deep:  #7C5A05; --gold-tint:  #F3EAD3;
+  --teal:  #0E7268; --teal-deep:  #095A51; --teal-tint:  #DDECE8;
+  --sage:  #5E7A54; --sage-deep:  #47603F; --sage-tint:  #E5EBDC;
+  --mauve: #8D5B80; --mauve-deep: #714566; --mauve-tint: #F1E5EE;
+  --slate: #4E6B84; --slate-deep: #3A5468; --slate-tint: #E1E8EE;
+  --plum:  #5D4991; --plum-tint:  #EAE6F3;
+  --danger: #B0432D; --danger-deep: #93341F; --danger-tint: #F5E4DF;
+  --clay:  #B0451F;
+
+  /* aliases so per-type dots resolve (video plum · pdf honey ·
+     web sage · audio mauve · paper slate · notes gold · AI teal) */
+  --c-video: var(--plum); --c-note: var(--gold); --c-insight: var(--teal);
+  --c-ai: var(--teal); --c-audio: var(--mauve); --c-paper: var(--slate);
+
+  --primary: #2E6B4F; --primary-hover: #245740; --on-primary: #F1F8F3;
+
+  --shadow-soft: 0 1px 2px rgba(35,37,42,.06);
+  --shadow-lift: 0 1px 3px rgba(35,37,42,.10);
+  --shadow-overlay: 0 2px 6px rgba(35,37,42,.10), 0 16px 44px rgba(35,37,42,.18);
+
+  /* squared: instrument, not toy; floor is 4px */
+  --r-xl: 6px; --r-lg: 5px; --r-md: 5px; --r-sm: 4px; --r-pill: 4px;
+
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Trebuchet MS", sans-serif;
+  --font-body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, monospace;
+  --fs-hero: 24px; --fs-title: 15.5px; --fs-body: 13.5px;
+  --fs-small: 12px; --fs-micro: 10.5px;
+
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 10px; --sp-4: 14px;
+  --sp-5: 18px; --sp-6: 22px; --sp-7: 28px;
+
+  --focus-ring: 0 0 0 3px var(--teal-tint);
+}
+
+.dark {
+  --bg: #17181B;
+  --bg-deep: #121316;
+  --surface: #1E2024;
+  --surface-raised: #24262B;
+  --ink: #ECEDEA;
+  --ink-soft: #A9ACB1;
+  --ink-faint: #74777D;
+  --line: #2E3036;
+  --line-strong: #ECEDEA;
+
+  --fern:  #55B285; --fern-deep:  #6CC298; --fern-tint:  #1B2F25;
+  --gold:  #CFA13E; --gold-deep:  #DDB55F; --gold-tint:  #322B1B;
+  --teal:  #3FB3A5; --teal-deep:  #64C5B9; --teal-tint:  #16302C;
+  --sage:  #93B084; --sage-deep:  #A8C299; --sage-tint:  #232B1D;
+  --mauve: #C892BA; --mauve-deep: #D6A8CB; --mauve-tint: #322230;
+  --slate: #8FAFC8; --slate-deep: #A5C1D6; --slate-tint: #212B34;
+  --plum:  #A290D3; --plum-tint:  #29253A;
+  --danger: #DF7C63; --danger-deep: #E9937D; --danger-tint: #37231D;
+  --clay:  #F08A5C;
+
+  --primary: #3D8E67; --primary-hover: #479E74; --on-primary: #ECF7F0;
+
+  --shadow-soft: 0 1px 2px rgba(0,0,0,.35);
+  --shadow-lift: 0 1px 3px rgba(0,0,0,.45);
+  --shadow-overlay: 0 2px 6px rgba(0,0,0,.4), 0 20px 52px rgba(0,0,0,.55);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-width: 1000px;
+  transition: background-color .25s ease, color .25s ease;
+}
+::selection { background: var(--teal-tint); color: var(--ink); }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+input, textarea { font: inherit; color: inherit; }
+::placeholder { color: var(--ink-faint); }
+
+.pebble { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex: none; }
+
+/* ---- concept banner (dark ink bar, H signature) ---- */
+.tile-banner {
+  display: flex; align-items: center; gap: var(--sp-3);
+  padding: 6px var(--sp-6);
+  font-size: var(--fs-micro);
+  letter-spacing: .04em;
+  color: var(--bg);
+  background: var(--ink);
+  flex: none;
+}
+.dark .tile-banner { background: #0E0F11; color: var(--ink-soft); }
+.tile-banner strong { font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.tile-banner span { opacity: .7; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tile-banner .dirlink {
+  margin-left: auto; flex: none;
+  opacity: .55; font-weight: 600; white-space: nowrap;
+}
+.tile-banner .dirlink:hover { opacity: 1; text-decoration: underline; }
+.banner-nav { display: flex; gap: 4px; flex: none; }
+.banner-nav a {
+  width: 21px; height: 21px; border-radius: 6px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 10px;
+  color: inherit; opacity: .6;
+  transition: background .15s ease, opacity .15s ease;
+}
+.banner-nav a:hover { background: rgba(255,255,255,.14); opacity: 1; }
+.banner-nav a.here { background: var(--primary); color: var(--on-primary); opacity: 1; }
+
+/* ---- shell / sidebar ---- */
+.shell { flex: 1; display: flex; min-height: 0; }
+.sidebar {
+  width: 232px; flex: none;
+  display: flex; flex-direction: column;
+  background: var(--bg-deep);
+  border-right: 1px solid var(--line);
+  padding: var(--sp-5) var(--sp-4) var(--sp-4);
+  gap: var(--sp-2);
+  overflow-y: auto;
+}
+.wordmark {
+  display: flex; align-items: center; gap: 9px;
+  padding: 2px var(--sp-2) var(--sp-4);
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 15px; letter-spacing: -.01em;
+}
+.logo-pebbles { display: flex; gap: 3px; align-items: center; }
+.logo-pebbles .pebble { width: 10px; height: 10px; border-radius: 3px; }
+.logo-pebbles .pebble:nth-child(1) { background: var(--fern); }
+.logo-pebbles .pebble:nth-child(2) { background: var(--gold); }
+.logo-pebbles .pebble:nth-child(3) { background: var(--teal); }
+
+.btn-new {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  height: 38px; margin: 0 var(--sp-2) var(--sp-4);
+  border-radius: var(--r-md);
+  background: var(--primary); color: var(--on-primary);
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 13.5px; letter-spacing: .01em;
+  box-shadow: none;
+  transition: background .15s ease;
+}
+.btn-new:hover { background: var(--primary-hover); }
+.btn-new:active { filter: brightness(.94); }
+.btn-new svg { width: 14px; height: 14px; }
+.btn-new .kbd { background: rgba(255,255,255,.18); box-shadow: none; color: inherit; margin-left: 2px; }
+.dark .btn-new .kbd { background: rgba(0,0,0,.22); }
+
+.nav-group { display: flex; flex-direction: column; gap: 2px; margin-bottom: var(--sp-3); }
+.nav-label {
+  padding: var(--sp-2) var(--sp-3) 5px;
+  font-size: var(--fs-micro); font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 7px var(--sp-3);
+  border-radius: var(--r-sm);
+  color: var(--ink-soft); font-weight: 500; font-size: 13px;
+  position: relative;
+  transition: background .12s ease, color .12s ease;
+  text-align: left;
+}
+.nav-item svg { width: 15px; height: 15px; flex: none; opacity: .85; }
+.nav-item:hover { background: var(--surface); color: var(--ink); }
+.nav-item.active {
+  background: var(--surface-raised);
+  color: var(--ink); font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.nav-item.active::before {
+  content: ""; position: absolute;
+  left: -4px; top: 7px; bottom: 7px; width: 3px;
+  border-radius: 3px; background: var(--fern);
+}
+.nav-item .nav-hint { margin-left: auto; font-size: var(--fs-micro); color: var(--ink-faint); font-weight: 500; }
+.nav-divider { height: 1px; background: var(--line); margin: var(--sp-2) var(--sp-3); }
+.nav-item.chat-entry { color: var(--ink-soft); }
+.nav-item.chat-entry:hover { color: var(--ink); }
+.nav-item.chat-entry .pebble { width: 6px; height: 6px; background: var(--teal); margin-left: auto; }
+
+.nav-manage { margin-top: var(--sp-1); }
+.nav-manage summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  padding: var(--sp-2) var(--sp-3) 5px;
+  font-size: var(--fs-micro); font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-faint);
+  transition: color .15s ease;
+}
+.nav-manage summary:hover { color: var(--ink-soft); }
+.nav-manage summary::-webkit-details-marker { display: none; }
+.nav-manage summary svg { width: 9px; height: 9px; transition: transform .2s ease; }
+.nav-manage[open] summary svg { transform: rotate(90deg); }
+.nav-manage .nav-item { padding: 6px var(--sp-3); font-size: var(--fs-small); color: var(--ink-soft); }
+.nav-manage .nav-item svg { width: 14px; height: 14px; color: var(--ink-faint); }
+
+.sidebar-foot {
+  margin-top: auto; padding-top: var(--sp-4);
+  border-top: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.foot-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px var(--sp-3); border-radius: var(--r-sm);
+  color: var(--ink-soft); font-size: 12.5px; font-weight: 500;
+  transition: background .12s ease, color .12s ease;
+  width: 100%; text-align: left;
+}
+.foot-item:hover { background: var(--surface); color: var(--ink); }
+.foot-item svg { width: 14px; height: 14px; opacity: .8; }
+.kbd {
+  margin-left: auto;
+  font-family: var(--font-body); font-size: 10px; font-weight: 600;
+  padding: 2px 6px; border-radius: 4px;
+  background: var(--plum-tint); color: var(--plum);
+  letter-spacing: .03em;
+}
+
+/* ---- main / header ---- */
+.main {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column;
+  padding: var(--sp-5) var(--sp-6) var(--sp-5) var(--sp-5);
+  gap: var(--sp-4);
+}
+.nb-header { display: flex; align-items: flex-start; gap: var(--sp-5); padding: 0 var(--sp-2); }
+.nb-id { flex: 1; min-width: 0; }
+.crumbs {
+  font-size: var(--fs-small); color: var(--ink-faint); font-weight: 500;
+  display: flex; align-items: center; gap: 7px; margin-bottom: 6px; flex-wrap: wrap;
+}
+.crumbs a { color: var(--teal); font-weight: 600; }
+.crumbs a:hover { text-decoration: underline; }
+.crumbs .sep { color: var(--ink-faint); }
+.crumbs .pebble { background: var(--gold); width: 6px; height: 6px; }
+.nb-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero); font-weight: 700;
+  letter-spacing: -.02em; line-height: 1.12;
+  position: relative; display: inline-block;
+  padding-bottom: 8px;
+}
+/* signature, disciplined: one short flat underline in the page's hue
+   — Creations owns gold */
+.nb-title::after {
+  content: ""; position: absolute;
+  left: 1px; bottom: 0; width: 56px; height: 3px;
+  border-radius: 2px; background: var(--gold);
+}
+.nb-desc {
+  margin-top: 6px; font-size: 13px; color: var(--ink-soft);
+  display: inline-flex; align-items: center; gap: 8px;
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 3px;
+  cursor: text;
+}
+.nb-desc:hover { border-bottom-color: var(--gold); }
+.nb-desc svg { width: 12px; height: 12px; color: var(--ink-faint); opacity: 0; transition: opacity .15s ease; }
+.nb-desc:hover svg { opacity: 1; }
+.nb-meta { margin-top: 8px; font-size: var(--fs-small); color: var(--ink-faint); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.nb-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+.nb-actions { display: flex; gap: var(--sp-2); padding-top: 6px; }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 6px 13px; border-radius: var(--r-md);
+  font-size: 12.5px; font-weight: 600; color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  transition: border-color .12s ease, color .12s ease, background .12s ease;
+}
+.btn-ghost:hover { border-color: var(--ink-soft); color: var(--ink); }
+/* red means delete — and only delete */
+.btn-ghost.danger:hover { border-color: var(--danger); color: var(--danger-deep); background: var(--danger-tint); }
+.dark .btn-ghost.danger:hover { color: var(--danger); }
+.btn-ghost svg { width: 13px; height: 13px; }
+
+/* ---- panels ---- */
+.workspace { flex: 1; min-height: 0; display: grid; gap: var(--sp-4); }
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-soft);
+  display: flex; flex-direction: column;
+  min-height: 0; overflow: hidden;
+  transition: background-color .25s ease;
+}
+.panel-head {
+  display: flex; align-items: center; gap: 9px;
+  padding: var(--sp-4) var(--sp-4) var(--sp-3);
+  border-bottom: 1px solid var(--line);
+  position: relative; flex: none;
+}
+.panel-head::after {
+  content: ""; position: absolute;
+  left: var(--sp-4); bottom: -1px;
+  width: 30px; height: 2px; border-radius: 2px;
+  background: var(--ink-faint);
+}
+.panel-title {
+  font-size: var(--fs-micro); font-weight: 700;
+  letter-spacing: .13em; text-transform: uppercase;
+  color: var(--ink-soft);
+}
+/* no count badges in panel headers */
+.panel-head .spacer { flex: 1; }
+.icon-btn {
+  width: 26px; height: 26px; border-radius: 4px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink-faint);
+  transition: background .12s ease, color .12s ease;
+}
+.icon-btn:hover { background: var(--bg-deep); color: var(--ink); }
+.icon-btn svg { width: 14px; height: 14px; }
+.panel-body { flex: 1; overflow-y: auto; padding: var(--sp-3) var(--sp-3) var(--sp-3); min-height: 0; }
+.panel-body::-webkit-scrollbar { width: 8px; }
+.panel-body::-webkit-scrollbar-thumb { background: var(--line); border-radius: 8px; }
+
+/* ---- artifacts (shared type-chip hues) ---- */
+.art-row {
+  display: flex; align-items: flex-start; gap: 11px;
+  width: 100%; text-align: left;
+  padding: 10px 11px; border-radius: var(--r-md);
+  transition: background .12s ease;
+}
+.art-row:hover { background: var(--bg-deep); }
+.art-type {
+  width: 26px; height: 26px; border-radius: 4px; flex: none;
+  display: flex; align-items: center; justify-content: center; margin-top: 1px;
+}
+.art-type svg { width: 13px; height: 13px; }
+.t-podcast  { background: var(--mauve-tint); color: var(--mauve-deep); }
+.t-mindmap  { background: var(--slate-tint); color: var(--slate-deep); }
+.t-guide    { background: var(--gold-tint);  color: var(--gold-deep); }
+.t-cards    { background: var(--teal-tint);  color: var(--teal-deep); }
+.t-videoart { background: var(--plum-tint); color: var(--plum); }
+.t-insight  { background: var(--teal-tint);  color: var(--teal-deep); }
+.t-noteart  { background: var(--gold-tint);  color: var(--gold-deep); }
+.art-main { min-width: 0; flex: 1; }
+.art-title { font-size: 12.8px; font-weight: 600; line-height: 1.35; }
+.art-meta { margin-top: 4px; font-size: 11px; color: var(--ink-faint); display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.art-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+/* cross-hue chip: neutral shell, colored dot */
+.proj-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 1.5px 8px; border-radius: var(--r-pill);
+  background: var(--bg-deep); border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-weight: 600; font-size: 11px;
+}
+.proj-badge .pebble { width: 5px; height: 5px; background: var(--slate); }
+
+.panel, .sidebar, .nav-item, .btn-ghost, .tile-banner, .art-row { transition-property: background-color, color, border-color, box-shadow; transition-duration: .25s; }
+
+/* ============ SCREEN 03 layout (creations library) ============ */
+.nb-actions { align-items: center; }
+/* filter chips: neutral shells + type-hue dots; the active one carries
+   a fern dot — selection speaks the action green, never a filled block */
+.filters { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 0 var(--sp-2); }
+.filter-chip {
+  padding: 5.5px 13px; border-radius: var(--r-pill);
+  font-size: var(--fs-small); font-weight: 600; color: var(--ink-soft);
+  background: transparent;
+  border: 1px solid var(--line);
+  transition: background .12s ease, color .12s ease, border-color .12s ease;
+  display: inline-flex; align-items: center; gap: 7px;
+}
+.filter-chip:hover { background: var(--surface-raised); border-color: var(--ink-faint); color: var(--ink); }
+.filter-chip.active {
+  background: var(--surface-raised);
+  border-color: var(--ink-soft);
+  color: var(--ink); font-weight: 700;
+  box-shadow: inset 0 -2px 0 var(--fern);
+}
+.filter-chip.active::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--fern); }
+.filter-chip .pebble { width: 6px; height: 6px; }
+.filters .spacer { flex: 1; }
+.lib-grid {
+  flex: 1; min-height: 0; overflow-y: auto;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(252px, 1fr));
+  gap: var(--sp-4); padding: var(--sp-1) var(--sp-2) var(--sp-4);
+  align-content: start;
+}
+.lib-grid::-webkit-scrollbar { width: 8px; }
+.lib-grid::-webkit-scrollbar-thumb { background: var(--line); border-radius: 8px; }
+/* artifact cards: neutral surfaces; the type hue lives in the icon chip
+   and one slim top tick */
+.art-card {
+  position: relative;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-soft);
+  padding: var(--sp-4);
+  display: flex; flex-direction: column; gap: 7px;
+  transition: border-color .15s ease, box-shadow .15s ease, background-color .25s ease;
+  overflow: hidden;
+}
+.art-card::before {
+  content: ""; position: absolute;
+  top: 0; left: var(--sp-4);
+  width: 30px; height: 3px; border-radius: 0 0 2px 2px;
+  background: var(--ink-faint);
+}
+.art-card:has(.t-podcast)::before  { background: var(--mauve); }
+.art-card:has(.t-mindmap)::before  { background: var(--slate); }
+.art-card:has(.t-guide)::before    { background: var(--gold); }
+.art-card:has(.t-cards)::before    { background: var(--teal); }
+.art-card:has(.t-videoart)::before { background: var(--plum); }
+.art-card:has(.t-insight)::before  { background: var(--teal); }
+.art-card:has(.t-noteart)::before  { background: var(--gold); }
+.art-card:hover { border-color: var(--ink-faint); box-shadow: var(--shadow-lift); }
+.art-kind { display: flex; align-items: center; gap: 9px; }
+.art-kind .art-type { margin: 0; }
+.art-kind .kind-label {
+  font-size: var(--fs-micro); font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-soft);
+}
+.art-kind .dur { margin-left: auto; font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-faint); }
+.art-card .art-title {
+  font-family: var(--font-display);
+  font-size: 14.5px; font-weight: 700; letter-spacing: -.01em; line-height: 1.25;
+}
+.provenance { font-size: 11px; color: var(--ink-faint); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.provenance svg { width: 11px; height: 11px; opacity: .7; flex: none; }
+/* generating: neutral surface, pulsing dot + thin progress line in the
+   artifact's OWN type hue (video explainer → plum) */
+.gen-label { display: flex; align-items: center; gap: 7px; font-size: 11px; color: var(--plum); font-weight: 600; }
+.gen-label .pebble { width: 5px; height: 5px; background: var(--plum); animation: breathe 1.4s ease-in-out infinite; }
+@keyframes breathe { 50% { opacity: .3; } }
+.progress { height: 3px; border-radius: 2px; background: var(--bg-deep); overflow: hidden; margin-top: 8px; }
+.progress i { display: block; height: 100%; width: 38%; border-radius: 2px; background: var(--plum); animation: slide 1.7s ease-in-out infinite; }
+@keyframes slide { 0% { transform: translateX(-110%); } 100% { transform: translateX(320%); } }
+.recipes-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: var(--fs-small); color: var(--ink-soft); font-weight: 600;
+  padding: 4px 8px; border-radius: var(--r-sm);
+  transition: color .12s ease, background .12s ease;
+}
+.recipes-link:hover { color: var(--ink); background: var(--bg-deep); }
+.recipes-link svg { width: 12px; height: 12px; }
+.btn-primary-sm {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 16px; border-radius: var(--r-md);
+  background: var(--primary); color: var(--on-primary);
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 13px; letter-spacing: .01em;
+  box-shadow: none;
+  transition: background .15s ease;
+}
+.btn-primary-sm:hover { background: var(--primary-hover); }
+.btn-primary-sm:active { filter: brightness(.94); }
+.btn-primary-sm svg { width: 14px; height: 14px; }
+@media (max-width: 1180px) {
+  .sidebar { width: 200px; }
+  .lib-grid { grid-template-columns: repeat(auto-fill, minmax(226px, 1fr)); }
+}
+</style>
+</head>
+<body>
+
+<div class="tile-banner">
+  <strong>UX Concept — Creations Library · Direction I</strong>
+  <span>One consolidated library of everything generated, filterable by type and scope. Notes live elsewhere — they are edited, not consumed.</span>
+  <a class="dirlink" href="../concepts/03-creations.html">view in Direction D →</a>
+  <nav class="banner-nav">
+    <a href="00-home.html">0</a><a href="01-notebook.html">1</a><a href="02-source.html">2</a><a class="here" href="03-creations.html">3</a><a href="04-global-chat.html">4</a><a href="05-create-overlay.html">5</a><a href="06-citations.html">6</a><a href="07-deep-research.html">7</a><a href="08-search.html">8</a>
+  </nav>
+</div>
+
+<div class="shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a class="wordmark" href="01-notebook.html">
+      <span class="logo-pebbles"><span class="pebble"></span><span class="pebble"></span><span class="pebble"></span></span>
+      Open Notebook
+    </a>
+
+    <a class="btn-new" href="05-create-overlay.html">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+      Create
+      <span class="kbd">⌘J</span>
+    </a>
+
+    <nav class="nav-group">
+      <a class="nav-item" href="00-home.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7 8 2.5 13.5 7v5.5a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1z"/><path d="M6.5 13.5v-4h3v4"/></svg>
+        Home
+      </a>
+      <a class="nav-item" href="01-notebook.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>
+        Notebooks
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path d="M5.5 6h5M5.5 8.5h5M5.5 11h3"/></svg>
+        Sources
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg>
+        Notes
+      </a>
+      <a class="nav-item active" href="03-creations.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/><path d="m12.5 10.5.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></svg>
+        Creations
+      </a>
+      <a class="nav-item" href="08-search.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>
+        Search
+      </a>
+      <div class="nav-divider"></div>
+      <a class="nav-item chat-entry" href="04-global-chat.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13.5 8a5.5 5.5 0 1 0-2.2 4.4L13.5 13l-.5-2.2A5.47 5.47 0 0 0 13.5 8z"/></svg>
+        Chat
+        <span class="pebble"></span>
+      </a>
+    </nav>
+
+    <details class="nav-manage">
+      <summary>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 4 4 4-4 4"/></svg>
+        Manage
+      </summary>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 5.5 8 2.5l5.5 3L8 8.5zM2.5 8.2 8 11.2l5.5-3M2.5 10.9 8 13.9l5.5-3"/></svg>
+        Models
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 5h7M12.5 5h.5M3 11h.5M6 11h7"/><circle cx="11" cy="5" r="1.6"/><circle cx="4.7" cy="11" r="1.6"/></svg>
+        Transformations
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="2.2"/><path d="M8 2v1.6M8 12.4V14M2 8h1.6M12.4 8H14M3.8 3.8l1.1 1.1M11.1 11.1l1.1 1.1M12.2 3.8l-1.1 1.1M4.9 11.1l-1.1 1.1"/></svg>
+        Settings
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m6 4-3 4 3 4M10 4l3 4-3 4"/></svg>
+        Advanced
+      </a>
+    </details>
+
+    <div class="sidebar-foot">
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/></svg>
+        Quick actions
+        <span class="kbd">⌘K</span>
+      </button>
+      <button class="foot-item" id="theme-toggle" aria-pressed="false">
+        <svg id="icon-moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3 5.5 5.5 0 1 0 13 9.5z"/></svg>
+        <svg id="icon-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="display:none"><circle cx="8" cy="8" r="3"/><path d="M8 1.5V3M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M12.6 3.4l-1 1M4.4 11.6l-1 1"/></svg>
+        <span id="theme-label">Dark theme</span>
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c1.8 1.7 2.6 3.8 2.6 6S9.8 12.3 8 14C6.2 12.3 5.4 10.2 5.4 8S6.2 3.7 8 2z"/></svg>
+        English
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 2h-3A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14h3M10.5 11 14 8l-3.5-3M14 8H6"/></svg>
+        Sign out
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <header class="nb-header">
+      <div class="nb-id">
+        <div class="crumbs"><span class="pebble"></span><span>Creations</span></div>
+        <h1 class="nb-title">Creations</h1>
+        <div class="nb-desc" role="button" tabindex="0">
+          Everything generated from your research — every artifact keeps its provenance.
+        </div>
+        <div class="nb-meta">8 artifacts <span class="dot"></span> across 3 notebooks</div>
+      </div>
+      <div class="nb-actions">
+        <a class="recipes-link" href="#" title="Transformation prompts and podcast profiles">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 5h7M12.5 5h.5M3 11h.5M6 11h7"/><circle cx="11" cy="5" r="1.6"/><circle cx="4.7" cy="11" r="1.6"/></svg>
+          Recipes
+        </a>
+        <a class="btn-primary-sm" href="05-create-overlay.html">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+          Create
+        </a>
+      </div>
+    </header>
+
+    <div class="filters">
+      <button class="filter-chip active">All</button>
+      <button class="filter-chip"><span class="pebble" style="background:var(--c-insight)"></span>Insights</button>
+      <button class="filter-chip"><span class="pebble" style="background:var(--c-audio)"></span>Podcasts</button>
+      <button class="filter-chip"><span class="pebble" style="background:var(--c-paper)"></span>Mind maps</button>
+      <button class="filter-chip"><span class="pebble" style="background:var(--c-note)"></span>Study guides</button>
+      <button class="filter-chip"><span class="pebble" style="background:var(--c-insight)"></span>Flashcards</button>
+      <button class="filter-chip"><span class="pebble" style="background:var(--c-video)"></span>Videos</button>
+      <span class="spacer"></span>
+      <button class="btn-ghost">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>
+        All notebooks ▾
+      </button>
+    </div>
+
+    <div class="lib-grid">
+      <a class="art-card" href="#">
+        <span class="art-kind"><span class="art-type t-podcast"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="6" y="2" width="4" height="8" rx="2"/><path d="M3.5 8a4.5 4.5 0 0 0 9 0M8 12.5V14"/></svg></span><span class="kind-label">Podcast</span><span class="dur">12:40</span></span>
+        <span class="art-title">Attention, Explained</span>
+        <span class="provenance"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>from The Attention Economy <span class="proj-badge"><span class="pebble"></span>+ 2 notebooks</span></span>
+      </a>
+      <a class="art-card" href="#">
+        <span class="art-kind"><span class="art-type t-mindmap"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="1.8"/><circle cx="3" cy="3.5" r="1.4"/><circle cx="13" cy="3.5" r="1.4"/><circle cx="8" cy="13.5" r="1.4"/><path d="M4.1 4.5 6.8 6.9M11.9 4.5 9.2 6.9M8 9.8v2.3"/></svg></span><span class="kind-label">Mind map</span></span>
+        <span class="art-title">Attention Economy Map</span>
+        <span class="provenance"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>from The Attention Economy</span>
+      </a>
+      <a class="art-card" href="#">
+        <span class="art-kind"><span class="art-type t-insight"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/><path d="m12.5 10.5.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></svg></span><span class="kind-label">Insight</span></span>
+        <span class="art-title">Dense Summary</span>
+        <span class="provenance"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>from source: Stolen Focus</span>
+      </a>
+      <a class="art-card" href="#">
+        <span class="art-kind"><span class="art-type t-insight"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/><path d="m12.5 10.5.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></svg></span><span class="kind-label">Insight</span></span>
+        <span class="art-title">Key Claims</span>
+        <span class="provenance"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>from source: Stolen Focus</span>
+      </a>
+      <a class="art-card" href="#">
+        <span class="art-kind"><span class="art-type t-guide"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H13v11H4.5A1.5 1.5 0 0 0 3 14.5v-11z"/><path d="M3 12.5A1.5 1.5 0 0 1 4.5 11H13M6 5.5h4"/></svg></span><span class="kind-label">Study guide</span></span>
+        <span class="art-title">Focus &amp; Distraction — Exam Prep</span>
+        <span class="provenance"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>from The Attention Economy</span>
+      </a>
+      <a class="art-card" href="#">
+        <span class="art-kind"><span class="art-type t-cards"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.5" y="4.5" width="9" height="9" rx="1.5"/><path d="M5.5 2.5h8v8"/></svg></span><span class="kind-label">Flashcards</span></span>
+        <span class="art-title">Attention Research · 24 cards</span>
+        <span class="provenance"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>from Deep Work Essays</span>
+      </a>
+      <a class="art-card" href="#">
+        <span class="art-kind"><span class="art-type t-videoart"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M6 4.5v7l6-3.5z"/></svg></span><span class="kind-label">Video explainer</span></span>
+        <span class="art-title">Why You Can’t Focus</span>
+        <span class="provenance"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>from The Attention Economy</span>
+        <span class="gen-label"><span class="pebble"></span>generating…</span>
+        <span class="progress"><i></i></span>
+      </a>
+      <a class="art-card" href="#">
+        <span class="art-kind"><span class="art-type t-podcast"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="6" y="2" width="4" height="8" rx="2"/><path d="M3.5 8a4.5 4.5 0 0 0 9 0M8 12.5V14"/></svg></span><span class="kind-label">Podcast</span><span class="dur">18:05</span></span>
+        <span class="art-title">Deep Work, Weekly #4</span>
+        <span class="provenance"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>from Deep Work Essays</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  if (localStorage.getItem('on-theme-i') === 'dark') root.classList.add('dark');
+  var btn = document.getElementById('theme-toggle');
+  var moon = document.getElementById('icon-moon');
+  var sun = document.getElementById('icon-sun');
+  var label = document.getElementById('theme-label');
+  function sync() {
+    var dark = root.classList.contains('dark');
+    btn.setAttribute('aria-pressed', String(dark));
+    moon.style.display = dark ? 'none' : '';
+    sun.style.display = dark ? '' : 'none';
+    label.textContent = dark ? 'Light theme' : 'Dark theme';
+  }
+  btn.addEventListener('click', function () {
+    root.classList.toggle('dark');
+    localStorage.setItem('on-theme-i', root.classList.contains('dark') ? 'dark' : 'light');
+    sync();
+  });
+  sync();
+})();
+</script>
+</body>
+</html>

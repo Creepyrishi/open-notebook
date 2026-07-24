@@ -1,0 +1,1119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UX Concept — Deep Research · Direction D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..800;1,400&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DIRECTION D FOUNDATION — CALM CLEAN / SOFT NEUTRAL
+   Shared across all five UX concept screens.
+   ============================================================ */
+:root {
+  --canvas:        #F1EEE8;
+  --canvas-tint:   #EAE6DE;
+  --surface:       #FBFAF7;
+  --surface-2:     #F5F3EE;
+  --surface-3:     #EDEAE3;
+  --hairline:      rgba(62, 56, 45, 0.08);
+  --hairline-soft: rgba(62, 56, 45, 0.05);
+
+  --ink:        #292522;
+  --ink-2:      #5C564D;
+  --ink-3:      #8B847A;
+  --ink-faint:  #ADA69B;
+
+  --primary:        #3E6B58;
+  --primary-hover:  #34594A;
+  --primary-ink:    #F4F7F3;
+  --primary-soft:   #DEE8E0;
+  --primary-soft-2: #ECF1EB;
+
+  --c-video:      #C2705F;  --c-video-soft:   #F3E1DB;
+  --c-note:       #A8823C;  --c-note-soft:    #F1E7D2;
+  --c-insight:    #6E6FA8;  --c-insight-soft: #E5E4F1;
+  --c-ai:         #4E7D6C;  --c-ai-soft:      #DFEAE2;
+  --c-audio:      #9A6B8F;  --c-audio-soft:   #EFE2EC;
+  --c-paper:      #5F7E9E;  --c-paper-soft:   #E0E8EE;
+
+  --shadow-panel:
+    0 1px 2px rgba(48, 42, 32, 0.04),
+    0 4px 14px rgba(48, 42, 32, 0.05),
+    0 14px 38px rgba(48, 42, 32, 0.06);
+  --shadow-card:
+    0 1px 2px rgba(48, 42, 32, 0.05),
+    0 3px 9px rgba(48, 42, 32, 0.05);
+  --shadow-pill:
+    0 1px 2px rgba(38, 66, 54, 0.25),
+    0 5px 14px rgba(38, 66, 54, 0.22);
+  --shadow-overlay:
+    0 2px 6px rgba(38, 33, 24, 0.10),
+    0 12px 34px rgba(38, 33, 24, 0.16),
+    0 40px 90px rgba(38, 33, 24, 0.22);
+
+  --r-panel: 22px;
+  --r-card:  14px;
+  --r-ctl:   10px;
+  --r-pill:  999px;
+
+  --font-sans: "Hanken Grotesk", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Spline Sans Mono", "SF Mono", "Cascadia Mono", monospace;
+  --fs-micro: 0.6875rem;
+  --fs-meta:  0.75rem;
+  --fs-body:  0.875rem;
+  --fs-md:    0.9375rem;
+  --fs-title: 1.375rem;
+
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-7: 32px;
+
+  --focus-ring: 0 0 0 3px rgba(62, 107, 88, 0.28);
+}
+
+.dark {
+  --canvas:        #1D1B18;
+  --canvas-tint:   #191714;
+  --surface:       #26231F;
+  --surface-2:     #2D2A25;
+  --surface-3:     #34302A;
+  --hairline:      rgba(235, 226, 210, 0.07);
+  --hairline-soft: rgba(235, 226, 210, 0.045);
+
+  --ink:        #EDE8DF;
+  --ink-2:      #B3ACA0;
+  --ink-3:      #837C71;
+  --ink-faint:  #5F594F;
+
+  --primary:        #6FA98F;
+  --primary-hover:  #83B9A0;
+  --primary-ink:    #14211B;
+  --primary-soft:   #2C3B33;
+  --primary-soft-2: #26312B;
+
+  --c-video:      #D89484;  --c-video-soft:   #3A2C27;
+  --c-note:       #CBA45E;  --c-note-soft:    #383023;
+  --c-insight:    #9C9DCF;  --c-insight-soft: #2E2E3D;
+  --c-ai:         #86B4A0;  --c-ai-soft:      #263630;
+  --c-audio:      #C595B8;  --c-audio-soft:   #362B33;
+  --c-paper:      #8FB0C9;  --c-paper-soft:   #26313A;
+
+  --shadow-panel:
+    0 1px 2px rgba(0, 0, 0, 0.28),
+    0 6px 18px rgba(0, 0, 0, 0.30),
+    0 18px 48px rgba(0, 0, 0, 0.32);
+  --shadow-card:
+    0 1px 2px rgba(0, 0, 0, 0.30),
+    0 3px 10px rgba(0, 0, 0, 0.26);
+  --shadow-pill:
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 5px 16px rgba(111, 169, 143, 0.18);
+  --shadow-overlay:
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    0 16px 44px rgba(0, 0, 0, 0.45),
+    0 48px 110px rgba(0, 0, 0, 0.5);
+
+  --focus-ring: 0 0 0 3px rgba(111, 169, 143, 0.32);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 420px at 62% -140px, var(--canvas-tint), transparent 70%),
+    var(--canvas);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-width: 1000px;
+  transition: background-color .35s ease, color .35s ease;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+input, textarea { font: inherit; color: inherit; }
+::placeholder { color: var(--ink-faint); }
+
+.pebble { display: inline-block; width: 8px; height: 8px; border-radius: 42%; flex: none; }
+
+/* ---- tile banner ---- */
+.tile-banner {
+  display: flex; align-items: baseline; gap: var(--sp-3);
+  padding: 7px var(--sp-6);
+  font-size: var(--fs-meta);
+  color: var(--ink-2);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--hairline);
+  flex: none;
+}
+.tile-banner strong { color: var(--ink); font-weight: 700; letter-spacing: .01em; }
+.tile-banner span { color: var(--ink-3); }
+.banner-nav { margin-left: auto; display: flex; gap: 5px; }
+.banner-nav a {
+  width: 22px; height: 22px; border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-3);
+  transition: background .15s ease, color .15s ease;
+}
+.banner-nav a:hover { background: var(--surface-3); color: var(--ink); }
+.banner-nav a.here { background: var(--primary); color: var(--primary-ink); }
+
+/* ---- shell / sidebar ---- */
+.shell { flex: 1; display: flex; min-height: 0; }
+.sidebar {
+  width: 232px; flex: none;
+  display: flex; flex-direction: column;
+  padding: var(--sp-6) var(--sp-4) var(--sp-4);
+  gap: var(--sp-2);
+  overflow-y: auto;
+}
+.wordmark {
+  display: flex; align-items: center; gap: 10px;
+  padding: 2px var(--sp-2) var(--sp-5);
+  font-weight: 700; font-size: var(--fs-md); letter-spacing: -0.01em;
+}
+.logo-pebbles { display: flex; gap: 3px; align-items: center; }
+.logo-pebbles .pebble { width: 11px; height: 11px; }
+.logo-pebbles .pebble:first-child { background: var(--primary); }
+.logo-pebbles .pebble:last-child  { background: var(--c-video); width: 8px; height: 8px; }
+
+.btn-new {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  height: 40px; margin: 0 var(--sp-2) var(--sp-4);
+  border-radius: var(--r-pill);
+  background: var(--primary); color: var(--primary-ink);
+  font-weight: 650; font-size: var(--fs-body); letter-spacing: .01em;
+  box-shadow: var(--shadow-pill);
+  transition: background .18s ease, transform .18s ease;
+}
+.btn-new:hover { background: var(--primary-hover); transform: translateY(-1px); }
+.btn-new svg { width: 15px; height: 15px; }
+.btn-new .kbd { background: rgba(255,255,255,.16); box-shadow: none; color: inherit; margin-left: 2px; }
+.dark .btn-new .kbd { background: rgba(0,0,0,.18); }
+
+.nav-group { display: flex; flex-direction: column; gap: 1px; margin-bottom: var(--sp-3); }
+.nav-label {
+  padding: var(--sp-2) var(--sp-3) 5px;
+  font-size: var(--fs-micro); font-weight: 650;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 8px var(--sp-3);
+  border-radius: var(--r-ctl);
+  color: var(--ink-2); font-weight: 500; font-size: var(--fs-body);
+  transition: background .15s ease, color .15s ease;
+  text-align: left;
+}
+.nav-item svg { width: 16px; height: 16px; flex: none; opacity: .72; }
+.nav-item:hover { background: var(--surface-3); color: var(--ink); }
+.nav-item.active {
+  background: var(--surface);
+  color: var(--ink); font-weight: 650;
+  box-shadow: var(--shadow-card);
+}
+.nav-item.active::before {
+  content: ""; width: 7px; height: 7px; border-radius: 42%;
+  background: var(--primary); margin-left: -2px; margin-right: -1px;
+}
+.nav-item .nav-hint {
+  margin-left: auto; font-size: var(--fs-micro); color: var(--ink-faint); font-weight: 500;
+}
+.nav-divider { height: 1px; background: var(--hairline-soft); margin: var(--sp-2) var(--sp-3); }
+.nav-item.chat-entry { color: var(--ink-3); }
+.nav-item.chat-entry:hover { color: var(--ink); }
+.nav-item.chat-entry .pebble { width: 6px; height: 6px; background: var(--c-ai); margin-left: auto; }
+
+.nav-manage { margin-top: var(--sp-1); }
+.nav-manage summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  padding: var(--sp-2) var(--sp-3) 5px;
+  font-size: var(--fs-micro); font-weight: 650;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-faint);
+  transition: color .15s ease;
+}
+.nav-manage summary:hover { color: var(--ink-3); }
+.nav-manage summary::-webkit-details-marker { display: none; }
+.nav-manage summary svg { width: 9px; height: 9px; transition: transform .2s ease; }
+.nav-manage[open] summary svg { transform: rotate(90deg); }
+.nav-manage .nav-item { padding: 6px var(--sp-3); font-size: var(--fs-meta); color: var(--ink-3); }
+.nav-manage .nav-item svg { width: 14px; height: 14px; }
+
+.sidebar-foot {
+  margin-top: auto; padding-top: var(--sp-4);
+  border-top: 1px solid var(--hairline);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.foot-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px var(--sp-3); border-radius: var(--r-ctl);
+  color: var(--ink-3); font-size: var(--fs-meta); font-weight: 500;
+  transition: background .15s ease, color .15s ease;
+  width: 100%; text-align: left;
+}
+.foot-item:hover { background: var(--surface-3); color: var(--ink); }
+.foot-item svg { width: 15px; height: 15px; opacity: .75; }
+.kbd {
+  margin-left: auto;
+  font-family: var(--font-mono); font-size: 10px;
+  padding: 2px 6px; border-radius: 6px;
+  background: var(--surface); box-shadow: inset 0 0 0 1px var(--hairline);
+  color: var(--ink-3);
+}
+
+/* ---- main / header ---- */
+.main {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column;
+  padding: var(--sp-6) var(--sp-6) var(--sp-5) var(--sp-2);
+  gap: var(--sp-5);
+}
+.nb-header { display: flex; align-items: flex-start; gap: var(--sp-5); padding: 0 var(--sp-2); }
+.nb-id { flex: 1; min-width: 0; }
+.crumbs {
+  font-size: var(--fs-meta); color: var(--ink-3); font-weight: 500;
+  display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap;
+}
+.crumbs a:hover { color: var(--ink); }
+.crumbs .sep { color: var(--ink-faint); }
+.crumbs .pebble { background: var(--primary); width: 6px; height: 6px; }
+.nb-title { font-size: var(--fs-title); font-weight: 750; letter-spacing: -0.022em; line-height: 1.15; }
+.nb-meta { margin-top: 7px; font-size: var(--fs-meta); color: var(--ink-3); display: flex; gap: 8px; align-items: center; }
+.nb-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+
+/* ---- panels ---- */
+.workspace { flex: 1; min-height: 0; display: grid; gap: var(--sp-4); }
+.panel {
+  background: var(--surface);
+  border-radius: var(--r-panel);
+  box-shadow: var(--shadow-panel);
+  display: flex; flex-direction: column;
+  min-height: 0; overflow: hidden;
+  transition: background-color .35s ease;
+}
+.panel-head { display: flex; align-items: center; gap: 9px; padding: var(--sp-4) var(--sp-5) var(--sp-3); flex: none; }
+.panel-title {
+  font-size: var(--fs-micro); font-weight: 700;
+  letter-spacing: .13em; text-transform: uppercase;
+  color: var(--ink-2);
+}
+.panel-count {
+  font-family: var(--font-mono); font-size: 10.5px;
+  color: var(--ink-3);
+  background: var(--surface-2); border-radius: 7px; padding: 2px 7px;
+}
+.panel-head .spacer { flex: 1; }
+.icon-btn {
+  width: 28px; height: 28px; border-radius: 9px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink-3);
+  transition: background .15s ease, color .15s ease;
+}
+.icon-btn:hover { background: var(--surface-3); color: var(--ink); }
+.icon-btn svg { width: 14px; height: 14px; }
+.panel-body { flex: 1; overflow-y: auto; padding: 0 var(--sp-3) var(--sp-3); min-height: 0; }
+.panel-body::-webkit-scrollbar { width: 8px; }
+.panel-body::-webkit-scrollbar-thumb { background: var(--hairline); border-radius: 4px; }
+
+/* ---- source rows (slim rail variant below) ---- */
+.src-row {
+  display: flex; align-items: flex-start; gap: 11px;
+  width: 100%; text-align: left;
+  padding: 11px 12px; border-radius: var(--r-card);
+  transition: background .15s ease;
+}
+.src-row:hover { background: var(--surface-2); }
+.src-row.selected { background: var(--primary-soft-2); }
+.src-row.selected:hover { background: var(--primary-soft); }
+.src-type {
+  width: 26px; height: 26px; border-radius: 9px; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--c-video-soft); color: var(--c-video);
+  margin-top: 1px;
+}
+.src-type svg { width: 12px; height: 12px; }
+.src-type.t-pdf   { background: var(--c-note-soft);  color: var(--c-note); }
+.src-type.t-web   { background: var(--c-ai-soft);    color: var(--c-ai); }
+.src-type.t-audio { background: var(--c-audio-soft); color: var(--c-audio); }
+.src-type.t-paper { background: var(--c-paper-soft); color: var(--c-paper); }
+.src-main { min-width: 0; flex: 1; }
+.src-title {
+  font-size: var(--fs-body); font-weight: 550; line-height: 1.35;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.src-meta { margin-top: 4px; display: flex; align-items: center; gap: 7px; font-size: var(--fs-micro); color: var(--ink-3); flex-wrap: wrap; }
+
+/* ---- chat ---- */
+.chat { display: flex; flex-direction: column; }
+.scope-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 4px 12px; border-radius: var(--r-pill);
+  background: var(--primary-soft-2); color: var(--primary);
+  font-size: var(--fs-micro); font-weight: 650;
+  transition: background .15s ease;
+  white-space: nowrap;
+}
+.scope-pill:hover { background: var(--primary-soft); }
+.scope-pill .pebble { background: var(--primary); width: 6px; height: 6px; }
+.scope-pill .chev { opacity: .6; font-size: 9px; }
+.chat-body { display: flex; flex-direction: column; gap: var(--sp-4); padding: var(--sp-2) var(--sp-5) var(--sp-4); }
+.msg { max-width: 88%; }
+.msg.user { align-self: flex-end; }
+.msg.user .bubble {
+  background: var(--primary-soft); color: var(--ink);
+  border-radius: 16px 16px 5px 16px;
+  padding: 10px 15px; font-size: var(--fs-body); line-height: 1.5;
+}
+.msg.ai { align-self: flex-start; }
+.msg-agent {
+  display: flex; align-items: center; gap: 7px;
+  font-size: var(--fs-micro); font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--c-ai); margin-bottom: 7px;
+}
+.msg-agent .pebble { background: var(--c-ai); width: 6px; height: 6px; }
+.msg.ai .bubble {
+  background: var(--surface-2);
+  border-radius: 5px 16px 16px 16px;
+  padding: 13px 16px;
+  font-size: var(--fs-body); line-height: 1.58; color: var(--ink);
+}
+.msg.ai .bubble p + p { margin-top: 12px; }
+.msg.ai .bubble em { font-style: normal; font-weight: 650; color: var(--primary); }
+.cite {
+  display: inline-flex; align-items: center; gap: 4px;
+  vertical-align: 1px; margin: 0 1px;
+  padding: 0.5px 7px; border-radius: var(--r-pill);
+  background: var(--c-insight-soft); color: var(--c-insight);
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  white-space: nowrap; cursor: pointer;
+  transition: filter .15s ease;
+}
+.cite:hover { filter: brightness(0.95); }
+.cite .pebble { width: 4px; height: 4px; background: var(--c-insight); }
+.cite.n { padding: 0.5px 8px; }
+.cite .no { font-weight: 500; }
+.cite.note-cite { background: var(--c-note-soft); color: var(--c-note); }
+.cite.note-cite .pebble { background: var(--c-note); }
+.cite.ins { background: var(--c-insight-soft); color: var(--c-insight); }
+.cite.ext {
+  background: none; border: 1px dashed var(--c-paper); color: var(--c-paper);
+  padding: 0 7px;
+}
+.cite.ext .pebble { background: none; box-shadow: inset 0 0 0 1.5px currentColor; }
+.inferred { border-bottom: 1.5px dotted var(--ink-faint); }
+.cite.inf {
+  background: none; box-shadow: inset 0 0 0 1px var(--hairline);
+  color: var(--ink-3); padding: 0 7px;
+}
+.msg-tools { display: flex; gap: 8px; margin-top: 9px; }
+.tool-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: var(--r-pill);
+  font-size: var(--fs-micro); font-weight: 650; color: var(--ink-3);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  transition: background .15s ease, color .15s ease;
+}
+.tool-pill:hover { background: var(--surface-2); color: var(--primary); }
+.tool-pill svg { width: 12px; height: 12px; }
+
+.context-bar {
+  flex: none;
+  margin: 0 var(--sp-4) var(--sp-3);
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 14px;
+  border-radius: var(--r-pill);
+  background: var(--surface-2);
+  font-family: var(--font-mono); font-size: 11px; color: var(--ink-3);
+}
+.context-bar .sep { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+.context-bar b { color: var(--ink-2); font-weight: 500; }
+.model-chip {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px; border-radius: var(--r-pill);
+  background: var(--c-ai-soft); color: var(--c-ai);
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 500;
+  white-space: nowrap;
+}
+.model-chip .pebble { width: 6px; height: 6px; background: var(--c-ai); }
+.composer {
+  flex: none;
+  margin: 0 var(--sp-4) var(--sp-4);
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 6px 6px 6px;
+  border-radius: var(--r-pill);
+  background: var(--canvas);
+  box-shadow: inset 0 1px 3px rgba(48, 42, 32, 0.06), inset 0 0 0 1px var(--hairline-soft);
+  transition: box-shadow .18s ease;
+}
+.composer:focus-within { box-shadow: inset 0 0 0 1.5px var(--primary), inset 0 1px 3px rgba(48,42,32,0.04); }
+.dark .composer { box-shadow: inset 0 1px 3px rgba(0,0,0,0.35), inset 0 0 0 1px var(--hairline); }
+.dark .composer:focus-within { box-shadow: inset 0 0 0 1.5px var(--primary); }
+.composer input { flex: 1; min-width: 0; background: none; border: none; font-size: var(--fs-body); padding: 8px 0; }
+.composer input:focus-visible { box-shadow: none; }
+.btn-send {
+  width: 36px; height: 36px; border-radius: 50%; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--primary); color: var(--primary-ink);
+  box-shadow: var(--shadow-pill);
+  transition: background .18s ease, transform .18s ease;
+}
+.btn-send:hover { background: var(--primary-hover); transform: translateY(-1px); }
+.btn-send svg { width: 15px; height: 15px; }
+
+/* ---- evidence bundle (receipt strip) ---- */
+.evidence-strip {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-top: 11px; padding: 8px 14px;
+  border-radius: var(--r-pill);
+  background: var(--surface-2);
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-3);
+}
+.evidence-strip b { color: var(--ink-2); font-weight: 500; }
+.evidence-strip .sep { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+.evidence-strip a { color: var(--primary); font-weight: 500; margin-left: 4px; }
+.evidence-strip a:hover { text-decoration: underline; }
+
+/* ---- progress (quiet) ---- */
+.progress { height: 4px; border-radius: 2px; background: var(--surface-3); overflow: hidden; margin-top: 8px; }
+.progress i { display: block; height: 100%; width: 38%; border-radius: 2px; background: var(--c-ai); animation: slide 1.7s ease-in-out infinite; }
+@keyframes slide { 0% { transform: translateX(-110%); } 100% { transform: translateX(320%); } }
+
+.panel, .sidebar, .nav-item, .composer, .context-bar,
+.src-row, .btn-ghost, .tile-banner { transition-property: background-color, color, box-shadow; transition-duration: .35s; }
+
+/* ---- annotation rail — meta, outside the app ---- */
+.anno-rail { display: flex; flex-direction: column; gap: var(--sp-4); padding: 6px 0 0 6px; align-self: start; }
+.anno-head {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--ink-faint);
+  padding-bottom: 2px; border-bottom: 1px dashed var(--hairline);
+}
+.anno { position: relative; padding-left: 16px; font-size: var(--fs-micro); color: var(--ink-3); line-height: 1.55; }
+.anno::before { content: ""; position: absolute; left: 0; top: 7px; width: 9px; height: 1px; background: var(--ink-faint); }
+.anno .num {
+  display: block; font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2);
+  margin-bottom: 2px;
+}
+
+/* ============ SCREEN 07 layout (deep research anatomy) ============ */
+.workspace.deep-page {
+  grid-template-columns: minmax(178px, 13rem) minmax(430px, 1fr) minmax(200px, 14.5rem);
+  min-height: max-content; /* the conversation is tall — let the canvas scroll, never clip */
+}
+.main { overflow-y: auto; }
+.workspace.deep-page .panel.chat,
+.workspace.deep-page .panel.chat .panel-body { overflow: visible; }
+.workspace.deep-page .panel.chat { max-width: 58rem; }
+.workspace.deep-page .chat-body { padding-top: 8px; }
+
+/* slim sources rail — collapsed to give the conversation room */
+.panel.rail { align-self: start; }
+.rail .panel-head { padding: var(--sp-4) var(--sp-4) var(--sp-2); }
+.rail-row {
+  display: flex; align-items: center; gap: 9px;
+  width: 100%; text-align: left;
+  padding: 7px 9px; border-radius: 11px;
+  transition: background .15s ease;
+}
+.rail-row:hover { background: var(--surface-2); }
+.rail-row.selected { background: var(--primary-soft-2); }
+.rail-row.selected:hover { background: var(--primary-soft); }
+.rail-row .src-type { width: 22px; height: 22px; border-radius: 8px; margin-top: 0; }
+.rail-row .src-type svg { width: 11px; height: 11px; }
+.rail-title {
+  min-width: 0; flex: 1;
+  font-size: var(--fs-meta); font-weight: 550; line-height: 1.3;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  color: var(--ink-2);
+}
+.rail-row.selected .rail-title { color: var(--ink); }
+.rail-row .sel-dot { width: 5px; height: 5px; border-radius: 42%; background: var(--primary); flex: none; }
+.rail-row .sel-dot.off { background: none; box-shadow: inset 0 0 0 1.2px var(--ink-faint); }
+.rail-foot {
+  margin: var(--sp-1) var(--sp-2) var(--sp-2); padding: 7px 9px 0;
+  border-top: 1px solid var(--hairline-soft);
+  font-size: var(--fs-micro); color: var(--ink-faint); line-height: 1.5;
+}
+
+/* deep tag on a promoted question */
+.deep-tag {
+  display: flex; justify-content: flex-end; align-items: center; gap: 5px;
+  margin-top: 5px;
+  font-family: var(--font-mono); font-size: 10px; color: var(--primary);
+}
+.deep-tag .pebble { width: 5px; height: 5px; background: var(--primary); }
+
+/* ---- mode switcher (composer) ---- */
+.mode-switch {
+  display: inline-flex; align-items: center; gap: 2px; flex: none;
+  padding: 3px; border-radius: var(--r-pill);
+  background: var(--surface-2);
+  box-shadow: inset 0 0 0 1px var(--hairline-soft);
+}
+.mode-opt {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 11px; border-radius: var(--r-pill);
+  font-size: var(--fs-micro); font-weight: 650; color: var(--ink-3);
+  white-space: nowrap;
+  transition: background .18s ease, color .18s ease;
+}
+.mode-opt:hover { color: var(--ink); }
+.mode-opt.on {
+  background: var(--primary); color: var(--primary-ink);
+  box-shadow: var(--shadow-pill);
+}
+.mode-opt .pebble { width: 6px; height: 6px; background: currentColor; opacity: .85; }
+.mode-hint {
+  flex: none;
+  margin: -9px var(--sp-5) var(--sp-4);
+  font-family: var(--font-mono); font-size: 10px; color: var(--ink-3);
+  display: flex; align-items: center; gap: 6px;
+}
+.mode-hint .pebble { width: 5px; height: 5px; background: var(--primary); opacity: .7; }
+.btn-deep-once {
+  width: 32px; height: 32px; border-radius: 50%; flex: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink-3);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  transition: background .15s ease, color .15s ease;
+}
+.btn-deep-once:hover { background: var(--primary-soft-2); color: var(--primary); }
+.btn-deep-once svg { width: 14px; height: 14px; }
+
+/* ---- agent activity — progressive disclosure ---- */
+.activity {
+  align-self: flex-start; max-width: 88%; width: 100%;
+  background: var(--surface-2);
+  border-radius: 5px 16px 16px 16px;
+  padding: 12px 16px 13px;
+}
+.act-head {
+  display: flex; align-items: center; gap: 8px;
+  font-size: var(--fs-micro); font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--c-ai);
+}
+.act-head .pebble { width: 7px; height: 7px; background: var(--c-ai); animation: breathe 1.8s ease-in-out infinite; }
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: .65; }
+  50%      { transform: scale(1.35); opacity: 1; }
+}
+.act-budget {
+  margin-left: auto;
+  font-family: var(--font-mono); font-size: 10px; font-weight: 400;
+  letter-spacing: 0; text-transform: none; color: var(--ink-3);
+}
+.act-events { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+.evt {
+  display: flex; align-items: baseline; gap: 9px;
+  font-size: var(--fs-meta); color: var(--ink-2); line-height: 1.45;
+}
+.evt .tick { flex: none; width: 12px; align-self: center; color: var(--c-ai); opacity: .75; }
+.evt .tick svg { width: 11px; height: 11px; display: block; }
+.evt .evt-n { margin-left: auto; font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); white-space: nowrap; }
+.evt.now { color: var(--ink); font-weight: 550; }
+.evt.now .tick { color: var(--c-ai); opacity: 1; }
+.evt.now .dot-live { width: 7px; height: 7px; border-radius: 42%; background: var(--c-ai); display: block; animation: breathe 1.8s ease-in-out infinite; }
+
+.act-detail { margin-top: 10px; }
+.act-detail summary {
+  list-style: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: 10px; color: var(--ink-3);
+  padding: 3px 9px; border-radius: var(--r-pill);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  transition: background .15s ease, color .15s ease;
+}
+.act-detail summary:hover { background: var(--surface-3); color: var(--ink); }
+.act-detail summary::-webkit-details-marker { display: none; }
+.act-log {
+  margin-top: 8px; padding: 10px 12px;
+  border-radius: var(--r-card);
+  background: var(--surface);
+  font-family: var(--font-mono); font-size: 10.5px; line-height: 1.7; color: var(--ink-3);
+}
+.act-log b { color: var(--ink-2); font-weight: 500; }
+.act-log .lg-group { display: block; }
+.act-log .lg-group + .lg-group { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--hairline-soft); }
+
+/* permission prompt — calm, inline */
+.perm {
+  margin-top: 10px; padding: 11px 13px;
+  border-radius: var(--r-card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+.perm-title {
+  display: flex; align-items: center; gap: 7px;
+  font-size: var(--fs-body); font-weight: 650; color: var(--ink);
+}
+.perm-title .pebble { width: 6px; height: 6px; background: none; box-shadow: inset 0 0 0 1.5px var(--c-paper); }
+.perm p { margin-top: 4px; font-size: var(--fs-meta); color: var(--ink-2); line-height: 1.5; }
+.perm-actions { display: flex; align-items: center; gap: 8px; margin-top: 9px; }
+.btn-allow {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 14px; border-radius: var(--r-pill);
+  background: var(--primary); color: var(--primary-ink);
+  font-size: var(--fs-meta); font-weight: 650;
+  box-shadow: var(--shadow-pill);
+  transition: background .18s ease;
+}
+.btn-allow:hover { background: var(--primary-hover); }
+.btn-decline {
+  display: inline-flex; align-items: center;
+  padding: 5px 12px; border-radius: var(--r-pill);
+  font-size: var(--fs-meta); font-weight: 600; color: var(--ink-3);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  transition: background .15s ease, color .15s ease;
+}
+.btn-decline:hover { background: var(--surface-3); color: var(--ink); }
+
+/* interruption controls */
+.act-controls {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-top: 11px; padding-top: 10px;
+  border-top: 1px solid var(--hairline-soft);
+}
+.act-controls .tool-pill:hover { color: var(--c-video); }
+.act-controls .tool-pill.salvage:hover { color: var(--primary); }
+
+/* collapsed activity summary on the finished answer */
+.act-done {
+  display: inline-flex; align-items: flex-start; gap: 8px;
+  margin-bottom: 7px; padding: 5px 12px;
+  border-radius: 12px;
+  background: var(--c-ai-soft);
+  font-family: var(--font-mono); font-size: 10px; line-height: 1.6; color: var(--c-ai);
+}
+.act-done .pebble { width: 5px; height: 5px; background: var(--c-ai); margin-top: 5px; }
+.act-done a { font-weight: 500; }
+.act-done a:hover { text-decoration: underline; }
+
+/* margin sketch — degraded mode switcher inside an annotation */
+.sketch {
+  display: block; margin-top: 8px; padding: 10px 11px;
+  border-radius: var(--r-card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+.sketch .mode-switch { background: var(--surface-2); }
+.sketch .mode-opt.off {
+  color: var(--ink-faint); cursor: not-allowed;
+}
+.sketch .mode-opt.off:hover { color: var(--ink-faint); }
+.sketch .mode-opt.on-lite {
+  background: var(--surface); color: var(--ink); box-shadow: var(--shadow-card);
+}
+.sketch-cap {
+  display: block; margin-top: 7px;
+  font-family: var(--font-mono); font-size: 10px; color: var(--ink-faint); line-height: 1.55;
+}
+
+@media (max-width: 1180px) {
+  .sidebar { width: 200px; }
+  .workspace.deep-page { grid-template-columns: minmax(400px, 1fr) minmax(220px, 16rem); }
+  .workspace.deep-page .panel.rail { grid-column: 2; grid-row: 1; }
+  .workspace.deep-page .anno-rail { grid-column: 2; grid-row: 2; }
+  .workspace.deep-page .panel.chat { grid-column: 1; grid-row: 1 / 3; }
+  .msg, .activity { max-width: 96%; }
+  .context-bar { flex-wrap: wrap; row-gap: 4px; }
+}
+</style>
+</head>
+<body>
+
+<div class="tile-banner">
+  <strong>UX Concept — Deep Research · Direction D</strong>
+  <span>Two efforts, one promise: Deep Research may search farther and think longer, but the evidence dress never changes.</span>
+  <nav class="banner-nav">
+    <a href="00-home.html">0</a><a href="01-notebook.html">1</a><a href="02-source.html">2</a><a href="03-creations.html">3</a><a href="04-global-chat.html">4</a><a href="05-create-overlay.html">5</a><a href="06-citations.html">6</a><a class="here" href="07-deep-research.html">7</a><a href="08-search.html">8</a>
+  </nav>
+</div>
+
+<div class="shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a class="wordmark" href="01-notebook.html">
+      <span class="logo-pebbles"><span class="pebble"></span><span class="pebble"></span></span>
+      Open Notebook
+    </a>
+
+    <a class="btn-new" href="05-create-overlay.html">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+      Create
+      <span class="kbd">⌘J</span>
+    </a>
+
+    <nav class="nav-group">
+      <a class="nav-item" href="00-home.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7 8 2.5 13.5 7v5.5a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1z"/><path d="M6.5 13.5v-4h3v4"/></svg>
+        Home
+      </a>
+      <a class="nav-item active" href="01-notebook.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>
+        Notebooks
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path d="M5.5 6h5M5.5 8.5h5M5.5 11h3"/></svg>
+        Sources
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg>
+        Notes
+      </a>
+      <a class="nav-item" href="03-creations.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/><path d="m12.5 10.5.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></svg>
+        Creations
+      </a>
+      <a class="nav-item" href="08-search.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>
+        Search
+      </a>
+      <div class="nav-divider"></div>
+      <a class="nav-item chat-entry" href="04-global-chat.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13.5 8a5.5 5.5 0 1 0-2.2 4.4L13.5 13l-.5-2.2A5.47 5.47 0 0 0 13.5 8z"/></svg>
+        Chat
+        <span class="pebble"></span>
+      </a>
+    </nav>
+
+    <details class="nav-manage">
+      <summary>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 4 4 4-4 4"/></svg>
+        Manage
+      </summary>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 5.5 8 2.5l5.5 3L8 8.5zM2.5 8.2 8 11.2l5.5-3M2.5 10.9 8 13.9l5.5-3"/></svg>
+        Models
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 5h7M12.5 5h.5M3 11h.5M6 11h7"/><circle cx="11" cy="5" r="1.6"/><circle cx="4.7" cy="11" r="1.6"/></svg>
+        Transformations
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="2.2"/><path d="M8 2v1.6M8 12.4V14M2 8h1.6M12.4 8H14M3.8 3.8l1.1 1.1M11.1 11.1l1.1 1.1M12.2 3.8l-1.1 1.1M4.9 11.1l-1.1 1.1"/></svg>
+        Settings
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m6 4-3 4 3 4M10 4l3 4-3 4"/></svg>
+        Advanced
+      </a>
+    </details>
+
+    <div class="sidebar-foot">
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/></svg>
+        Quick actions
+        <span class="kbd">⌘K</span>
+      </button>
+      <button class="foot-item" id="theme-toggle" aria-pressed="false">
+        <svg id="icon-moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3 5.5 5.5 0 1 0 13 9.5z"/></svg>
+        <svg id="icon-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="display:none"><circle cx="8" cy="8" r="3"/><path d="M8 1.5V3M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M12.6 3.4l-1 1M4.4 11.6l-1 1"/></svg>
+        <span id="theme-label">Dark theme</span>
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c1.8 1.7 2.6 3.8 2.6 6S9.8 12.3 8 14C6.2 12.3 5.4 10.2 5.4 8S6.2 3.7 8 2z"/></svg>
+        English
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 2h-3A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14h3M10.5 11 14 8l-3.5-3M14 8H6"/></svg>
+        Sign out
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <header class="nb-header">
+      <div class="nb-id">
+        <div class="crumbs">
+          <span class="pebble"></span>
+          <a href="01-notebook.html">Notebooks</a><span class="sep">/</span>
+          <a href="01-notebook.html">The Attention Economy</a><span class="sep">/</span>
+          <span>Conversation</span>
+        </div>
+        <h1 class="nb-title">Deep Research</h1>
+        <div class="nb-meta">The agent investigates instead of answering <span class="dot"></span> anatomy of one deep question, all states shown</div>
+      </div>
+    </header>
+
+    <div class="workspace deep-page">
+
+      <!-- SOURCES — collapsed to a slim rail; this screen is about the conversation -->
+      <section class="panel rail">
+        <div class="panel-head">
+          <span class="panel-title">Sources</span>
+          <span class="panel-count">3 / 5</span>
+          <span class="spacer"></span>
+          <button class="icon-btn" title="Expand panel">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m6 4 4 4-4 4"/></svg>
+          </button>
+        </div>
+        <div class="panel-body">
+          <a class="rail-row selected" href="01-notebook.html" title="How Your Attention Is Sold">
+            <span class="src-type"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M6 4.5v7l6-3.5z"/></svg></span>
+            <span class="rail-title">How Your Attention Is Sold</span>
+            <span class="sel-dot"></span>
+          </a>
+          <a class="rail-row selected" href="02-source.html" title="Stolen Focus — Johann Hari (chapter notes)">
+            <span class="src-type t-pdf"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5L12.5 6v7A1.5 1.5 0 0 1 11 14.5H4A1.5 1.5 0 0 1 2.5 13V4A1.5 1.5 0 0 1 4 2.5z"/><path d="M9 2.5V6h3.5"/></svg></span>
+            <span class="rail-title">Stolen Focus — Johann Hari</span>
+            <span class="sel-dot"></span>
+          </a>
+          <a class="rail-row selected" href="01-notebook.html" title="The Cost of Context Switching — Cal Newport">
+            <span class="src-type t-web"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="8" r="5.5"/><path d="M2.5 8h11M8 2.5c1.7 1.6 2.5 3.5 2.5 5.5S9.7 11.9 8 13.5C6.3 11.9 5.5 10 5.5 8S6.3 4.1 8 2.5z"/></svg></span>
+            <span class="rail-title">The Cost of Context Switching</span>
+            <span class="sel-dot"></span>
+          </a>
+          <a class="rail-row" href="01-notebook.html" title="Deep Questions #312: Rebuilding Concentration">
+            <span class="src-type t-audio"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 6.5v3M5.5 4.5v7M8 3v10M10.5 5.5v5M13 7v2"/></svg></span>
+            <span class="rail-title">Deep Questions #312</span>
+            <span class="sel-dot off"></span>
+          </a>
+          <a class="rail-row" href="01-notebook.html" title="Attention Is All You Need">
+            <span class="src-type t-paper"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3.5 2.5h9v11h-9z"/><path d="M5.5 5h5M5.5 7.3h5M5.5 9.6h3"/></svg></span>
+            <span class="rail-title">Attention Is All You Need</span>
+            <span class="sel-dot off"></span>
+          </a>
+          <div class="rail-foot">Deep Research may read beyond the 3 selected — everything it uses shows up in the receipt.</div>
+        </div>
+      </section>
+
+      <!-- THE CONVERSATION -->
+      <section class="panel chat">
+        <div class="panel-head">
+          <span class="panel-title">Conversation</span>
+          <span class="spacer"></span>
+          <button class="scope-pill" title="Change scope">
+            <span class="pebble"></span>
+            Scope: this notebook
+            <span class="chev">▾</span>
+          </button>
+        </div>
+
+        <div class="panel-body chat-body">
+
+          <div class="msg user">
+            <div class="bubble">Is the collapse of attention span actually supported by evidence, or is it a moral panic? Check my sources against each other.</div>
+            <div class="deep-tag"><span class="pebble"></span>deep research · this question</div>
+          </div>
+
+          <!-- AGENT ACTIVITY — running state -->
+          <div class="activity">
+            <div class="act-head">
+              <span class="pebble"></span>
+              Researching
+              <span class="act-budget">2m 10s · 6/10 steps</span>
+            </div>
+
+            <div class="act-events">
+              <div class="evt">
+                <span class="tick"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8.5 3.2 3L13 4.5"/></svg></span>
+                Searching the notebook for attention-span measurements
+                <span class="evt-n">8 candidates</span>
+              </div>
+              <div class="evt">
+                <span class="tick"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8.5 3.2 3L13 4.5"/></svg></span>
+                Opened the strongest passages
+                <span class="evt-n">4 evidences</span>
+              </div>
+              <div class="evt now">
+                <span class="tick"><span class="dot-live"></span></span>
+                Comparing 3 sources on whether spans shrank or attention moved…
+              </div>
+            </div>
+
+            <!-- PERMISSION — external reach is opt-in -->
+            <div class="perm">
+              <div class="perm-title"><span class="pebble"></span>Search beyond your library?</div>
+              <p>The agent wants to query the web for workplace-distraction studies — your sources disagree on the numbers and none is primary.</p>
+              <div class="perm-actions">
+                <button class="btn-allow">Allow once</button>
+                <button class="btn-decline">Not in this session</button>
+              </div>
+            </div>
+
+            <details class="act-detail" open>
+              <summary>detail ▾</summary>
+              <div class="act-log">
+                <span class="lg-group"><b>queries run (2)</b><br>“attention span decline longitudinal” · “context switching cost measured”</span>
+                <span class="lg-group"><b>sources consulted (4)</b><br>Stolen Focus · Newport · How Your Attention Is Sold · Deep Questions #312</span>
+                <span class="lg-group"><b>evidences</b> — 14 opened · 9 discarded (off-topic or duplicate) · 5 kept<br><b>elapsed</b> — 2m 10s</span>
+              </div>
+            </details>
+
+            <div class="act-controls">
+              <button class="tool-pill">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="4.5" y="4.5" width="7" height="7" rx="1.5"/></svg>
+                Stop
+              </button>
+              <button class="tool-pill salvage">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8h8M7.5 4.5 11 8l-3.5 3.5M13.5 3.5v9"/></svg>
+                Answer with what you have
+              </button>
+              <button class="tool-pill salvage">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg>
+                Refine…
+              </button>
+            </div>
+          </div>
+
+          <!-- THE COMPLETED DEEP ANSWER -->
+          <div class="msg ai" style="max-width: 94%">
+            <div class="msg-agent"><span class="pebble"></span>Notebook · Deep</div>
+            <div class="act-done">
+              <span class="pebble"></span>
+              <span>deep research · done in 3m 24s · 8/10 steps · 2 web queries · 5 evidences kept · <a href="#">detail ↓</a></span>
+            </div>
+            <div class="bubble">
+              <p>The honest verdict is <em>both, in different places</em>. The strong claim — that human attention capacity has biologically shrunk — is not supported anywhere in your library. What is well supported is a behavioral shift: attention is being spent in ever-smaller slices. Hari is careful on exactly this point; his argument is environmental capture, not neurological decay <span class="cite n"><span class="pebble"></span><span class="no">1</span></span>.</p>
+
+              <p>The measured evidence is about fragmentation, not capacity. Newport's case rests on switch costs — “attention residue” means each interrupted block underperforms, so fragmented days feel like shrinking spans even when the underlying faculty is intact <span class="cite n"><span class="pebble"></span><span class="no">2</span></span>. The video supplies the motive: feeds are tuned for retention in millisecond auctions, so shorter slices are a design outcome, not a symptom <span class="cite ins"><span class="pebble"></span><span class="no">3</span></span>. A newly found study adds the missing primary data — screen-focus intervals among knowledge workers fell from around 2.5 minutes in 2004 to 47 seconds — measured behavior, on work devices, over two decades <span class="cite ext"><span class="pebble"></span>ics.uci.edu · Mark</span>.</p>
+
+              <p><span class="inferred">So the moral-panic framing and the crisis framing are both half right: capacity looks stable, but the environment now spends it in 47-second increments — which is a real, measurable loss even without any biological decline</span> <span class="cite inf">~ synthesis</span>.</p>
+            </div>
+
+            <div class="evidence-strip">
+              This answer drew on <b>4 sources</b><span class="sep"></span><b>1 external</b><span class="sep"></span><b>11 passages</b>
+              <a href="06-citations.html">View evidence →</a>
+            </div>
+
+            <div class="msg-tools">
+              <button class="tool-pill" title="Saving preserves the evidence bundle">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h8A1.5 1.5 0 0 1 13.5 4v9.5L8 10.8l-5.5 2.7V4A1.5 1.5 0 0 1 4 2.5z"/></svg>
+                Save answer
+              </button>
+              <button class="tool-pill">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 3v7M8 3 5.5 5.5M8 3l2.5 2.5M3 11v1.5A1.5 1.5 0 0 0 4.5 14h7a1.5 1.5 0 0 0 1.5-1.5V11"/></svg>
+                Copy
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="context-bar">
+          <b>3 sources</b><span class="sep"></span><b>1 note</b><span class="sep"></span>4.9K tokens
+          <span class="model-chip"><span class="pebble"></span>gpt-5.6-terra</span>
+        </div>
+
+        <div class="composer">
+          <div class="mode-switch" role="radiogroup" aria-label="Conversation mode">
+            <button class="mode-opt" role="radio" aria-checked="false" title="Fast, predictable — answers from the pre-curated context">Focused</button>
+            <button class="mode-opt on" role="radio" aria-checked="true" title="Investigates: searches iteratively, uses more tools and time">
+              <span class="pebble"></span>
+              Deep Research
+            </button>
+          </div>
+          <input type="text" placeholder="Ask a question worth investigating…" aria-label="Message">
+          <button class="btn-deep-once" title="Run this question deep — without switching the session">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.8 2 3.5 9h3.7l-1 5L11.5 7H7.8z"/></svg>
+          </button>
+          <button class="btn-send" title="Send">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5v-9M4 7.5l4-4 4 4"/></svg>
+          </button>
+        </div>
+        <div class="mode-hint"><span class="pebble"></span>Deep Research: takes longer · searches beyond the selected context</div>
+      </section>
+
+      <!-- ANNOTATION RAIL (meta — not part of the app UI) -->
+      <aside class="anno-rail" aria-label="Design annotations">
+        <div class="anno-head">Spec · deep research</div>
+
+        <div class="anno">
+          <span class="num">01 · Mode switcher</span>
+          Two efforts, one control, in the composer where the choice is made. Focused = fast, predictable, pre-curated context. Deep = investigates. The consequence line under the composer is the whole disclosure — no modal, no wizard.
+        </div>
+
+        <div class="anno">
+          <span class="num">02 · Per-question promotion</span>
+          The bolt beside send runs a single question deep without converting the session — the session default stays Focused; the promoted question carries its own quiet “deep research” tag under the bubble.
+        </div>
+
+        <div class="anno">
+          <span class="num">03 · Activity, not a tool log</span>
+          Default level = significant events, summarized: searched → found → opened → comparing. The grouped log (queries, sources, discards, elapsed) lives one click deeper, shown open here. The model’s private reasoning is never shown at any level.
+        </div>
+
+        <div class="anno">
+          <span class="num">04 · Permission to reach out</span>
+          External reach is opt-in, per request. The prompt says what it wants and why, offers “Allow once” or “Not in this session”, and declining just narrows the research — it never fails it.
+        </div>
+
+        <div class="anno">
+          <span class="num">05 · Always interruptible</span>
+          Quiet controls on the activity block: Stop discards, “Answer with what you have” salvages the evidence gathered so far into a normal cited answer, Refine… redirects mid-flight.
+        </div>
+
+        <div class="anno">
+          <span class="num">06 · Budget, only when relevant</span>
+          A tiny mono hint — elapsed time and step budget — appears while running and collapses into the summary strip when done. Never a progress bar pretending to know the future.
+        </div>
+
+        <div class="anno">
+          <span class="num">07 · Same citations, more effort</span>
+          The finished answer is dressed exactly like a Focused one — numbered chips, dashed external find with its “Add as source” story, honest ~synthesis, the receipt strip. Citation quality does not change between modes; only the effort allowed.
+        </div>
+
+        <div class="anno">
+          <span class="num">08 · Graceful degradation</span>
+          A local model without tool calling simply can’t investigate — Deep goes quiet, Focused remains. A hint, never an error:
+          <span class="sketch">
+            <span class="mode-switch"><span class="mode-opt on-lite">Focused</span><span class="mode-opt off">Deep Research</span></span>
+            <span class="sketch-cap">llama-local · no tool calling — Deep Research unavailable with this model</span>
+          </span>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  if (localStorage.getItem('dirD-theme') === 'dark') root.classList.add('dark');
+  var btn = document.getElementById('theme-toggle');
+  var moon = document.getElementById('icon-moon');
+  var sun = document.getElementById('icon-sun');
+  var label = document.getElementById('theme-label');
+  function sync() {
+    var dark = root.classList.contains('dark');
+    btn.setAttribute('aria-pressed', String(dark));
+    moon.style.display = dark ? 'none' : '';
+    sun.style.display = dark ? '' : 'none';
+    label.textContent = dark ? 'Light theme' : 'Dark theme';
+  }
+  btn.addEventListener('click', function () {
+    root.classList.toggle('dark');
+    localStorage.setItem('dirD-theme', root.classList.contains('dark') ? 'dark' : 'light');
+    sync();
+  });
+  sync();
+
+  var input = document.querySelector('.composer input');
+  var send = document.querySelector('.btn-send');
+  if (send) {
+    send.addEventListener('click', function () {
+      if (!input.value.trim()) return;
+      input.value = '';
+      send.animate([{ transform: 'scale(1)' }, { transform: 'scale(0.86)' }, { transform: 'scale(1)' }], { duration: 220, easing: 'ease-out' });
+      input.focus();
+    });
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') send.click(); });
+  }
+})();
+</script>
+</body>
+</html>

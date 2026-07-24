@@ -1,0 +1,251 @@
+/* ============================================================================
+   OPEN NOTEBOOK — DESIGN FOUNDATION TOKENS
+   Direction: Variant I — "Quiet Green"  (H's skeleton, de-alarmed & squared)
+
+   Single source of truth, distilled from style-tiles/i-quiet-green.html (canon)
+   and the nine concepts-h/ screens, tie-broken by 02-ux-architecture.md.
+
+   The laws, in one breath:
+     fern acts · teal speaks (AI/system voice) · red destroys, and only destroys
+     warn is clay, never the action hues · color never washes a reading surface
+     hairline borders, near-zero shadows — popovers own the one real shadow
+     geometry is squared, 4–6px, floor is 4 · mono is for data, not prose
+
+   Layers (top of file = most raw, bottom = most semantic):
+     1. core palette      raw named hues (fern, sage, gold, teal, …)
+     2. semantic          surface / ink / hairline / action / danger / warn
+     3. content-type      per-source-type hues (video, pdf, web, audio, …)
+     4. evidence classes  citation chip + popover colors (source/note/derived/…)
+     5. context states    per-source context inclusion (full / insights / off)
+     6. shape             radii
+     7. type              families + scale
+     8. space             spacing scale
+     9. depth             shadows (incl. the popover-only rule)
+    10. motion            durations + easing
+
+   Dark theme: `.dark` on the <html> element overrides ONLY the raw layers
+   (palette, semantic raws, shadows). Every alias defined with var() re-resolves
+   automatically — never duplicate aliases into the dark block.
+   ========================================================================== */
+
+:root {
+  /* ------------------------------------------------------------------
+     1 · CORE PALETTE — the owned hues, red-free
+     Raw layer. Components should normally reach for the semantic /
+     type / evidence aliases below instead of these.
+     ------------------------------------------------------------------ */
+  --fern: #2E6B4F;            /* THE action green — where you act */
+  --fern-deep: #245740;
+  --fern-tint: #DFEAE2;
+
+  --sage: #5E7A54;            /* earthier green — gathering / web */
+  --sage-deep: #47603F;
+  --sage-tint: #E5EBDC;
+
+  --gold: #A97B12;            /* honey — notes & pdf */
+  --gold-deep: #7C5A05;
+  --gold-tint: #F3EAD3;
+
+  --teal: #0E7268;            /* AI / system voice */
+  --teal-deep: #095A51;
+  --teal-tint: #DDECE8;
+
+  --plum: #5D4991;            /* video; rare seasoning (model chip, kbd) */
+  --plum-tint: #EAE6F3;
+
+  --mauve: #8D5B80;           /* audio — dusty, pinkish */
+  --mauve-deep: #714566;
+  --mauve-tint: #F1E5EE;
+
+  --slate: #4E6B84;           /* paper / external — cool neutral */
+  --slate-deep: #3A5468;
+  --slate-tint: #E1E8EE;
+
+  --violet: #6E51A6;          /* derived insight — distinct from audio mauve */
+  --violet-deep: #57408A;
+  --violet-tint: #EBE5F5;
+
+  --clay: #B0451F;            /* warn / degraded — clay, never an action hue */
+  --clay-deep: #93330F;
+  --clay-tint: #F5E4DB;
+
+  /* ------------------------------------------------------------------
+     2 · SEMANTIC — surfaces, ink, hairlines, action, danger, warn
+     ------------------------------------------------------------------ */
+  /* surfaces — neutral, never washed with color */
+  --bg: #F5F5F2;              /* app canvas */
+  --bg-deep: #EEEEE9;         /* recessed canvas (rails, wells) */
+  --surface: #FEFEFC;         /* panels, cards — the reading surface */
+  --surface-raised: #FFFFFF;  /* hover targets, popovers, inputs */
+  --surface-recessed: #F4F4F0;/* recessed area within a panel */
+  --surface-sunken: #ECECE7;  /* deepest step (kbd, wells within recessed) */
+
+  /* ink ramp */
+  --ink: #23252A;             /* primary text */
+  --ink-soft: #565A61;        /* secondary text */
+  --ink-faint: #878B92;       /* metadata, placeholders */
+  --ink-faintest: #A8ABB1;    /* disabled, ghost glyphs */
+
+  /* hairlines — honest 1px borders do the separating */
+  --line: #E0E0DA;
+  --line-soft: #E8E8E2;       /* sub-separators within a card */
+  --line-strong: #23252A;     /* emphasis border = ink, not a new gray */
+
+  /* action — fern is THE action color (send included) */
+  --primary: #2E6B4F;
+  --primary-hover: #245740;
+  --on-primary: #F1F8F3;
+
+  /* destructive / error — the ONLY place red is allowed */
+  --danger: #B0432D;
+  --danger-deep: #93341F;
+  --danger-tint: #F5E4DF;
+
+  /* warn / degraded — clay family, distinct from danger red */
+  --warn: var(--clay);
+  --warn-deep: var(--clay-deep);
+  --warn-tint: var(--clay-tint);
+
+  /* focus */
+  --focus-ring: 0 0 0 3px var(--teal-tint);
+
+  /* ------------------------------------------------------------------
+     3 · CONTENT-TYPE HUES — dots, ticks, chips only; never washes
+     ------------------------------------------------------------------ */
+  --type-video: var(--plum);        --type-video-soft: var(--plum-tint);
+  --type-pdf: var(--gold);          --type-pdf-soft: var(--gold-tint);
+  --type-web: var(--sage);          --type-web-soft: var(--sage-tint);
+  --type-audio: var(--mauve);       --type-audio-soft: var(--mauve-tint);
+  --type-paper: var(--slate);       --type-paper-soft: var(--slate-tint);
+  --type-note: var(--gold);         --type-note-soft: var(--gold-tint);
+  --type-ai: var(--teal);           --type-ai-soft: var(--teal-tint);
+  --type-insight: var(--teal);      --type-insight-soft: var(--teal-tint);
+
+  /* ------------------------------------------------------------------
+     4 · EVIDENCE CLASSES — citation chips, popovers, cited passages
+     one pill skeleton, one distinguishing dress per class
+     ------------------------------------------------------------------ */
+  --cite-source: var(--teal);       --cite-source-deep: var(--teal-deep);
+  --cite-note: var(--gold);         --cite-note-deep: var(--gold-deep);
+  --cite-derived: var(--violet);    --cite-derived-deep: var(--violet-deep);
+  --cite-external: var(--slate);    --cite-external-deep: var(--slate-deep);
+  --cite-synthesis: var(--ink-faint);      /* hollow chip — no direct span */
+  --cite-warn: var(--clay);                /* stale / degraded citation */
+
+  /* teal evidence washes (hand-tuned — the one sanctioned tinted text bg) */
+  --excerpt-wash: #ECF3F0;                 /* cited passage, very soft teal */
+  --best-match: rgba(14, 114, 104, .16);   /* best-match sentence, a step stronger */
+  --best-match-ring: rgba(14, 114, 104, .16);
+
+  /* ------------------------------------------------------------------
+     5 · CONTEXT STATES — per-source inclusion (spine + ctx chip)
+     full = fern · insights-only = gold · off = neutral + dimmed
+     ------------------------------------------------------------------ */
+  --ctx-full: var(--fern);          --ctx-full-tint: var(--fern-tint);
+  --ctx-insights: var(--gold);      --ctx-insights-tint: var(--gold-tint);
+  --ctx-off-ink: var(--ink-soft);   --ctx-off-bg: var(--surface-raised);
+
+  /* ------------------------------------------------------------------
+     6 · SHAPE — squared: instrument, not toy; floor is 4px
+     ------------------------------------------------------------------ */
+  --r-xl: 6px;                /* panels, overlays */
+  --r-lg: 5px;                /* large cards */
+  --r-md: 5px;                /* cards, controls, inputs */
+  --r-sm: 4px;                /* chips, small buttons */
+  --r-pill: 4px;              /* "pills" are squared too — never round */
+
+  /* ------------------------------------------------------------------
+     7 · TYPE — display for identity, body for everything, mono for data
+     ------------------------------------------------------------------ */
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Trebuchet MS", sans-serif;
+  --font-body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, monospace;
+
+  --fs-hero: 24px;            /* page hero / notebook title (ratified 2026-07-24) */
+  --fs-title: 15.5px;         /* panel & card titles */
+  --fs-body: 13.5px;          /* reading text */
+  --fs-small: 12px;           /* metadata, nav, labels */
+  --fs-micro: 10.5px;         /* chips, ticks, kbd */
+
+  /* ------------------------------------------------------------------
+     8 · SPACE
+     ------------------------------------------------------------------ */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 10px;
+  --sp-4: 14px;
+  --sp-5: 18px;
+  --sp-6: 22px;
+  --sp-7: 28px;
+
+  /* ------------------------------------------------------------------
+     9 · DEPTH — flat clarity. Hairlines separate; shadows barely exist.
+     THE POPOVER RULE: --shadow-pop is the only true shadow in the
+     system and popovers own it. Overlays (modal sheets) use
+     --shadow-overlay. Everything else is --shadow-soft/-lift at most.
+     ------------------------------------------------------------------ */
+  --shadow-soft: 0 1px 2px rgba(35,37,42,.06);     /* panels, cards */
+  --shadow-lift: 0 1px 3px rgba(35,37,42,.10);     /* hover lift */
+  --shadow-pop: 0 1px 2px rgba(35,37,42,.08), 0 8px 26px rgba(35,37,42,.13);
+  --shadow-overlay: 0 2px 6px rgba(35,37,42,.10), 0 16px 44px rgba(35,37,42,.18);
+
+  /* ------------------------------------------------------------------
+     10 · MOTION — quick and quiet; theme cross-fade is the slow one
+     ------------------------------------------------------------------ */
+  --motion-fast: .12s;        /* hovers on small controls */
+  --motion-base: .15s;        /* standard control transitions */
+  --motion-slow: .25s;        /* theme change, large surface fades */
+  --ease: ease;
+}
+
+/* ============================================================================
+   DARK — overrides raw layers only; var() aliases re-resolve on their own
+   ========================================================================== */
+.dark {
+  /* 1 · core palette */
+  --fern: #55B285;   --fern-deep: #6CC298;   --fern-tint: #1B2F25;
+  --sage: #93B084;   --sage-deep: #A8C299;   --sage-tint: #232B1D;
+  --gold: #CFA13E;   --gold-deep: #DDB55F;   --gold-tint: #322B1B;
+  --teal: #3FB3A5;   --teal-deep: #64C5B9;   --teal-tint: #16302C;
+  --plum: #A290D3;   --plum-tint: #29253A;
+  --mauve: #C892BA;  --mauve-deep: #D6A8CB;  --mauve-tint: #322230;
+  --slate: #8FAFC8;  --slate-deep: #A5C1D6;  --slate-tint: #212B34;
+  --violet: #A995DB; --violet-deep: #BCAAE6; --violet-tint: #2B2540;
+  --clay: #F08A5C;   --clay-deep: #F5A07A;   --clay-tint: #35211A;
+
+  /* 2 · semantic raws */
+  --bg: #17181B;
+  --bg-deep: #121316;
+  --surface: #1E2024;
+  --surface-raised: #24262B;
+  --surface-recessed: #24262B;
+  --surface-sunken: #2B2D33;
+
+  --ink: #ECEDEA;
+  --ink-soft: #A9ACB1;
+  --ink-faint: #74777D;
+  --ink-faintest: #63666C;
+
+  --line: #2E3036;
+  --line-soft: #26282D;
+  --line-strong: #ECEDEA;
+
+  --primary: #3D8E67;
+  --primary-hover: #479E74;
+  --on-primary: #ECF7F0;
+
+  --danger: #DF7C63;
+  --danger-deep: #E9937D;
+  --danger-tint: #37231D;
+
+  /* 4 · evidence washes (hand-tuned raws) */
+  --excerpt-wash: #1C2A28;
+  --best-match: rgba(63, 179, 165, .20);
+  --best-match-ring: rgba(63, 179, 165, .20);
+
+  /* 9 · depth */
+  --shadow-soft: 0 1px 2px rgba(0,0,0,.35);
+  --shadow-lift: 0 1px 3px rgba(0,0,0,.45);
+  --shadow-pop: 0 1px 2px rgba(0,0,0,.45), 0 10px 30px rgba(0,0,0,.5);
+  --shadow-overlay: 0 2px 6px rgba(0,0,0,.4), 0 20px 52px rgba(0,0,0,.55);
+}

@@ -1,0 +1,1313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UX Concept — Home · Direction I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DIRECTION I FOUNDATION — QUIET GREEN (H, de-alarmed & squared)
+   Neutral near-fresh canvas, honest 1px borders, near-zero
+   shadows. Red retired to destructive-only; fern green marks
+   where you act. Geometry squared to 4–6px. Each panel speaks
+   ONLY its hue via a header tick and tinted action.
+   Shared across all UX concept screens (Direction I set).
+   ============================================================ */
+/* ===== CANONICAL TOKENS — verbatim mirror of ../foundation/tokens.css ===== */
+:root {
+  /* ------------------------------------------------------------------
+     1 · CORE PALETTE — the owned hues, red-free
+     Raw layer. Components should normally reach for the semantic /
+     type / evidence aliases below instead of these.
+     ------------------------------------------------------------------ */
+  --fern: #2E6B4F;            /* THE action green — where you act */
+  --fern-deep: #245740;
+  --fern-tint: #DFEAE2;
+
+  --sage: #5E7A54;            /* earthier green — gathering / web */
+  --sage-deep: #47603F;
+  --sage-tint: #E5EBDC;
+
+  --gold: #A97B12;            /* honey — notes & pdf */
+  --gold-deep: #7C5A05;
+  --gold-tint: #F3EAD3;
+
+  --teal: #0E7268;            /* AI / system voice */
+  --teal-deep: #095A51;
+  --teal-tint: #DDECE8;
+
+  --plum: #5D4991;            /* video; rare seasoning (model chip, kbd) */
+  --plum-tint: #EAE6F3;
+
+  --mauve: #8D5B80;           /* audio — dusty, pinkish */
+  --mauve-deep: #714566;
+  --mauve-tint: #F1E5EE;
+
+  --slate: #4E6B84;           /* paper / external — cool neutral */
+  --slate-deep: #3A5468;
+  --slate-tint: #E1E8EE;
+
+  --violet: #6E51A6;          /* derived insight — distinct from audio mauve */
+  --violet-deep: #57408A;
+  --violet-tint: #EBE5F5;
+
+  --clay: #B0451F;            /* warn / degraded — clay, never an action hue */
+  --clay-deep: #93330F;
+  --clay-tint: #F5E4DB;
+
+  /* ------------------------------------------------------------------
+     2 · SEMANTIC — surfaces, ink, hairlines, action, danger, warn
+     ------------------------------------------------------------------ */
+  /* surfaces — neutral, never washed with color */
+  --bg: #F5F5F2;              /* app canvas */
+  --bg-deep: #EEEEE9;         /* recessed canvas (rails, wells) */
+  --surface: #FEFEFC;         /* panels, cards — the reading surface */
+  --surface-raised: #FFFFFF;  /* hover targets, popovers, inputs */
+  --surface-recessed: #F4F4F0;/* recessed area within a panel */
+  --surface-sunken: #ECECE7;  /* deepest step (kbd, wells within recessed) */
+
+  /* ink ramp */
+  --ink: #23252A;             /* primary text */
+  --ink-soft: #565A61;        /* secondary text */
+  --ink-faint: #878B92;       /* metadata, placeholders */
+  --ink-faintest: #A8ABB1;    /* disabled, ghost glyphs */
+
+  /* hairlines — honest 1px borders do the separating */
+  --line: #E0E0DA;
+  --line-soft: #E8E8E2;       /* sub-separators within a card */
+  --line-strong: #23252A;     /* emphasis border = ink, not a new gray */
+
+  /* action — fern is THE action color (send included) */
+  --primary: #2E6B4F;
+  --primary-hover: #245740;
+  --on-primary: #F1F8F3;
+
+  /* destructive / error — the ONLY place red is allowed */
+  --danger: #B0432D;
+  --danger-deep: #93341F;
+  --danger-tint: #F5E4DF;
+
+  /* warn / degraded — clay family, distinct from danger red */
+  --warn: var(--clay);
+  --warn-deep: var(--clay-deep);
+  --warn-tint: var(--clay-tint);
+
+  /* focus */
+  --focus-ring: 0 0 0 3px var(--teal-tint);
+
+  /* ------------------------------------------------------------------
+     3 · CONTENT-TYPE HUES — dots, ticks, chips only; never washes
+     ------------------------------------------------------------------ */
+  --type-video: var(--plum);        --type-video-soft: var(--plum-tint);
+  --type-pdf: var(--gold);          --type-pdf-soft: var(--gold-tint);
+  --type-web: var(--sage);          --type-web-soft: var(--sage-tint);
+  --type-audio: var(--mauve);       --type-audio-soft: var(--mauve-tint);
+  --type-paper: var(--slate);       --type-paper-soft: var(--slate-tint);
+  --type-note: var(--gold);         --type-note-soft: var(--gold-tint);
+  --type-ai: var(--teal);           --type-ai-soft: var(--teal-tint);
+  --type-insight: var(--teal);      --type-insight-soft: var(--teal-tint);
+
+  /* ------------------------------------------------------------------
+     4 · EVIDENCE CLASSES — citation chips, popovers, cited passages
+     one pill skeleton, one distinguishing dress per class
+     ------------------------------------------------------------------ */
+  --cite-source: var(--teal);       --cite-source-deep: var(--teal-deep);
+  --cite-note: var(--gold);         --cite-note-deep: var(--gold-deep);
+  --cite-derived: var(--violet);    --cite-derived-deep: var(--violet-deep);
+  --cite-external: var(--slate);    --cite-external-deep: var(--slate-deep);
+  --cite-synthesis: var(--ink-faint);      /* hollow chip — no direct span */
+  --cite-warn: var(--clay);                /* stale / degraded citation */
+
+  /* teal evidence washes (hand-tuned — the one sanctioned tinted text bg) */
+  --excerpt-wash: #ECF3F0;                 /* cited passage, very soft teal */
+  --best-match: rgba(14, 114, 104, .16);   /* best-match sentence, a step stronger */
+  --best-match-ring: rgba(14, 114, 104, .16);
+
+  /* ------------------------------------------------------------------
+     5 · CONTEXT STATES — per-source inclusion (spine + ctx chip)
+     full = fern · insights-only = gold · off = neutral + dimmed
+     ------------------------------------------------------------------ */
+  --ctx-full: var(--fern);          --ctx-full-tint: var(--fern-tint);
+  --ctx-insights: var(--gold);      --ctx-insights-tint: var(--gold-tint);
+  --ctx-off-ink: var(--ink-soft);   --ctx-off-bg: var(--surface-raised);
+
+  /* ------------------------------------------------------------------
+     6 · SHAPE — squared: instrument, not toy; floor is 4px
+     ------------------------------------------------------------------ */
+  --r-xl: 6px;                /* panels, overlays */
+  --r-lg: 5px;                /* large cards */
+  --r-md: 5px;                /* cards, controls, inputs */
+  --r-sm: 4px;                /* chips, small buttons */
+  --r-pill: 4px;              /* "pills" are squared too — never round */
+
+  /* ------------------------------------------------------------------
+     7 · TYPE — display for identity, body for everything, mono for data
+     ------------------------------------------------------------------ */
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Trebuchet MS", sans-serif;
+  --font-body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, monospace;
+
+  --fs-hero: 24px;            /* page hero / notebook title (ratified 2026-07-24) */
+  --fs-title: 15.5px;         /* panel & card titles */
+  --fs-body: 13.5px;          /* reading text */
+  --fs-small: 12px;           /* metadata, nav, labels */
+  --fs-micro: 10.5px;         /* chips, ticks, kbd */
+
+  /* ------------------------------------------------------------------
+     8 · SPACE
+     ------------------------------------------------------------------ */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 10px;
+  --sp-4: 14px;
+  --sp-5: 18px;
+  --sp-6: 22px;
+  --sp-7: 28px;
+
+  /* ------------------------------------------------------------------
+     9 · DEPTH — flat clarity. Hairlines separate; shadows barely exist.
+     THE POPOVER RULE: --shadow-pop is the only true shadow in the
+     system and popovers own it. Overlays (modal sheets) use
+     --shadow-overlay. Everything else is --shadow-soft/-lift at most.
+     ------------------------------------------------------------------ */
+  --shadow-soft: 0 1px 2px rgba(35,37,42,.06);     /* panels, cards */
+  --shadow-lift: 0 1px 3px rgba(35,37,42,.10);     /* hover lift */
+  --shadow-pop: 0 1px 2px rgba(35,37,42,.08), 0 8px 26px rgba(35,37,42,.13);
+  --shadow-overlay: 0 2px 6px rgba(35,37,42,.10), 0 16px 44px rgba(35,37,42,.18);
+
+  /* ------------------------------------------------------------------
+     10 · MOTION — quick and quiet; theme cross-fade is the slow one
+     ------------------------------------------------------------------ */
+  --motion-fast: .12s;        /* hovers on small controls */
+  --motion-base: .15s;        /* standard control transitions */
+  --motion-slow: .25s;        /* theme change, large surface fades */
+  --ease: ease;
+}
+
+/* ============================================================================
+   DARK — overrides raw layers only; var() aliases re-resolve on their own
+   ========================================================================== */
+.dark {
+  /* 1 · core palette */
+  --fern: #55B285;   --fern-deep: #6CC298;   --fern-tint: #1B2F25;
+  --sage: #93B084;   --sage-deep: #A8C299;   --sage-tint: #232B1D;
+  --gold: #CFA13E;   --gold-deep: #DDB55F;   --gold-tint: #322B1B;
+  --teal: #3FB3A5;   --teal-deep: #64C5B9;   --teal-tint: #16302C;
+  --plum: #A290D3;   --plum-tint: #29253A;
+  --mauve: #C892BA;  --mauve-deep: #D6A8CB;  --mauve-tint: #322230;
+  --slate: #8FAFC8;  --slate-deep: #A5C1D6;  --slate-tint: #212B34;
+  --violet: #A995DB; --violet-deep: #BCAAE6; --violet-tint: #2B2540;
+  --clay: #F08A5C;   --clay-deep: #F5A07A;   --clay-tint: #35211A;
+
+  /* 2 · semantic raws */
+  --bg: #17181B;
+  --bg-deep: #121316;
+  --surface: #1E2024;
+  --surface-raised: #24262B;
+  --surface-recessed: #24262B;
+  --surface-sunken: #2B2D33;
+
+  --ink: #ECEDEA;
+  --ink-soft: #A9ACB1;
+  --ink-faint: #74777D;
+  --ink-faintest: #63666C;
+
+  --line: #2E3036;
+  --line-soft: #26282D;
+  --line-strong: #ECEDEA;
+
+  --primary: #3D8E67;
+  --primary-hover: #479E74;
+  --on-primary: #ECF7F0;
+
+  --danger: #DF7C63;
+  --danger-deep: #E9937D;
+  --danger-tint: #37231D;
+
+  /* 4 · evidence washes (hand-tuned raws) */
+  --excerpt-wash: #1C2A28;
+  --best-match: rgba(63, 179, 165, .20);
+  --best-match-ring: rgba(63, 179, 165, .20);
+
+  /* 9 · depth */
+  --shadow-soft: 0 1px 2px rgba(0,0,0,.35);
+  --shadow-lift: 0 1px 3px rgba(0,0,0,.45);
+  --shadow-pop: 0 1px 2px rgba(0,0,0,.45), 0 10px 30px rgba(0,0,0,.5);
+  --shadow-overlay: 0 2px 6px rgba(0,0,0,.4), 0 20px 52px rgba(0,0,0,.55);
+}
+/* ===== END CANONICAL TOKENS ===== */
+
+/* ===== LEGACY NAME ADAPTER — this file's Gen-A var names resolved onto the
+   canonical tokens above (names only; every value lives in the mirror). ===== */
+:root, .dark {
+  --canvas: var(--bg);
+  --canvas-deep: var(--bg-deep);
+  --surface-2: var(--surface-recessed);
+  --surface-3: var(--surface-sunken);
+  --raised: var(--surface-raised);
+  --hairline: var(--line);
+  --hairline-soft: var(--line-soft);
+  --ink-2: var(--ink-soft);
+  --ink-3: var(--ink-faint);
+  /* legacy --ink-faint (lightest step) is renamed in-place to --ink-faintest */
+  --primary-ink: var(--on-primary);
+  --c-video: var(--type-video);   --c-video-soft: var(--type-video-soft);
+  --c-honey: var(--type-pdf);     --c-honey-soft: var(--type-pdf-soft);
+  --c-sage: var(--type-web);      --c-sage-soft: var(--type-web-soft);
+  --c-audio: var(--type-audio);   --c-audio-soft: var(--type-audio-soft);
+  --c-paper: var(--type-paper);   --c-paper-soft: var(--type-paper-soft);
+  --c-note: var(--type-note);     --c-note-soft: var(--type-note-soft);
+  --c-ai: var(--type-ai);         --c-ai-soft: var(--type-ai-soft);
+  --c-insight: var(--type-insight); --c-insight-soft: var(--type-insight-soft);
+  --c-warn: var(--warn);
+  --shadow-panel: var(--shadow-soft);
+  --shadow-card: var(--shadow-soft);
+  --r-panel: var(--r-xl);
+  --r-card: var(--r-md);
+  --r-ctl: var(--r-md);
+  --font-sans: var(--font-body);
+  --fs-meta: var(--fs-small);
+  /* legacy --fs-title (page hero) is renamed in-place to --fs-hero */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  color: var(--ink);
+  background: var(--canvas);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-width: 1000px;
+  transition: background-color .25s ease, color .25s ease;
+}
+::selection { background: var(--teal-tint); color: var(--ink); }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+input, textarea { font: inherit; color: inherit; }
+::placeholder { color: var(--ink-faintest); }
+
+.pebble { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex: none; }
+
+/* ---- tile banner (H: ink bar, tri-hue quiet) ---- */
+.tile-banner {
+  display: flex; align-items: center; gap: var(--sp-3);
+  padding: 7px var(--sp-5);
+  font-size: var(--fs-meta);
+  background: var(--ink);
+  color: var(--canvas);
+  flex: none;
+  letter-spacing: .02em;
+}
+.dark .tile-banner { background: #0E0F11; color: var(--ink-2); }
+.tile-banner strong { font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: var(--fs-micro); }
+.tile-banner span { opacity: .68; font-size: var(--fs-meta); }
+.tile-banner .d-link {
+  opacity: .55; font-weight: 600; white-space: nowrap; font-size: var(--fs-micro);
+}
+.tile-banner .d-link:hover { opacity: 1; text-decoration: underline; }
+.banner-nav { margin-left: auto; display: flex; gap: 4px; }
+.banner-nav a {
+  width: 21px; height: 21px; border-radius: 5px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 10.5px; opacity: .65;
+  transition: background .15s ease, opacity .15s ease;
+}
+.banner-nav a:hover { background: rgba(255,255,255,.14); opacity: 1; }
+.dark .banner-nav a:hover { background: rgba(255,255,255,.08); }
+.banner-nav a.here { background: var(--primary); color: var(--primary-ink); opacity: 1; }
+
+/* ---- shell / sidebar ---- */
+.shell { flex: 1; display: flex; min-height: 0; }
+.sidebar {
+  width: 232px; flex: none;
+  background: var(--canvas-deep);
+  border-right: 1px solid var(--hairline);
+  display: flex; flex-direction: column;
+  padding: var(--sp-5) var(--sp-4) var(--sp-4);
+  gap: var(--sp-2);
+  overflow-y: auto;
+}
+.wordmark {
+  display: flex; align-items: center; gap: 9px;
+  padding: 2px var(--sp-2) var(--sp-5);
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 15px; letter-spacing: -0.01em;
+}
+.logo-pebbles { display: flex; gap: 3px; align-items: center; }
+/* the tri-hue mark recomposed: fern / gold / teal — no red left */
+.logo-pebbles .pebble { width: 9px; height: 9px; border-radius: 3px; }
+.logo-pebbles .pebble:nth-child(1) { background: var(--fern); }
+.logo-pebbles .pebble:nth-child(2) { background: var(--gold); }
+.logo-pebbles .pebble:nth-child(3) { background: var(--teal); }
+
+.btn-new {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  height: 38px; margin: 0 var(--sp-2) var(--sp-4);
+  border-radius: var(--r-card);
+  background: var(--primary); color: var(--primary-ink);
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 13.5px; letter-spacing: .01em;
+  transition: background .15s ease;
+}
+.btn-new:hover { background: var(--primary-hover); }
+.btn-new:active { filter: brightness(.94); }
+.btn-new svg { width: 14px; height: 14px; }
+.btn-new .kbd { background: rgba(255,255,255,.18); color: inherit; margin-left: 2px; box-shadow: none; }
+.dark .btn-new .kbd { background: rgba(0,0,0,.22); }
+
+.nav-group { display: flex; flex-direction: column; gap: 2px; margin-bottom: var(--sp-3); }
+.nav-label {
+  padding: var(--sp-2) var(--sp-3) 5px;
+  font-size: var(--fs-micro); font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-faintest);
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 7px var(--sp-3);
+  border-radius: var(--r-ctl);
+  color: var(--ink-2); font-weight: 500; font-size: 13px;
+  position: relative;
+  transition: background .12s ease, color .12s ease;
+  text-align: left;
+}
+.nav-item svg { width: 15px; height: 15px; flex: none; opacity: .85; }
+.nav-item:hover { background: var(--surface); color: var(--ink); }
+.nav-item.active {
+  background: var(--raised);
+  color: var(--ink); font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--hairline);
+}
+.nav-item.active::before {
+  content: ""; position: absolute;
+  left: -6px; top: 7px; bottom: 7px; width: 3px;
+  border-radius: 2px; background: var(--fern);
+}
+/* color-as-affordance: each destination's icon speaks its hue */
+.nav-group > a:nth-of-type(2) svg { color: var(--teal); }      /* Notebooks */
+.nav-group > a:nth-of-type(3) svg { color: var(--c-sage); }    /* Sources */
+.nav-group > a:nth-of-type(4) svg { color: var(--gold); }      /* Notes */
+.nav-group > a:nth-of-type(5) svg { color: var(--c-audio); }   /* Creations */
+.nav-item .nav-hint {
+  margin-left: auto; font-size: var(--fs-micro); color: var(--ink-faintest); font-weight: 500;
+}
+.nav-divider { height: 1px; background: var(--hairline); margin: var(--sp-2) var(--sp-3); }
+.nav-item.chat-entry { color: var(--ink-3); }
+.nav-item.chat-entry:hover { color: var(--ink); }
+.nav-item.chat-entry svg { color: var(--teal); }
+.nav-item.chat-entry .pebble { width: 6px; height: 6px; background: var(--teal); margin-left: auto; }
+
+.nav-manage { margin-top: var(--sp-1); }
+.nav-manage summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  padding: var(--sp-2) var(--sp-3) 5px;
+  font-size: var(--fs-micro); font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-faintest);
+  transition: color .12s ease;
+}
+.nav-manage summary:hover { color: var(--ink-3); }
+.nav-manage summary::-webkit-details-marker { display: none; }
+.nav-manage summary svg { width: 9px; height: 9px; transition: transform .2s ease; }
+.nav-manage[open] summary svg { transform: rotate(90deg); }
+.nav-manage .nav-item { padding: 6px var(--sp-3); font-size: var(--fs-meta); color: var(--ink-3); }
+.nav-manage .nav-item svg { width: 14px; height: 14px; }
+
+.sidebar-foot {
+  margin-top: auto; padding-top: var(--sp-4);
+  border-top: 1px solid var(--hairline);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.foot-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px var(--sp-3); border-radius: var(--r-ctl);
+  color: var(--ink-3); font-size: 12.5px; font-weight: 500;
+  transition: background .12s ease, color .12s ease;
+  width: 100%; text-align: left;
+}
+.foot-item:hover { background: var(--surface); color: var(--ink); }
+.foot-item svg { width: 14px; height: 14px; opacity: .8; }
+.kbd {
+  margin-left: auto;
+  font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+  padding: 2px 6px; border-radius: 4px;
+  background: var(--plum-tint); color: var(--plum);
+  letter-spacing: .03em;
+}
+
+/* ---- main / header ---- */
+.main {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column;
+  padding: var(--sp-5) var(--sp-6) var(--sp-5);
+  gap: var(--sp-5);
+}
+.nb-header { display: flex; align-items: flex-start; gap: var(--sp-5); padding: 0 var(--sp-1); }
+.nb-id { flex: 1; min-width: 0; }
+.crumbs {
+  font-size: var(--fs-meta); color: var(--ink-faintest); font-weight: 500;
+  display: flex; align-items: center; gap: 7px; margin-bottom: 6px; flex-wrap: wrap;
+}
+.crumbs a { color: var(--teal); font-weight: 600; }
+.crumbs a:hover { text-decoration: underline; }
+.crumbs .sep { color: var(--ink-faintest); }
+.crumbs .pebble { background: var(--teal); width: 6px; height: 6px; }
+.nb-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero); font-weight: 700;
+  letter-spacing: -0.02em; line-height: 1.1;
+}
+/* signature: one short flat fern underline — one hue, no show */
+.nb-title::after {
+  content: ""; display: block;
+  width: 56px; height: 3px; border-radius: 1px;
+  margin-top: 7px;
+  background: var(--fern);
+}
+.nb-desc {
+  margin-top: 10px; font-size: 13px; color: var(--ink-2);
+  display: inline-flex; align-items: center; gap: 8px;
+  border-bottom: 1px dashed var(--hairline); padding-bottom: 3px;
+  cursor: text; transition: border-color .15s ease;
+}
+.nb-desc:hover { border-bottom-color: var(--gold); }
+.nb-desc svg { width: 12px; height: 12px; opacity: 0; transition: opacity .15s ease; color: var(--ink-faintest); }
+.nb-desc:hover svg { opacity: .8; }
+.nb-meta { margin-top: 8px; font-size: var(--fs-meta); color: var(--ink-faintest); display: flex; gap: 8px; align-items: center; }
+.nb-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faintest); }
+.nb-actions { display: flex; gap: var(--sp-2); padding-top: 6px; }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 13px; border-radius: var(--r-card);
+  font-size: 12.5px; font-weight: 600; color: var(--ink-2);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  transition: box-shadow .12s ease, color .12s ease, background .12s ease;
+}
+.btn-ghost:hover { box-shadow: inset 0 0 0 1px var(--ink-3); color: var(--ink); }
+/* red means delete — and only delete */
+.btn-ghost.danger:hover { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger-deep); background: var(--danger-tint); }
+.dark .btn-ghost.danger:hover { color: var(--danger); }
+.btn-ghost svg { width: 13px; height: 13px; }
+
+/* ---- panels: neutral surfaces, honest borders; identity lives in
+       the header — hue tick + icon-hue, never a background ---- */
+.workspace { flex: 1; min-height: 0; display: grid; gap: var(--sp-4); }
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-panel);
+  box-shadow: var(--shadow-panel);
+  display: flex; flex-direction: column;
+  min-height: 0; overflow: hidden;
+  transition: background-color .25s ease;
+}
+.panel-head {
+  display: flex; align-items: center; gap: 9px;
+  padding: var(--sp-4) var(--sp-4) var(--sp-3);
+  flex: none; position: relative;
+  border-bottom: 1px solid var(--hairline);
+}
+/* the hue tick: each panel's single allowed stroke of identity */
+.panel-head::after {
+  content: ""; position: absolute;
+  left: var(--sp-4); bottom: -1px;
+  width: 30px; height: 2px; border-radius: 2px;
+}
+.p-sources   > .panel-head::after { background: var(--c-sage); }
+.p-notes     > .panel-head::after { background: var(--gold); }
+.p-chat      > .panel-head::after { background: var(--teal); }
+.p-creations > .panel-head::after { background: var(--c-audio); }
+.panel-title {
+  font-size: var(--fs-micro); font-weight: 700;
+  letter-spacing: .13em; text-transform: uppercase;
+  color: var(--ink-2);
+}
+.panel-head .spacer { flex: 1; }
+.icon-btn {
+  width: 26px; height: 26px; border-radius: var(--r-ctl);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink-3);
+  transition: background .12s ease, color .12s ease;
+}
+.icon-btn:hover { background: var(--canvas-deep); color: var(--ink); }
+.icon-btn svg { width: 14px; height: 14px; }
+.panel-body { flex: 1; overflow-y: auto; padding: var(--sp-2) var(--sp-3) var(--sp-3); min-height: 0; }
+.panel-body::-webkit-scrollbar { width: 8px; }
+.panel-body::-webkit-scrollbar-thumb { background: var(--hairline); border-radius: 4px; }
+/* panel action: quiet tinted button — action speaks fern now,
+   the same green everywhere you can act */
+.panel-action {
+  margin: 0 var(--sp-3) var(--sp-3);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  height: 34px; border-radius: var(--r-card); flex: none;
+  font-size: var(--fs-meta); font-weight: 700;
+  transition: filter .12s ease;
+  background: var(--fern-tint); color: var(--fern-deep);
+}
+.dark .panel-action { color: var(--fern); }
+.panel-action:hover { filter: brightness(.96); }
+.dark .panel-action:hover { filter: brightness(1.15); }
+.panel-action svg { width: 13px; height: 13px; }
+
+/* ---- source rows: title + ONE smaller metadata line (type chip ·
+       location). Context chips are a notebook-scope concept — none
+       here on Home. ---- */
+.src-row {
+  display: flex; align-items: flex-start; gap: 11px;
+  width: 100%; text-align: left;
+  padding: 9px 11px; border-radius: var(--r-card);
+  transition: background .12s ease;
+}
+.src-row:hover { background: var(--canvas-deep); }
+.src-row + .src-row { margin-top: 4px; }
+/* type hues, rebuilt without red: video plum, pdf honey, web sage,
+   audio mauve, paper slate — small chip lives on the meta line */
+.src-type {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 9px; font-weight: 700; letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--c-video); background: var(--c-video-soft);
+  border-radius: 4px; padding: 1px 5px;
+}
+.src-type svg { width: 9px; height: 9px; }
+.src-type.t-pdf   { color: var(--c-honey); background: var(--c-honey-soft); }
+.src-type.t-web   { color: var(--c-sage);  background: var(--c-sage-soft); }
+.src-type.t-audio { color: var(--c-audio); background: var(--c-audio-soft); }
+.src-type.t-paper { color: var(--c-paper); background: var(--c-paper-soft); }
+.src-main { min-width: 0; flex: 1; }
+.src-title {
+  font-size: 12.8px; font-weight: 600; line-height: 1.35;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.src-meta { margin-top: 5px; display: flex; align-items: center; gap: 6px; font-size: var(--fs-micro); color: var(--ink-3); flex-wrap: wrap; min-width: 0; }
+.src-meta .meta-dot { color: var(--ink-faintest); font-size: 10px; line-height: 1; }
+
+/* ---- notes ---- */
+.note-card {
+  display: block; width: 100%; text-align: left;
+  padding: 12px 14px; border-radius: var(--r-card);
+  background: var(--raised);
+  border: 1px solid var(--hairline);
+  transition: border-color .15s ease, background .15s ease;
+}
+.note-card:hover {
+  border-color: color-mix(in srgb, var(--gold) 50%, var(--hairline));
+  background: color-mix(in srgb, var(--gold-tint) 16%, var(--raised));
+}
+.note-kind {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 700; letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--gold-deep); background: var(--gold-tint);
+  border-radius: 4px; padding: 1.5px 6px;
+  margin-bottom: 7px;
+}
+.dark .note-kind { color: var(--gold); }
+.note-kind .pebble { background: var(--gold); width: 5px; height: 5px; }
+.note-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 13.5px; font-weight: 700; line-height: 1.3; letter-spacing: -.005em;
+}
+.note-excerpt {
+  display: block;
+  margin-top: 5px; font-size: var(--fs-meta); color: var(--ink-2); line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.note-time { margin-top: 8px; font-size: 11px; color: var(--ink-faintest); display: flex; align-items: center; gap: 6px; }
+.note-time svg { width: 11px; height: 11px; opacity: .7; }
+
+.quick-capture {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: var(--sp-3);
+  padding: 3px 4px 3px 12px;
+  border-radius: var(--r-card);
+  background: var(--raised);
+  border: 1px solid var(--hairline);
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.quick-capture:focus-within { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-tint); }
+.quick-capture input { flex: 1; min-width: 0; background: none; border: none; font-size: var(--fs-meta); padding: 6px 0; }
+.quick-capture input:focus-visible { box-shadow: none; }
+.quick-capture .mini-send {
+  width: 26px; height: 26px; border-radius: var(--r-ctl); flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--canvas-deep); color: var(--ink-3);
+  transition: background .12s ease, color .12s ease;
+}
+.quick-capture:focus-within .mini-send { background: var(--gold); color: #FFFDF6; }
+.dark .quick-capture:focus-within .mini-send { color: #241D0C; }
+.quick-capture .mini-send svg { width: 12px; height: 12px; }
+
+/* ---- artifacts ---- */
+.art-row {
+  display: flex; align-items: flex-start; gap: 11px;
+  width: 100%; text-align: left;
+  padding: 10px 11px; border-radius: var(--r-card);
+  transition: background .12s ease;
+}
+.art-row:hover { background: var(--canvas-deep); }
+.art-type {
+  width: 26px; height: 26px; border-radius: var(--r-card); flex: none;
+  display: flex; align-items: center; justify-content: center; margin-top: 1px;
+}
+.art-type svg { width: 13px; height: 13px; }
+.t-podcast  { background: var(--c-audio-soft);   color: var(--c-audio); }
+.t-mindmap  { background: var(--c-paper-soft);   color: var(--c-paper); }
+.t-guide    { background: var(--c-honey-soft);   color: var(--c-honey); }
+.t-cards    { background: var(--c-insight-soft); color: var(--c-insight); }
+.t-videoart { background: var(--c-video-soft);   color: var(--c-video); }
+.t-insight  { background: var(--c-insight-soft); color: var(--c-insight); }
+.t-noteart  { background: var(--c-note-soft);    color: var(--c-note); }
+.art-main { min-width: 0; flex: 1; }
+.art-title { font-size: 12.8px; font-weight: 600; line-height: 1.35; }
+.art-meta { margin-top: 4px; font-size: var(--fs-micro); color: var(--ink-3); display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.art-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faintest); }
+/* projection badge: neutral shell, slate dot */
+.proj-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 1.5px 8px; border-radius: var(--r-pill);
+  background: var(--canvas-deep);
+  border: 1px solid var(--hairline);
+  color: var(--ink-2);
+  font-weight: 600; font-size: var(--fs-micro);
+}
+.proj-badge .pebble { width: 5px; height: 5px; background: var(--c-paper); }
+
+/* ---- creation chips: neutral shells, colored dots ---- */
+.chip-row { display: flex; flex-wrap: wrap; gap: 6px; padding: var(--sp-3) var(--sp-3) 2px; }
+.create-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 4px 11px; border-radius: var(--r-pill);
+  font-size: var(--fs-meta); font-weight: 600; color: var(--ink-2);
+  background: transparent;
+  border: 1px solid var(--hairline);
+  transition: border-color .12s ease, background .12s ease, color .12s ease;
+}
+.create-chip:hover { border-color: var(--ink-3); background: var(--surface); color: var(--ink); }
+.create-chip .pebble { width: 7px; height: 7px; }
+
+/* ---- chat ---- */
+.chat { display: flex; flex-direction: column; }
+/* scope pill: neutral shell, teal dot carries the active scope */
+.scope-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 3.5px 11px; border-radius: var(--r-pill);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  color: var(--ink-2);
+  font-size: var(--fs-micro); font-weight: 600;
+  transition: border-color .12s ease;
+  white-space: nowrap;
+}
+.scope-pill:hover { border-color: var(--ink-3); }
+.scope-pill .pebble { background: var(--teal); width: 6px; height: 6px; }
+.scope-pill .chev { opacity: .6; font-size: 9px; }
+.chat-body { display: flex; flex-direction: column; gap: var(--sp-4); padding: var(--sp-3) var(--sp-4) var(--sp-4); }
+.msg { max-width: 88%; }
+.msg.user { align-self: flex-end; }
+.msg.user .bubble {
+  background: var(--canvas-deep); color: var(--ink);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-panel);
+  border-bottom-right-radius: 4px;
+  padding: 9px 13px; font-size: 13px; line-height: 1.55;
+}
+.dark .msg.user .bubble { background: var(--raised); }
+.msg.ai { align-self: flex-start; }
+.msg-agent {
+  display: flex; align-items: center; gap: 6px;
+  font-size: var(--fs-micro); font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--teal-deep); margin-bottom: 6px;
+}
+.dark .msg-agent { color: var(--teal); }
+.msg-agent .pebble { background: var(--teal); width: 6px; height: 6px; }
+.msg.ai .bubble {
+  background: var(--raised);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-panel);
+  border-top-left-radius: 4px;
+  padding: 12px 14px;
+  font-size: 13px; line-height: 1.6; color: var(--ink);
+}
+.msg.ai .bubble p + p { margin-top: 9px; }
+/* AI emphasis: one family only — teal marker underline, not paint */
+.msg.ai .bubble em {
+  font-style: normal; font-weight: 600; color: var(--teal-deep);
+  box-shadow: inset 0 -5px 0 var(--teal-tint);
+}
+.dark .msg.ai .bubble em { color: var(--teal); }
+/* citation chips: mono-ish, neutral shell + colored dot per class.
+   source = teal dot; authoral note = gold dot + "your note ·" prefix */
+.cite {
+  display: inline-flex; align-items: center; gap: 5px;
+  vertical-align: 1px; margin: 0 1px;
+  padding: 0.5px 7px; border-radius: var(--r-pill);
+  background: var(--canvas-deep);
+  border: 1px solid var(--hairline);
+  color: var(--ink-2);
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  white-space: nowrap; cursor: pointer;
+  transition: border-color .12s ease;
+}
+.cite:hover { border-color: var(--teal); }
+.cite .pebble { width: 5px; height: 5px; background: var(--teal); }
+.cite.note-cite:hover { border-color: var(--gold); }
+.cite.note-cite .pebble { background: var(--gold); }
+.cite.note-cite::before { content: "your note ·"; color: var(--ink-faintest); margin-right: 1px; }
+/* chat panel's own tinted actions (teal) */
+.msg-tools { display: flex; gap: 6px; margin-top: 8px; }
+.tool-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3.5px 10px; border-radius: var(--r-ctl);
+  font-size: var(--fs-micro); font-weight: 600;
+  color: var(--teal-deep); background: var(--teal-tint);
+  transition: filter .12s ease;
+}
+.dark .tool-pill { color: var(--teal); }
+.tool-pill:hover { filter: brightness(.95); }
+.dark .tool-pill:hover { filter: brightness(1.15); }
+.tool-pill svg { width: 12px; height: 12px; }
+
+.context-bar {
+  flex: none;
+  margin: 0 var(--sp-4) var(--sp-3);
+  display: flex; align-items: center; gap: 9px;
+  padding: 7px 12px;
+  border-radius: var(--r-card);
+  background: var(--canvas-deep);
+  border: 1px solid var(--hairline-soft);
+  font-family: var(--font-mono); font-size: 11px; color: var(--ink-3);
+}
+.context-bar .sep { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faintest); }
+.context-bar b { color: var(--ink-2); font-weight: 600; }
+.model-chip {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 2.5px 10px; border-radius: var(--r-pill);
+  background: var(--plum-tint); color: var(--plum);
+  font-size: 11px; font-weight: 700; font-family: var(--font-sans);
+  white-space: nowrap;
+}
+.model-chip .pebble { width: 6px; height: 6px; background: var(--plum); }
+.composer {
+  flex: none;
+  margin: 0 var(--sp-4) var(--sp-4);
+  display: flex; align-items: center; gap: 8px;
+  padding: 5px 5px 5px 14px;
+  border-radius: var(--r-panel);
+  background: var(--raised);
+  border: 1px solid var(--hairline);
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.composer:focus-within { border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-tint); }
+.composer input { flex: 1; min-width: 0; background: none; border: none; font-size: 13px; padding: 8px 0; }
+.composer input:focus-visible { box-shadow: none; }
+.btn-send {
+  width: 34px; height: 34px; border-radius: var(--r-card); flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--primary); color: var(--primary-ink);
+  transition: background .12s ease;
+}
+.btn-send:hover { background: var(--primary-hover); }
+.btn-send svg { width: 15px; height: 15px; }
+
+/* ---- empty hint ---- */
+.notes-empty {
+  margin-top: var(--sp-3);
+  padding: var(--sp-4);
+  border-radius: var(--r-card);
+  border: 1.5px dashed color-mix(in srgb, var(--gold) 40%, var(--hairline));
+  text-align: center;
+}
+.notes-empty .pebble-trio { display: flex; justify-content: center; gap: 5px; margin-bottom: 8px; }
+.notes-empty .pebble-trio .pebble { width: 8px; height: 8px; }
+.notes-empty .pebble-trio .pebble:nth-child(1) { background: var(--fern); opacity: .85; }
+.notes-empty .pebble-trio .pebble:nth-child(2) { background: var(--gold); opacity: .85; }
+.notes-empty .pebble-trio .pebble:nth-child(3) { background: var(--teal); opacity: .85; }
+.notes-empty p { font-size: var(--fs-meta); color: var(--ink-3); line-height: 1.55; }
+.notes-empty p strong {
+  color: var(--ink); font-weight: 700; display: block; margin-bottom: 3px;
+  font-family: var(--font-display); letter-spacing: -.005em;
+}
+
+/* ---- generating: neutral surface, pulsing dot + thin line in
+       the artifact's own type hue (video → plum here) ---- */
+.progress { height: 3px; border-radius: 2px; background: var(--canvas-deep); overflow: hidden; margin-top: 8px; }
+.progress i { display: block; height: 100%; width: 38%; border-radius: 2px; background: var(--c-video); animation: slide 1.7s ease-in-out infinite; }
+@keyframes slide { 0% { transform: translateX(-110%); } 100% { transform: translateX(320%); } }
+
+.panel, .sidebar, .nav-item, .note-card, .composer, .context-bar,
+.src-row, .art-row, .btn-ghost, .tile-banner { transition-property: background-color, color, border-color, box-shadow; transition-duration: .25s; }
+
+/* ============ SCREEN 00 layout (home) ============ */
+.nb-actions { align-items: center; }
+.search-pill {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 7px 9px 7px 13px; border-radius: var(--r-card);
+  min-width: 220px;
+  font-size: 13px; font-weight: 500; color: var(--ink-3);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  transition: border-color .12s ease, color .12s ease;
+}
+.search-pill:hover { color: var(--ink-2); border-color: var(--ink-3); }
+.search-pill svg { width: 14px; height: 14px; opacity: .7; }
+.search-pill .kbd { margin-left: auto; }
+.btn-primary-sm {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 16px; border-radius: var(--r-card);
+  background: var(--primary); color: var(--primary-ink);
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 13px;
+  transition: background .15s ease;
+}
+.btn-primary-sm:hover { background: var(--primary-hover); }
+.btn-primary-sm svg { width: 14px; height: 14px; }
+
+.onboard {
+  display: flex; align-items: center; gap: 10px;
+  margin: 0 var(--sp-1);
+  padding: 8px 10px 8px 14px;
+  border-radius: var(--r-card);
+  border: 1.5px dashed color-mix(in srgb, var(--teal) 35%, var(--hairline));
+  color: var(--ink-3); font-size: var(--fs-meta);
+}
+.onboard .pebble { width: 7px; height: 7px; background: var(--teal); }
+.onboard b { color: var(--ink); font-weight: 700; }
+.onboard a { color: var(--teal-deep); font-weight: 700; }
+.dark .onboard a { color: var(--teal); }
+.onboard a:hover { text-decoration: underline; }
+.onboard .icon-btn { margin-left: auto; width: 24px; height: 24px; }
+
+.home-scroll {
+  flex: 1; min-height: 0; overflow-y: auto;
+  display: flex; flex-direction: column; gap: var(--sp-5);
+  padding: 0 var(--sp-1) var(--sp-4);
+}
+.home-scroll::-webkit-scrollbar { width: 8px; }
+.home-scroll::-webkit-scrollbar-thumb { background: var(--hairline); border-radius: 4px; }
+/* stream heads: micro-caps + owned-hue tick breaking the hairline */
+.stream-head {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 0 2px 7px; position: relative;
+  border-bottom: 1px solid var(--hairline);
+}
+.stream-head::after {
+  content: ""; position: absolute;
+  left: 2px; bottom: -1px;
+  width: 30px; height: 2px; border-radius: 2px;
+  background: var(--teal);   /* notebooks stream owns teal */
+}
+.stream-title {
+  font-size: var(--fs-micro); font-weight: 700;
+  letter-spacing: .13em; text-transform: uppercase;
+  color: var(--ink-2);
+}
+.stream-more {
+  margin-left: auto; font-size: var(--fs-meta); color: var(--ink-3); font-weight: 600;
+  transition: color .12s ease;
+}
+.stream-more:hover { color: var(--ink); }
+
+.nb-cards {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(218px, 1fr));
+  gap: var(--sp-3); margin-top: var(--sp-3);
+}
+.nb-card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-panel);
+  box-shadow: var(--shadow-card);
+  padding: var(--sp-4) var(--sp-4) var(--sp-4);
+  display: flex; flex-direction: column; gap: 8px;
+  transition: border-color .15s ease, box-shadow .15s ease, background-color .25s ease;
+}
+.nb-card:hover { border-color: var(--ink-3); box-shadow: var(--shadow-lift); }
+.nb-card .nb-dot { width: 9px; height: 9px; border-radius: 3px; background: var(--teal); }
+.nb-card h3 {
+  font-family: var(--font-display);
+  font-size: 15px; font-weight: 700; letter-spacing: -0.015em; line-height: 1.25;
+}
+.nb-card .counts {
+  display: flex; align-items: center; gap: 7px; flex-wrap: wrap;
+  font-size: var(--fs-micro); color: var(--ink-3);
+}
+.nb-card .counts .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faintest); }
+.nb-card .when { margin-top: auto; padding-top: 4px; font-size: var(--fs-micro); color: var(--ink-faintest); }
+.nb-card.new {
+  border: 1.5px dashed var(--hairline);
+  background: none; box-shadow: none;
+  align-items: center; justify-content: center; gap: 9px;
+  color: var(--ink-3); font-weight: 600; font-size: 13px;
+}
+.nb-card.new:hover { color: var(--primary); border-color: color-mix(in srgb, var(--primary) 45%, var(--hairline)); box-shadow: none; }
+.nb-card.new svg { width: 16px; height: 16px; }
+
+.home-cols {
+  display: grid; grid-template-columns: 1.15fr 1.15fr 1fr;
+  gap: var(--sp-4); align-items: start;
+}
+.home-cols .panel { min-height: 0; }
+.home-cols .panel-body { overflow: visible; }
+.home-cols .stream-more { font-size: var(--fs-micro); }
+
+.session-row {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 10px 12px; border-radius: var(--r-card);
+  transition: background .12s ease;
+}
+.session-row:hover { background: var(--canvas-deep); }
+.session-scope {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: var(--fs-micro); font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.session-scope .pebble { width: 5px; height: 5px; }
+.session-q { font-size: var(--fs-meta); color: var(--ink); font-weight: 500; line-height: 1.4; }
+.session-time { font-size: var(--fs-micro); color: var(--ink-faintest); }
+.gen-label { display: flex; align-items: center; gap: 6px; font-size: var(--fs-micro); color: var(--c-video); font-weight: 700; margin-top: 3px; }
+.gen-label .pebble { width: 5px; height: 5px; background: var(--c-video); animation: breathe 1.4s ease-in-out infinite; }
+@keyframes breathe { 50% { opacity: .35; } }
+
+@media (max-width: 1180px) {
+  .sidebar { width: 200px; }
+  .home-cols { grid-template-columns: minmax(220px, 1.1fr) minmax(220px, 1.1fr) minmax(200px, 1fr); }
+  .search-pill { min-width: 150px; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="tile-banner">
+  <strong>UX Concept — Home · Direction I</strong>
+  <span>The landing screen answers “where was I?” — four recency streams, notebooks first, every item deep-linkable.</span>
+  <a class="d-link" href="../concepts/00-home.html">view in Direction D →</a>
+  <nav class="banner-nav">
+    <a class="here" href="00-home.html">0</a><a href="01-notebook.html">1</a><a href="02-source.html">2</a><a href="03-creations.html">3</a><a href="04-global-chat.html">4</a><a href="05-create-overlay.html">5</a><a href="06-citations.html">6</a><a href="07-deep-research.html">7</a><a href="08-search.html">8</a>
+  </nav>
+</div>
+
+<div class="shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a class="wordmark" href="01-notebook.html">
+      <span class="logo-pebbles"><span class="pebble"></span><span class="pebble"></span><span class="pebble"></span></span>
+      Open Notebook
+    </a>
+
+    <a class="btn-new" href="05-create-overlay.html">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+      Create
+      <span class="kbd">⌘J</span>
+    </a>
+
+    <nav class="nav-group">
+      <a class="nav-item active" href="00-home.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7 8 2.5 13.5 7v5.5a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1z"/><path d="M6.5 13.5v-4h3v4"/></svg>
+        Home
+      </a>
+      <a class="nav-item" href="01-notebook.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H8v12H4.5A1.5 1.5 0 0 1 3 12.5v-9zM13 3.5A1.5 1.5 0 0 0 11.5 2H8v12h3.5a1.5 1.5 0 0 0 1.5-1.5v-9z"/></svg>
+        Notebooks
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path d="M5.5 6h5M5.5 8.5h5M5.5 11h3"/></svg>
+        Sources
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m11.3 2.7 2 2L5.5 12.5l-2.8.8.8-2.8z"/></svg>
+        Notes
+      </a>
+      <a class="nav-item" href="03-creations.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/><path d="m12.5 10.5.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></svg>
+        Creations
+      </a>
+      <a class="nav-item" href="08-search.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>
+        Search
+      </a>
+      <div class="nav-divider"></div>
+      <a class="nav-item chat-entry" href="04-global-chat.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13.5 8a5.5 5.5 0 1 0-2.2 4.4L13.5 13l-.5-2.2A5.47 5.47 0 0 0 13.5 8z"/></svg>
+        Chat
+        <span class="pebble"></span>
+      </a>
+    </nav>
+
+    <details class="nav-manage">
+      <summary>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 4 4 4-4 4"/></svg>
+        Manage
+      </summary>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 5.5 8 2.5l5.5 3L8 8.5zM2.5 8.2 8 11.2l5.5-3M2.5 10.9 8 13.9l5.5-3"/></svg>
+        Models
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 5h7M12.5 5h.5M3 11h.5M6 11h7"/><circle cx="11" cy="5" r="1.6"/><circle cx="4.7" cy="11" r="1.6"/></svg>
+        Transformations
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="2.2"/><path d="M8 2v1.6M8 12.4V14M2 8h1.6M12.4 8H14M3.8 3.8l1.1 1.1M11.1 11.1l1.1 1.1M12.2 3.8l-1.1 1.1M4.9 11.1l-1.1 1.1"/></svg>
+        Settings
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m6 4-3 4 3 4M10 4l3 4-3 4"/></svg>
+        Advanced
+      </a>
+    </details>
+
+    <div class="sidebar-foot">
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m8 2 1.4 3.3L13 6l-3.6.7L8 10 6.6 6.7 3 6l3.6-.7z"/></svg>
+        Quick actions
+        <span class="kbd">⌘K</span>
+      </button>
+      <button class="foot-item" id="theme-toggle" aria-pressed="false">
+        <svg id="icon-moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3 5.5 5.5 0 1 0 13 9.5z"/></svg>
+        <svg id="icon-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="display:none"><circle cx="8" cy="8" r="3"/><path d="M8 1.5V3M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M12.6 3.4l-1 1M4.4 11.6l-1 1"/></svg>
+        <span id="theme-label">Dark theme</span>
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c1.8 1.7 2.6 3.8 2.6 6S9.8 12.3 8 14C6.2 12.3 5.4 10.2 5.4 8S6.2 3.7 8 2z"/></svg>
+        English
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 2h-3A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14h3M10.5 11 14 8l-3.5-3M14 8H6"/></svg>
+        Sign out
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <header class="nb-header">
+      <div class="nb-id">
+        <div class="crumbs"><span class="pebble"></span><span>Home</span></div>
+        <h1 class="nb-title">Good morning</h1>
+        <div class="nb-meta">Tuesday, July 21 <span class="dot"></span> 4 notebooks <span class="dot"></span> 11 sources <span class="dot"></span> 8 creations</div>
+      </div>
+      <div class="nb-actions">
+        <button class="search-pill">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>
+          Search everything
+          <span class="kbd">⌘K</span>
+        </button>
+        <a class="btn-primary-sm" href="05-create-overlay.html">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+          Create
+        </a>
+      </div>
+    </header>
+
+    <div class="onboard">
+      <span class="pebble"></span>
+      <span><b>New here?</b> Create your first notebook — add sources, chat with them, and your first creations follow. <a href="05-create-overlay.html">Create a notebook</a></span>
+      <button class="icon-btn" title="Dismiss">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+      </button>
+    </div>
+
+    <div class="home-scroll">
+
+      <!-- RECENT NOTEBOOKS -->
+      <section>
+        <div class="stream-head">
+          <span class="stream-title">Recent notebooks</span>
+          <a class="stream-more" href="01-notebook.html">All notebooks →</a>
+        </div>
+        <div class="nb-cards">
+          <a class="nb-card" href="01-notebook.html">
+            <span class="nb-dot"></span>
+            <h3>The Attention Economy</h3>
+            <span class="counts">5 sources <span class="dot"></span> 1 note <span class="dot"></span> 2 creations</span>
+            <span class="when">Active 2 days ago</span>
+          </a>
+          <a class="nb-card" href="#">
+            <span class="nb-dot" style="background:var(--c-paper)"></span>
+            <h3>Deep Work Essays</h3>
+            <span class="counts">4 sources <span class="dot"></span> 2 notes <span class="dot"></span> 2 creations</span>
+            <span class="when">Active 4 days ago</span>
+          </a>
+          <a class="nb-card" href="#">
+            <span class="nb-dot" style="background:var(--c-audio)"></span>
+            <h3>AI in Education</h3>
+            <span class="counts">2 sources <span class="dot"></span> 0 notes <span class="dot"></span> 1 creation</span>
+            <span class="when">Active last week</span>
+          </a>
+          <a class="nb-card" href="#">
+            <span class="nb-dot" style="background:var(--c-note)"></span>
+            <h3>Sleep &amp; Memory</h3>
+            <span class="counts">3 sources <span class="dot"></span> 1 note <span class="dot"></span> 0 creations</span>
+            <span class="when">Active 2 weeks ago</span>
+          </a>
+          <a class="nb-card new" href="05-create-overlay.html">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+            New notebook
+          </a>
+        </div>
+      </section>
+
+      <!-- THREE STREAMS -->
+      <div class="home-cols">
+
+        <section class="panel p-sources">
+          <div class="panel-head">
+            <span class="panel-title">Recent sources</span>
+            <span class="spacer"></span>
+            <a class="stream-more" href="#">All →</a>
+          </div>
+          <div class="panel-body">
+            <a class="src-row" href="02-source.html">
+              <span class="src-main">
+                <span class="src-title">Stolen Focus — Johann Hari (chapter notes)</span>
+                <span class="src-meta"><span class="src-type t-pdf"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5L12.5 6v7A1.5 1.5 0 0 1 11 14.5H4A1.5 1.5 0 0 1 2.5 13V4A1.5 1.5 0 0 1 4 2.5z"/><path d="M9 2.5V6h3.5"/></svg>PDF</span> <span class="meta-dot" aria-hidden="true">·</span> in The Attention Economy</span>
+              </span>
+            </a>
+            <a class="src-row" href="01-notebook.html">
+              <span class="src-main">
+                <span class="src-title">How Your Attention Is Sold</span>
+                <span class="src-meta"><span class="src-type"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M6 4.5v7l6-3.5z"/></svg>Video</span> <span class="meta-dot" aria-hidden="true">·</span> in The Attention Economy</span>
+              </span>
+            </a>
+            <a class="src-row" href="#">
+              <span class="src-main">
+                <span class="src-title">So Good They Can't Ignore You — notes</span>
+                <span class="src-meta"><span class="src-type t-web"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="8" r="5.5"/><path d="M2.5 8h11M8 2.5c1.7 1.6 2.5 3.5 2.5 5.5S9.7 11.9 8 13.5C6.3 11.9 5.5 10 5.5 8S6.3 4.1 8 2.5z"/></svg>Web</span> <span class="meta-dot" aria-hidden="true">·</span> in Deep Work Essays</span>
+              </span>
+            </a>
+            <a class="src-row" href="01-notebook.html">
+              <span class="src-main">
+                <span class="src-title">Deep Questions #312: Rebuilding Concentration</span>
+                <span class="src-meta"><span class="src-type t-audio"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 6.5v3M5.5 4.5v7M8 3v10M10.5 5.5v5M13 7v2"/></svg>Audio</span> <span class="meta-dot" aria-hidden="true">·</span> in The Attention Economy</span>
+              </span>
+            </a>
+            <a class="src-row" href="01-notebook.html">
+              <span class="src-main">
+                <span class="src-title">Attention Is All You Need</span>
+                <span class="src-meta"><span class="src-type t-paper"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3.5 2.5h9v11h-9z"/><path d="M5.5 5h5M5.5 7.3h5M5.5 9.6h3"/></svg>Paper</span> <span class="meta-dot" aria-hidden="true">·</span> arXiv <span class="meta-dot" aria-hidden="true">·</span> in The Attention Economy</span>
+              </span>
+            </a>
+          </div>
+        </section>
+
+        <section class="panel p-creations">
+          <div class="panel-head">
+            <span class="panel-title">Recent creations</span>
+            <span class="spacer"></span>
+            <a class="stream-more" href="03-creations.html">All →</a>
+          </div>
+          <div class="panel-body">
+            <a class="art-row" href="03-creations.html">
+              <span class="art-type t-podcast"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="6" y="2" width="4" height="8" rx="2"/><path d="M3.5 8a4.5 4.5 0 0 0 9 0M8 12.5V14"/></svg></span>
+              <span class="art-main">
+                <span class="art-title">Attention, Explained</span>
+                <span class="art-meta">Podcast <span class="dot"></span> 12:40 <span class="dot"></span> from The Attention Economy + 2 notebooks</span>
+              </span>
+            </a>
+            <a class="art-row" href="03-creations.html">
+              <span class="art-type t-videoart"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M6 4.5v7l6-3.5z"/></svg></span>
+              <span class="art-main">
+                <span class="art-title">Why You Can’t Focus</span>
+                <span class="art-meta">Video explainer <span class="dot"></span> from The Attention Economy</span>
+                <span class="gen-label"><span class="pebble"></span>generating…</span>
+                <span class="progress"><i></i></span>
+              </span>
+            </a>
+            <a class="art-row" href="03-creations.html">
+              <span class="art-type t-mindmap"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="1.8"/><circle cx="3" cy="3.5" r="1.4"/><circle cx="13" cy="3.5" r="1.4"/><circle cx="8" cy="13.5" r="1.4"/><path d="M4.1 4.5 6.8 6.9M11.9 4.5 9.2 6.9M8 9.8v2.3"/></svg></span>
+              <span class="art-main">
+                <span class="art-title">Attention Economy Map</span>
+                <span class="art-meta">Mind map <span class="dot"></span> from The Attention Economy</span>
+              </span>
+            </a>
+            <a class="art-row" href="03-creations.html">
+              <span class="art-type t-guide"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H13v11H4.5A1.5 1.5 0 0 0 3 14.5v-11z"/><path d="M3 12.5A1.5 1.5 0 0 1 4.5 11H13M6 5.5h4"/></svg></span>
+              <span class="art-main">
+                <span class="art-title">Focus &amp; Distraction — Exam Prep</span>
+                <span class="art-meta">Study guide <span class="dot"></span> from The Attention Economy</span>
+              </span>
+            </a>
+          </div>
+        </section>
+
+        <section class="panel p-chat">
+          <div class="panel-head">
+            <span class="panel-title">Recent conversations</span>
+            <span class="spacer"></span>
+            <a class="stream-more" href="04-global-chat.html">All →</a>
+          </div>
+          <div class="panel-body">
+            <a class="session-row" href="04-global-chat.html">
+              <span class="session-scope"><span class="pebble" style="background:var(--teal)"></span>All notebooks</span>
+              <span class="session-q">Across all my research, what did I conclude about attention and focus?</span>
+              <span class="session-time">this morning</span>
+            </a>
+            <a class="session-row" href="01-notebook.html">
+              <span class="session-scope"><span class="pebble" style="background:var(--c-ai)"></span>Notebook · The Attention Economy</span>
+              <span class="session-q">What do my sources agree on about rebuilding focus?</span>
+              <span class="session-time">2 days ago · 1 answer saved</span>
+            </a>
+            <a class="session-row" href="02-source.html">
+              <span class="session-scope"><span class="pebble" style="background:var(--c-note)"></span>Source · Stolen Focus</span>
+              <span class="session-q">Is Hari saying willpower is useless?</span>
+              <span class="session-time">3 days ago</span>
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  if (localStorage.getItem('on-theme-i') === 'dark') root.classList.add('dark');
+  var btn = document.getElementById('theme-toggle');
+  var moon = document.getElementById('icon-moon');
+  var sun = document.getElementById('icon-sun');
+  var label = document.getElementById('theme-label');
+  function sync() {
+    var dark = root.classList.contains('dark');
+    btn.setAttribute('aria-pressed', String(dark));
+    moon.style.display = dark ? 'none' : '';
+    sun.style.display = dark ? '' : 'none';
+    label.textContent = dark ? 'Light theme' : 'Dark theme';
+  }
+  btn.addEventListener('click', function () {
+    root.classList.toggle('dark');
+    localStorage.setItem('on-theme-i', root.classList.contains('dark') ? 'dark' : 'light');
+    sync();
+  });
+  sync();
+
+  var input = document.querySelector('.composer input');
+  var send = document.querySelector('.btn-send');
+  if (send) {
+    send.addEventListener('click', function () {
+      if (!input.value.trim()) return;
+      input.value = '';
+      send.animate([{ transform: 'scale(1)' }, { transform: 'scale(0.86)' }, { transform: 'scale(1)' }], { duration: 220, easing: 'ease-out' });
+      input.focus();
+    });
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') send.click(); });
+  }
+})();
+</script>
+</body>
+</html>

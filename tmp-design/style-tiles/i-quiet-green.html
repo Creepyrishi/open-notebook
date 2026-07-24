@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open Notebook — Variant I: Quiet Green</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   VARIANT I — QUIET GREEN  (H, de-alarmed & squared)
+   Two community critiques fixed on top of H's skeleton:
+   1) Red is retired from every affordance — it survives ONLY
+      as the destructive/error semantic. Primary action is a
+      confident fern green; content-type hues rebuilt with no
+      red and no traffic-light triad.
+   2) Geometry tightened one notch: 5–6px cards, 4–5px chips
+      and buttons. Serious instrument, still warm. Never < 4px.
+   Everything else is H: neutral reading surfaces, honest 1px
+   borders, near-zero shadows, color as dots/ticks/chips only.
+   ============================================================ */
+
+:root {
+  /* — neutrals (unchanged from H) — */
+  --bg: #F5F5F2;
+  --bg-deep: #EEEEE9;
+  --surface: #FEFEFC;
+  --surface-raised: #FFFFFF;
+  --ink: #23252A;
+  --ink-soft: #565A61;
+  --ink-faint: #878B92;
+  --line: #E0E0DA;
+  --line-strong: #23252A;
+
+  /* — owned hues, red-free —
+     fern   = action (New, Add Source, Write Note, active states)
+     sage   = sources / web (gathering, earthier than fern)
+     gold   = notes / pdf (honey)
+     teal   = chat / AI voice
+     plum   = video + rare seasoning (model chip, kbd)
+     mauve  = audio
+     slate  = paper (neutral)                                   */
+  --fern: #2E6B4F;
+  --fern-deep: #245740;
+  --fern-tint: #DFEAE2;
+  --sage: #5E7A54;           /* sources / web */
+  --sage-deep: #47603F;
+  --sage-tint: #E5EBDC;
+  --sage-wash: #E5EBDC;      /* washes stay retired from panels; kept for chips */
+  --gold: #A97B12;           /* notes / pdf */
+  --gold-deep: #7C5A05;
+  --gold-tint: #F3EAD3;
+  --gold-wash: #F3EAD3;
+  --teal: #0E7268;           /* chat / AI */
+  --teal-deep: #095A51;
+  --teal-tint: #DDECE8;
+  --teal-wash: #DDECE8;
+  --plum: #5D4991;           /* video; seasoning: model chip, kbd */
+  --plum-tint: #EAE6F3;
+  --mauve: #8D5B80;          /* audio */
+  --mauve-deep: #714566;
+  --mauve-tint: #F1E5EE;
+
+  /* — destructive/error: the ONLY place red is allowed — */
+  --danger: #B0432D;
+  --danger-deep: #93341F;
+  --danger-tint: #F5E4DF;
+
+  /* — action — */
+  --primary: #2E6B4F;
+  --primary-hover: #245740;
+  --on-primary: #F1F8F3;
+
+  /* — depth (flat clarity: hairline borders, near-zero shadow) — */
+  --shadow-soft: 0 1px 2px rgba(35,37,42,.06);
+  --shadow-lift: 0 1px 3px rgba(35,37,42,.10);
+  --offset-sage: none;
+  --offset-gold: none;
+  --offset-teal: none;
+
+  /* — shape (squared: instrument, not toy; floor is 4px) — */
+  --r-xl: 6px;
+  --r-lg: 5px;
+  --r-md: 5px;
+  --r-sm: 4px;
+  --r-pill: 4px;
+
+  /* — type — */
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Trebuchet MS", sans-serif;
+  --font-body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --fs-hero: 24px;
+  --fs-title: 15.5px;
+  --fs-body: 13.5px;
+  --fs-small: 12px;
+  --fs-micro: 10.5px;
+
+  /* — space (unchanged from H) — */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 10px; --sp-4: 14px;
+  --sp-5: 18px; --sp-6: 22px; --sp-7: 28px;
+}
+
+.dark {
+  --bg: #17181B;
+  --bg-deep: #121316;
+  --surface: #1E2024;
+  --surface-raised: #24262B;
+  --ink: #ECEDEA;
+  --ink-soft: #A9ACB1;
+  --ink-faint: #74777D;
+  --line: #2E3036;
+  --line-strong: #ECEDEA;
+
+  --fern: #55B285;
+  --fern-deep: #6CC298;
+  --fern-tint: #1B2F25;
+  --sage: #93B084;
+  --sage-deep: #A8C299;
+  --sage-tint: #232B1D;
+  --sage-wash: #232B1D;
+  --gold: #CFA13E;
+  --gold-deep: #DDB55F;
+  --gold-tint: #322B1B;
+  --gold-wash: #322B1B;
+  --teal: #3FB3A5;
+  --teal-deep: #64C5B9;
+  --teal-tint: #16302C;
+  --teal-wash: #16302C;
+  --plum: #A290D3;
+  --plum-tint: #29253A;
+  --mauve: #C892BA;
+  --mauve-deep: #D6A8CB;
+  --mauve-tint: #322230;
+
+  --danger: #DF7C63;
+  --danger-deep: #E9937D;
+  --danger-tint: #37231D;
+
+  --primary: #3D8E67;
+  --primary-hover: #479E74;
+  --on-primary: #ECF7F0;
+
+  --shadow-soft: 0 1px 2px rgba(0,0,0,.35);
+  --shadow-lift: 0 1px 3px rgba(0,0,0,.45);
+  --offset-sage: none;
+  --offset-gold: none;
+  --offset-teal: none;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  transition: background .25s ease, color .25s ease;
+}
+
+::selection { background: var(--teal-tint); color: var(--ink); }
+
+/* ---------- direction banner ---------- */
+.tile-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: var(--fs-micro);
+  letter-spacing: .04em;
+  flex-shrink: 0;
+}
+.dark .tile-banner { background: #0E0F11; color: var(--ink-soft); }
+.tile-banner .dots { display: flex; gap: 4px; }
+.tile-banner .dots i { width: 8px; height: 8px; border-radius: 2px; display: block; }
+.tile-banner .dots i:nth-child(1) { background: var(--fern); }
+.tile-banner .dots i:nth-child(2) { background: var(--gold); }
+.tile-banner .dots i:nth-child(3) { background: var(--teal); }
+.tile-banner strong { font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.tile-banner span { opacity: .75; }
+.tile-banner a {
+  margin-left: auto;
+  color: inherit;
+  opacity: .6;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.tile-banner a:hover { opacity: 1; text-decoration: underline; }
+
+/* ---------- app frame ---------- */
+.app {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 226px 1fr;
+  min-height: 0;
+}
+
+/* ---------- sidebar ---------- */
+.sidebar {
+  background: var(--bg-deep);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-5) var(--sp-4);
+  gap: var(--sp-5);
+  overflow-y: auto;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 2px 4px;
+}
+.wordmark .mark {
+  width: 32px; height: 32px;
+  border-radius: 5px;
+  background: var(--ink);
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.dark .wordmark .mark { background: var(--surface-raised); }
+/* the tri-hue spine recomposed: fern / gold / teal — no red left */
+.wordmark .mark::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border-radius: 2px 2px 1px 1px;
+  background:
+    linear-gradient(to bottom,
+      var(--fern) 0 33%,
+      var(--gold) 33% 66%,
+      var(--teal) 66% 100%);
+}
+.wordmark h1 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  line-height: 1.05;
+}
+.wordmark h1 span { color: var(--fern); }
+
+.btn-new {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13.5px;
+  letter-spacing: .01em;
+  background: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  border-radius: var(--r-md);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background .15s ease;
+}
+.btn-new:hover { background: var(--primary-hover); }
+.btn-new:active { filter: brightness(.94); }
+.btn-new svg { width: 14px; height: 14px; }
+
+.nav { display: flex; flex-direction: column; gap: var(--sp-5); flex: 1; }
+.nav-group { display: flex; flex-direction: column; gap: 2px; }
+.nav-label {
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding: 0 10px 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-label::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: var(--line);
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: var(--r-sm);
+  color: var(--ink-soft);
+  font-weight: 500;
+  font-size: 13px;
+  text-decoration: none;
+  position: relative;
+  transition: background .12s ease, color .12s ease;
+}
+.nav-item svg { width: 15px; height: 15px; flex-shrink: 0; opacity: .85; }
+.nav-item:hover { background: var(--surface); color: var(--ink); }
+.nav-item.active {
+  background: var(--surface-raised);
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.nav-item.active::before {
+  content: "";
+  position: absolute;
+  left: -3px;
+  top: 7px;
+  bottom: 7px;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--fern);
+}
+/* color-as-affordance, kept: each nav group's icon speaks its hue */
+.g-collect .nav-item svg { color: var(--sage); }
+.g-process .nav-item svg { color: var(--teal); }
+.g-create .nav-item svg { color: var(--gold); }
+.g-manage .nav-item svg { color: var(--ink-faint); }
+
+.sidebar-foot {
+  border-top: 1px solid var(--line);
+  padding-top: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.foot-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: var(--r-sm);
+  color: var(--ink-soft);
+  font-size: 12.5px;
+  font-weight: 500;
+  background: none;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: background .12s ease, color .12s ease;
+}
+.foot-item:hover { background: var(--surface); color: var(--ink); }
+.foot-item svg { width: 14px; height: 14px; opacity: .8; }
+.foot-item .grow { flex: 1; }
+kbd {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  background: var(--plum-tint);
+  color: var(--plum);
+  border-radius: 4px;
+  padding: 2px 6px;
+  letter-spacing: .03em;
+}
+
+/* ---------- main ---------- */
+.main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.nb-header {
+  padding: var(--sp-6) var(--sp-7) var(--sp-5);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-5);
+  flex-shrink: 0;
+}
+.nb-head-left { min-width: 0; }
+.breadcrumb {
+  font-size: var(--fs-small);
+  color: var(--ink-faint);
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.breadcrumb a { color: var(--teal); text-decoration: none; font-weight: 600; }
+.breadcrumb a:hover { text-decoration: underline; }
+.nb-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  display: inline-block;
+  position: relative;
+}
+/* signature, disciplined: one short flat fern underline.
+   Same gesture as H — the hue is no longer alarming. */
+.nb-title .squiggle {
+  position: absolute;
+  left: 2px;
+  right: auto;
+  bottom: -6px;
+  width: 56px;
+  height: 3px;
+  border-radius: 1px;
+  background: var(--fern);
+  overflow: hidden;
+}
+.nb-title .squiggle path { display: none; }
+.nb-desc {
+  margin-top: 12px;
+  color: var(--ink-soft);
+  font-size: 13px;
+  max-width: 60ch;
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: text;
+}
+.nb-desc:hover { border-bottom-color: var(--gold); }
+.nb-desc svg { width: 12px; height: 12px; color: var(--ink-faint); flex-shrink: 0; }
+.nb-meta {
+  margin-top: 7px;
+  font-size: var(--fs-small);
+  color: var(--ink-faint);
+}
+.nb-meta b { color: var(--ink-soft); font-weight: 600; }
+
+.nb-actions { display: flex; gap: 8px; flex-shrink: 0; padding-top: 20px; }
+.btn-ghost {
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 6px 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all .12s ease;
+}
+.btn-ghost svg { width: 13px; height: 13px; }
+.btn-ghost:hover { border-color: var(--ink-soft); color: var(--ink); }
+/* red means delete — and only delete */
+.btn-ghost.danger:hover { border-color: var(--danger); color: var(--danger-deep); background: var(--danger-tint); }
+.dark .btn-ghost.danger:hover { color: var(--danger); }
+
+/* ---------- workspace ---------- */
+.workspace {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(280px, 330px) minmax(250px, 1fr) minmax(340px, 1.25fr);
+  gap: var(--sp-4);
+  padding: 0 var(--sp-7) var(--sp-6);
+  min-height: 0;
+}
+
+/* panels: neutral surfaces, honest borders. Identity moves to the
+   header — icon chip + a short colored tick under the header.
+   Sources now owns sage; coral is gone entirely. */
+.panel {
+  border-radius: var(--r-xl);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+.panel-sources, .panel-notes, .panel-chat { background: var(--surface); border-color: var(--line); }
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: var(--sp-4) var(--sp-4) var(--sp-3);
+  flex-shrink: 0;
+  position: relative;
+  border-bottom: 1px solid var(--line);
+}
+/* the hue tick: each panel's single allowed stroke of identity */
+.panel-head::after {
+  content: "";
+  position: absolute;
+  left: var(--sp-4);
+  bottom: -1px;
+  width: 30px;
+  height: 2px;
+  border-radius: 1px;
+}
+.panel-sources .panel-head::after { background: var(--sage); }
+.panel-notes .panel-head::after   { background: var(--gold); }
+.panel-chat .panel-head::after    { background: var(--teal); }
+
+.panel-head .p-icon {
+  width: 26px; height: 26px;
+  border-radius: 4px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.panel-head .p-icon svg { width: 13px; height: 13px; }
+/* tinted chip, colored glyph — flat, not candy */
+.panel-sources .p-icon { background: var(--sage-tint); color: var(--sage-deep); }
+.panel-notes   .p-icon { background: var(--gold-tint);  color: var(--gold-deep); }
+.panel-chat    .p-icon { background: var(--teal-tint);  color: var(--teal-deep); }
+.dark .panel-sources .p-icon { color: var(--sage); }
+.dark .panel-notes .p-icon { color: var(--gold); }
+.dark .panel-chat .p-icon { color: var(--teal); }
+
+/* quiet collapse affordance: every panel folds, like the product */
+.panel-collapse {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 0;
+  color: var(--ink-faint);
+  cursor: pointer;
+  transition: background .12s ease, border-color .12s ease, color .12s ease;
+}
+.panel-collapse:hover {
+  background: var(--bg-deep);
+  border-color: var(--line);
+  color: var(--ink);
+}
+.panel-collapse svg { width: 12px; height: 12px; }
+
+.panel-head h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-title);
+  font-weight: 700;
+  letter-spacing: -.01em;
+  flex: 1;
+}
+/* panel actions: quiet tinted buttons — action speaks fern now,
+   the same green everywhere you can act */
+.panel-action {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--r-md);
+  padding: 5px 11px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: filter .12s ease;
+}
+.panel-action svg { width: 12px; height: 12px; }
+.panel-action { white-space: nowrap; }
+.panel-action:hover { filter: brightness(.95); }
+.dark .panel-action:hover { filter: brightness(1.15); }
+.panel-sources .panel-action { background: var(--fern-tint); color: var(--fern-deep); }
+.panel-notes   .panel-action { background: var(--fern-tint); color: var(--fern-deep); }
+.dark .panel-sources .panel-action { color: var(--fern); }
+.dark .panel-notes .panel-action { color: var(--fern); }
+
+.panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sp-3) var(--sp-4) var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+}
+
+/* ---------- source cards ---------- */
+/* the left spine is the ambient echo of the source's CONTEXT
+   STATE — fern = full content, gold = insights only, none
+   (hairline) = excluded. The clickable truth is a single
+   current-state chip, right-aligned on the metadata row of
+   every card — click cycles full → insights → off. */
+.src-card {
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 9px 11px 9px;
+  cursor: pointer;
+  position: relative;
+  transition: border-color .15s ease, background .15s ease;
+}
+.src-card.ctx-full     { border-left-color: var(--fern); }
+.src-card.ctx-insights { border-left-color: var(--gold); }
+.src-card.ctx-excluded { border-left-color: var(--line); }
+.src-card:hover {
+  border-color: color-mix(in srgb, var(--sage) 45%, var(--line));
+  background: color-mix(in srgb, var(--sage-tint) 18%, var(--surface-raised));
+}
+.src-card.ctx-full:hover     { border-left-color: var(--fern); }
+.src-card.ctx-insights:hover { border-left-color: var(--gold); }
+.src-card.ctx-excluded:hover { border-left-color: var(--line); }
+/* excluded: dim the text, keep it legible — the context chip
+   stays at full opacity: it is the way back in */
+.src-card.ctx-excluded .src-title,
+.src-card.ctx-excluded .src-type,
+.src-card.ctx-excluded .meta-dot,
+.src-card.ctx-excluded .insight-chip { opacity: .55; }
+/* type hues, rebuilt without red: video plum, pdf honey, web sage,
+   audio mauve, paper slate — no traffic light anywhere.
+   One step smaller now that it shares a line with the insight count. */
+.src-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--plum);
+  background: var(--plum-tint);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+.src-type svg { width: 9px; height: 9px; }
+.src-type.t-pdf   { color: var(--gold-deep);  background: var(--gold-tint); }
+.src-type.t-web   { color: var(--sage-deep);  background: var(--sage-tint); }
+.src-type.t-audio { color: var(--mauve-deep); background: var(--mauve-tint); }
+.src-type.t-paper { color: var(--ink-soft);   background: var(--bg-deep); }
+.dark .src-type.t-pdf { color: var(--gold); }
+.dark .src-type.t-web { color: var(--sage); }
+.dark .src-type.t-audio { color: var(--mauve); }
+.insight-chip.empty {
+  background: transparent;
+  border: 1px dashed var(--line);
+  color: var(--ink-faint);
+  font-weight: 500;
+}
+.src-title {
+  font-weight: 600;
+  font-size: 12.8px;
+  line-height: 1.35;
+  color: var(--ink);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /* keep the title clear of the top-right ⋮ button */
+  max-width: calc(100% - 24px);
+}
+/* ONE metadata line: type chip · insight count · context chip — the
+   title gets the vertical room back */
+.src-meta {
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.src-meta .meta-dot { color: var(--ink-faint); font-size: 10px; line-height: 1; }
+/* context chip: shows ONLY the current state — click cycles
+   full → insights → off. Right-aligned on the metadata row of
+   every card. Border + slight raise + the tiny ⟳ glyph keep it
+   reading as a control, not a label. Full opacity even on
+   excluded cards: the chip is the way back in. */
+.ctx-state {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: inherit;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  white-space: nowrap;
+  border-radius: var(--r-sm);
+  padding: 3px 7px;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: filter .12s ease, box-shadow .12s ease;
+}
+.ctx-state svg { width: 9px; height: 9px; opacity: .75; flex-shrink: 0; }
+.ctx-state:hover { filter: brightness(.96); box-shadow: var(--shadow-lift); }
+.dark .ctx-state:hover { filter: brightness(1.12); }
+.ctx-state.on-full {
+  background: var(--fern-tint);
+  color: var(--fern-deep);
+  border: 1px solid color-mix(in srgb, var(--fern) 45%, transparent);
+}
+.dark .ctx-state.on-full { color: var(--fern); }
+.ctx-state.on-ins {
+  background: var(--gold-tint);
+  color: var(--gold-deep);
+  border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
+}
+.dark .ctx-state.on-ins { color: var(--gold); }
+.ctx-state.on-off {
+  background: var(--surface-raised);
+  color: var(--ink-soft);
+  border: 1px solid color-mix(in srgb, var(--ink-faint) 40%, transparent);
+}
+.dark .ctx-state.on-off { background: var(--surface-raised); color: var(--ink-soft); }
+/* compact fallback labels (F / I / O) for the narrow step */
+.ctx-state .seg-s { display: none; }
+/* insight-titles flyout: static demo of the hover affordance on
+   the insight chip — a real build shows this on :hover only */
+.src-card.has-flyout { z-index: 4; }
+.insight-flyout {
+  position: absolute;
+  left: auto;
+  right: 10px;
+  top: calc(100% - 4px);
+  z-index: 6;
+  min-width: 172px;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-lift);
+  padding: 6px 10px 8px;
+  pointer-events: none;
+}
+.insight-flyout .fly-cap {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 8.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 4px;
+}
+.insight-flyout .fly-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 2px 0;
+}
+.insight-flyout .fly-item svg { width: 10px; height: 10px; color: var(--gold); flex-shrink: 0; }
+/* insight chip goes neutral; only the star glyph keeps gold */
+.insight-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: var(--bg-deep);
+  border-radius: var(--r-pill);
+  padding: 2px 8px;
+  transition: filter .12s ease;
+}
+.insight-chip:hover { filter: brightness(.96); }
+.insight-chip svg { width: 11px; height: 11px; color: var(--gold); }
+/* ⋮ overflow: pinned to the card's TOP-RIGHT, aligned with the
+   title line — never collides with the context chip or flyout */
+.src-more {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  color: var(--ink-faint);
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 3px;
+  display: grid;
+  place-items: center;
+}
+.src-more:hover { background: var(--sage-tint); color: var(--sage-deep); }
+.dark .src-more:hover { color: var(--sage); }
+.src-more svg { width: 14px; height: 14px; }
+
+/* ---------- notes panel ---------- */
+/* notes carry the same context spine + chip as sources, but the
+   state is BINARY — a note has no insights layer, so it is either
+   in context (fern spine, FULL chip) or out (hairline spine, OFF).
+   Click toggles full ↔ off. */
+.note-card {
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 10px 12px;
+  cursor: pointer;
+  position: relative;
+  transition: border-color .15s ease, background .15s ease;
+}
+.note-card.ctx-full { border-left-color: var(--fern); }
+.note-card.ctx-off  { border-left-color: var(--line); }
+.note-card:hover {
+  border-color: color-mix(in srgb, var(--gold) 50%, var(--line));
+  background: color-mix(in srgb, var(--gold-tint) 18%, var(--surface-raised));
+}
+.note-card.ctx-full:hover { border-left-color: var(--fern); }
+.note-card.ctx-off:hover  { border-left-color: var(--line); }
+/* off: dim the content, never the chip — it is the way back in */
+.note-card.ctx-off .note-badge,
+.note-card.ctx-off .note-title { opacity: .55; }
+.note-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  background: var(--gold-tint);
+  border-radius: 4px;
+  padding: 1.5px 6px;
+  margin-bottom: 6px;
+}
+.dark .note-badge { color: var(--gold); }
+.note-badge svg { width: 10px; height: 10px; }
+.note-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13.5px;
+  line-height: 1.3;
+  letter-spacing: -.005em;
+}
+.note-meta {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--ink-faint);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* the friendly empty state — voice kept, volume down */
+.notes-empty {
+  flex: 1;
+  border: 1.5px dashed color-mix(in srgb, var(--gold) 40%, var(--line));
+  border-radius: var(--r-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--sp-6) var(--sp-5);
+  gap: 6px;
+  min-height: 210px;
+  position: relative;
+  overflow: hidden;
+}
+.notes-empty .burst {
+  width: 52px;
+  height: 52px;
+  margin-bottom: 6px;
+  animation: none;
+  opacity: .9;
+}
+@keyframes float {
+  0%, 100% { transform: none; }
+  50% { transform: none; }
+}
+.notes-empty h3 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+.notes-empty p {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  max-width: 34ch;
+}
+.notes-empty .hints {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+/* hint pills: outlined + hue text — affordance without confetti.
+   The old coral hint speaks fern now. */
+.hint-pill {
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: var(--r-pill);
+  padding: 3.5px 11px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--line);
+  transition: border-color .12s ease, background .12s ease;
+}
+.hint-pill.h-coral { color: var(--fern-deep); }
+.hint-pill.h-coral:hover { border-color: var(--fern); background: var(--fern-tint); }
+.hint-pill.h-teal { color: var(--teal-deep); }
+.hint-pill.h-teal:hover { border-color: var(--teal); background: var(--teal-tint); }
+.hint-pill.h-gold { color: var(--gold-deep); }
+.hint-pill.h-gold:hover { border-color: var(--gold); background: var(--gold-tint); }
+.dark .hint-pill.h-coral { color: var(--fern); }
+.dark .hint-pill.h-teal { color: var(--teal); }
+.dark .hint-pill.h-gold { color: var(--gold); }
+
+/* ---------- chat panel (fully untinted, per feedback) ---------- */
+.panel-chat .panel-head { border-bottom: 1px solid var(--line); padding-bottom: var(--sp-3); }
+.model-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--plum);
+  background: var(--plum-tint);
+  border-radius: var(--r-pill);
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: filter .12s ease;
+}
+.model-chip:hover { filter: brightness(.97); }
+.model-chip .pulse {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--plum);
+  animation: none;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 1; }
+}
+
+.chat-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  min-height: 0;
+}
+.msg { display: flex; gap: 10px; max-width: 92%; }
+.msg.user { align-self: flex-end; flex-direction: row-reverse; max-width: 80%; }
+.avatar {
+  width: 26px; height: 26px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 10.5px;
+}
+.avatar.ai { background: var(--teal); color: #EFFAF7; }
+.dark .avatar.ai { color: #0B211E; }
+.avatar.me { background: var(--ink); color: var(--bg); }
+.dark .avatar.me { background: var(--surface-raised); color: var(--ink); border: 1px solid var(--line); }
+.bubble {
+  border-radius: var(--r-lg);
+  padding: 10px 13px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.msg.user .bubble {
+  background: var(--bg-deep);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-bottom-right-radius: 4px;
+}
+.dark .msg.user .bubble { background: var(--surface-raised); color: var(--ink); border: 1px solid var(--line); }
+.msg.ai .bubble {
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-bottom-left-radius: 4px;
+  box-shadow: none;
+}
+.msg.ai .bubble p + p { margin-top: 9px; }
+.msg.ai .bubble strong { font-weight: 700; }
+/* in-chat highlights: one family only (teal = the AI's voice).
+   Marker underlines, not paint. */
+.msg.ai .bubble .hl-coral {
+  background: none; color: var(--teal-deep);
+  border-radius: 0; padding: 0; font-weight: 600;
+  box-shadow: inset 0 -5px 0 var(--teal-tint);
+}
+.msg.ai .bubble .hl-teal {
+  background: none; color: var(--teal-deep);
+  border-radius: 0; padding: 0; font-weight: 600;
+  box-shadow: inset 0 -5px 0 var(--teal-tint);
+}
+.dark .msg.ai .bubble .hl-coral,
+.dark .msg.ai .bubble .hl-teal { color: var(--teal); }
+.msg-actions {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+  opacity: 0;
+  transition: opacity .15s ease;
+}
+.msg:hover .msg-actions { opacity: 1; }
+.msg-act {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--teal-deep);
+  background: var(--teal-tint);
+  border: none;
+  border-radius: 4px;
+  padding: 3px 9px;
+  cursor: pointer;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.dark .msg-act { color: var(--teal); }
+.msg-act svg { width: 10px; height: 10px; }
+.msg-act:hover { filter: brightness(.95); }
+.dark .msg-act:hover { filter: brightness(1.15); }
+
+.chat-foot {
+  flex-shrink: 0;
+  padding: var(--sp-3) var(--sp-4) var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.context-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  flex-wrap: wrap;
+}
+/* context chips: neutral shells, the dot carries the hue */
+.ctx-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: var(--r-pill);
+  padding: 2.5px 9px;
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+.ctx-chip i { width: 7px; height: 7px; border-radius: 50%; display: block; }
+.ctx-chip.c-src { background: var(--bg-deep); color: var(--ink-soft); }
+.ctx-chip.c-src i { background: var(--sage); }
+.ctx-chip.c-note { background: var(--bg-deep); color: var(--ink-soft); }
+.ctx-chip.c-note i { background: var(--gold); }
+.ctx-chip.c-tok { background: var(--bg-deep); border: 1px solid var(--line); color: var(--ink-faint); }
+.ctx-label { margin-right: 2px; color: var(--ink-faint); font-weight: 500; }
+
+.composer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 5px 5px 5px 14px;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.composer:focus-within {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px var(--teal-tint);
+}
+.composer input {
+  flex: 1;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  outline: none;
+  min-width: 0;
+}
+.composer input::placeholder { color: var(--ink-faint); }
+.btn-send {
+  width: 34px; height: 34px;
+  border-radius: var(--r-md);
+  border: none;
+  background: var(--primary);
+  color: var(--on-primary);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background .12s ease;
+}
+.btn-send:hover { background: var(--primary-hover); }
+.btn-send svg { width: 15px; height: 15px; }
+
+/* ---------- scrollbars ---------- */
+.panel-body::-webkit-scrollbar, .chat-scroll::-webkit-scrollbar { width: 8px; }
+.panel-body::-webkit-scrollbar-thumb, .chat-scroll::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 8px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1180px) {
+  .workspace { grid-template-columns: minmax(250px, 290px) minmax(220px, 1fr) minmax(300px, 1.2fr); padding: 0 var(--sp-5) var(--sp-5); }
+  .nb-header { padding: var(--sp-5) var(--sp-5) var(--sp-4); }
+}
+@media (max-width: 1040px) {
+  .app { grid-template-columns: 200px 1fr; }
+  .workspace { gap: var(--sp-3); }
+  .nb-desc { max-width: 44ch; }
+}
+@media (max-width: 1010px) {
+  .workspace { grid-template-columns: minmax(228px, 270px) minmax(198px, 1fr) minmax(272px, 1.2fr); }
+  /* panel actions collapse to icon-only so the chevron keeps its seat */
+  .panel-action span { display: none; }
+  /* context chip collapses to initials: F / I / O */
+  .ctx-state .seg-l { display: none; }
+  .ctx-state .seg-s { display: inline; }
+}
+</style>
+</head>
+<body>
+
+<div class="tile-banner">
+  <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+  <strong>Variant I — Quiet Green (H, de-alarmed & squared) · community-feedback synthesis</strong>
+  <span>H's quiet color with red retired to destructive-only — fern green marks where you act — geometry squared to 4–6px, and the source spine now carries per-source context state.</span>
+  <a href="h-quiet-color.html">view H →</a>
+</div>
+
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="wordmark">
+      <div class="mark" aria-hidden="true"></div>
+      <h1>Open<br>Notebook<span>.</span></h1>
+    </div>
+
+    <button class="btn-new">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+      New
+    </button>
+
+    <nav class="nav">
+      <div class="nav-group g-collect">
+        <div class="nav-label">Collect</div>
+        <a class="nav-item" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/></svg>
+          Sources
+        </a>
+      </div>
+      <div class="nav-group g-process">
+        <div class="nav-label">Process</div>
+        <a class="nav-item active" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/></svg>
+          Notebooks
+        </a>
+        <a class="nav-item" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          Ask
+        </a>
+        <a class="nav-item" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Search
+        </a>
+      </div>
+      <div class="nav-group g-create">
+        <div class="nav-label">Create</div>
+        <a class="nav-item" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></svg>
+          Podcasts
+        </a>
+      </div>
+      <div class="nav-group g-manage">
+        <div class="nav-label">Manage</div>
+        <a class="nav-item" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Models
+        </a>
+        <a class="nav-item" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h6l2-8 4 16 2-8h6"/></svg>
+          Transformations
+        </a>
+        <a class="nav-item" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Settings
+        </a>
+        <a class="nav-item" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          Advanced
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-foot">
+      <button class="foot-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <span class="grow">Quick actions</span>
+        <kbd>⌘K</kbd>
+      </button>
+      <button class="foot-item" id="themeToggle">
+        <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <span class="grow" id="themeLabel">Dark mode</span>
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="grow">English</span>
+      </button>
+      <button class="foot-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        <span class="grow">Sign Out</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <header class="nb-header">
+      <div class="nb-head-left">
+        <div class="breadcrumb"><a href="#">Notebooks</a> <span>/</span></div>
+        <h1 class="nb-title">
+          The Attention Economy
+          <svg class="squiggle" viewBox="0 0 200 8" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M2 5 Q 18 1, 34 5 T 66 5" fill="none" stroke="var(--fern)" stroke-width="3" stroke-linecap="round"/>
+            <path d="M70 5 Q 86 1, 102 5 T 134 5" fill="none" stroke="var(--gold)" stroke-width="3" stroke-linecap="round"/>
+            <path d="M138 5 Q 154 1, 170 5 T 198 5" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </h1>
+        <div class="nb-desc" role="button" tabindex="0">
+          Research for an essay on focus, distraction and what technology does to both.
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg>
+        </div>
+        <div class="nb-meta">Created <b>3 days ago</b> · Updated <b>2 days ago</b></div>
+      </div>
+      <div class="nb-actions">
+        <button class="btn-ghost">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/></svg>
+          Archive
+        </button>
+        <button class="btn-ghost danger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>
+          Delete
+        </button>
+      </div>
+    </header>
+
+    <div class="workspace">
+
+      <!-- ===== SOURCES ===== -->
+      <section class="panel panel-sources" aria-label="Sources">
+        <div class="panel-head">
+          <div class="p-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/></svg>
+          </div>
+          <h2>Sources</h2>
+          <button class="panel-action">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            <span>Add Source</span>
+          </button>
+          <button class="panel-collapse" aria-label="Collapse Sources panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+        </div>
+        <div class="panel-body">
+
+          <article class="src-card ctx-full">
+            <h3 class="src-title">How Your Attention Is Sold</h3>
+            <button class="src-more" aria-label="Source options"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+            <div class="src-meta">
+              <span class="src-type"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Video</span>
+              <span class="meta-dot" aria-hidden="true">·</span>
+              <span class="insight-chip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 13.9 8.1 20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg>1 insight</span>
+              <button class="ctx-state on-full" title="Context: full — click to cycle (full → insights → off)"><span class="seg-l">Full</span><span class="seg-s">F</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
+            </div>
+          </article>
+
+          <article class="src-card ctx-full has-flyout">
+            <h3 class="src-title">Stolen Focus — Johann Hari (chapter notes)</h3>
+            <button class="src-more" aria-label="Source options"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+            <div class="src-meta">
+              <span class="src-type t-pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>PDF</span>
+              <span class="meta-dot" aria-hidden="true">·</span>
+              <span class="insight-chip" title="Dense summary · Key claims — ch. 4–6"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 13.9 8.1 20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg>2 insights</span>
+              <button class="ctx-state on-full" title="Context: full — click to cycle (full → insights → off)"><span class="seg-l">Full</span><span class="seg-s">F</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
+            </div>
+            <!-- static demo of the insight-chip hover flyout -->
+            <div class="insight-flyout" aria-hidden="true">
+              <div class="fly-cap">On hover · insights</div>
+              <div class="fly-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 13.9 8.1 20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg>Dense summary</div>
+              <div class="fly-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 13.9 8.1 20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg>Key claims — ch. 4–6</div>
+            </div>
+          </article>
+
+          <article class="src-card ctx-full">
+            <h3 class="src-title">The Cost of Context Switching — Cal Newport</h3>
+            <button class="src-more" aria-label="Source options"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+            <div class="src-meta">
+              <span class="src-type t-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Web</span>
+              <span class="meta-dot" aria-hidden="true">·</span>
+              <span class="insight-chip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 13.9 8.1 20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg>1 insight</span>
+              <button class="ctx-state on-full" title="Context: full — click to cycle (full → insights → off)"><span class="seg-l">Full</span><span class="seg-s">F</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
+            </div>
+          </article>
+
+          <article class="src-card ctx-insights">
+            <h3 class="src-title">Deep Questions #312: Rebuilding Concentration</h3>
+            <button class="src-more" aria-label="Source options"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+            <div class="src-meta">
+              <span class="src-type t-audio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>Audio</span>
+              <span class="meta-dot" aria-hidden="true">·</span>
+              <span class="insight-chip empty">No insights yet</span>
+              <button class="ctx-state on-ins" title="Context: insights — click to cycle (full → insights → off)"><span class="seg-l">Insights</span><span class="seg-s">I</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
+            </div>
+          </article>
+
+          <article class="src-card ctx-excluded">
+            <h3 class="src-title">Attention Is All You Need</h3>
+            <button class="src-more" aria-label="Source options"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+            <div class="src-meta">
+              <span class="src-type t-paper"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/></svg>Paper</span>
+              <span class="meta-dot" aria-hidden="true">·</span>
+              <span class="insight-chip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 13.9 8.1 20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg>1 insight</span>
+              <button class="ctx-state on-off" title="Context: off — click to cycle (full → insights → off)"><span class="seg-l">Off</span><span class="seg-s">O</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ===== NOTES ===== -->
+      <section class="panel panel-notes" aria-label="Notes">
+        <div class="panel-head">
+          <div class="p-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>
+          </div>
+          <h2>Notes</h2>
+          <button class="panel-action">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            <span>Write Note</span>
+          </button>
+          <button class="panel-collapse" aria-label="Collapse Notes panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+        </div>
+        <div class="panel-body">
+
+          <article class="note-card ctx-full">
+            <span class="note-badge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 13.9 8.1 20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg>AI Generated</span>
+            <h3 class="note-title">Key levers for reclaiming focus</h3>
+            <div class="note-meta">
+              <span>3 days ago</span>
+              <button class="ctx-state on-full" title="Context: full — click to toggle (full → off)"><span class="seg-l">Full</span><span class="seg-s">F</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
+            </div>
+          </article>
+
+          <div class="notes-empty">
+            <svg class="burst" viewBox="0 0 80 80" aria-hidden="true">
+              <path d="M40 8 44.5 31.5 66 22 49 40 66 58 44.5 48.5 40 72 35.5 48.5 14 58 31 40 14 22 35.5 31.5z" fill="var(--gold)"/>
+              <circle cx="40" cy="40" r="8.5" fill="var(--surface-raised)"/>
+              <circle cx="40" cy="40" r="4" fill="var(--fern)"/>
+            </svg>
+            <h3>This is where thinking sticks</h3>
+            <p>Notes hold what you keep — answers worth saving, your own drafts, insights distilled from sources.</p>
+            <div class="hints">
+              <span class="hint-pill h-coral">Summarize a source</span>
+              <span class="hint-pill h-teal">Save a chat answer</span>
+              <span class="hint-pill h-gold">Draft an idea</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== CHAT ===== -->
+      <section class="panel panel-chat" aria-label="Chat with Notebook">
+        <div class="panel-head">
+          <div class="p-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </div>
+          <h2>Chat with Notebook</h2>
+          <button class="model-chip"><span class="pulse" aria-hidden="true"></span>gpt-5.6-terra</button>
+          <button class="panel-collapse" aria-label="Collapse Chat panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+
+        <div class="chat-scroll">
+          <div class="msg user">
+            <div class="avatar me" aria-hidden="true">LN</div>
+            <div>
+              <div class="bubble">What do my sources agree on about rebuilding focus?</div>
+            </div>
+          </div>
+
+          <div class="msg ai">
+            <div class="avatar ai" aria-hidden="true">ON</div>
+            <div>
+              <div class="bubble">
+                <p>Across all five, one idea keeps surfacing: attention is a <strong>finite, trainable resource</strong> — not a fixed personality trait. Hari's strongest claim is that <span class="hl-coral">environment beats willpower</span>: you don't out-discipline a feed engineered against you, you redesign the room. The video makes the same point from the supply side — as long as your attention is the product being sold, the defaults will never be on your side.</p>
+                <p>Newport puts numbers on the damage: every context switch leaves <span class="hl-teal">attention residue</span> that degrades the next block of work, which is why his fix — and the podcast's rebuilding protocol — is long, scheduled stretches of single focus rather than scattered "productive" minutes. Even the arXiv paper rhymes: <span class="hl-coral">selective attention is the whole mechanism</span> — what you attend to determines what gets processed at all.</p>
+              </div>
+              <div class="msg-actions">
+                <button class="msg-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>Save as note</button>
+                <button class="msg-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-foot">
+          <div class="context-bar">
+            <span class="ctx-label">Context</span>
+            <span class="ctx-chip c-src"><i></i>4 sources</span>
+            <span class="ctx-chip c-note"><i></i>1 note</span>
+            <span class="ctx-chip c-tok">4.9K tokens</span>
+          </div>
+          <div class="composer">
+            <input type="text" placeholder="Ask anything about your sources…" aria-label="Message">
+            <button class="btn-send" aria-label="Send message">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    var label = document.getElementById('themeLabel');
+    var icon = document.getElementById('iconSun');
+    var KEY = 'on-theme-i';
+    var moon = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+    var sun = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+    function apply(dark) {
+      root.classList.toggle('dark', dark);
+      label.textContent = dark ? 'Light mode' : 'Dark mode';
+      icon.innerHTML = dark ? moon : sun;
+    }
+    var stored = null;
+    try { stored = localStorage.getItem(KEY); } catch (e) {}
+    apply(stored === 'dark');
+    btn.addEventListener('click', function () {
+      var dark = !root.classList.contains('dark');
+      apply(dark);
+      try { localStorage.setItem(KEY, dark ? 'dark' : 'light'); } catch (e) {}
+    });
+  })();
+</script>
+
+</body>
+</html>
